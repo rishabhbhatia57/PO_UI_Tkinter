@@ -1,0 +1,39 @@
+2022-09-12 18:30:22,367 INFO Client Name: PL Client Code: PL Order Date: 2022-09-01 PO Folder Path: 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' 
+2022-09-12 18:30:22,367 INFO Starting script 
+2022-09-12 18:30:22,371 INFO Checking if the folder exists or not, if doesnt exists, then script will create one. 
+2022-09-12 18:30:22,371 INFO Creating a new folder 'PL-2022/2022-09-01' at location D:/ProjectStructure 
+2022-09-12 18:30:22,505 INFO Folder 'PL-2022/2022-09-01' is created. 
+2022-09-12 18:30:22,507 INFO Folder 'PL-2022/2022-09-01' exists. 
+2022-09-12 18:30:22,518 INFO File '4000444765.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
+2022-09-12 18:30:22,530 INFO File '4000444766.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
+2022-09-12 18:30:22,538 INFO File '4000444767.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
+2022-09-12 18:30:22,599 INFO File '4000444772.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
+2022-09-12 18:30:22,599 INFO File '4000444785.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
+2022-09-12 18:30:22,608 INFO File '4000444790.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
+2022-09-12 18:30:22,620 INFO File '4000444792.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
+2022-09-12 18:30:22,625 INFO File '4000444794.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
+2022-09-12 18:30:22,631 INFO File '4000444798.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
+2022-09-12 18:30:22,631 INFO File '4000444799.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
+2022-09-12 18:30:22,653 INFO File '4000444803.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
+2022-09-12 18:30:22,684 INFO File '4000444805.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
+2022-09-12 18:30:22,740 INFO File '4000444902.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
+2022-09-12 18:30:22,752 INFO File '4000444906.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
+2022-09-12 18:30:22,759 INFO File '4000444911.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
+2022-09-12 18:30:22,809 INFO File '4000444914.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
+2022-09-12 18:30:22,814 INFO File '4000444918.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
+2022-09-12 18:30:22,819 INFO File '4000444923.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
+2022-09-12 18:30:22,819 INFO File '4000444925.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
+2022-09-12 18:30:22,827 INFO Converting '4000444765.pdf' to excel '4000444765.xlsx' 
+2022-09-12 18:30:56,616 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/4000444765.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-01/40-Extract-Excel/4000444765.xlsx' in 33.79 seconds. 
+2022-09-12 18:30:56,625 INFO Converting '4000444766.pdf' to excel '4000444766.xlsx' 
+2022-09-12 18:44:21,816 INFO Client Name: SSL Client Code: SSL Order Date: 2022-09-07 PO Folder Path: 'Path not selected' 
+2022-09-12 18:44:21,816 INFO Starting script 
+2022-09-12 18:44:21,822 INFO Checking if the folder exists or not, if doesnt exists, then script will create one. 
+2022-09-12 18:44:21,823 INFO Creating a new folder 'SSL-2022/2022-09-07' at location D:/ProjectStructure 
+2022-09-12 18:44:21,832 INFO Folder 'SSL-2022/2022-09-07' is created. 
+2022-09-12 18:44:21,832 INFO Folder 'SSL-2022/2022-09-07' exists. 
+2022-09-12 18:44:21,832 ERROR Error while copying files: [WinError 3] The system cannot find the path specified: 'Path not selected' 
+2022-09-12 18:44:21,832 INFO 'D:/ProjectStructure/SSL-2022/2022-09-07/10-Download-Files/' Folder is empty, add pdf files to convert 
+2022-09-12 18:44:21,832 INFO No excel files found to merge. 
+2022-09-12 18:44:21,876 INFO Could not find the consolidate order folder to generate requirement summary file 
+2022-09-12 18:44:21,876 INFO Script Ended 
