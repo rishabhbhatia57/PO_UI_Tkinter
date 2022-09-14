@@ -1,39 +1,207 @@
-2022-09-12 18:30:22,367 INFO Client Name: PL Client Code: PL Order Date: 2022-09-01 PO Folder Path: 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' 
-2022-09-12 18:30:22,367 INFO Starting script 
-2022-09-12 18:30:22,371 INFO Checking if the folder exists or not, if doesnt exists, then script will create one. 
-2022-09-12 18:30:22,371 INFO Creating a new folder 'PL-2022/2022-09-01' at location D:/ProjectStructure 
-2022-09-12 18:30:22,505 INFO Folder 'PL-2022/2022-09-01' is created. 
-2022-09-12 18:30:22,507 INFO Folder 'PL-2022/2022-09-01' exists. 
-2022-09-12 18:30:22,518 INFO File '4000444765.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
-2022-09-12 18:30:22,530 INFO File '4000444766.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
-2022-09-12 18:30:22,538 INFO File '4000444767.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
-2022-09-12 18:30:22,599 INFO File '4000444772.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
-2022-09-12 18:30:22,599 INFO File '4000444785.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
-2022-09-12 18:30:22,608 INFO File '4000444790.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
-2022-09-12 18:30:22,620 INFO File '4000444792.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
-2022-09-12 18:30:22,625 INFO File '4000444794.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
-2022-09-12 18:30:22,631 INFO File '4000444798.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
-2022-09-12 18:30:22,631 INFO File '4000444799.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
-2022-09-12 18:30:22,653 INFO File '4000444803.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
-2022-09-12 18:30:22,684 INFO File '4000444805.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
-2022-09-12 18:30:22,740 INFO File '4000444902.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
-2022-09-12 18:30:22,752 INFO File '4000444906.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
-2022-09-12 18:30:22,759 INFO File '4000444911.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
-2022-09-12 18:30:22,809 INFO File '4000444914.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
-2022-09-12 18:30:22,814 INFO File '4000444918.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
-2022-09-12 18:30:22,819 INFO File '4000444923.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
-2022-09-12 18:30:22,819 INFO File '4000444925.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/' 
-2022-09-12 18:30:22,827 INFO Converting '4000444765.pdf' to excel '4000444765.xlsx' 
-2022-09-12 18:30:56,616 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-01/10-Download-Files/4000444765.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-01/40-Extract-Excel/4000444765.xlsx' in 33.79 seconds. 
-2022-09-12 18:30:56,625 INFO Converting '4000444766.pdf' to excel '4000444766.xlsx' 
-2022-09-12 18:44:21,816 INFO Client Name: SSL Client Code: SSL Order Date: 2022-09-07 PO Folder Path: 'Path not selected' 
-2022-09-12 18:44:21,816 INFO Starting script 
-2022-09-12 18:44:21,822 INFO Checking if the folder exists or not, if doesnt exists, then script will create one. 
-2022-09-12 18:44:21,823 INFO Creating a new folder 'SSL-2022/2022-09-07' at location D:/ProjectStructure 
-2022-09-12 18:44:21,832 INFO Folder 'SSL-2022/2022-09-07' is created. 
-2022-09-12 18:44:21,832 INFO Folder 'SSL-2022/2022-09-07' exists. 
-2022-09-12 18:44:21,832 ERROR Error while copying files: [WinError 3] The system cannot find the path specified: 'Path not selected' 
-2022-09-12 18:44:21,832 INFO 'D:/ProjectStructure/SSL-2022/2022-09-07/10-Download-Files/' Folder is empty, add pdf files to convert 
-2022-09-12 18:44:21,832 INFO No excel files found to merge. 
-2022-09-12 18:44:21,876 INFO Could not find the consolidate order folder to generate requirement summary file 
-2022-09-12 18:44:21,876 INFO Script Ended 
+2022-09-13 19:42:02,172 INFO Client Name: PL Client Code: PL Order Date: 2022-09-13 PO Folder Path: 'C:/Users/HP/Desktop/PO Metadata/Configfiles-Folder/' 
+2022-09-13 19:42:02,172 INFO Starting script 
+2022-09-13 19:42:02,176 INFO Checking if the folder exists or not, if doesnt exists, then script will create one. 
+2022-09-13 19:42:02,176 INFO Creating a new folder 'PL-2022/2022-09-13' at location D:/ProjectStructure 
+2022-09-13 19:42:02,188 INFO Folder 'PL-2022/2022-09-13' is created. 
+2022-09-13 19:42:02,188 INFO Folder 'PL-2022/2022-09-13' exists. 
+2022-09-13 19:42:02,190 INFO File 'azure.tcl' copied from source 'C:/Users/HP/Desktop/PO Metadata/Configfiles-Folder/' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 19:42:02,193 INFO File 'client.json' copied from source 'C:/Users/HP/Desktop/PO Metadata/Configfiles-Folder/' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 19:42:02,195 INFO File 'config.json' copied from source 'C:/Users/HP/Desktop/PO Metadata/Configfiles-Folder/' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 19:42:02,196 INFO Converting 'azure.tcl' to excel 'azure.tcl' 
+2022-09-13 19:42:02,572 ERROR Error from tabula-java:
+Error: Error: End-of-File, expected line
+
+ 
+2022-09-13 19:42:02,572 ERROR Error while processing file: Command '['java', '-jar', 'c:\\Users\\HP\\Desktop\\TrimphPO\\googlevenv\\lib\\site-packages\\tabula\\tabula-1.0.5-jar-with-dependencies.jar', '--pages', 'all', '--lattice', '--guess', '--format', 'CSV', '--outfile', 'D:/ProjectStructure/PL-2022/2022-09-13/30-Extract-CSV/azure.tcl', 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/azure.tcl']' returned non-zero exit status 1. 
+2022-09-13 19:42:02,572 INFO Converting 'client.json' to excel 'client.json' 
+2022-09-13 19:42:02,942 ERROR Error from tabula-java:
+Error: Error: End-of-File, expected line
+
+ 
+2022-09-13 19:42:02,942 ERROR Error while processing file: Command '['java', '-jar', 'c:\\Users\\HP\\Desktop\\TrimphPO\\googlevenv\\lib\\site-packages\\tabula\\tabula-1.0.5-jar-with-dependencies.jar', '--pages', 'all', '--lattice', '--guess', '--format', 'CSV', '--outfile', 'D:/ProjectStructure/PL-2022/2022-09-13/30-Extract-CSV/client.json', 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/client.json']' returned non-zero exit status 1. 
+2022-09-13 19:42:02,942 INFO Converting 'config.json' to excel 'config.json' 
+2022-09-13 19:42:03,290 ERROR Error from tabula-java:
+Error: Error: End-of-File, expected line
+
+ 
+2022-09-13 19:42:03,290 ERROR Error while processing file: Command '['java', '-jar', 'c:\\Users\\HP\\Desktop\\TrimphPO\\googlevenv\\lib\\site-packages\\tabula\\tabula-1.0.5-jar-with-dependencies.jar', '--pages', 'all', '--lattice', '--guess', '--format', 'CSV', '--outfile', 'D:/ProjectStructure/PL-2022/2022-09-13/30-Extract-CSV/config.json', 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/config.json']' returned non-zero exit status 1. 
+2022-09-13 19:42:03,306 INFO No excel files found to merge. 
+2022-09-13 19:42:03,336 INFO Could not find the consolidate order folder to generate requirement summary file 
+2022-09-13 19:42:03,336 INFO Script Ended 
+2022-09-13 19:45:14,303 INFO Client Name: PL Client Code: PL Order Date: 2022-09-13 PO Folder Path: 'C:/Users/HP/Desktop/PO Metadata/Configfiles-Folder/' 
+2022-09-13 19:45:14,303 INFO Starting script 
+2022-09-13 19:45:14,309 INFO Checking if the folder exists or not, if doesnt exists, then script will create one. 
+2022-09-13 19:45:14,310 INFO Folder 'PL-2022/2022-09-13' exists. 
+2022-09-13 19:45:14,312 INFO File 'azure.tcl' copied from source 'C:/Users/HP/Desktop/PO Metadata/Configfiles-Folder/' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 19:45:14,313 INFO File 'client.json' copied from source 'C:/Users/HP/Desktop/PO Metadata/Configfiles-Folder/' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 19:45:14,314 INFO File 'config.json' copied from source 'C:/Users/HP/Desktop/PO Metadata/Configfiles-Folder/' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 19:45:14,315 INFO Converting 'azure.tcl' to excel 'azure.tcl' 
+2022-09-13 19:45:14,779 ERROR Error from tabula-java:
+Error: Error: End-of-File, expected line
+
+ 
+2022-09-13 19:45:14,779 ERROR Error while processing file: Command '['java', '-jar', 'c:\\Users\\HP\\Desktop\\TrimphPO\\googlevenv\\lib\\site-packages\\tabula\\tabula-1.0.5-jar-with-dependencies.jar', '--pages', 'all', '--lattice', '--guess', '--format', 'CSV', '--outfile', 'D:/ProjectStructure/PL-2022/2022-09-13/30-Extract-CSV/azure.tcl', 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/azure.tcl']' returned non-zero exit status 1. 
+2022-09-13 19:45:14,779 INFO Converting 'client.json' to excel 'client.json' 
+2022-09-13 19:45:15,148 ERROR Error from tabula-java:
+Error: Error: End-of-File, expected line
+
+ 
+2022-09-13 19:45:15,148 ERROR Error while processing file: Command '['java', '-jar', 'c:\\Users\\HP\\Desktop\\TrimphPO\\googlevenv\\lib\\site-packages\\tabula\\tabula-1.0.5-jar-with-dependencies.jar', '--pages', 'all', '--lattice', '--guess', '--format', 'CSV', '--outfile', 'D:/ProjectStructure/PL-2022/2022-09-13/30-Extract-CSV/client.json', 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/client.json']' returned non-zero exit status 1. 
+2022-09-13 19:45:15,148 INFO Converting 'config.json' to excel 'config.json' 
+2022-09-13 19:45:15,502 ERROR Error from tabula-java:
+Error: Error: End-of-File, expected line
+
+ 
+2022-09-13 19:45:15,502 ERROR Error while processing file: Command '['java', '-jar', 'c:\\Users\\HP\\Desktop\\TrimphPO\\googlevenv\\lib\\site-packages\\tabula\\tabula-1.0.5-jar-with-dependencies.jar', '--pages', 'all', '--lattice', '--guess', '--format', 'CSV', '--outfile', 'D:/ProjectStructure/PL-2022/2022-09-13/30-Extract-CSV/config.json', 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/config.json']' returned non-zero exit status 1. 
+2022-09-13 19:45:15,502 INFO No excel files found to merge. 
+2022-09-13 19:45:15,544 INFO Could not find the consolidate order folder to generate requirement summary file 
+2022-09-13 19:45:15,544 INFO Script Ended 
+2022-09-13 19:49:24,557 INFO Client Name: PL Client Code: PL Order Date: 2022-09-13 PO Folder Path: 'C:/Users/HP/Desktop/PO Metadata/Configfiles-Folder/' 
+2022-09-13 19:49:24,557 INFO Starting script 
+2022-09-13 19:49:24,567 INFO Checking if the folder exists or not, if doesnt exists, then script will create one. 
+2022-09-13 19:49:24,567 INFO Folder 'PL-2022/2022-09-13' exists. 
+2022-09-13 19:49:24,570 INFO File 'azure.tcl' copied from source 'C:/Users/HP/Desktop/PO Metadata/Configfiles-Folder/' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 19:49:24,572 INFO File 'client.json' copied from source 'C:/Users/HP/Desktop/PO Metadata/Configfiles-Folder/' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 19:49:24,579 INFO File 'config.json' copied from source 'C:/Users/HP/Desktop/PO Metadata/Configfiles-Folder/' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 19:49:24,581 INFO Converting 'azure.tcl' to excel 'azure.tcl' 
+2022-09-13 19:49:24,973 ERROR Error from tabula-java:
+Error: Error: End-of-File, expected line
+
+ 
+2022-09-13 19:49:24,973 ERROR Error while processing file: Command '['java', '-jar', 'c:\\Users\\HP\\Desktop\\TrimphPO\\googlevenv\\lib\\site-packages\\tabula\\tabula-1.0.5-jar-with-dependencies.jar', '--pages', 'all', '--lattice', '--guess', '--format', 'CSV', '--outfile', 'D:/ProjectStructure/PL-2022/2022-09-13/30-Extract-CSV/azure.tcl', 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/azure.tcl']' returned non-zero exit status 1. 
+2022-09-13 19:49:24,973 INFO Converting 'client.json' to excel 'client.json' 
+2022-09-13 19:49:25,321 ERROR Error from tabula-java:
+Error: Error: End-of-File, expected line
+
+ 
+2022-09-13 19:49:25,321 ERROR Error while processing file: Command '['java', '-jar', 'c:\\Users\\HP\\Desktop\\TrimphPO\\googlevenv\\lib\\site-packages\\tabula\\tabula-1.0.5-jar-with-dependencies.jar', '--pages', 'all', '--lattice', '--guess', '--format', 'CSV', '--outfile', 'D:/ProjectStructure/PL-2022/2022-09-13/30-Extract-CSV/client.json', 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/client.json']' returned non-zero exit status 1. 
+2022-09-13 19:49:25,321 INFO Converting 'config.json' to excel 'config.json' 
+2022-09-13 19:49:25,675 ERROR Error from tabula-java:
+Error: Error: End-of-File, expected line
+
+ 
+2022-09-13 19:49:25,675 ERROR Error while processing file: Command '['java', '-jar', 'c:\\Users\\HP\\Desktop\\TrimphPO\\googlevenv\\lib\\site-packages\\tabula\\tabula-1.0.5-jar-with-dependencies.jar', '--pages', 'all', '--lattice', '--guess', '--format', 'CSV', '--outfile', 'D:/ProjectStructure/PL-2022/2022-09-13/30-Extract-CSV/config.json', 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/config.json']' returned non-zero exit status 1. 
+2022-09-13 19:49:25,675 INFO No excel files found to merge. 
+2022-09-13 19:49:25,717 INFO Could not find the consolidate order folder to generate requirement summary file 
+2022-09-13 19:49:25,717 INFO Script Ended 
+2022-09-13 19:54:28,818 INFO Client Name: PL Client Code: PL Order Date: 2022-09-13 PO Folder Path: 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' 
+2022-09-13 19:54:28,818 INFO Starting script 
+2022-09-13 19:54:28,823 INFO Checking if the folder exists or not, if doesnt exists, then script will create one. 
+2022-09-13 19:54:28,824 INFO Folder 'PL-2022/2022-09-13' exists. 
+2022-09-13 19:54:28,850 INFO File '4000444765.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 19:54:28,878 INFO File '4000444766.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 19:54:28,897 INFO File '4000444767.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 19:54:28,917 INFO File '4000444772.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 19:54:28,934 INFO File '4000444785.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 19:54:28,949 INFO File '4000444790.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 19:54:28,961 INFO File '4000444792.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 19:54:28,973 INFO File '4000444794.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 19:54:28,987 INFO File '4000444798.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 19:54:29,000 INFO File '4000444799.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 19:54:29,014 INFO File '4000444803.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 19:54:29,025 INFO File '4000444805.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 19:54:29,039 INFO File '4000444902.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 19:54:29,051 INFO File '4000444906.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 19:54:29,066 INFO File '4000444911.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 19:54:29,078 INFO File '4000444914.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 19:54:29,083 INFO File '4000444918.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 19:54:29,088 INFO File '4000444923.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 19:54:29,101 INFO File '4000444925.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 19:54:29,101 INFO Converting '4000444765.pdf' to excel '4000444765.xlsx' 
+2022-09-13 19:55:00,727 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444765.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444765.xlsx' in 31.62 seconds. 
+2022-09-13 19:55:00,729 INFO Converting '4000444766.pdf' to excel '4000444766.xlsx' 
+2022-09-13 19:55:54,033 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444766.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444766.xlsx' in 53.30 seconds. 
+2022-09-13 19:55:54,037 INFO Converting '4000444767.pdf' to excel '4000444767.xlsx' 
+2022-09-13 19:56:22,269 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444767.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444767.xlsx' in 28.23 seconds. 
+2022-09-13 19:56:22,271 INFO Converting '4000444772.pdf' to excel '4000444772.xlsx' 
+2022-09-13 19:57:00,751 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444772.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444772.xlsx' in 38.48 seconds. 
+2022-09-13 19:57:00,754 INFO Converting '4000444785.pdf' to excel '4000444785.xlsx' 
+2022-09-13 19:57:23,810 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444785.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444785.xlsx' in 23.06 seconds. 
+2022-09-13 19:57:23,818 INFO Converting '4000444790.pdf' to excel '4000444790.xlsx' 
+2022-09-13 19:58:08,915 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444790.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444790.xlsx' in 45.10 seconds. 
+2022-09-13 19:58:08,915 INFO Converting '4000444792.pdf' to excel '4000444792.xlsx' 
+2022-09-13 19:59:00,819 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444792.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444792.xlsx' in 51.90 seconds. 
+2022-09-13 19:59:00,821 INFO Converting '4000444794.pdf' to excel '4000444794.xlsx' 
+2022-09-13 19:59:17,628 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444794.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444794.xlsx' in 16.81 seconds. 
+2022-09-13 19:59:17,628 INFO Converting '4000444798.pdf' to excel '4000444798.xlsx' 
+2022-09-13 20:00:30,425 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444798.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444798.xlsx' in 72.80 seconds. 
+2022-09-13 20:00:30,428 INFO Converting '4000444799.pdf' to excel '4000444799.xlsx' 
+2022-09-13 20:00:33,578 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444799.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444799.xlsx' in 3.15 seconds. 
+2022-09-13 20:00:33,579 INFO Converting '4000444803.pdf' to excel '4000444803.xlsx' 
+2022-09-13 20:01:44,955 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444803.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444803.xlsx' in 71.38 seconds. 
+2022-09-13 20:01:44,961 INFO Converting '4000444805.pdf' to excel '4000444805.xlsx' 
+2022-09-13 20:01:50,875 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444805.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444805.xlsx' in 5.91 seconds. 
+2022-09-13 20:01:50,875 INFO Converting '4000444902.pdf' to excel '4000444902.xlsx' 
+2022-09-13 20:02:58,964 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444902.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444902.xlsx' in 68.09 seconds. 
+2022-09-13 20:02:58,964 INFO Converting '4000444906.pdf' to excel '4000444906.xlsx' 
+2022-09-13 20:03:30,949 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444906.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444906.xlsx' in 31.99 seconds. 
+2022-09-13 20:03:30,951 INFO Converting '4000444911.pdf' to excel '4000444911.xlsx' 
+2022-09-13 20:04:27,736 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444911.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444911.xlsx' in 56.79 seconds. 
+2022-09-13 20:04:27,736 INFO Converting '4000444914.pdf' to excel '4000444914.xlsx' 
+2022-09-13 20:04:47,040 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444914.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444914.xlsx' in 19.30 seconds. 
+2022-09-13 20:04:47,041 INFO Converting '4000444918.pdf' to excel '4000444918.xlsx' 
+2022-09-13 20:05:36,193 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444918.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444918.xlsx' in 49.15 seconds. 
+2022-09-13 20:05:36,193 INFO Converting '4000444923.pdf' to excel '4000444923.xlsx' 
+2022-09-13 20:06:22,967 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444923.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444923.xlsx' in 46.77 seconds. 
+2022-09-13 20:06:22,969 INFO Converting '4000444925.pdf' to excel '4000444925.xlsx' 
+2022-09-13 20:07:00,828 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444925.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444925.xlsx' in 37.86 seconds. 
+2022-09-13 20:07:00,829 INFO Converting 'azure.tcl' to excel 'azure.tcl' 
+2022-09-13 20:07:01,322 ERROR Error from tabula-java:
+Error: Error: End-of-File, expected line
+
+ 
+2022-09-13 20:07:01,322 ERROR Error while processing file: Command '['java', '-jar', 'c:\\Users\\HP\\Desktop\\TrimphPO\\googlevenv\\lib\\site-packages\\tabula\\tabula-1.0.5-jar-with-dependencies.jar', '--pages', 'all', '--lattice', '--guess', '--format', 'CSV', '--outfile', 'D:/ProjectStructure/PL-2022/2022-09-13/30-Extract-CSV/azure.tcl', 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/azure.tcl']' returned non-zero exit status 1. 
+2022-09-13 20:07:01,323 INFO Converting 'client.json' to excel 'client.json' 
+2022-09-13 20:07:01,746 ERROR Error from tabula-java:
+Error: Error: End-of-File, expected line
+
+ 
+2022-09-13 20:07:01,746 ERROR Error while processing file: Command '['java', '-jar', 'c:\\Users\\HP\\Desktop\\TrimphPO\\googlevenv\\lib\\site-packages\\tabula\\tabula-1.0.5-jar-with-dependencies.jar', '--pages', 'all', '--lattice', '--guess', '--format', 'CSV', '--outfile', 'D:/ProjectStructure/PL-2022/2022-09-13/30-Extract-CSV/client.json', 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/client.json']' returned non-zero exit status 1. 
+2022-09-13 20:07:01,747 INFO Converting 'config.json' to excel 'config.json' 
+2022-09-13 20:07:02,085 ERROR Error from tabula-java:
+Error: Error: End-of-File, expected line
+
+ 
+2022-09-13 20:07:02,086 ERROR Error while processing file: Command '['java', '-jar', 'c:\\Users\\HP\\Desktop\\TrimphPO\\googlevenv\\lib\\site-packages\\tabula\\tabula-1.0.5-jar-with-dependencies.jar', '--pages', 'all', '--lattice', '--guess', '--format', 'CSV', '--outfile', 'D:/ProjectStructure/PL-2022/2022-09-13/30-Extract-CSV/config.json', 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/config.json']' returned non-zero exit status 1. 
+2022-09-13 20:07:02,088 INFO Accessing '4000444765.xlsx' right now:  
+2022-09-13 20:07:02,410 INFO Accessing '4000444766.xlsx' right now:  
+2022-09-13 20:07:02,610 INFO Accessing '4000444767.xlsx' right now:  
+2022-09-13 20:07:02,731 INFO Accessing '4000444772.xlsx' right now:  
+2022-09-13 20:07:02,889 INFO Accessing '4000444785.xlsx' right now:  
+2022-09-13 20:07:02,992 INFO Accessing '4000444790.xlsx' right now:  
+2022-09-13 20:07:03,195 INFO Accessing '4000444792.xlsx' right now:  
+2022-09-13 20:07:03,351 INFO Accessing '4000444794.xlsx' right now:  
+2022-09-13 20:07:03,448 INFO Accessing '4000444798.xlsx' right now:  
+2022-09-13 20:07:03,648 INFO Accessing '4000444799.xlsx' right now:  
+2022-09-13 20:07:03,663 INFO Accessing '4000444803.xlsx' right now:  
+2022-09-13 20:07:03,848 INFO Accessing '4000444805.xlsx' right now:  
+2022-09-13 20:07:03,905 INFO Accessing '4000444902.xlsx' right now:  
+2022-09-13 20:07:04,071 INFO Accessing '4000444906.xlsx' right now:  
+2022-09-13 20:07:04,202 INFO Accessing '4000444911.xlsx' right now:  
+2022-09-13 20:07:04,372 INFO Accessing '4000444914.xlsx' right now:  
+2022-09-13 20:07:04,472 INFO Accessing '4000444918.xlsx' right now:  
+2022-09-13 20:07:04,634 INFO Accessing '4000444923.xlsx' right now:  
+2022-09-13 20:07:04,817 INFO Accessing '4000444925.xlsx' right now:  
+2022-09-13 20:07:06,760 INFO Merged 19 excel files to a single excel as 'Consolidate-Orders.xlsx' 
+2022-09-13 20:07:08,491 INFO Generated requirement summary file from consolidated orders for order date - 2022-09-13 
+2022-09-13 20:07:08,521 INFO Script Ended 
+2022-09-13 20:19:40,619 INFO Client Name: Pantaloons Client Code: PL Order Date: 2022-09-13 PO Folder Path: 'D:/ProjectStructure/PL-2022/2022-09-13/60-Requirement-Summary/Requirement-Summary.xlsx' 
+2022-09-13 20:19:40,623 INFO Starting script 
+2022-09-13 20:19:40,836 INFO Template File copied successfully for generating packaging-slip 
+2022-09-13 20:20:47,968 INFO Client Name: Pantaloons Client Code: PL Order Date: 2022-09-13 PO Folder Path: 'D:/ProjectStructure/PL-2022/2022-09-13/60-Requirement-Summary/Requirement-Summary.xlsx' 
+2022-09-13 20:20:47,983 INFO Starting script 
+2022-09-13 20:20:56,467 INFO Template File copied successfully for generating packaging-slip 
+2022-09-13 20:21:17,588 INFO Packaing slip generated for: 4000444765 file - 21.12 seconds. 
+2022-09-13 20:21:17,609 INFO Template File copied successfully for generating packaging-slip 
+2022-09-13 20:21:38,796 INFO Packaing slip generated for: 4000444766 file - 21.19 seconds. 
+2022-09-13 20:21:38,813 INFO Template File copied successfully for generating packaging-slip 
+2022-09-13 20:22:06,856 INFO Packaing slip generated for: 4000444767 file - 28.06 seconds. 
+2022-09-13 20:22:06,873 INFO Template File copied successfully for generating packaging-slip 
+2022-09-13 20:22:32,229 INFO Packaing slip generated for: 4000444772 file - 25.37 seconds. 
+2022-09-13 20:22:32,236 INFO Template File copied successfully for generating packaging-slip 
+2022-09-13 20:22:54,077 INFO Packaing slip generated for: 4000444785 file - 21.85 seconds. 
+2022-09-13 20:22:54,086 INFO Template File copied successfully for generating packaging-slip 
+2022-09-13 20:23:13,988 INFO Packaing slip generated for: 4000444790 file - 19.91 seconds. 
+2022-09-13 20:23:13,999 INFO Template File copied successfully for generating packaging-slip 
+2022-09-13 20:23:37,633 INFO Packaing slip generated for: 4000444792 file - 23.64 seconds. 
+2022-09-13 20:23:37,649 INFO Template File copied successfully for generating packaging-slip 

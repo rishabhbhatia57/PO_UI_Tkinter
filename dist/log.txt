@@ -1,82 +1,127 @@
-2022-09-10 12:44:06,265 INFO Starting script 
-2022-09-10 12:44:06,269 INFO Checking if the folder exists or not, if doesnt exists, then script will create one. 
-2022-09-10 12:44:06,269 INFO Folder 'PL-2022/2022-09-02' exists. 
-2022-09-10 12:44:06,273 INFO File '4000444765.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/' 
-2022-09-10 12:44:06,278 INFO File '4000444766.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/' 
-2022-09-10 12:44:06,281 INFO File '4000444767.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/' 
-2022-09-10 12:44:06,286 INFO File '4000444772.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/' 
-2022-09-10 12:44:06,289 INFO File '4000444785.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/' 
-2022-09-10 12:44:06,294 INFO File '4000444790.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/' 
-2022-09-10 12:44:06,297 INFO File '4000444792.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/' 
-2022-09-10 12:44:06,301 INFO File '4000444794.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/' 
-2022-09-10 12:44:06,305 INFO File '4000444798.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/' 
-2022-09-10 12:44:06,307 INFO File '4000444799.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/' 
-2022-09-10 12:44:06,312 INFO File '4000444803.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/' 
-2022-09-10 12:44:06,314 INFO File '4000444805.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/' 
-2022-09-10 12:44:06,318 INFO File '4000444902.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/' 
-2022-09-10 12:44:06,322 INFO File '4000444906.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/' 
-2022-09-10 12:44:06,326 INFO File '4000444911.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/' 
-2022-09-10 12:44:06,329 INFO File '4000444914.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/' 
-2022-09-10 12:44:06,333 INFO File '4000444918.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/' 
-2022-09-10 12:44:06,337 INFO File '4000444923.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/' 
-2022-09-10 12:44:06,341 INFO File '4000444925.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/' 
-2022-09-10 12:44:06,342 INFO Converting '4000444765.pdf' to excel '4000444765.xlsx' 
-2022-09-10 12:44:24,761 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/4000444765.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-02/40-Extract-Excel/4000444765.xlsx' in 18.42 seconds. 
-2022-09-10 12:44:24,763 INFO Converting '4000444766.pdf' to excel '4000444766.xlsx' 
-2022-09-10 12:45:20,255 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/4000444766.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-02/40-Extract-Excel/4000444766.xlsx' in 55.49 seconds. 
-2022-09-10 12:45:20,258 INFO Converting '4000444767.pdf' to excel '4000444767.xlsx' 
-2022-09-10 12:45:47,696 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/4000444767.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-02/40-Extract-Excel/4000444767.xlsx' in 27.44 seconds. 
-2022-09-10 12:45:47,698 INFO Converting '4000444772.pdf' to excel '4000444772.xlsx' 
-2022-09-10 12:46:20,068 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/4000444772.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-02/40-Extract-Excel/4000444772.xlsx' in 32.37 seconds. 
-2022-09-10 12:46:20,070 INFO Converting '4000444785.pdf' to excel '4000444785.xlsx' 
-2022-09-10 12:46:34,121 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/4000444785.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-02/40-Extract-Excel/4000444785.xlsx' in 14.05 seconds. 
-2022-09-10 12:46:34,122 INFO Converting '4000444790.pdf' to excel '4000444790.xlsx' 
-2022-09-10 12:47:06,045 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/4000444790.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-02/40-Extract-Excel/4000444790.xlsx' in 31.92 seconds. 
-2022-09-10 12:47:06,047 INFO Converting '4000444792.pdf' to excel '4000444792.xlsx' 
-2022-09-10 12:47:44,704 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/4000444792.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-02/40-Extract-Excel/4000444792.xlsx' in 38.66 seconds. 
-2022-09-10 12:47:44,706 INFO Converting '4000444794.pdf' to excel '4000444794.xlsx' 
-2022-09-10 12:47:55,906 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/4000444794.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-02/40-Extract-Excel/4000444794.xlsx' in 11.20 seconds. 
-2022-09-10 12:47:55,909 INFO Converting '4000444798.pdf' to excel '4000444798.xlsx' 
-2022-09-10 12:48:37,753 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/4000444798.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-02/40-Extract-Excel/4000444798.xlsx' in 41.84 seconds. 
-2022-09-10 12:48:37,755 INFO Converting '4000444799.pdf' to excel '4000444799.xlsx' 
-2022-09-10 12:48:39,200 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/4000444799.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-02/40-Extract-Excel/4000444799.xlsx' in 1.44 seconds. 
-2022-09-10 12:48:39,201 INFO Converting '4000444803.pdf' to excel '4000444803.xlsx' 
-2022-09-10 12:49:21,932 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/4000444803.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-02/40-Extract-Excel/4000444803.xlsx' in 42.73 seconds. 
-2022-09-10 12:49:21,933 INFO Converting '4000444805.pdf' to excel '4000444805.xlsx' 
-2022-09-10 12:49:25,835 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/4000444805.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-02/40-Extract-Excel/4000444805.xlsx' in 3.90 seconds. 
-2022-09-10 12:49:25,836 INFO Converting '4000444902.pdf' to excel '4000444902.xlsx' 
-2022-09-10 12:50:08,832 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/4000444902.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-02/40-Extract-Excel/4000444902.xlsx' in 43.00 seconds. 
-2022-09-10 12:50:08,834 INFO Converting '4000444906.pdf' to excel '4000444906.xlsx' 
-2022-09-10 12:50:43,774 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/4000444906.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-02/40-Extract-Excel/4000444906.xlsx' in 34.94 seconds. 
-2022-09-10 12:50:43,776 INFO Converting '4000444911.pdf' to excel '4000444911.xlsx' 
-2022-09-10 12:51:22,873 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/4000444911.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-02/40-Extract-Excel/4000444911.xlsx' in 39.10 seconds. 
-2022-09-10 12:51:22,875 INFO Converting '4000444914.pdf' to excel '4000444914.xlsx' 
-2022-09-10 12:51:37,515 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/4000444914.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-02/40-Extract-Excel/4000444914.xlsx' in 14.64 seconds. 
-2022-09-10 12:51:37,517 INFO Converting '4000444918.pdf' to excel '4000444918.xlsx' 
-2022-09-10 12:52:10,389 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/4000444918.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-02/40-Extract-Excel/4000444918.xlsx' in 32.87 seconds. 
-2022-09-10 12:52:10,391 INFO Converting '4000444923.pdf' to excel '4000444923.xlsx' 
-2022-09-10 12:52:48,298 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/4000444923.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-02/40-Extract-Excel/4000444923.xlsx' in 37.91 seconds. 
-2022-09-10 12:52:48,300 INFO Converting '4000444925.pdf' to excel '4000444925.xlsx' 
-2022-09-10 12:53:13,135 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-02/10-Download-Files/4000444925.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-02/40-Extract-Excel/4000444925.xlsx' in 24.83 seconds. 
-2022-09-10 12:53:13,139 INFO Accessing '4000444765.xlsx' right now:  
-2022-09-10 12:53:13,301 INFO Accessing '4000444766.xlsx' right now:  
-2022-09-10 12:53:13,488 INFO Accessing '4000444767.xlsx' right now:  
-2022-09-10 12:53:13,611 INFO Accessing '4000444772.xlsx' right now:  
-2022-09-10 12:53:13,771 INFO Accessing '4000444785.xlsx' right now:  
-2022-09-10 12:53:13,877 INFO Accessing '4000444790.xlsx' right now:  
-2022-09-10 12:53:14,035 INFO Accessing '4000444792.xlsx' right now:  
-2022-09-10 12:53:14,200 INFO Accessing '4000444794.xlsx' right now:  
-2022-09-10 12:53:14,293 INFO Accessing '4000444798.xlsx' right now:  
-2022-09-10 12:53:14,503 INFO Accessing '4000444799.xlsx' right now:  
-2022-09-10 12:53:14,522 INFO Accessing '4000444803.xlsx' right now:  
-2022-09-10 12:53:14,707 INFO Accessing '4000444805.xlsx' right now:  
-2022-09-10 12:53:14,760 INFO Accessing '4000444902.xlsx' right now:  
-2022-09-10 12:53:14,942 INFO Accessing '4000444906.xlsx' right now:  
-2022-09-10 12:53:15,067 INFO Accessing '4000444911.xlsx' right now:  
-2022-09-10 12:53:15,244 INFO Accessing '4000444914.xlsx' right now:  
-2022-09-10 12:53:15,344 INFO Accessing '4000444918.xlsx' right now:  
-2022-09-10 12:53:15,504 INFO Accessing '4000444923.xlsx' right now:  
-2022-09-10 12:53:15,698 INFO Accessing '4000444925.xlsx' right now:  
-2022-09-10 12:53:17,817 INFO Merged 19 excel files to a single excel as 'Consolidate-Orders.xlsx' 
-2022-09-10 12:53:17,818 ERROR Error while generating Requirement-Summary file: [Errno 2] No such file or directory: '../PO Metadata/Formulasheet-Folder/FormulaSheet.xlsx' 
-2022-09-10 12:53:17,818 INFO Script Ended 
+2022-09-13 20:44:44,462 INFO Client Name: PL Client Code: PL Order Date: 2022-09-13 PO Folder Path: 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' 
+2022-09-13 20:44:44,463 INFO Starting script 
+2022-09-13 20:44:44,474 INFO Checking if the folder exists or not, if doesnt exists, then script will create one. 
+2022-09-13 20:44:44,474 INFO Creating a new folder 'PL-2022/2022-09-13' at location D:/ProjectStructure 
+2022-09-13 20:44:44,484 INFO Folder 'PL-2022/2022-09-13' is created. 
+2022-09-13 20:44:44,484 INFO Folder 'PL-2022/2022-09-13' exists. 
+2022-09-13 20:44:44,490 INFO File '4000444765.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 20:44:44,496 INFO File '4000444766.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 20:44:44,503 INFO File '4000444767.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 20:44:44,509 INFO File '4000444772.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 20:44:44,514 INFO File '4000444785.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 20:44:44,521 INFO File '4000444790.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 20:44:44,526 INFO File '4000444792.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 20:44:44,532 INFO File '4000444794.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 20:44:44,542 INFO File '4000444798.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 20:44:44,544 INFO File '4000444799.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 20:44:44,552 INFO File '4000444803.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 20:44:44,570 INFO File '4000444805.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 20:44:44,595 INFO File '4000444902.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 20:44:44,605 INFO File '4000444906.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 20:44:44,614 INFO File '4000444911.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 20:44:44,619 INFO File '4000444914.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 20:44:44,626 INFO File '4000444918.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 20:44:44,651 INFO File '4000444923.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 20:44:44,659 INFO File '4000444925.pdf' copied from source 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' to destination 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/' 
+2022-09-13 20:44:44,663 INFO Converting '4000444765.pdf' to excel '4000444765.xlsx' 
+2022-09-13 20:45:12,728 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444765.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444765.xlsx' in 28.06 seconds. 
+2022-09-13 20:45:12,729 INFO Converting '4000444766.pdf' to excel '4000444766.xlsx' 
+2022-09-13 20:46:04,752 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444766.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444766.xlsx' in 52.02 seconds. 
+2022-09-13 20:46:04,754 INFO Converting '4000444767.pdf' to excel '4000444767.xlsx' 
+2022-09-13 20:46:27,315 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444767.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444767.xlsx' in 22.56 seconds. 
+2022-09-13 20:46:27,317 INFO Converting '4000444772.pdf' to excel '4000444772.xlsx' 
+2022-09-13 20:47:08,812 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444772.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444772.xlsx' in 41.49 seconds. 
+2022-09-13 20:47:08,814 INFO Converting '4000444785.pdf' to excel '4000444785.xlsx' 
+2022-09-13 20:47:24,781 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444785.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444785.xlsx' in 15.97 seconds. 
+2022-09-13 20:47:24,782 INFO Converting '4000444790.pdf' to excel '4000444790.xlsx' 
+2022-09-13 20:48:01,542 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444790.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444790.xlsx' in 36.76 seconds. 
+2022-09-13 20:48:01,544 INFO Converting '4000444792.pdf' to excel '4000444792.xlsx' 
+2022-09-13 20:48:40,543 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444792.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444792.xlsx' in 39.00 seconds. 
+2022-09-13 20:48:40,545 INFO Converting '4000444794.pdf' to excel '4000444794.xlsx' 
+2022-09-13 20:48:53,240 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444794.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444794.xlsx' in 12.69 seconds. 
+2022-09-13 20:48:53,241 INFO Converting '4000444798.pdf' to excel '4000444798.xlsx' 
+2022-09-13 20:49:41,133 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444798.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444798.xlsx' in 47.89 seconds. 
+2022-09-13 20:49:41,137 INFO Converting '4000444799.pdf' to excel '4000444799.xlsx' 
+2022-09-13 20:49:42,861 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444799.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444799.xlsx' in 1.72 seconds. 
+2022-09-13 20:49:42,862 INFO Converting '4000444803.pdf' to excel '4000444803.xlsx' 
+2022-09-13 20:50:32,462 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444803.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444803.xlsx' in 49.60 seconds. 
+2022-09-13 20:50:32,465 INFO Converting '4000444805.pdf' to excel '4000444805.xlsx' 
+2022-09-13 20:50:37,108 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444805.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444805.xlsx' in 4.64 seconds. 
+2022-09-13 20:50:37,109 INFO Converting '4000444902.pdf' to excel '4000444902.xlsx' 
+2022-09-13 20:51:25,306 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444902.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444902.xlsx' in 48.20 seconds. 
+2022-09-13 20:51:25,309 INFO Converting '4000444906.pdf' to excel '4000444906.xlsx' 
+2022-09-13 20:51:48,476 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444906.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444906.xlsx' in 23.17 seconds. 
+2022-09-13 20:51:48,478 INFO Converting '4000444911.pdf' to excel '4000444911.xlsx' 
+2022-09-13 20:52:31,524 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444911.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444911.xlsx' in 43.05 seconds. 
+2022-09-13 20:52:31,527 INFO Converting '4000444914.pdf' to excel '4000444914.xlsx' 
+2022-09-13 20:52:46,138 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444914.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444914.xlsx' in 14.61 seconds. 
+2022-09-13 20:52:46,140 INFO Converting '4000444918.pdf' to excel '4000444918.xlsx' 
+2022-09-13 20:53:22,272 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444918.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444918.xlsx' in 36.13 seconds. 
+2022-09-13 20:53:22,275 INFO Converting '4000444923.pdf' to excel '4000444923.xlsx' 
+2022-09-13 20:54:00,168 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444923.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444923.xlsx' in 37.89 seconds. 
+2022-09-13 20:54:00,171 INFO Converting '4000444925.pdf' to excel '4000444925.xlsx' 
+2022-09-13 20:54:33,965 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-13/10-Download-Files/4000444925.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-13/40-Extract-Excel/4000444925.xlsx' in 33.79 seconds. 
+2022-09-13 20:54:33,972 INFO Accessing '4000444765.xlsx' right now:  
+2022-09-13 20:54:34,180 INFO Accessing '4000444766.xlsx' right now:  
+2022-09-13 20:54:34,423 INFO Accessing '4000444767.xlsx' right now:  
+2022-09-13 20:54:34,583 INFO Accessing '4000444772.xlsx' right now:  
+2022-09-13 20:54:34,791 INFO Accessing '4000444785.xlsx' right now:  
+2022-09-13 20:54:34,937 INFO Accessing '4000444790.xlsx' right now:  
+2022-09-13 20:54:35,159 INFO Accessing '4000444792.xlsx' right now:  
+2022-09-13 20:54:35,381 INFO Accessing '4000444794.xlsx' right now:  
+2022-09-13 20:54:35,512 INFO Accessing '4000444798.xlsx' right now:  
+2022-09-13 20:54:35,789 INFO Accessing '4000444799.xlsx' right now:  
+2022-09-13 20:54:35,818 INFO Accessing '4000444803.xlsx' right now:  
+2022-09-13 20:54:36,061 INFO Accessing '4000444805.xlsx' right now:  
+2022-09-13 20:54:36,138 INFO Accessing '4000444902.xlsx' right now:  
+2022-09-13 20:54:36,379 INFO Accessing '4000444906.xlsx' right now:  
+2022-09-13 20:54:36,553 INFO Accessing '4000444911.xlsx' right now:  
+2022-09-13 20:54:36,787 INFO Accessing '4000444914.xlsx' right now:  
+2022-09-13 20:54:36,921 INFO Accessing '4000444918.xlsx' right now:  
+2022-09-13 20:54:37,149 INFO Accessing '4000444923.xlsx' right now:  
+2022-09-13 20:54:37,395 INFO Accessing '4000444925.xlsx' right now:  
+2022-09-13 20:54:40,198 INFO Merged 19 excel files to a single excel as 'Consolidate-Orders.xlsx' 
+2022-09-13 20:54:42,740 INFO Generated requirement summary file from consolidated orders for order date - 2022-09-13 
+2022-09-13 20:54:42,798 INFO Script Ended 
+2022-09-13 21:03:01,365 INFO Client Name: Pantaloons Client Code: PL Order Date: 2022-09-13 PO Folder Path: 'D:/ProjectStructure/PL-2022/2022-09-13/60-Requirement-Summary/Requirement-Summary.xlsx' 
+2022-09-13 21:03:01,366 INFO Starting script 
+2022-09-13 21:03:18,684 INFO Template File copied successfully for generating packaging-slip 
+2022-09-13 21:04:08,565 INFO Packaing slip generated for: 4000444765 file - 49.89 seconds. 
+2022-09-13 21:04:08,575 INFO Template File copied successfully for generating packaging-slip 
+2022-09-13 21:04:52,744 INFO Packaing slip generated for: 4000444766 file - 44.18 seconds. 
+2022-09-13 21:04:52,751 INFO Template File copied successfully for generating packaging-slip 
+2022-09-13 21:05:36,854 INFO Packaing slip generated for: 4000444767 file - 44.11 seconds. 
+2022-09-13 21:05:36,861 INFO Template File copied successfully for generating packaging-slip 
+2022-09-13 21:06:18,282 INFO Packaing slip generated for: 4000444772 file - 41.43 seconds. 
+2022-09-13 21:06:18,289 INFO Template File copied successfully for generating packaging-slip 
+2022-09-13 21:06:58,847 INFO Packaing slip generated for: 4000444785 file - 40.56 seconds. 
+2022-09-13 21:06:58,854 INFO Template File copied successfully for generating packaging-slip 
+2022-09-13 21:07:45,358 INFO Packaing slip generated for: 4000444790 file - 46.51 seconds. 
+2022-09-13 21:07:45,364 INFO Template File copied successfully for generating packaging-slip 
+2022-09-13 21:08:28,759 INFO Packaing slip generated for: 4000444792 file - 43.40 seconds. 
+2022-09-13 21:08:28,770 INFO Template File copied successfully for generating packaging-slip 
+2022-09-13 21:09:20,049 INFO Packaing slip generated for: 4000444794 file - 51.29 seconds. 
+2022-09-13 21:09:20,060 INFO Template File copied successfully for generating packaging-slip 
+2022-09-13 21:10:25,558 INFO Packaing slip generated for: 4000444798 file - 65.51 seconds. 
+2022-09-13 21:10:25,565 INFO Template File copied successfully for generating packaging-slip 
+2022-09-13 21:11:12,632 INFO Packaing slip generated for: 4000444799 file - 47.07 seconds. 
+2022-09-13 21:11:12,643 INFO Template File copied successfully for generating packaging-slip 
+2022-09-13 21:11:54,736 INFO Packaing slip generated for: 4000444803 file - 42.10 seconds. 
+2022-09-13 21:11:54,744 INFO Template File copied successfully for generating packaging-slip 
+2022-09-13 21:12:35,969 INFO Packaing slip generated for: 4000444805 file - 41.23 seconds. 
+2022-09-13 21:12:35,977 INFO Template File copied successfully for generating packaging-slip 
+2022-09-13 21:13:18,218 INFO Packaing slip generated for: 4000444902 file - 42.25 seconds. 
+2022-09-13 21:13:18,227 INFO Template File copied successfully for generating packaging-slip 
+2022-09-13 21:14:01,210 INFO Packaing slip generated for: 4000444906 file - 42.99 seconds. 
+2022-09-13 21:14:01,218 INFO Template File copied successfully for generating packaging-slip 
+2022-09-13 21:14:43,532 INFO Packaing slip generated for: 4000444911 file - 42.32 seconds. 
+2022-09-13 21:14:43,543 INFO Template File copied successfully for generating packaging-slip 
+2022-09-13 21:15:25,438 INFO Packaing slip generated for: 4000444914 file - 41.91 seconds. 
+2022-09-13 21:15:25,448 INFO Template File copied successfully for generating packaging-slip 
+2022-09-13 21:16:09,965 INFO Packaing slip generated for: 4000444918 file - 44.53 seconds. 
+2022-09-13 21:16:09,979 INFO Template File copied successfully for generating packaging-slip 
+2022-09-13 21:16:55,476 INFO Packaing slip generated for: 4000444923 file - 45.51 seconds. 
+2022-09-13 21:16:55,483 INFO Template File copied successfully for generating packaging-slip 
+2022-09-13 21:17:43,344 INFO Packaing slip generated for: 4000444925 file - 47.87 seconds. 
+2022-09-13 21:17:43,345 INFO Total time taken for generation of packaging-slips:  881.97 seconds. 
+2022-09-13 21:17:43,347 INFO Script Ended 

@@ -13,9 +13,9 @@ import tkinter.font as tkFont
 import json
 from openpyxl import load_workbook,Workbook
 import openpyxl.utils.cell
+import pyperclip
 
-
-
+path1 = 'C:/Users/HP/Desktop/PO Metadata/Configfiles-Folder/'
 
 def select_folder(showPath):
     filetypes = (
@@ -34,40 +34,54 @@ def select_folder(showPath):
 
 def select_files(showPath,showReqPath,showOrderdate):
     filetypes = (
-        ('pdf files', '*.pdf'),
+        ('Excel Workbook', '*.xlsx'),
         ('All files', '*.*')
     )
     global ReqFileSelected 
     ReqFileSelected = fd.askopenfilename()
-    showPath.config(text=ReqFileSelected)
+    if not ReqFileSelected.lower().endswith('.xlsx'):
+        showinfo(title='Invalid Selection',
+        message='Wrong file selected. Only excel workbook with extenstion ".xlsx" can be selected.')
+    else:
+        showinfo(title='Please wait',message="Fetching Client Name and Order Date...")
+        showPath.config(text=ReqFileSelected)
 
-    ReqSumWorkbook = load_workbook(ReqFileSelected,data_only=True) 
-    ReqSumSheet = ReqSumWorkbook.active
-
-
-    showReqPath.config(text=ReqSumSheet.cell(2,6).value)
-    showOrderdate.config(text=ReqSumSheet.cell(2,4).value)
-
+        ReqSumWorkbook = load_workbook(ReqFileSelected,data_only=True) 
+        ReqSumSheet = ReqSumWorkbook.active
+        showReqPath.config(text=ReqSumSheet.cell(2,6).value)
+        showOrderdate.config(text=ReqSumSheet.cell(2,4).value)
     
-    showinfo(
-        title='Selected Files',
-        message=ReqFileSelected
-    )
     return ReqFileSelected
 
-def openfolder(Targetfolder,clientcode,date):
-    Targetpath = Targetfolder+'/'+clientcode+'-'+date.strftime('%Y')+'/'+str(date)
+def openfolder(params,frame):
+    
+    year = params[2].strftime('%Y')
+    date = str(params[2])
+    
 
-    # RequirementSummarypath = Targetfolder+'/'+clientcode+'-'+date.strftime('%Y')+'/'+str(date)+'/60-Requirement-Summary'
-    path = os.path.realpath(Targetpath)
-    os.startfile(path)
+    path = params[0]+'/'+params[1]+'-'+year+'/'+date+'/'+params[3]
+    isExist = os.path.exists(path)
+    if not isExist:
+        showinfo(
+            title='Invalid Selection',
+            message="Folder doesn't exists. Check Client Name, path or Order Date Selected"
+        )
+        print("Path doesn't exists. Please check date or client name.")
+    else:
+        pyperclip.copy(path)
+        RequirementSummaryPath = Label(frame,text=path)
+        RequirementSummaryPath.grid(row=5,column=2,padx=20, pady=20,sticky=W)
+        showinfo(title='Path Copied',message="'"+path+"' is copied to the clipboard.")
+        # path = os.path.realpath(path)
+        # os.startfile(path)
+    
 
 def selectedFun(mode, client, date,path):
-    ClientCode = {
-  "Pantaloons": "PL",
-  "Shoppers Stop Limited": "SSL",
-  "Lifestyle Limited": "LSL"
-}
+    print(path)
+    with open(path1+'/'+'client.json', 'r') as jsonFile:
+            config = json.load(jsonFile)
+            print(config)
+            ClientCode = config
 
     ClientCodeSelected = client
     OrderDateSelected = date
@@ -78,7 +92,7 @@ def selectedFun(mode, client, date,path):
         message="Invalid Client Name, path or Order Date Selected"
     )
     else:
-        with open('C:/Users/HP/Desktop/PO Metadata/Configfiles-Folder/config.json', 'r') as jsonFile:
+        with open(path1+'config.json', 'r') as jsonFile:
             config = json.load(jsonFile)    
             pythonenvpath = config['pythonPath']
             pythonScriptPath = config['appsScriptPath']
@@ -87,18 +101,9 @@ def selectedFun(mode, client, date,path):
         encodedOrderDateSelected = str(OrderDateSelected).replace(' ', "#")
         enodedPOFolderSelected = requestedpath.replace(' ', "#") 
 
-          
-        # pb = ttk.Progressbar(
-        #     Orderframe,
-        #     orient='horizontal',
-        #     mode='indeterminate',
-        #     length=500
-        # )
-        # pb.grid(row=8,column=2,padx=0, pady=20,sticky=tk.W)  
-        # pb.start
-
         # Running code on CMD
+        print(pythonenvpath,pythonScriptPath,mode,encodedClientCodeSelected,encodedOrderDateSelected,enodedPOFolderSelected)
         os.system(pythonenvpath +" "+ pythonScriptPath+" "+mode+" "+encodedClientCodeSelected+" "+encodedOrderDateSelected+" "+enodedPOFolderSelected)
-        print('Here')
+
 
         

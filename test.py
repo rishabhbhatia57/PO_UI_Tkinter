@@ -14,7 +14,12 @@ from tab2 import Tab2
 from tab1 import Tab1
 from tab3 import Tab3
 import json
+from logscmd import PrintLogger
+import sys
+from pygtail import Pygtail
 
+
+path = "C:/Users/HP/Desktop/PO Metadata/Configfiles-Folder/"
 # Getting Screen Dimensions
 DeviceScreenHeight = ''
 DeviceScreenWidth = ''
@@ -26,11 +31,6 @@ for m in get_monitors():
 POFolderSelected = ''
 OrderDateSelected = ''
 ClientCodeSelected = ''
-ClientCode = {
-  "Pantaloons": "PL",
-  "Shoppers Stop Limited": "SSL",
-  "Lifestyle Limited": "LSL"
-}
 
 root = Tk()
 root.geometry(DeviceScreenWidth+"x"+DeviceScreenHeight)
@@ -39,7 +39,7 @@ root.maxsize(int(DeviceScreenWidth),int(DeviceScreenHeight))
 
 root.title("Purchase Orders")
 
-with open('C:/Users/HP/Desktop/PO Metadata/Configfiles-Folder/config.json', 'r') as jsonFile:
+with open(path+'config.json', 'r') as jsonFile:
   config = json.load(jsonFile)
   themepath = config['appTheme']
 
@@ -66,5 +66,20 @@ tab2 = Tab2(root,tabControl)
 tab3 = Tab3(root,tabControl)
 
 tabControl.pack(expand = 1, fill ="both")
+
+# f = open('log.txt')
+
+
+# logbox = st.ScrolledText(root, width = 60, height = 50, font = ("Times New Roman", 13))
+# logbox.pack()
+# global pl 
+# pl= PrintLogger(logbox)
+# sys.stdout = pl
+
+# logbox.insert(tk.INSERT,pl) # Inserting Text which is read only
+# print('Here')
+# # logbox.configure(state ='disabled')
+# print('Again')
+            
 
 root.mainloop()  
