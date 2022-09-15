@@ -10,6 +10,8 @@ import os
 import threading
 import base64
 import tkinter.font as tkFont
+from config import ConfigFolderPath, headingFont,fieldFont,buttonFont,labelFont,pathFont,logFont
+
 
 
 class Tab3():

@@ -14,8 +14,11 @@ import json
 from openpyxl import load_workbook,Workbook
 import openpyxl.utils.cell
 import pyperclip
+from datetime import datetime
+from config import ConfigFolderPath, headingFont,fieldFont,buttonFont,labelFont,pathFont,logFont
 
-path1 = 'C:/Users/HP/Desktop/PO Metadata/Configfiles-Folder/'
+
+
 
 def select_folder(showPath):
     filetypes = (
@@ -24,13 +27,19 @@ def select_folder(showPath):
     )
     global POFolderSelected 
     POFolderSelected = fd.askdirectory()
-    showPath.config(text=POFolderSelected)
-    
-    showinfo(
-        title='Selected Folder',
-        message=POFolderSelected
-    )
-    return POFolderSelected
+    if POFolderSelected == '':
+        showPath.config(text='No Folder selected')
+        showinfo(
+            title='Invalid Selection',
+            message='Please select the folder.'
+        )
+    else:
+        showPath.config(text=POFolderSelected)
+        showinfo(
+            title='Selected Folder',
+            message=POFolderSelected
+        )
+        return POFolderSelected
 
 def select_files(showPath,showReqPath,showOrderdate):
     filetypes = (
@@ -45,11 +54,10 @@ def select_files(showPath,showReqPath,showOrderdate):
     else:
         showinfo(title='Please wait',message="Fetching Client Name and Order Date...")
         showPath.config(text=ReqFileSelected)
-
         ReqSumWorkbook = load_workbook(ReqFileSelected,data_only=True) 
         ReqSumSheet = ReqSumWorkbook.active
-        showReqPath.config(text=ReqSumSheet.cell(2,6).value)
-        showOrderdate.config(text=ReqSumSheet.cell(2,4).value)
+        showReqPath.set(ReqSumSheet.cell(2,6).value)
+        showOrderdate.set(ReqSumSheet.cell(2,4).value)
     
     return ReqFileSelected
 
@@ -74,13 +82,40 @@ def openfolder(params,frame):
         showinfo(title='Path Copied',message="'"+path+"' is copied to the clipboard.")
         # path = os.path.realpath(path)
         # os.startfile(path)
+
+def openfolderpackaging(params,frame):
+    print(params)
+    if  params[2] == '' or params[3] == '':
+        showinfo(
+            title='Invalid Selection',
+            message="No folder is selected. Check Client Name, path or Order Date Selected"
+        )
+    else:
+        with open(ConfigFolderPath+'client.json', 'r') as jsonFile:
+            clientcode = json.load(jsonFile)
+            clientcode = clientcode[params[1]]
+        year = datetime.strptime(params[2], '%Y-%m-%d').strftime('%Y')
+        date = str(params[2])
+        
+
+        path = params[0]+'/'+clientcode+'-'+year+'/'+date+'/'+params[3]
+        isExist = os.path.exists(path)
+        if not isExist:
+            showinfo(
+                title='Invalid Selection',
+                message="Folder doesn't exists. Check Client Name, path or Order Date Selected"
+            )
+            print("Path doesn't exists. Please check date or client name.")
+        else:
+            pyperclip.copy(path)
+            showinfo(title='Path Copied',message="'"+path+"' is copied to the clipboard.")
+            # path = os.path.realpath(path)
+            # os.startfile(path)
     
 
-def selectedFun(mode, client, date,path):
-    print(path)
-    with open(path1+'/'+'client.json', 'r') as jsonFile:
+def selectedFun(mode, client, date, path):
+    with open(ConfigFolderPath+'/'+'client.json', 'r') as jsonFile:
             config = json.load(jsonFile)
-            print(config)
             ClientCode = config
 
     ClientCodeSelected = client
@@ -92,7 +127,7 @@ def selectedFun(mode, client, date,path):
         message="Invalid Client Name, path or Order Date Selected"
     )
     else:
-        with open(path1+'config.json', 'r') as jsonFile:
+        with open(ConfigFolderPath+'config.json', 'r') as jsonFile:
             config = json.load(jsonFile)    
             pythonenvpath = config['pythonPath']
             pythonScriptPath = config['appsScriptPath']
