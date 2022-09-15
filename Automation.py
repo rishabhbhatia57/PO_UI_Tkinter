@@ -76,7 +76,8 @@ logbox.pack(expand = True,fill ="both",ipady=10,ipadx=10)
 global pl 
 pl= PrintLogger(logbox)
 sys.stdout = pl
-
+# for line in Pygtail("C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/log.txt"):
+#     logbox.insert(tk.INSERT,line) # Inserting Text which is read only
 logbox.insert(tk.INSERT,pl) # Inserting Text which is read only
 print('Here')
 # logbox.configure(state ='disabled')
