@@ -5,6 +5,7 @@ from tkinter import *
 
 # Path used to get config path, client path and app theme
 ConfigFolderPath = "C:/Users/HP/Desktop/PO Metadata/Configfiles-Folder/"
+MasterFolderPath = "C:/Users/HP/Desktop/PO Metadata/Masterfiles-Folder/"
 # Fonts used throughout application
 headingFont = ("Calibri",30)
 fieldFont =  ("Calibri",15)
