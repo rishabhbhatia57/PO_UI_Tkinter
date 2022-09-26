@@ -69,9 +69,9 @@ tabControl.pack(fill ="x")
 logbox = st.ScrolledText(root)
 logbox.pack(expand = True,fill ="both",ipady=10,ipadx=10)
 global pl 
-pl= PrintLogger(logbox)
-# sys.stdout = pl
-# logbox.insert(tk.INSERT,pl) # Inserting Text which is read only
+pl = PrintLogger(logbox)
+sys.stdout = pl
+logbox.insert(tk.INSERT,pl) # Inserting Text which is read only
 # for line in Pygtail("C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/log.txt"):
       # logbox.insert(tk.INSERT,pl) # Inserting Text which is read only
 # while True:

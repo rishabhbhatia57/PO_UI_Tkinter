@@ -647,8 +647,44 @@ def generatingPackaingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulashee
             TemplateSheet = TemplateWorkbook['ORDER']
             print(TemplateSheet.cell(1,4).value)
             # Getting data from IGST/ SGST Sheet DBF to Tempalate sheet DBF
+
+            # If IGST then open IGST Master
             if TemplateSheet.cell(1,4).value == 'IGST':
 
+                # Opening Packaging slip as df for second time to get EAN values
+                df_TempalateWorkbook = pd.read_excel(sourcePackagingSlip,sheet_name='ORDER', skiprows=6,index_col=False)
+                df_TempalateWorkbook.rename(columns = {'EAN':'EAN ID'}, inplace = True)
+                
+                # Temporary df to store EAN ID
+                df_EAN_temp = df_TempalateWorkbook[['EAN ID']]
+                # Applying join using EAN ID to get hidden_item_master to get SKU and Other fields
+                df_hidden_item_master = df_EAN_temp.merge(df_IteamMaster,on='EAN ID',how='left')
+
+                df_Location2_temp = df_hidden_item_master.merge(df_Location2,on='EAN ID',how='left')
+                # print(df_Location2_temp)
+
+                # Temporary df to store SKU
+                df_SKU_temp = df_hidden_item_master[['SKU ID']]
+                df_SKU_temp.rename(columns = {'SKU ID':'ITEMNAME'}, inplace = True)
+                # Applying join using ITEMNAME to get hidden_dbf (from IGST/SGST sheet) to get SKU and Other fields
+                df_GST_hidden = df_SKU_temp.merge(df_IGSTMaster,on='ITEMNAME',how='left')
+
+
+                with pd.ExcelWriter(sourcePackagingSlip, mode='a', engine='openpyxl',if_sheet_exists='replace') as writer:
+                    # Adding Hidden Item Master sheet to the RQ sheet with values 'Style Name', 'EAN', 'Style', 'SKU ID', 'MRP'
+                    df_Location2_temp.to_excel(writer,sheet_name='Hidden Item Master',index=False, columns=['Style Name', 'EAN', 'Style', 'SKU', 'MRP','Location 2','BULK  / DTA  BULK  /  EOSS LOC'])
+                    # # Adding Hidden DBF sheet to the RQ sheet with values 'Vouchertypename', 'CSNNO','DATE' ETC.
+                    df_GST_hidden.to_excel(writer,sheet_name='Hidden DBF',index=False, columns=['Vouchertypename', 'CSNNO','DATE',
+                    'REFERENCE', 'REF1','DEALNAME', 'PRICELEVEL', 'ITEMNAME', 'GODOWN', 'QTY', 'RATE', 'SUBTOTAL', 'DISCPERC',
+                    'DISCAMT', 'ITEMVALUE', 'LedgerAcct', 'CATEGORY1', 'COSTCENT1', 'CATEGORY2', 'COSTCENT2', 'CATEGORY3', 'COSTCENT3',
+                    'CATEGORY4', 'COSTCENT4', 'ITEMTOTAL', 'TOTALQTY', 'CDISCHEAD', 'CDISCPERC', 'COMMONDISC', 'BEFORETAX',
+                    'TAXHEAD', 'TAXPERC', 'TAXAMT', 'STAXHEAD', 'STAXPERC', 'STAXAMT', 'ITAXHEAD', 'ITAXPERC' ,'ITAXAMT', 'NETAMT',
+                    'ROUND', 'ROUND1', 'REFTYPE', 'Name', 'REFAMT', 'Narration', 'Transport','transmode', 'pymtterm', 'ordno',
+                    'orddate', 'DANO', 'Delyadd1', 'Delyadd2', 'Delyadd3', 'Delyadd4'])
+            
+            # If SGST then open SGST Master
+            if TemplateSheet.cell(1,4).value == 'SGST':
+                
                 # Opening Packaging slip as df for second time to get EAN values
                 df_TempalateWorkbook = pd.read_excel(sourcePackagingSlip,sheet_name='ORDER', skiprows=6,index_col=False)
                 df_TempalateWorkbook.rename(columns = {'EAN':'EAN ID'}, inplace = True)
@@ -679,8 +715,6 @@ def generatingPackaingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulashee
                     'TAXHEAD', 'TAXPERC', 'TAXAMT', 'STAXHEAD', 'STAXPERC', 'STAXAMT', 'ITAXHEAD', 'ITAXPERC' ,'ITAXAMT', 'NETAMT',
                     'ROUND', 'ROUND1', 'REFTYPE', 'Name', 'REFAMT', 'Narration', 'Transport','transmode', 'pymtterm', 'ordno',
                     'orddate', 'DANO', 'Delyadd1', 'Delyadd2', 'Delyadd3', 'Delyadd4'])
-                
-            if TemplateSheet.cell(1,4).value == 'SGST':
                 pass
 
             TemplateWorkbook.close()
