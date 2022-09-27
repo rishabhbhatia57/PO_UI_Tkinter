@@ -6,6 +6,8 @@ class PrintLogger(): # create file like object
         self.textbox = textbox # keep ref
 
     def write(self, text):
+        text = sys.stdout.read()
+        print(text)
         self.textbox.insert(tk.END, text) # write text to textbox
             # could also scroll to end of textbox here to make sure always visible
 

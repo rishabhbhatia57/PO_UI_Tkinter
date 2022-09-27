@@ -18,9 +18,11 @@ from datetime import datetime
 import sys
 from config import ConfigFolderPath, headingFont,fieldFont,buttonFont,labelFont,pathFont,logFont
 from BKE_mainFunction import startProcessing
+import threading
+from globalvar import logboxstate
 
 
-
+global flag
 def select_folder(showPath):
     filetypes = (
         ('pdf files', '*.pdf'),
@@ -114,6 +116,7 @@ def openfolderpackaging(params,frame):
             # os.startfile(path)
     
 def selectedFun(mode, client, date, path):
+    
     print(mode, client, date, path)
     with open(ConfigFolderPath+'/'+'client.json', 'r') as jsonFile:
             config = json.load(jsonFile)
@@ -122,7 +125,7 @@ def selectedFun(mode, client, date, path):
     ClientCodeSelected = client
     OrderDateSelected = date
     requestedpath = path
-    if ClientCodeSelected == '' or OrderDateSelected == '' or requestedpath == '':
+    if OrderDateSelected == '' or requestedpath == 'No Folder selected':
         showinfo(
         title='Invalid Selection',
         message="Invalid Client Name, path or Order Date Selected"
@@ -140,12 +143,14 @@ def selectedFun(mode, client, date, path):
                 message="Please selected Client Name from dropdowm menu."
             )
         else:
+            global logboxstate
+            logboxstate = True
+            print(logboxstate)
             encodedClientCodeSelected = ClientCode[ClientCodeSelected]
             encodedOrderDateSelected = str(OrderDateSelected).replace(' ', "#")
             enodedPOFolderSelected = requestedpath.replace(' ', "#") 
-
             # Running code on CMD
             # print(pythonenvpath,pythonScriptPath,mode,encodedClientCodeSelected,encodedOrderDateSelected,enodedPOFolderSelected)
-
             startProcessing(mode=mode,clientname=ClientCode[ClientCodeSelected],orderdate=str(OrderDateSelected),processing_source=requestedpath)
+
             # os.system(pythonenvpath +" "+ pythonScriptPath+" "+mode+" "+encodedClientCodeSelected+" "+encodedOrderDateSelected+" "+enodedPOFolderSelected)

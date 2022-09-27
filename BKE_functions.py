@@ -257,7 +257,6 @@ def getFilesToProcess(RootFolder,POSource,OrderDate,ClientCode):
 def pdfToTable(inputPath,outputPath,RootFolder,POSource,OrderDate,ClientCode,filecsv):
 
     try:
-        print(tabula.environment_info())
         logger.info("Converting '"+ filecsv +"' to excel '"+filecsv.replace('.pdf', '.xlsx')+"'")
         print("Converting '"+ filecsv +"' to excel '"+filecsv.replace('.pdf', '.xlsx')+"'")
         #converting str to datetime
