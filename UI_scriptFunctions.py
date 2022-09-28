@@ -133,8 +133,8 @@ def beginOrderProcessing(mode, client, date, path):
     else:
         with open(ConfigFolderPath+'config.json', 'r') as jsonFile:
             config = json.load(jsonFile)    
-            pythonenvpath = config['pythonPath']
-            pythonScriptPath = config['appsScriptPath']
+            # pythonenvpath = config['pythonPath']
+            # pythonScriptPath = config['appsScriptPath']
 
         if ClientCodeSelected == '--select--':
             print('Wrong input')

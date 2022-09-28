@@ -8,7 +8,7 @@ a = Analysis(
     ['UI_Automation.py'],
     pathex=[],
     binaries=[],
-    datas=[('C:\\C-BIA\\PO_UI_Tkinter\\triumphvenv\\Lib\\site-packages\\tabula\\tabula-1.0.5-jar-with-dependencies.jar', 'tabula')],
+    datas=[('C:\\Users\\HP\\Documents\\GitHub\\PO_UI_Tkinter\\guienve\\Lib\\site-packages\\tabula\\tabula-1.0.5-jar-with-dependencies.jar', 'tabula')],
     hiddenimports=['babel.numbers'],
     hookspath=[],
     hooksconfig={},

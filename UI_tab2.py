@@ -78,16 +78,16 @@ class Tab2():
 
                 changedDate = date.get()
                 # print(date.get())
-                changedDate = datetime.strptime(changedDate, '%Y-%m-%d')
+                # changedDate = datetime.strptime(changedDate, '%Y-%m-%d')
 
-                # Year = changedDate[6:10]
-                # Month = changedDate[3:5]
-                # Date = changedDate[0:2]
+                Year = changedDate[6:10]
+                Month = changedDate[3:5]
+                Date = changedDate[0:2]
 
-                year = changedDate.strftime('%Y')
-                date1 = str(changedDate.strftime('%Y-%m-%d'))
-                # year = Year
-                # date = Year+ "-"+Month+ "-"+ Date
+                # year = changedDate.strftime('%Y')
+                # date1 = str(changedDate.strftime('%Y-%m-%d'))
+                year = Year
+                date1 = Year+ "-"+Month+ "-"+ Date
                 changedclient = client.get()
                 with open(ConfigFolderPath+'client.json', 'r') as jsonFile:
                     clientcode = json.load(jsonFile)

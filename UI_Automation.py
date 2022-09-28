@@ -34,7 +34,7 @@ for m in get_monitors():
 
 root = Tk()
 root.geometry(DeviceScreenWidth+"x"+DeviceScreenHeight)
-root.minsize(1700,1000)
+root.minsize(int(DeviceScreenWidth)-300,int(DeviceScreenHeight)-250)
 root.maxsize(int(DeviceScreenWidth),int(DeviceScreenHeight))
 
 

@@ -16,6 +16,9 @@ import sys
 
 import BKE_log
 from config import MasterFolderPath
+pd.options.mode.chained_assignment = None
+# import warnings
+# warnings.simplefilter(action='ignore', category=SettingWithCopyWarning)
 
 logger = BKE_log.setup_custom_logger('root')
 
@@ -30,6 +33,7 @@ def downloadFiles(RootFolder,POSource,OrderDate,ClientCode):
     source_folder = POSource
     destination_folder = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/10-Download-Files/"
     try:
+        print("Copying PDF Files from '"+str(source_folder)+"' to '"+str(destination_folder)+"'")
         for file_name in os.listdir(POSource):
             # construct full file path
             
@@ -216,8 +220,8 @@ def mergeToPivotRQ(RootFolder,POSource,OrderDate,ClientCode,Formulasheet):
 
 
             pivotWorksheet.save(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/60-Requirement-Summary/Requirement-Summary.xlsx")
-            logger.info('Generated requirement summary file for order date - '+OrderDate)
-            print('Generated requirement summary file for order date - '+OrderDate)
+            logger.info('Generated requirement summary file - order date - '+OrderDate)
+            print('Generated requirement summary file - order date - '+OrderDate)
             # formulaWorksheet.save(Formulasheet+'/FormulaSheet.xlsx')
 
             formulaWorksheet.close()
@@ -246,12 +250,16 @@ def getFilesToProcess(RootFolder,POSource,OrderDate,ClientCode):
             print("'"+inputFolderPath+"' Folder is empty, add pdf files to convert")
             return
         else:
+            logger.info("Converting PDF files to Excel...")
+            print("Converting PDF files to Excel...")
+            count = 0
+
             for f in os.listdir(inputFolderPath):
                 fOutputExtension = f.replace('.pdf', '.xlsx')
-                
                 pdfToTable(inputFolderPath+f,outputFolderPath+fOutputExtension,RootFolder,POSource,OrderDate,ClientCode,f)
+                count += 1
             
-            print("Successfully converted all Files in"+"{:.2f}".format(time.time() - startedProcessing,2)+ " seconds!")
+            print("Successfully converted "+str(count)+" Files in "+"{:.2f}".format(time.time() - startedProcessing,2)+ " seconds!")
             # print("Completed in "+"{:.2f}".format(time.time() - startedProcessing,2)+ " seconds!")
     except Exception as e:
         logger.error("Error while processing files: "+str(e))
@@ -260,11 +268,9 @@ def getFilesToProcess(RootFolder,POSource,OrderDate,ClientCode):
 
 def pdfToTable(inputPath,outputPath,RootFolder,POSource,OrderDate,ClientCode,filecsv):
 
-    logger.info("Converting PDF files to Excel...")
-    print("Converting PDF files to Excel...")
     try:
         logger.info("Converting '"+ filecsv)# +"' to excel '"+filecsv.replace('.pdf', '.xlsx')+"'")
-        print("Converting '"+ filecsv)# +"' to excel '"+filecsv.replace('.pdf', '.xlsx')+"'")
+        # print("Converting '"+ filecsv)# +"' to excel '"+filecsv.replace('.pdf', '.xlsx')+"'")
         #converting str to datetime
         OrderDate = datetime.strptime(OrderDate, '%Y-%m-%d')
         # extracting year from the order date
@@ -468,7 +474,7 @@ def pdfToTable(inputPath,outputPath,RootFolder,POSource,OrderDate,ClientCode,fil
 
         # logger.info("Converted '"+ inputPath + "' to '" + outputPath+"'"+ " in "+ "{:.2f}".format(time.time() - startedProcessing,2)+ " seconds.")
         # print("Converted '"+ inputPath + "' to '" + outputPath+"'"+ " in "+ "{:.2f}".format(time.time() - startedProcessing,2)+ " seconds.")
-        print("Converted '"+ inputPath + " in "+ "{:.2f}".format(time.time() - startedProcessing,2)+ " seconds.")
+        print("Converted '"+ filecsv + "' to '"+filecsv.replace('pdf','xlsx')+"' in "+ "{:.2f}".format(time.time() - startedProcessing,2)+ " seconds.")
         
         return "Conversion Complete!"
     
