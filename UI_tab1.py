@@ -15,7 +15,7 @@ import subprocess
 from datetime import datetime
 import sys
 
-from UI_scriptFunctions import select_folder,selectedFun,openfolder
+from UI_scriptFunctions import select_folder,beginOrderProcessing,openfolder
 from UI_logscmd import PrintLogger
 from config import ConfigFolderPath, headingFont,fieldFont,buttonFont,labelFont,pathFont,logFont
 
@@ -69,7 +69,7 @@ class Tab1():
         OrderDateButton1 = DateEntry(Orderframe,selectmode='day',date_pattern='dd-mm-Y',textvariable=sel,font=buttonFont)
         OrderDateButton1.grid(row=3,column=1,padx=20, pady=20,sticky=W)
 
-        ProcessButton1 = Button(Orderframe, command=threading.Thread(target=lambda:selectedFun(mode ='consolidation', client=clicked.get(), date=OrderDateButton1.get_date(), path=POFolderPathValue1['text'])).start, text="Process",font=buttonFont)
+        ProcessButton1 = Button(Orderframe, command=threading.Thread(target=lambda:beginOrderProcessing(mode ='consolidation', client=clicked.get(), date=OrderDateButton1.get_date(), path=POFolderPathValue1['text'])).start, text="Process",font=buttonFont)
         ProcessButton1.grid(row=4,column=1,padx=20, pady=20,sticky=W)
 
         CancelButton1 = Button(Orderframe, text="Cancel",font=buttonFont)
@@ -90,11 +90,19 @@ class Tab1():
             def my_date_client(*argus):
 
                 changedDate = sel.get()
-                
-                changedDate = datetime.strptime(changedDate, '%d-%m-%Y')
-                print(changedDate)
-                year = changedDate.strftime('%Y')
-                date = str(changedDate.strftime('%Y-%m-%d'))
+                Year = changedDate[6:10]
+                Month = changedDate[3:5]
+                Date = changedDate[0:2]
+                # print("1 ",changedDate, type(changedDate))
+                # print(Year, Month, Date)
+                # changedDate = changedDate + ' 00:00:00'
+                # print("2", changedDate)
+                # changedDate = datetime.strptime(changedDate, '%d-%m-%Y').date()
+                # print("3", changedDate, type(changedDate))
+                # year = changedDate.strftime('%Y')
+                # date = str(changedDate.strftime('%Y-%m-%d'))
+                year= Year
+                date= Year+ "-"+Month+ "-"+ Date
                 chnagedClientcode = clicked.get()
                 
                 path = config['targetFolder']+'/'+ClientCode[clicked.get()]+'-'+year+'/'+date+'/'+'60-Requirement-Summary'

@@ -629,3 +629,73 @@ PO Folder Path: 'D:/ProjectStructure/SSL-2022/2022-09-26/60-Requirement-Summary/
 2022-09-27 10:39:29,197 INFO Converting '4000444767.pdf' to excel '4000444767.xlsx' 
 2022-09-27 10:39:51,530 INFO Converted 'D:/ProjectStructure/PL-2022/2022-09-27/10-Download-Files/4000444767.pdf' to 'D:/ProjectStructure/PL-2022/2022-09-27/40-Extract-Excel/4000444767.xlsx' in 22.33 seconds. 
 2022-09-27 10:39:51,534 INFO Converting '4000444772.pdf' to excel '4000444772.xlsx' 
+2022-09-27 18:22:12,635 INFO Client Name: PL Client Code: PL Order Date: 2022-09-28 PO Folder Path: 'C:/C-BIA/PO Metadata/POSourcefiles-Folder' 
+2022-09-27 18:22:12,635 INFO Starting script 
+2022-09-27 18:22:12,640 INFO Creating the new directory... 
+2022-09-27 18:22:12,642 INFO Folder 'PL-2022/2022-09-28' is created. 
+2022-09-27 18:22:12,646 INFO File '4000444765.pdf' copied 
+2022-09-27 18:22:12,650 INFO File '4000444766.pdf' copied 
+2022-09-27 18:22:12,654 INFO File '4000444767.pdf' copied 
+2022-09-27 18:22:12,658 INFO File '4000444772.pdf' copied 
+2022-09-27 18:22:12,661 INFO File '4000444785.pdf' copied 
+2022-09-27 18:22:12,664 INFO File '4000444790.pdf' copied 
+2022-09-27 18:22:12,668 INFO File '4000444792.pdf' copied 
+2022-09-27 18:22:12,671 INFO File '4000444794.pdf' copied 
+2022-09-27 18:22:12,674 INFO File '4000444798.pdf' copied 
+2022-09-27 18:22:12,676 INFO File '4000444799.pdf' copied 
+2022-09-27 18:22:12,680 INFO File '4000444803.pdf' copied 
+2022-09-27 18:22:12,683 INFO File '4000444805.pdf' copied 
+2022-09-27 18:22:12,686 INFO File '4000444902.pdf' copied 
+2022-09-27 18:22:12,689 INFO File '4000444906.pdf' copied 
+2022-09-27 18:22:12,692 INFO File '4000444911.pdf' copied 
+2022-09-27 18:22:12,695 INFO File '4000444914.pdf' copied 
+2022-09-27 18:22:12,700 INFO File '4000444918.pdf' copied 
+2022-09-27 18:22:12,704 INFO File '4000444923.pdf' copied 
+2022-09-27 18:22:12,707 INFO File '4000444925.pdf' copied 
+2022-09-27 18:22:12,708 INFO Converting PDF files to Excel... 
+2022-09-27 18:22:12,708 INFO Converting '4000444765.pdf 
+2022-09-27 18:26:27,290 INFO Client Name: SSL Client Code: SSL Order Date: 2022-09-09 PO Folder Path: 'C:/C-BIA/PO Metadata/POSourcefiles-Folder' 
+2022-09-27 18:26:27,291 INFO Starting script 
+2022-09-27 18:26:27,294 INFO Creating the new directory... 
+2022-09-27 18:26:27,308 INFO Folder 'SSL-2022/2022-09-09' is created. 
+2022-09-27 18:26:27,312 INFO File '4000444765.pdf' copied 
+2022-09-27 18:26:27,315 INFO File '4000444766.pdf' copied 
+2022-09-27 18:26:27,320 INFO File '4000444767.pdf' copied 
+2022-09-27 18:26:27,323 INFO File '4000444772.pdf' copied 
+2022-09-27 18:26:27,327 INFO File '4000444785.pdf' copied 
+2022-09-27 18:26:27,330 INFO File '4000444790.pdf' copied 
+2022-09-27 18:26:27,334 INFO File '4000444792.pdf' copied 
+2022-09-27 18:26:27,337 INFO File '4000444794.pdf' copied 
+2022-09-27 18:26:27,341 INFO File '4000444798.pdf' copied 
+2022-09-27 18:26:27,342 INFO File '4000444799.pdf' copied 
+2022-09-27 18:26:27,347 INFO File '4000444803.pdf' copied 
+2022-09-27 18:26:27,349 INFO File '4000444805.pdf' copied 
+2022-09-27 18:26:27,354 INFO File '4000444902.pdf' copied 
+2022-09-27 18:26:27,358 INFO File '4000444906.pdf' copied 
+2022-09-27 18:26:27,362 INFO File '4000444911.pdf' copied 
+2022-09-27 18:26:27,365 INFO File '4000444914.pdf' copied 
+2022-09-27 18:26:27,369 INFO File '4000444918.pdf' copied 
+2022-09-27 18:26:27,374 INFO File '4000444923.pdf' copied 
+2022-09-27 18:26:27,377 INFO File '4000444925.pdf' copied 
+2022-09-27 18:26:27,378 INFO Converting PDF files to Excel... 
+2022-09-27 18:26:27,378 INFO Converting '4000444765.pdf 
+2022-09-27 18:26:39,027 INFO Converting PDF files to Excel... 
+2022-09-27 18:26:39,028 INFO Converting '4000444766.pdf 
+2022-09-27 18:27:11,512 INFO Converting PDF files to Excel... 
+2022-09-27 18:27:11,514 INFO Converting '4000444767.pdf 
+2022-09-27 18:27:25,416 INFO Converting PDF files to Excel... 
+2022-09-27 18:27:25,432 INFO Converting '4000444772.pdf 
+2022-09-27 18:27:50,433 INFO Converting PDF files to Excel... 
+2022-09-27 18:27:50,433 INFO Converting '4000444785.pdf 
+2022-09-27 18:28:00,677 INFO Converting PDF files to Excel... 
+2022-09-27 18:28:00,677 INFO Converting '4000444790.pdf 
+2022-09-27 18:28:26,152 INFO Converting PDF files to Excel... 
+2022-09-27 18:28:26,153 INFO Converting '4000444792.pdf 
+2022-09-27 18:28:51,127 INFO Converting PDF files to Excel... 
+2022-09-27 18:28:51,127 INFO Converting '4000444794.pdf 
+2022-09-27 18:28:59,173 INFO Converting PDF files to Excel... 
+2022-09-27 18:28:59,182 INFO Converting '4000444798.pdf 
+2022-09-27 18:29:31,936 INFO Converting PDF files to Excel... 
+2022-09-27 18:29:31,936 INFO Converting '4000444799.pdf 
+2022-09-27 18:29:32,803 INFO Converting PDF files to Excel... 
+2022-09-27 18:29:32,803 INFO Converting '4000444803.pdf 

@@ -1,5 +1,6 @@
 import tkinter as tk
 import sys
+import logging
 
 class PrintLogger(): # create file like object
     def __init__(self, textbox): # pass reference to text widget

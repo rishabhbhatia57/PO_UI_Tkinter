@@ -87,7 +87,7 @@ def openfolder(params,frame):
         # os.startfile(path)
 
 def openfolderpackaging(params,frame):
-    print(params)
+    # print(params)
     if  params[2] == '' or params[3] == '':
         showinfo(
             title='Invalid Selection',
@@ -115,9 +115,9 @@ def openfolderpackaging(params,frame):
             # path = os.path.realpath(path)
             # os.startfile(path)
     
-def selectedFun(mode, client, date, path):
+def beginOrderProcessing(mode, client, date, path):
     
-    print(mode, client, date, path)
+    # print(mode, client, date, path)
     with open(ConfigFolderPath+'/'+'client.json', 'r') as jsonFile:
             config = json.load(jsonFile)
             ClientCode = config
@@ -145,7 +145,7 @@ def selectedFun(mode, client, date, path):
         else:
             global logboxstate
             logboxstate = True
-            print(logboxstate)
+            # print(logboxstate)
             encodedClientCodeSelected = ClientCode[ClientCodeSelected]
             encodedOrderDateSelected = str(OrderDateSelected).replace(' ', "#")
             enodedPOFolderSelected = requestedpath.replace(' ', "#") 

@@ -21,7 +21,7 @@ logger = BKE_log.setup_custom_logger('root')
 
 def downloadFiles(RootFolder,POSource,OrderDate,ClientCode):
     #converting str to datetime
-    print(OrderDate)
+    # print(OrderDate)
     OrderDate = datetime.strptime(OrderDate, '%Y-%m-%d')
     # extracting year from the order date
     year = OrderDate.strftime("%Y")
@@ -39,8 +39,8 @@ def downloadFiles(RootFolder,POSource,OrderDate,ClientCode):
             if os.path.isfile(source):
 
                 shutil.copy(source, destination)
-                logger.info("File '"+file_name+"' copied from source '"+source_folder+"' to destination '"+destination_folder+"'")
-                print("File '"+file_name+"' copied from source '"+source_folder+"' to destination '"+destination_folder+"'")
+                logger.info("File '"+file_name+"' copied")# from source '"+source_folder+"' to destination '"+destination_folder+"'")
+                print("File '"+file_name+"' copied")# from source '"+source_folder+"' to destination '"+destination_folder+"'")
     except Exception as e:
         logger.error("Error while copying files: "+str(e))
         print("Error while copying files: "+str(e))
@@ -72,13 +72,15 @@ def checkFolderStructure(RootFolder,ClientCode,OrderDate):
         OrderDate = OrderDate.strftime('%Y-%m-%d')
         
         # Checking if the folder exists or not, if doesnt exists, then script will create one.
-        logger.info('Checking if the folder exists or not, if doesnt exists, then script will create one.')
-        print('Checking if the folder exists or not, if doesnt exists, then script will create one.')
+        # logger.info('Checking if the folder exists or not, if doesnt exists, then script will create one.')
+        # print('Checking if the folder exists or not, if doesnt exists, then script will create one.')
+        logger.info("Creating the new directory...")
+        print("Creating the new directory...")
         DatedPath = RootFolder +"/"+ClientCode+"-"+year+"/"+str(OrderDate)
         isExist = os.path.exists(DatedPath)
         if not isExist:
-            logger.info("Creating a new folder '"+ClientCode+"-"+year+"/"+str(OrderDate)+"' at location "+ RootFolder)
-            print("Creating a new folder '"+ClientCode+"-"+year+"/"+str(OrderDate)+"' at location "+ RootFolder)
+            # logger.info("Creating a new folder '"+ClientCode+"-"+year+"/"+str(OrderDate)+"' at location "+ RootFolder)
+            # print("Creating a new folder '"+ClientCode+"-"+year+"/"+str(OrderDate)+"' at location "+ RootFolder)
             os.makedirs(DatedPath)
             os.makedirs(DatedPath+"/10-Download-Files")
             os.makedirs(DatedPath+"/20-Intermediate-Files")
@@ -90,8 +92,9 @@ def checkFolderStructure(RootFolder,ClientCode,OrderDate):
             os.makedirs(DatedPath+"/80-Logs")
             logger.info("Folder '"+ClientCode+"-"+year+"/"+str(OrderDate)+"' is created.")
             print("Folder '"+ClientCode+"-"+year+"/"+str(OrderDate)+"' is created.")
-        logger.info("Folder '"+ClientCode+"-"+year+"/"+str(OrderDate)+"' exists.")
-        print("Folder '"+ClientCode+"-"+year+"/"+str(OrderDate)+"' exists.")
+        else:
+            logger.info("Folder '"+ClientCode+"-"+year+"/"+str(OrderDate)+"' exists.")
+            print("Folder '"+ClientCode+"-"+year+"/"+str(OrderDate)+"' exists.")
 
     except Exception as e:
         logger.error("Error while checking folder structure:  "+str(e))
@@ -117,16 +120,17 @@ def mergeExcelsToOne(RootFolder,POSource,OrderDate,ClientCode):
             return
         else:
             excl_list = []
+            print("Merging files...")
             for f in os.listdir(inputpath):
-                logger.info("Accessing '"+f+"' right now: ")
-                print("Accessing '"+f+"' right now: ")
+                # logger.info("Accessing '"+f+"' right now: ")
+                # print("Accessing '"+f+"' right now: ")
                 df = pd.read_excel(inputpath+"/"+f)
                 df.insert(0, "file_name", f)
                 excl_list.append(df)
             excl_merged = pd.concat(excl_list, ignore_index=True,)
             excl_merged.to_excel(outputpath+"/"+'Consolidate-Orders.xlsx', index=False)
-            logger.info("Merged "+str(len(file_list))+ " excel files to a single excel as 'Consolidate-Orders.xlsx'")
-            print("Merged "+str(len(file_list))+ " excel files to a single excel as 'Consolidate-Orders.xlsx'")
+            logger.info("Merged "+str(len(file_list))+ " excel files into a single excel file 'Consolidate-Orders.xlsx'")
+            print("Merged "+str(len(file_list))+ " excel files into a single excel file 'Consolidate-Orders.xlsx'")
             return 'All excels are merged into a single excel file'
     except Exception as e:
         logger.info("Error while merging files: "+str(e))
@@ -156,8 +160,8 @@ def mergeToPivotRQ(RootFolder,POSource,OrderDate,ClientCode,Formulasheet):
         # Data_only = True is used to get evaluated formula value instead of formula
         formulaSheet = formulaWorksheet['FormulaSheet']
         if not os.path.exists(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/Consolidate-Orders.xlsx"):
-            logger.info("Could not find the consolidate order folder to generate requirement summary file")
-            print("Could not find the consolidate order folder to generate requirement summary file")
+            logger.info("Could not find the consolidated order folder to generate requirement summary file")
+            print("Could not find the consolidated order folder to generate requirement summary file")
             return
         else:
             df = pd.read_excel(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/Consolidate-Orders.xlsx")
@@ -212,8 +216,8 @@ def mergeToPivotRQ(RootFolder,POSource,OrderDate,ClientCode,Formulasheet):
 
 
             pivotWorksheet.save(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/60-Requirement-Summary/Requirement-Summary.xlsx")
-            logger.info('Generated requirement summary file from consolidated orders for order date - '+OrderDate)
-            print('Generated requirement summary file from consolidated orders for order date - '+OrderDate)
+            logger.info('Generated requirement summary file for order date - '+OrderDate)
+            print('Generated requirement summary file for order date - '+OrderDate)
             # formulaWorksheet.save(Formulasheet+'/FormulaSheet.xlsx')
 
             formulaWorksheet.close()
@@ -247,8 +251,8 @@ def getFilesToProcess(RootFolder,POSource,OrderDate,ClientCode):
                 
                 pdfToTable(inputFolderPath+f,outputFolderPath+fOutputExtension,RootFolder,POSource,OrderDate,ClientCode,f)
             
-            print("Successfully Converted all the PDF Files to Excel Files!")
-            print("Conversion Completed in "+"{:.2f}".format(time.time() - startedProcessing,2)+ " seconds!")
+            print("Successfully converted all Files in"+"{:.2f}".format(time.time() - startedProcessing,2)+ " seconds!")
+            # print("Completed in "+"{:.2f}".format(time.time() - startedProcessing,2)+ " seconds!")
     except Exception as e:
         logger.error("Error while processing files: "+str(e))
         print("Error while processing files: "+str(e))
@@ -256,9 +260,11 @@ def getFilesToProcess(RootFolder,POSource,OrderDate,ClientCode):
 
 def pdfToTable(inputPath,outputPath,RootFolder,POSource,OrderDate,ClientCode,filecsv):
 
+    logger.info("Converting PDF files to Excel...")
+    print("Converting PDF files to Excel...")
     try:
-        logger.info("Converting '"+ filecsv +"' to excel '"+filecsv.replace('.pdf', '.xlsx')+"'")
-        print("Converting '"+ filecsv +"' to excel '"+filecsv.replace('.pdf', '.xlsx')+"'")
+        logger.info("Converting '"+ filecsv)# +"' to excel '"+filecsv.replace('.pdf', '.xlsx')+"'")
+        print("Converting '"+ filecsv)# +"' to excel '"+filecsv.replace('.pdf', '.xlsx')+"'")
         #converting str to datetime
         OrderDate = datetime.strptime(OrderDate, '%Y-%m-%d')
         # extracting year from the order date
@@ -460,8 +466,10 @@ def pdfToTable(inputPath,outputPath,RootFolder,POSource,OrderDate,ClientCode,fil
         workbook2.save(filename= intermediateoutputPath)
         workbook.save(filename= outputPath)
 
-        logger.info("Converted '"+ inputPath + "' to '" + outputPath+"'"+ " in "+ "{:.2f}".format(time.time() - startedProcessing,2)+ " seconds.")
-        print("Converted '"+ inputPath + "' to '" + outputPath+"'"+ " in "+ "{:.2f}".format(time.time() - startedProcessing,2)+ " seconds.")
+        # logger.info("Converted '"+ inputPath + "' to '" + outputPath+"'"+ " in "+ "{:.2f}".format(time.time() - startedProcessing,2)+ " seconds.")
+        # print("Converted '"+ inputPath + "' to '" + outputPath+"'"+ " in "+ "{:.2f}".format(time.time() - startedProcessing,2)+ " seconds.")
+        print("Converted '"+ inputPath + " in "+ "{:.2f}".format(time.time() - startedProcessing,2)+ " seconds.")
+        
         return "Conversion Complete!"
     
     except Exception as e:
@@ -524,8 +532,8 @@ def generatingPackaingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulashee
             startedTemplatingFile = time.time()
             # Making Copy of template file
             shutil.copy(source, destination)
-            logger.info("Template File copied successfully for generating packaging-slip")
-            print("Template File copied successfully for generating packaging-slip")
+            # logger.info("Template File copied successfully for generating packaging-slip")
+            # print("Template File copied successfully for generating packaging-slip")
 
             # Load work vook and sheets
             TemplateWorkbook = load_workbook(destination, data_only=True)
@@ -644,7 +652,7 @@ def generatingPackaingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulashee
             sourcePackagingSlip = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/70-Packaging-Slip/"+"PackagingSlip_"+str(filename)+".xlsx"
             TemplateWorkbook = load_workbook(sourcePackagingSlip, data_only=True)
             TemplateSheet = TemplateWorkbook['ORDER']
-            print(TemplateSheet.cell(1,4).value)
+            # print(TemplateSheet.cell(1,4).value)
             # Getting data from IGST/ SGST Sheet DBF to Tempalate sheet DBF
 
             # If IGST then open IGST Master
@@ -719,15 +727,15 @@ def generatingPackaingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulashee
             TemplateWorkbook.close()
 
 
-            logger.info("Packaing slip generated for: "+str(filename)+ " file - {:.2f}".format(time.time() - startedTemplatingFile,2)+ " seconds.")
-            print("Packaing slip generated for: "+str(filename)+ " file - {:.2f}".format(time.time() - startedTemplatingFile,2)+ " seconds.")
+            logger.info("Packing slip generated for: "+str(filename)+ " file in {:.2f}".format(time.time() - startedTemplatingFile,2)+ " seconds.")
+            print("Packing slip generated for: "+str(filename)+ " file in {:.2f}".format(time.time() - startedTemplatingFile,2)+ " seconds.")
             
-        logger.info("Total time taken for generation of packaging-slips:  {:.2f}".format(time.time() - startedTemplating,2)+ " seconds.")
-        print("Total time taken for generation of packaging-slips:  {:.2f}".format(time.time() - startedTemplating,2)+ " seconds.")
+        logger.info("Total time taken for generation of packing-slips:  {:.2f}".format(time.time() - startedTemplating,2)+ " seconds.")
+        print("Total time taken for generation of packing-slips:  {:.2f}".format(time.time() - startedTemplating,2)+ " seconds.")
         return 'Completed!'
     except Exception as e:
-        logger.error("Error while generating packaging-slip file: "+str(e))
+        logger.error("Error while generating packing-slip file: "+str(e))
         exc_type, exc_obj, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
         print(exc_type, fname, exc_tb.tb_lineno)
-        print("Error while generating packaging-slip file: "+str(e))
+        print("Error while generating packing-slip file: "+str(e))

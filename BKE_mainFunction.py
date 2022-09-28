@@ -26,13 +26,16 @@ logger = BKE_log.setup_custom_logger('root')
 
 def startProcessing(mode,clientname,orderdate,processing_source):
     try:
-        print(mode,clientname,orderdate,processing_source)
+        print("Mode: ",mode)
+        print("Client name: ",clientname)
+        print("Order date: ", orderdate)
+        print("PO Source Path: ", processing_source)
         # Phase I
         if mode == 'consolidation':
             clientcode = clientname
             logger.info("Client Name: "+clientname+" Client Code: "+clientcode+" Order Date: "+orderdate+" PO Folder Path: '"+processing_source+"'" )
-            print(mode)
-            logger.info(mode)
+            # print(mode)
+            # logger.info(mode)
             # 1. Notify that the script is Started
             scriptStarted()
             # 2. Checking the folder structure 
@@ -57,8 +60,8 @@ def startProcessing(mode,clientname,orderdate,processing_source):
             #     position = val_list.index(clientname)
             #     clientcode = key_list[position]
             # print(clientname, clientcode)
-            logger.info("Client Name: "+clientname+"\nClient Code: "+clientname+"\nOrder Date: "+orderdate+"\nPO Folder Path: '"+processing_source+"'" )
-            print("Client Name: "+clientname+" Client Code: "+clientname+" Order Date: "+orderdate+" PO Folder Path: '"+processing_source+"'")
+            # logger.info("Client Name: "+clientname+"\nClient Code: "+clientname+"\nOrder Date: "+orderdate+"\nPO Folder Path: '"+processing_source+"'" )
+            # print("Client Name: "+clientname+" Client Code: "+clientname+" Order Date: "+orderdate+" PO Folder Path: '"+processing_source+"'")
         # Phase II
             scriptStarted()
             generatingPackaingSlip(RootFolder=destinationpath,ReqSource=processing_source,OrderDate=orderdate,ClientCode=clientname,Formulasheet=formulasheetpath,TemplateFiles=templatespath)

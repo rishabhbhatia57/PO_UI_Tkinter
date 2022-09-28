@@ -14,7 +14,7 @@ import json
 from datetime import datetime
 
 from config import ConfigFolderPath, headingFont,fieldFont,buttonFont,labelFont,pathFont,logFont
-from UI_scriptFunctions import select_files,selectedFun, openfolderpackaging
+from UI_scriptFunctions import select_files,beginOrderProcessing, openfolderpackaging
 
 
 
@@ -54,7 +54,7 @@ class Tab2():
         OrderDateValue2 = Label(packagingframe, textvariable=date,font=labelFont)
         OrderDateValue2.grid(row=3,column=1,padx=20, pady=20,sticky=W)
 
-        ProcessButton2 = Button(packagingframe, command=threading.Thread(target=lambda:selectedFun(mode ='packaging', client=ClientNameValue2.cget("text"), date=OrderDateValue2.cget("text"), path=RequirementSummaryPathValue2.cget("text"))).start, text="Process",font=buttonFont)
+        ProcessButton2 = Button(packagingframe, command=threading.Thread(target=lambda:beginOrderProcessing(mode ='packaging', client=ClientNameValue2.cget("text"), date=OrderDateValue2.cget("text"), path=RequirementSummaryPathValue2.cget("text"))).start, text="Process",font=buttonFont)
         ProcessButton2.grid(row=4,column=1,padx=20, pady=20,sticky=W)
 
         CancelButton2 = Button(packagingframe, text="Cancel", font=buttonFont)
@@ -77,11 +77,17 @@ class Tab2():
             def my_date_client(*argus):
 
                 changedDate = date.get()
-                print(date.get())
+                # print(date.get())
                 changedDate = datetime.strptime(changedDate, '%Y-%m-%d')
+
+                # Year = changedDate[6:10]
+                # Month = changedDate[3:5]
+                # Date = changedDate[0:2]
 
                 year = changedDate.strftime('%Y')
                 date1 = str(changedDate.strftime('%Y-%m-%d'))
+                # year = Year
+                # date = Year+ "-"+Month+ "-"+ Date
                 changedclient = client.get()
                 with open(ConfigFolderPath+'client.json', 'r') as jsonFile:
                     clientcode = json.load(jsonFile)
