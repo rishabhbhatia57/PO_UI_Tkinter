@@ -12,3 +12,77 @@
 2022-09-28 15:28:10,307 INFO Merged 3 excel files into a single excel file 'Consolidate-Orders.xlsx' 
 2022-09-28 15:28:10,825 INFO Generated requirement summary file - order date - 2022-09-28 
 2022-09-28 15:28:10,826 INFO Script Ended 
+2022-09-29 00:13:07,209 INFO Client Name: PL Client Code: PL Order Date: 2022-09-29 PO Folder Path: 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' 
+2022-09-29 00:13:07,212 INFO Starting script 
+2022-09-29 00:13:07,216 INFO Creating the new directory... 
+2022-09-29 00:13:07,222 INFO Folder 'PL-2022/2022-09-29' is created. 
+2022-09-29 00:13:07,244 INFO File '4000444765.pdf' copied 
+2022-09-29 00:13:07,270 INFO File '4000444766.pdf' copied 
+2022-09-29 00:13:07,293 INFO File '4000444767.pdf' copied 
+2022-09-29 00:13:07,294 INFO Converting PDF files to Excel... 
+2022-09-29 00:13:07,294 INFO Converting '4000444765.pdf 
+2022-09-29 00:13:31,217 INFO Converting '4000444766.pdf 
+2022-09-29 00:14:23,438 INFO Converting '4000444767.pdf 
+2022-09-29 00:14:44,932 INFO Merged 3 excel files into a single excel file 'Consolidate-Orders.xlsx' 
+2022-09-29 00:14:45,437 INFO Generated requirement summary file - order date - 2022-09-29 
+2022-09-29 00:14:45,438 INFO Script Ended 
+2022-09-29 10:30:45,637 INFO Client Name: PL Client Code: PL Order Date: 2022-09-29 PO Folder Path: 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' 
+2022-09-29 10:30:45,638 INFO Starting script 
+2022-09-29 10:30:45,645 INFO Creating the new directory... 
+2022-09-29 10:30:45,650 INFO Folder 'PL-2022/2022-09-29' is created. 
+2022-09-29 10:30:45,677 INFO File '4000444765.pdf' copied 
+2022-09-29 10:30:45,708 INFO File '4000444766.pdf' copied 
+2022-09-29 10:30:45,733 INFO File '4000444767.pdf' copied 
+2022-09-29 10:30:45,734 INFO Converting PDF files to Excel... 
+2022-09-29 10:30:45,735 INFO Converting '4000444765.pdf 
+2022-09-29 10:30:49,639 ERROR Error from tabula-java:
+
+ 
+2022-09-29 10:30:49,639 ERROR Error while processing file: Command '['java', '-jar', 'C:\\Users\\HP\\Documents\\GitHub\\PO_UI_Tkinter\\guienve\\lib\\site-packages\\tabula\\tabula-1.0.5-jar-with-dependencies.jar', '--pages', 'all', '--lattice', '--guess', '--format', 'CSV', '--outfile', 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/OrderProcessing/PL-2022/2022-09-29/30-Extract-CSV/4000444765.csv', 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/OrderProcessing/PL-2022/2022-09-29/10-Download-Files/4000444765.pdf']' returned non-zero exit status 130. 
+2022-09-29 10:30:49,641 INFO Converting '4000444766.pdf 
+2022-09-29 16:01:42,417 INFO Client Name: OTH2 Client Code: OTH2 Order Date: 2022-09-29 PO Folder Path: 'C:/Users/HP/Desktop/PO Metadata/POSourcefiles-Folder' 
+2022-09-29 16:01:42,418 INFO Starting script 
+2022-09-29 16:01:42,422 INFO Creating the new directory... 
+2022-09-29 16:01:42,423 INFO Folder 'OTH2-2022/2022-09-29' exists. 
+2022-09-29 16:01:42,443 INFO File '4000444765.pdf' copied 
+2022-09-29 16:01:42,462 INFO File '4000444766.pdf' copied 
+2022-09-29 16:01:42,491 INFO File '4000444767.pdf' copied 
+2022-09-29 16:01:42,492 INFO Converting PDF files to Excel... 
+2022-09-29 16:01:42,493 INFO Converting '4000444765.pdf 
+2022-09-29 16:02:01,002 INFO Converting '4000444766.pdf 
+2022-09-29 16:02:41,870 INFO Converting '4000444767.pdf 
+2022-09-29 16:03:01,714 INFO Merged 3 excel files into a single excel file 'Consolidate-Orders.xlsx' 
+2022-09-29 16:03:02,293 INFO Generated requirement summary file - order date - 2022-09-29 
+2022-09-29 16:03:02,294 INFO Script Ended 
+2022-09-29 16:04:48,330 INFO Starting script 
+2022-09-29 16:04:57,369 ERROR Error while generating packing-slip file: [Errno 2] No such file or directory: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/MasterFilesItem Master.xlsx' 
+2022-09-29 16:04:57,371 INFO Script Ended 
+2022-09-29 17:25:10,982 INFO Starting script 
+2022-09-29 17:25:19,881 ERROR Error while generating packing-slip file: [Errno 2] No such file or directory: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/MasterFilesItem Master.xlsx' 
+2022-09-29 17:25:19,882 INFO Script Ended 
+2022-09-30 11:22:06,973 INFO Client Name: PL Client Code: PL Order Date: 2022-09-30 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-09-30 11:22:06,974 INFO Starting script 
+2022-09-30 11:22:06,978 INFO Creating the new directory... 
+2022-09-30 11:22:06,983 INFO Folder 'PL-2022/2022-09-30' is created. 
+2022-09-30 11:22:07,013 INFO File '4000444765.pdf' copied 
+2022-09-30 11:22:07,045 INFO File '4000444766.pdf' copied 
+2022-09-30 11:22:07,070 INFO File '4000444767.pdf' copied 
+2022-09-30 11:22:07,072 INFO Converting PDF files to Excel... 
+2022-09-30 11:22:07,073 INFO Converting '4000444765.pdf 
+2022-09-30 11:22:26,952 INFO Converting '4000444766.pdf 
+2022-09-30 11:23:08,681 INFO Converting '4000444767.pdf 
+2022-09-30 11:23:30,278 INFO Merged 3 excel files into a single excel file 'Consolidate-Orders.xlsx' 
+2022-09-30 11:23:31,036 INFO Generated requirement summary file - order date - 2022-09-30 
+2022-09-30 11:23:31,037 INFO Script Ended 
+2022-09-30 11:26:02,358 INFO Starting script 
+2022-09-30 11:26:17,106 ERROR Error while generating packing-slip file: [Errno 2] No such file or directory: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/MasterFilesItem Master.xlsx' 
+2022-09-30 11:26:17,106 INFO Script Ended 
+2022-09-30 11:29:52,417 INFO Starting script 
+2022-09-30 11:31:01,458 ERROR Error while generating packing-slip file: [Errno 2] No such file or directory: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph/template/PackingSlip-Template.xlsxPackingSlip-Template.xlsx' 
+2022-09-30 11:31:01,458 INFO Script Ended 
+2022-09-30 11:33:35,654 INFO Starting script 
+2022-09-30 11:34:34,916 INFO Packing slip generated for: 4000444765 file in 4.76 seconds. 
+2022-09-30 11:34:40,827 INFO Packing slip generated for: 4000444766 file in 5.91 seconds. 
+2022-09-30 11:34:45,434 INFO Packing slip generated for: 4000444767 file in 4.61 seconds. 
+2022-09-30 11:34:45,435 INFO Total time taken for generation of packing-slips:  69.78 seconds. 
+2022-09-30 11:34:45,455 INFO Script Ended 

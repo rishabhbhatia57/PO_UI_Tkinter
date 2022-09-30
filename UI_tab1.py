@@ -16,14 +16,13 @@ from datetime import datetime
 import sys
 
 from UI_scriptFunctions import select_folder,beginOrderProcessing,openfolder
-from UI_logscmd import PrintLogger
-from config import ConfigFolderPath, headingFont,fieldFont,buttonFont,labelFont,pathFont,logFont
+from config import ConfigFolderPath, headingFont,fieldFont,buttonFont,labelFont,pathFont,logFont,ClientsFolderPath
 
 
 class Tab1():
     def __init__(self, root,tabControl):
 
-        with open(ConfigFolderPath+'client.json', 'r') as jsonFile:
+        with open(ClientsFolderPath, 'r') as jsonFile:
             config = json.load(jsonFile)
             ClientCode = config
 
@@ -57,7 +56,7 @@ class Tab1():
         POFolderPathButton1 = Button(Orderframe,text='Select Folder',command=lambda:select_folder(POFolderPathValue1),font=buttonFont)
         POFolderPathButton1.grid(row=2,column=1,padx=20, pady=20,sticky=W)
 
-        POFolderPathValue1 = Label(Orderframe,text="No Folder selected", font=pathFont)
+        POFolderPathValue1 = Label(Orderframe,text="No Folder selected", font=pathFont, wraplength=800)
         POFolderPathValue1.grid(row=2,column=2,padx=20, pady=20,sticky=W)
 
 
@@ -84,7 +83,7 @@ class Tab1():
             RequirementSummaryPathButton = Button(Orderframe,text='Copy Path',command=lambda:openfolder(params=[config['targetFolder'], ClientCode[clicked.get()], OrderDateButton1.get_date(), '60-Requirement-Summary'],frame=Orderframe),font=buttonFont)
             RequirementSummaryPathButton.grid(row=5,column=1,padx=20, pady=20,sticky=W)
 
-            RequirementSummaryPath = Label(Orderframe,text='No Path selected',font=pathFont)
+            RequirementSummaryPath = Label(Orderframe,text='No Path selected',font=pathFont, wraplength=800)
             RequirementSummaryPath.grid(row=5,column=2,padx=20, pady=20,sticky=W)
 
             def my_date_client(*argus):
@@ -106,10 +105,16 @@ class Tab1():
                 chnagedClientcode = clicked.get()
                 
                 path = config['targetFolder']+'/'+ClientCode[clicked.get()]+'-'+year+'/'+date+'/'+'60-Requirement-Summary'
-                RequirementSummaryPath.config(text=path)
+                RequirementSummaryPath.config(text=path,wraplength=800)
         
             clicked.trace('w',my_date_client)
             sel.trace('w',my_date_client)
+
+        # consoleLabel = Label(logframe,text='Logs', font=labelFont)
+        # consoleLabel.pack(side=tk.LEFT)
+        # logbox = st.ScrolledText(logframe)
+        # logbox.configure(state ='disabled')
+        # logbox.pack(logframe,expand = True,fill ="both",ipady=10,ipadx=10)
 
 
        

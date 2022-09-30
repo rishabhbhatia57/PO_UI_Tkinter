@@ -13,8 +13,9 @@ import tkinter.font as tkFont
 import json
 from datetime import datetime
 
-from config import ConfigFolderPath, headingFont,fieldFont,buttonFont,labelFont,pathFont,logFont
+from config import ConfigFolderPath, ClientsFolderPath, headingFont,fieldFont,buttonFont,labelFont,pathFont,logFont
 from UI_scriptFunctions import select_files,beginOrderProcessing, openfolderpackaging
+import pythoncom 
 
 
 
@@ -37,7 +38,7 @@ class Tab2():
         RequirementSummaryButton2 = Button(packagingframe,text='Select File',command=lambda:select_files(RequirementSummaryPathValue2, client,date), font=buttonFont)
         RequirementSummaryButton2.grid(row=1,column=1,padx=20, pady=20,sticky=W)
 
-        RequirementSummaryPathValue2 = Label(packagingframe,text="No Path Selected", font=pathFont)
+        RequirementSummaryPathValue2 = Label(packagingframe,text="No Path Selected", font=pathFont, wraplength=800)
         RequirementSummaryPathValue2.grid(row=1,column=2,padx=20, pady=20,sticky=W)
 
         ClientNameField2 = Label(packagingframe,text='Client Name',font=labelFont)
@@ -70,7 +71,7 @@ class Tab2():
             PackagingSummaryPathButton2 = Button(packagingframe,text='Copy Path',command=lambda:openfolderpackaging(params=[config['targetFolder'], client.get(), date.get(), '70-Packaging-Slip'],frame=packagingframe),font=buttonFont)
             PackagingSummaryPathButton2.grid(row=5,column=1,padx=20, pady=20,sticky=W)
 
-            PackagingSlipFolderValue2 = Label(packagingframe,text='No Path Selected', font=pathFont)
+            PackagingSlipFolderValue2 = Label(packagingframe,text='No Path Selected', font=pathFont, wraplength=800)
             PackagingSlipFolderValue2.grid(row=5,column=2,padx=20, pady=20,sticky=W)
 
 
@@ -89,7 +90,7 @@ class Tab2():
                 year = Year
                 date1 = Year+ "-"+Month+ "-"+ Date
                 changedclient = client.get()
-                with open(ConfigFolderPath+'client.json', 'r') as jsonFile:
+                with open(ClientsFolderPath, 'r') as jsonFile:
                     clientcode = json.load(jsonFile)
                     clientcode = clientcode[changedclient]
 

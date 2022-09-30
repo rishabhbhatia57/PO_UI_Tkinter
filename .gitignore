@@ -3,8 +3,11 @@ dist
 log.txt
 build
 __pycache__
+config
 dist
 build
 __pycache__
 triumphvenv
 PO Metadata
+test.py
+UI_Automation.spec

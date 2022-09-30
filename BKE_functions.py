@@ -8,7 +8,7 @@ import numpy as np
 from openpyxl import load_workbook,Workbook
 import openpyxl.utils.cell
 import time
-from config import ConfigFolderPath
+from config import ConfigFolderPath, ClientsFolderPath
 import tabula
 import csv
 import json
@@ -53,7 +53,7 @@ def downloadFiles(RootFolder,POSource,OrderDate,ClientCode):
 def scriptStarted():
     logger.info('Starting script')
     print('Starting script')
-    print('Starting is running...')
+    print('Script is running...')
     print('Do not close this window while processing...')
     return "Script Started."
 
@@ -144,7 +144,7 @@ def mergeExcelsToOne(RootFolder,POSource,OrderDate,ClientCode):
 def mergeToPivotRQ(RootFolder,POSource,OrderDate,ClientCode,Formulasheet):
 
 
-    with open(ConfigFolderPath+'client.json', 'r') as jsonFile:
+    with open(ClientsFolderPath, 'r') as jsonFile:
         config = json.load(jsonFile)
         ClientName = config
 
@@ -160,7 +160,7 @@ def mergeToPivotRQ(RootFolder,POSource,OrderDate,ClientCode,Formulasheet):
         # formatting order date {2022-00-00) format
         OrderDate = OrderDate.strftime('%Y-%m-%d')
 
-        formulaWorksheet = load_workbook(Formulasheet+'/FormulaSheet.xlsx',data_only=True) 
+        formulaWorksheet = load_workbook(Formulasheet,data_only=True) 
         # Data_only = True is used to get evaluated formula value instead of formula
         formulaSheet = formulaWorksheet['FormulaSheet']
         if not os.path.exists(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/Consolidate-Orders.xlsx"):
@@ -195,9 +195,10 @@ def mergeToPivotRQ(RootFolder,POSource,OrderDate,ClientCode,Formulasheet):
             
 
             for i in range(9,rows):
-                pivotSheet.cell(i,cols-3).value = "=SUM(B"+str(i)+":"+openpyxl.utils.cell.get_column_letter(cols-4)+str(i)+")"
-                pivotSheet.cell(i,cols-1).value = '='+openpyxl.utils.cell.get_column_letter(cols-2)+str(i)+'-'+openpyxl.utils.cell.get_column_letter(cols-3)+str(i)
-                pivotSheet.cell(i,cols-2).value = "="+formulaSheet.cell(10,2).value.replace("#VAL#",str(i)) 
+                pivotSheet.cell(i,cols-3).value = "=SUM(B"+str(i)+":"+openpyxl.utils.cell.get_column_letter(cols-4)+str(i)+")" # Grand Total
+                pivotSheet.cell(i,cols-1).value = '='+openpyxl.utils.cell.get_column_letter(cols-2)+str(i)+'-'+openpyxl.utils.cell.get_column_letter(cols-3)+str(i) # Diff CS - GT
+                pivotSheet.cell(i,cols-2).value = "="+formulaSheet.cell(10,2).value.replace("#VAL#",str(i)) # Closing Stock
+                pivotSheet.cell(i,cols).value = "="+formulaSheet.cell(6,2).value.replace("#VAL#",str(i))  # Rate
 
             
             pivotSheet.cell(6,1).value = 'IGST/CGST Type'
@@ -222,7 +223,6 @@ def mergeToPivotRQ(RootFolder,POSource,OrderDate,ClientCode,Formulasheet):
             pivotWorksheet.save(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/60-Requirement-Summary/Requirement-Summary.xlsx")
             logger.info('Generated requirement summary file - order date - '+OrderDate)
             print('Generated requirement summary file - order date - '+OrderDate)
-            # formulaWorksheet.save(Formulasheet+'/FormulaSheet.xlsx')
 
             formulaWorksheet.close()
             return 'Generated Requirement Summary file'
@@ -494,8 +494,8 @@ def generatingPackaingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulashee
 
         startedTemplating = time.time()
         sourcePivot = ReqSource
-        source = TemplateFiles+"/PackingSlip-Template.xlsx"
-        destination = TemplateFiles+"/TemplateFile.xlsx"
+        source = TemplateFiles+"PackingSlip-Template.xlsx"
+        destination = TemplateFiles+"TemplateFile.xlsx"
         
 
         # Making Copy of template file
@@ -515,22 +515,26 @@ def generatingPackaingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulashee
         cols = len(df.axes[1])
 
 
-        formulaWorksheet = load_workbook(Formulasheet+'/FormulaSheet.xlsx',data_only=True)
+        formulaWorksheet = load_workbook(Formulasheet,data_only=True)
         formulaSheet = formulaWorksheet['FormulaSheet']
         DBFformula = formulaWorksheet['DBF']
 
         # df_itemMaster = pd.read_excel(MasterFolderPath+'Item Master.xlsx',sheet_name='Item Master')
         # df_IGST = pd.read_excel(MasterFolderPath+'IGST Master.xlsx',sheet_name='DBF')
         # df_SGST = pd.read_excel(MasterFolderPath+'SGST Master.xlsx',sheet_name='DBF')
-
+        print('Loading Master files for processing...')
         # Opening Item Master Sheet
         df_IteamMaster = pd.read_excel(MasterFolderPath+'Item Master.xlsx', sheet_name='Item Master',index_col=False)
+        print('Item Master loaded.')
         # Opening IGST Master Sheet
         df_IGSTMaster = pd.read_excel(MasterFolderPath+'IGST Master.xlsx', sheet_name='DBF',index_col=False)
+        print('IGST Master loaded.')
         # Opening SGST Master Sheet
         df_SGSTMaster = pd.read_excel(MasterFolderPath+'SGST Master.xlsx', sheet_name='DBF',index_col=False)
+        print('SGST Master loaded.')
         # Opening Location2 Master Sheet
         df_Location2 = pd.read_excel(MasterFolderPath+'Location 2 Master.xlsx',sheet_name='Location2',index_col=False)
+        print('Location 2 Master loaded.')
         
         
         
@@ -542,13 +546,13 @@ def generatingPackaingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulashee
             # print("Template File copied successfully for generating packaging-slip")
 
             # Load work vook and sheets
-            TemplateWorkbook = load_workbook(destination, data_only=True)
+            TemplateWorkbook = load_workbook(destination)
             TemplateSheet = TemplateWorkbook['ORDER']
             dbfsheet = TemplateWorkbook['DBF']
 
             
-            TemplateSheet.cell(6,4).value = InputSheet.cell(7,2).value # Order Name
-            TemplateSheet.cell(5,1).value = InputSheet.cell(7,2).value # Order Name
+            TemplateSheet.cell(6,4).value = InputSheet.cell(7,column).value # Order Name
+            TemplateSheet.cell(5,1).value = InputSheet.cell(7,column).value # Order Name
             # PO Number
             filename = InputSheet.cell(4,column).value
             TemplateSheet.cell(5,2).value = InputSheet.cell(4,column).value
@@ -647,7 +651,12 @@ def generatingPackaingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulashee
                         dbfsheet.cell(dbfrows, i).value = '='+DBFformula.cell(2,i+1).value.replace("#VAL#",str(Trows)).replace("#DBFROWS#",str(dbfrows))
                     
                     Trows += 1
-                    dbfrows += 1 
+                    dbfrows += 1
+                    
+            TemplateSheet.cell(5,5).value = "=SUM(E8:E"+str(Trows-1)+")"
+            TemplateSheet.cell(5,6).value = "=SUM(F8:F"+str(Trows-1)+")"
+            TemplateSheet.cell(5,7).value = "=SUM(G8:G"+str(Trows-1)+")"
+
 
             
             TemplateWorkbook.save(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/70-Packaging-Slip/"+"PackagingSlip_"+str(filename)+".xlsx")

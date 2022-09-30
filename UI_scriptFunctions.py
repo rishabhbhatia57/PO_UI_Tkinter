@@ -16,10 +16,11 @@ import openpyxl.utils.cell
 import pyperclip
 from datetime import datetime
 import sys
-from config import ConfigFolderPath, headingFont,fieldFont,buttonFont,labelFont,pathFont,logFont
+from config import ConfigFolderPath,ClientsFolderPath, headingFont,fieldFont,buttonFont,labelFont,pathFont,logFont
 from BKE_mainFunction import startProcessing
 import threading
 from globalvar import logboxstate
+
 
 
 global flag
@@ -57,10 +58,14 @@ def select_files(showPath,showReqPath,showOrderdate):
     else:
         showinfo(title='Please wait',message="Fetching Client Name and Order Date...")
         showPath.config(text=ReqFileSelected)
-        ReqSumWorkbook = load_workbook(ReqFileSelected,data_only=True) 
+        ReqSumWorkbook = load_workbook(ReqFileSelected,data_only=True)
+
+        
+        
         ReqSumSheet = ReqSumWorkbook.active
         showReqPath.set(ReqSumSheet.cell(2,6).value)
         showOrderdate.set(ReqSumSheet.cell(2,4).value)
+        
     
     return ReqFileSelected
 
@@ -80,7 +85,7 @@ def openfolder(params,frame):
         print("Path doesn't exists. Please check date or client name.")
     else:
         pyperclip.copy(path)
-        RequirementSummaryPath = Label(frame,text=path)
+        RequirementSummaryPath = Label(frame,text=path,wraplength=800)
         RequirementSummaryPath.grid(row=5,column=2,padx=20, pady=20,sticky=W)
         showinfo(title='Path Copied',message="'"+path+"' is copied to the clipboard.")
         # path = os.path.realpath(path)
@@ -94,7 +99,7 @@ def openfolderpackaging(params,frame):
             message="No folder is selected. Check Client Name, path or Order Date Selected"
         )
     else:
-        with open(ConfigFolderPath+'client.json', 'r') as jsonFile:
+        with open(ClientsFolderPath, 'r') as jsonFile:
             clientcode = json.load(jsonFile)
             clientcode = clientcode[params[1]]
         year = datetime.strptime(params[2], '%Y-%m-%d').strftime('%Y')
@@ -118,7 +123,7 @@ def openfolderpackaging(params,frame):
 def beginOrderProcessing(mode, client, date, path):
     
     # print(mode, client, date, path)
-    with open(ConfigFolderPath+'/'+'client.json', 'r') as jsonFile:
+    with open(ClientsFolderPath, 'r') as jsonFile:
             config = json.load(jsonFile)
             ClientCode = config
 

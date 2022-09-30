@@ -7,7 +7,7 @@ import sys
 import json
 import base64
 from tkinter.messagebox import showinfo
-from config import ConfigFolderPath, MasterFolderPath
+from config import ConfigFolderPath, MasterFolderPath, ClientsFolderPath
 import BKE_log
 from BKE_functions import scriptStarted, downloadFiles, scriptEnded, checkFolderStructure, mergeExcelsToOne,mergeToPivotRQ, generatingPackaingSlip, pdfToTable,getFilesToProcess
 
@@ -36,7 +36,7 @@ def startProcessing(mode,clientname,orderdate,processing_source):
         )
         else:
             print("Mode: ",mode)
-            print("Client name: ",clientname)
+            print("Client Code: ",clientname)
             print("Order date: ", orderdate)
             print("Source Path: ", processing_source)
             # Phase I
@@ -61,7 +61,7 @@ def startProcessing(mode,clientname,orderdate,processing_source):
 
             if mode == 'packaging':
                 # print(clientname)
-                # with open(ConfigFolderPath+'client.json', 'r') as jsonFile:
+                # with open(ClientsFolderPath, 'r') as jsonFile:
                 #     config = json.load(jsonFile)
                 #     clientNameDict = config
                 #     key_list = list(clientNameDict.keys())
