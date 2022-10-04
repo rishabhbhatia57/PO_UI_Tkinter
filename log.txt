@@ -23,3 +23,78 @@
 2022-10-04 10:43:08,726 INFO Packing slip generated for: 4000444767 file in 4.33 seconds. 
 2022-10-04 10:43:08,726 INFO Total time taken for generation of packing-slips:  51.38 seconds. 
 2022-10-04 10:43:08,752 INFO Script Ended 
+2022-10-04 11:27:39,706 INFO Starting script 
+2022-10-04 11:28:03,790 ERROR Error while generating packing-slip file: [Errno 13] Permission denied: 'C:/Users/harsh/OneDrive/Desktop/TriumphProject/Triumph Data/Processed Orders/LSL-2022/2022-10-04/70-Packaging-Slip/PackagingSlip_4000444765.xlsx' 
+2022-10-04 11:28:03,791 INFO Script Ended 
+2022-10-04 11:31:09,476 INFO Starting script 
+2022-10-04 11:31:37,938 ERROR Error while generating packing-slip file: NDFrame.to_excel() got an unexpected keyword argument 'sheet_state' 
+2022-10-04 11:31:37,939 INFO Script Ended 
+2022-10-04 11:41:40,644 INFO Starting script 
+2022-10-04 11:42:10,721 INFO Packing slip generated for: 4000444765 file in 3.35 seconds. 
+2022-10-04 11:42:15,062 INFO Packing slip generated for: 4000444766 file in 4.34 seconds. 
+2022-10-04 11:42:18,405 INFO Packing slip generated for: 4000444767 file in 3.34 seconds. 
+2022-10-04 11:42:18,405 INFO Total time taken for generation of packing-slips:  37.76 seconds. 
+2022-10-04 11:42:18,418 INFO Script Ended 
+2022-10-04 11:43:50,246 INFO Client Name: PL Client Code: PL Order Date: 2022-10-04 PO Folder Path: 'C:/Users/harsh/OneDrive/Desktop/TriumphProject/Triumph Data/POSourceFiles' 
+2022-10-04 11:43:50,247 INFO Starting script 
+2022-10-04 11:43:50,250 INFO Creating the new directory... 
+2022-10-04 11:43:50,265 INFO Folder 'PL-2022/2022-10-04' is created. 
+2022-10-04 11:43:50,270 INFO File '4000444765.pdf' copied 
+2022-10-04 11:43:50,273 INFO File '4000444766.pdf' copied 
+2022-10-04 11:43:50,277 INFO File '4000444767.pdf' copied 
+2022-10-04 11:43:50,277 INFO Converting PDF files to Excel... 
+2022-10-04 11:43:50,277 INFO Converting '4000444765.pdf 
+2022-10-04 11:44:00,810 INFO Converting '4000444766.pdf 
+2022-10-04 11:44:27,995 INFO Converting '4000444767.pdf 
+2022-10-04 11:44:41,074 INFO Merged 3 excel files into a single excel file 'Consolidate-Orders.xlsx' 
+2022-10-04 11:44:51,023 INFO Script Ended 
+2022-10-04 11:49:22,250 INFO Starting script 
+2022-10-04 11:49:52,349 INFO Packing slip generated for: 4000444765 file in 3.38 seconds. 
+2022-10-04 11:49:56,576 INFO Packing slip generated for: 4000444766 file in 4.23 seconds. 
+2022-10-04 11:50:00,257 INFO Packing slip generated for: 4000444767 file in 3.68 seconds. 
+2022-10-04 11:50:00,258 INFO Total time taken for generation of packing-slips:  38.01 seconds. 
+2022-10-04 11:50:00,274 INFO Script Ended 
+2022-10-04 11:54:42,668 INFO Client Name: OTH1 Client Code: OTH1 Order Date: 2022-10-03 PO Folder Path: 'C:/Users/harsh/OneDrive/Desktop/TriumphProject/Triumph Data/POSourceFiles' 
+2022-10-04 11:54:42,668 INFO Starting script 
+2022-10-04 11:54:42,671 INFO Creating the new directory... 
+2022-10-04 11:54:42,673 INFO Folder 'OTH1-2022/2022-10-03' is created. 
+2022-10-04 11:54:42,677 INFO File '4000444765.pdf' copied 
+2022-10-04 11:54:42,681 INFO File '4000444766.pdf' copied 
+2022-10-04 11:54:42,684 INFO File '4000444767.pdf' copied 
+2022-10-04 11:54:42,684 INFO Converting PDF files to Excel... 
+2022-10-04 11:54:42,685 INFO Converting '4000444765.pdf 
+2022-10-04 11:54:53,496 INFO Converting '4000444766.pdf 
+2022-10-04 11:55:22,190 INFO Converting '4000444767.pdf 
+2022-10-04 11:55:35,222 INFO Merged 3 excel files into a single excel file 'Consolidate-Orders.xlsx' 
+2022-10-04 11:55:45,295 INFO Script Ended 
+2022-10-04 11:56:08,586 INFO Starting script 
+2022-10-04 11:56:38,043 ERROR Error while generating packing-slip file: 'Worksheet Hidden Item Master does not exist.' 
+2022-10-04 11:56:38,044 INFO Script Ended 
+2022-10-04 11:59:36,738 INFO Client Name: PL Client Code: PL Order Date: 2022-10-04 PO Folder Path: 'C:/Users/harsh/OneDrive/Desktop/TriumphProject/Triumph Data/POSourceFiles' 
+2022-10-04 11:59:36,739 INFO Starting script 
+2022-10-04 11:59:36,742 INFO Creating the new directory... 
+2022-10-04 11:59:36,755 INFO Folder 'PL-2022/2022-10-04' is created. 
+2022-10-04 11:59:36,760 INFO File '4000444765.pdf' copied 
+2022-10-04 11:59:36,764 INFO File '4000444766.pdf' copied 
+2022-10-04 11:59:36,767 INFO File '4000444767.pdf' copied 
+2022-10-04 11:59:36,768 INFO Converting PDF files to Excel... 
+2022-10-04 11:59:36,768 INFO Converting '4000444765.pdf 
+2022-10-04 11:59:47,571 INFO Converting '4000444766.pdf 
+2022-10-04 12:00:15,747 INFO Converting '4000444767.pdf 
+2022-10-04 12:00:28,744 INFO Merged 3 excel files into a single excel file 'Consolidate-Orders.xlsx' 
+2022-10-04 12:00:39,002 INFO Script Ended 
+2022-10-04 12:02:16,066 INFO Starting script 
+2022-10-04 12:02:46,001 INFO Packing slip generated for: 4000444765 file in 3.95 seconds. 
+2022-10-04 12:02:50,943 INFO Packing slip generated for: 4000444766 file in 4.94 seconds. 
+2022-10-04 12:02:55,133 INFO Packing slip generated for: 4000444767 file in 4.19 seconds. 
+2022-10-04 12:02:55,134 INFO Total time taken for generation of packing-slips:  39.07 seconds. 
+2022-10-04 12:02:55,173 INFO Script Ended 
+2022-10-04 12:05:27,671 INFO Starting script 
+2022-10-04 12:05:57,498 ERROR Error while generating packing-slip file: Workbook.save() missing 1 required positional argument: 'filename' 
+2022-10-04 12:05:57,499 INFO Script Ended 
+2022-10-04 12:07:26,636 INFO Starting script 
+2022-10-04 12:07:57,677 INFO Packing slip generated for: 4000444765 file in 4.91 seconds. 
+2022-10-04 12:08:03,746 INFO Packing slip generated for: 4000444766 file in 6.07 seconds. 
+2022-10-04 12:08:08,829 INFO Packing slip generated for: 4000444767 file in 5.08 seconds. 
+2022-10-04 12:08:08,830 INFO Total time taken for generation of packing-slips:  42.19 seconds. 
+2022-10-04 12:08:08,843 INFO Script Ended 

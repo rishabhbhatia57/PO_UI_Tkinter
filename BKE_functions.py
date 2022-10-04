@@ -101,7 +101,7 @@ def checkFolderStructure(RootFolder,ClientCode,OrderDate):
             os.makedirs(DatedPath+"/40-Extract-Excel")
             os.makedirs(DatedPath+"/50-Consolidate-Orders")
             os.makedirs(DatedPath+"/60-Requirement-Summary")
-            os.makedirs(DatedPath+"/70-Packaging-Slip")
+            os.makedirs(DatedPath+"/70-Packing-Slip")
             os.makedirs(DatedPath+"/80-Logs")
             logger.info("Folder '"+ClientCode+"-"+year+"/"+str(OrderDate)+"' is created.")
             print("Folder '"+ClientCode+"-"+year+"/"+str(OrderDate)+"' is created.")
@@ -549,7 +549,7 @@ def pdfToTable(inputPath,outputPath,RootFolder,POSource,OrderDate,ClientCode,fil
         print("Error while processing file: "+str(e))
 
 
-def generatingPackaingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulasheet,TemplateFiles):
+def generatingPackingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulasheet,TemplateFiles):
     try:
         #converting str to datetime
         OrderDate = datetime.strptime(OrderDate, '%Y-%m-%d')
@@ -608,14 +608,13 @@ def generatingPackaingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulashee
             startedTemplatingFile = time.time()
             # Making Copy of template file
             shutil.copy(source, destination)
-            # logger.info("Template File copied successfully for generating packaging-slip")
-            # print("Template File copied successfully for generating packaging-slip")
+            # logger.info("Template File copied successfully for generating packing-slip")
+            # print("Template File copied successfully for generating packing-slip")
 
             # Load work vook and sheets
             TemplateWorkbook = load_workbook(destination)
             TemplateSheet = TemplateWorkbook['ORDER']
             dbfsheet = TemplateWorkbook['DBF']
-
             
             TemplateSheet.cell(5,1).value = InputSheet.cell(start_cols,column).value # Order Name
             # TemplateSheet.cell(5,1).value = InputSheet.cell(7,column).value # Order Name
@@ -722,12 +721,12 @@ def generatingPackaingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulashee
 
 
             
-            TemplateWorkbook.save(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/70-Packaging-Slip/"+"PackagingSlip_"+str(filename)+".xlsx")
+            TemplateWorkbook.save(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/70-Packing-Slip/"+"PackagingSlip_"+str(filename)+".xlsx")
             TemplateWorkbook.close()
 
 
-            # Opening Packaging slip using openpyxl to check igst/sgst value
-            sourcePackagingSlip = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/70-Packaging-Slip/"+"PackagingSlip_"+str(filename)+".xlsx"
+            # Opening Packing slip using openpyxl to check igst/sgst value
+            sourcePackagingSlip = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/70-Packing-Slip/"+"PackagingSlip_"+str(filename)+".xlsx"
             TemplateWorkbook = load_workbook(sourcePackagingSlip, data_only=True)
             TemplateSheet = TemplateWorkbook['ORDER']
             # print(TemplateSheet.cell(1,4).value)
@@ -736,7 +735,7 @@ def generatingPackaingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulashee
             # If IGST then open IGST Master
             if TemplateSheet.cell(1,4).value == 'IGST':
 
-                # Opening Packaging slip as df for second time to get EAN values
+                # Opening Packing slip as df for second time to get EAN values
                 df_TempalateWorkbook = pd.read_excel(sourcePackagingSlip,sheet_name='ORDER', skiprows=6,index_col=False)
                 df_TempalateWorkbook.rename(columns = {'EAN':'EAN ID'}, inplace = True)
                 
@@ -759,18 +758,19 @@ def generatingPackaingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulashee
                     # Adding Hidden Item Master sheet to the RQ sheet with values 'Style Name', 'EAN', 'Style', 'SKU ID', 'MRP'
                     df_Location2_temp.to_excel(writer,sheet_name='Hidden Item Master',index=False, columns=['Style Name', 'EAN', 'Style', 'SKU', 'MRP','Location 2','BULK  / DTA  BULK  /  EOSS LOC'])
                     # # Adding Hidden DBF sheet to the RQ sheet with values 'Vouchertypename', 'CSNNO','DATE' ETC.
-                    df_GST_hidden.to_excel(writer,sheet_name='Hidden DBF',index=False, columns=['Vouchertypename', 'CSNNO','DATE',
+                    df_GST_hidden.to_excel(writer,sheet_name='Hidden DBF', index=False, columns=['Vouchertypename', 'CSNNO','DATE',
                     'REFERENCE', 'REF1','DEALNAME', 'PRICELEVEL', 'ITEMNAME', 'GODOWN', 'QTY', 'RATE', 'SUBTOTAL', 'DISCPERC',
                     'DISCAMT', 'ITEMVALUE', 'LedgerAcct', 'CATEGORY1', 'COSTCENT1', 'CATEGORY2', 'COSTCENT2', 'CATEGORY3', 'COSTCENT3',
                     'CATEGORY4', 'COSTCENT4', 'ITEMTOTAL', 'TOTALQTY', 'CDISCHEAD', 'CDISCPERC', 'COMMONDISC', 'BEFORETAX',
                     'TAXHEAD', 'TAXPERC', 'TAXAMT', 'STAXHEAD', 'STAXPERC', 'STAXAMT', 'ITAXHEAD', 'ITAXPERC' ,'ITAXAMT', 'NETAMT',
                     'ROUND', 'ROUND1', 'REFTYPE', 'Name', 'REFAMT', 'Narration', 'Transport','transmode', 'pymtterm', 'ordno',
                     'orddate', 'DANO', 'Delyadd1', 'Delyadd2', 'Delyadd3', 'Delyadd4'])
+
             
             # If SGST then open SGST Master
             if TemplateSheet.cell(1,4).value == 'SGST':
                 
-                # Opening Packaging slip as df for second time to get EAN values
+                # Opening Packing slip as df for second time to get EAN values
                 df_TempalateWorkbook = pd.read_excel(sourcePackagingSlip,sheet_name='ORDER', skiprows=6,index_col=False)
                 df_TempalateWorkbook.rename(columns = {'EAN':'EAN ID'}, inplace = True)
                 
@@ -803,7 +803,17 @@ def generatingPackaingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulashee
                 pass
 
             TemplateWorkbook.close()
+            
+            # Opening Sheet again to hide hidden dbf and item master sheets
+            TemplateWorkbook = load_workbook(sourcePackagingSlip)
+            hidden_item_master = TemplateWorkbook['Hidden Item Master']
+            hidden_dbf = TemplateWorkbook['Hidden DBF']
 
+            hidden_item_master.sheet_state = 'hidden'
+            hidden_dbf.sheet_state = 'hidden'
+
+            TemplateWorkbook.close()
+            TemplateWorkbook.save(sourcePackagingSlip)
 
             logger.info("Packing slip generated for: "+str(filename)+ " file in {:.2f}".format(time.time() - startedTemplatingFile,2)+ " seconds.")
             print("Packing slip generated for: "+str(filename)+ " file in {:.2f}".format(time.time() - startedTemplatingFile,2)+ " seconds.")

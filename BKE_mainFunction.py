@@ -9,7 +9,7 @@ import base64
 from tkinter.messagebox import showinfo
 from config import ConfigFolderPath, MasterFolderPath, ClientsFolderPath
 import BKE_log
-from BKE_functions import scriptStarted, downloadFiles, scriptEnded, checkFolderStructure, mergeExcelsToOne,mergeToPivotRQ, generatingPackaingSlip, pdfToTable,getFilesToProcess
+from BKE_functions import scriptStarted, downloadFiles, scriptEnded, checkFolderStructure, mergeExcelsToOne,mergeToPivotRQ, generatingPackingSlip, pdfToTable,getFilesToProcess
 
 
 with open(ConfigFolderPath+'config.json', 'r') as jsonFile:
@@ -59,7 +59,7 @@ def startProcessing(mode,clientname,orderdate,processing_source):
                 mergeToPivotRQ(RootFolder=destinationpath,POSource=processing_source,OrderDate=orderdate,ClientCode=clientcode,Formulasheet=formulasheetpath)
                 scriptEnded()
 
-            if mode == 'packaging':
+            if mode == 'packing':
                 # print(clientname)
                 # with open(ClientsFolderPath, 'r') as jsonFile:
                 #     config = json.load(jsonFile)
@@ -73,7 +73,7 @@ def startProcessing(mode,clientname,orderdate,processing_source):
                 # print("Client Name: "+clientname+" Client Code: "+clientname+" Order Date: "+orderdate+" PO Folder Path: '"+processing_source+"'")
             # Phase II
                 scriptStarted()
-                generatingPackaingSlip(RootFolder=destinationpath,ReqSource=processing_source,OrderDate=orderdate,ClientCode=clientname,Formulasheet=formulasheetpath,TemplateFiles=templatespath)
+                generatingPackingSlip(RootFolder=destinationpath,ReqSource=processing_source,OrderDate=orderdate,ClientCode=clientname,Formulasheet=formulasheetpath,TemplateFiles=templatespath)
             # 7. Notify that the script is Ended
                 scriptEnded()
 

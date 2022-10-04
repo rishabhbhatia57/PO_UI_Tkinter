@@ -121,11 +121,11 @@ class Tab2():
         pkg_date_var = StringVar()
 
         pkg_tab = ttk.Frame(tabControl)
-        tabControl.add(pkg_tab, text ='Packaging Slip')
+        tabControl.add(pkg_tab, text ='Packing Slip')
 
         pkg_frame = Frame(pkg_tab)
         pkg_frame.grid(row=0,column=0)
-        pkg_heading = Label(pkg_frame,text='Generating Packaging Slip',font=headingFont)
+        pkg_heading = Label(pkg_frame,text='Generating Packing Slip',font=headingFont)
         pkg_heading.grid(row=0,column=0,padx=20, pady=20,sticky=W,columnspan=2)  
 
         pkg_requirements_summary = ttk.Label(pkg_frame,text='Requirements Summary Path',font=labelFont)
@@ -150,20 +150,20 @@ class Tab2():
         pkg_order_date_value = Label(pkg_frame, textvariable=pkg_date_var,font=labelFont)
         pkg_order_date_value.grid(row=3,column=1,padx=20, pady=20,sticky=W)
 
-        pkg_process_btn = Button(pkg_frame, command=threading.Thread(target=lambda:begin_order_processing(mode ='packaging', client=pkg_client_Name_value.cget("text"), date=pkg_order_date_value.cget("text"), path=pkg_requirements_summary_path.cget("text"))).start, text="Process",font=buttonFont)
+        pkg_process_btn = Button(pkg_frame, command=threading.Thread(target=lambda:begin_order_processing(mode ='packing', client=pkg_client_Name_value.cget("text"), date=pkg_order_date_value.cget("text"), path=pkg_requirements_summary_path.cget("text"))).start, text="Process",font=buttonFont)
         pkg_process_btn.grid(row=4,column=1,padx=20, pady=20,sticky=W)
 
         pkg_cancel_btn = Button(pkg_frame, text="Cancel", font=buttonFont)
         pkg_cancel_btn.grid(row=4,column=2,padx=20, pady=20,sticky=W)
 
-        pkg_packing_slip = Label(pkg_frame,text='Packaging slip Folder Path ', font=labelFont)
+        pkg_packing_slip = Label(pkg_frame,text='Packing slip Folder Path ', font=labelFont)
         pkg_packing_slip.grid(row=5,column=0,padx=20, pady=20,sticky=W)
 
         with open(ConfigFolderPath+'config.json', 'r') as jsonFile:
 
             config = json.load(jsonFile)
 
-            pkg_packing_slip_btn = Button(pkg_frame,text='Copy Path',command=lambda:open_folder_packaging(params=[config['targetFolder'], pkg_client_var.get(), pkg_date_var.get(), '70-Packaging-Slip'],frame=pkg_frame),font=buttonFont)
+            pkg_packing_slip_btn = Button(pkg_frame,text='Copy Path',command=lambda:open_folder_packaging(params=[config['targetFolder'], pkg_client_var.get(), pkg_date_var.get(), '70-Packing-Slip'],frame=pkg_frame),font=buttonFont)
             pkg_packing_slip_btn.grid(row=5,column=1,padx=20, pady=20,sticky=W)
 
             pkg_packing_slip_folder_path = Label(pkg_frame,text='No Path Selected', font=pathFont, wraplength=800)
@@ -182,7 +182,7 @@ class Tab2():
                     pkg_client_code = json.load(jsonFile)
                     pkg_client_code = pkg_client_code[pkg_changed_client]
 
-                temp_pkg_slip_path = config['targetFolder']+'/'+pkg_client_code+'-'+pkg_year+'/'+pkg_date+'/'+'70-Packaging-Slip'
+                temp_pkg_slip_path = config['targetFolder']+'/'+pkg_client_code+'-'+pkg_year+'/'+pkg_date+'/'+'70-Packing-Slip'
                 pkg_packing_slip_folder_path.config(text=temp_pkg_slip_path)
 
             pkg_client_var.trace('w',pkg_date_client)
