@@ -15,13 +15,14 @@ import json
 import sys
 from pygtail import Pygtail
 import subprocess
+import webbrowser
 from tkinter.messagebox import showwarning
 import threading
 
 from UI_scriptFunctions import select_folder,begin_order_processing,open_folder, open_folder_packaging, select_files
 from config import ConfigFolderPath, headingFont,fieldFont,buttonFont,labelFont,pathFont,logFont,ClientsFolderPath
 from UI_tabs import Tab1, Tab2
-from UI_logscmd import PrintLogger
+# from UI_logscmd import PrintLogger
 
 
 print('Initialzing Program...')
@@ -75,22 +76,27 @@ print('Loading Screen...')
 tabControl.pack(fill ="x")
 
 
-# consoleLabel = Label(logFrame,text='Console logs', font=labelFont)
-# consoleLabel.pack(side='top',anchor=NW, padx=20,pady=10)
 
-# logbox = st.ScrolledText(logFrame)
-
-# pl = PrintLogger(logbox)
-# # logbox.insert(tk.INSERT,'Logs:')
-# sys.stdout = pl
-# logbox.pack(expand = True,fill ="both",ipady=20,ipadx=10)
 tabFrame.pack(side='top',anchor=NW,fill ="x")
-# logFrame.pack(side='bottom',anchor=SW,fill ="x")
-# pl.write("HI THERE")
-# logbox.configure(state ='disabled')
 
 
+def callback(url):
+   webbrowser.open_new_tab(url)
 
+footer_frame = ttk.Frame(root)
+inside_footer_frame = ttk.Frame(footer_frame)
+inside_footer_frame.grid(row=0,column=0)
+
+footerText = Label(inside_footer_frame, text="Developed by: C-BIA Solutions & Services LLP ",font=(logFont,10), cursor="hand2")
+footerText.grid(row=0,column=1)
+
+link = Label(inside_footer_frame, text="     Website:  https://c-bia.com/" ,font=(logFont,10), cursor="hand2")
+link.grid(row=0,column=2)
+link.bind("<Button-1>", lambda e:
+callback("https://c-bia.com/"))
+
+
+footer_frame.pack()
 
 
 print('UI Loaded...')

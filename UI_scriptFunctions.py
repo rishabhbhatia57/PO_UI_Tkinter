@@ -119,7 +119,7 @@ def open_folder_packaging(params,frame):
             # path = os.path.realpath(path)
             # os.startfile(path)
     
-def begin_order_processing(mode, client, date, path):
+def begin_order_processing(mode, client, date, path, consoleLabel):
     
     # print(mode, client, date, path)
     with open(ClientsFolderPath, 'r') as jsonFile:
@@ -149,6 +149,7 @@ def begin_order_processing(mode, client, date, path):
         else:
             global logboxstate
             logboxstate = True
+            consoleLabel.config(text='Console logs 🔄')
             # print(logboxstate)
             encodedClientCodeSelected = ClientCode[ClientCodeSelected]
             encodedOrderDateSelected = str(OrderDateSelected).replace(' ', "#")
@@ -156,5 +157,11 @@ def begin_order_processing(mode, client, date, path):
             # Running code on CMD
             # print(pythonenvpath,pythonScriptPath,mode,encodedClientCodeSelected,encodedOrderDateSelected,enodedPOFolderSelected)
             startProcessing(mode=mode,clientname=ClientCode[ClientCodeSelected],orderdate=str(OrderDateSelected),processing_source=requestedpath)
+            # t1 = threading.Thread(target=(startProcessing(mode=mode,clientname=ClientCode[ClientCodeSelected],orderdate=str(OrderDateSelected),processing_source=requestedpath)))
+            # t1.start()
+            # t1.join()
+            
+
+            consoleLabel.config(text='Console logs ✅')
 
             # os.system(pythonenvpath +" "+ pythonScriptPath+" "+mode+" "+encodedClientCodeSelected+" "+encodedOrderDateSelected+" "+enodedPOFolderSelected)

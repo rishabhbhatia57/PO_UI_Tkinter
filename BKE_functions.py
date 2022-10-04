@@ -21,7 +21,7 @@ import sys
 from openpyxl.styles import PatternFill
 
 import BKE_log
-from UI_logscmd import PrintLogger
+# from UI_logscmd import PrintLogger
 from config import MasterFolderPath
 pd.options.mode.chained_assignment = None
 # import warnings
@@ -41,6 +41,7 @@ def downloadFiles(RootFolder,POSource,OrderDate,ClientCode):
     destination_folder = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/10-Download-Files/"
     try:
         print("Copying PDF Files from '"+str(source_folder)+"' to '"+str(destination_folder)+"'")
+        logger.info("Copying PDF Files from '"+str(source_folder)+"' to '"+str(destination_folder)+"'")
         # Tab1.pl.write("Copying PDF Files from '"+str(source_folder)+"' to '"+str(destination_folder)+"'")
         
         for file_name in os.listdir(POSource):
@@ -64,6 +65,7 @@ def scriptStarted():
     print('Starting script')
     print('Script is running...')
     print('Do not close this window while processing...')
+    logger.info('Do not close this window while processing...')
     return "Script Started."
 
 
@@ -134,6 +136,7 @@ def mergeExcelsToOne(RootFolder,POSource,OrderDate,ClientCode):
         else:
             excl_list = []
             print("Merging files...")
+            logger.info("Merging files...")
             for f in os.listdir(inputpath):
                 # logger.info("Accessing '"+f+"' right now: ")
                 # print("Accessing '"+f+"' right now: ")
@@ -189,10 +192,13 @@ def mergeToPivotRQ(RootFolder,POSource,OrderDate,ClientCode,Formulasheet):
 
             df_item_master.rename(columns = {'EAN ID':'ArticleEAN'}, inplace = True)
             print('Fetching SKU values corresponding to the EAN ID from Item Master...')
+            logger.info('Fetching SKU values corresponding to the EAN ID from Item Master...')
             df_SKU = df_consolidated_order.merge(df_item_master, on='ArticleEAN', how='left')
             print('Fetching GST Type values corresponding to the Location from Location Master...')
+            logger.info('Fetching GST Type values corresponding to the Location from Location Master...')
             df_gst_type = df_SKU.merge(df_location_master, on='Receiving Location', how='left') # Perfoming join to get values of GST
             print('Fetching closing stock values from closing stock sheet...')
+            logger.info('Fetching closing stock values from closing stock sheet...')
             df_join = df_gst_type.merge(df_closing_stock, on='SKU', how='left') # Perfoming join to get values of closing stock
 
             df_join['Order No.'] = '' # adding order number as col
@@ -257,7 +263,8 @@ def mergeToPivotRQ(RootFolder,POSource,OrderDate,ClientCode,Formulasheet):
                 pivotSheet.cell(i,cols-3).value = "=SUM(B"+str(i)+":"+openpyxl.utils.cell.get_column_letter(cols-4)+str(i)+")"
                 pivotSheet.cell(i,cols-1).value = "="+openpyxl.utils.cell.get_column_letter(cols-2)+str(i)+"-"+openpyxl.utils.cell.get_column_letter(cols-3)+str(i)
 
-            print('Improving the appearance of Requirements summary sheet...')
+
+            
             pivotSheet.cell(3,2).font = Font(bold=True)
             pivotSheet.cell(4,2).font = Font(bold=True)
             pivotSheet.cell(5,2).font = Font(bold=True)
@@ -275,7 +282,7 @@ def mergeToPivotRQ(RootFolder,POSource,OrderDate,ClientCode,Formulasheet):
                     pivotSheet.cell(row=i, column=j).border = thin_border
                     pivotSheet.cell(row=i, column=j).alignment = Alignment(horizontal='center', vertical='center')
             
-            print('Almost done...')
+
             dim_holder = DimensionHolder(worksheet=pivotSheet)
             for col in range(pivotSheet.min_column, pivotSheet.max_column + 1):
                 dim_holder[get_column_letter(col)] = ColumnDimension(pivotSheet, min=col, max=col, width=20)
@@ -287,6 +294,7 @@ def mergeToPivotRQ(RootFolder,POSource,OrderDate,ClientCode,Formulasheet):
             pivotWorksheet.save(workbook_path)
 
             print('Requirements summary sheet generated.')
+            logger.info('Requirements summary sheet generated.')
 
             return 'Generated Requirement Summary file'
 
@@ -326,6 +334,7 @@ def getFilesToProcess(RootFolder,POSource,OrderDate,ClientCode):
                 count += 1
             
             print("Successfully converted "+str(count)+" Files in "+"{:.2f}".format(time.time() - startedProcessing,2)+ " seconds!")
+            logger.info("Successfully converted "+str(count)+" Files in "+"{:.2f}".format(time.time() - startedProcessing,2)+ " seconds!")
             # print("Completed in "+"{:.2f}".format(time.time() - startedProcessing,2)+ " seconds!")
     except Exception as e:
         logger.error("Error while processing files: "+str(e))
@@ -541,7 +550,7 @@ def pdfToTable(inputPath,outputPath,RootFolder,POSource,OrderDate,ClientCode,fil
         # logger.info("Converted '"+ inputPath + "' to '" + outputPath+"'"+ " in "+ "{:.2f}".format(time.time() - startedProcessing,2)+ " seconds.")
         # print("Converted '"+ inputPath + "' to '" + outputPath+"'"+ " in "+ "{:.2f}".format(time.time() - startedProcessing,2)+ " seconds.")
         print("Converted '"+ filecsv + "' to '"+filecsv.replace('pdf','xlsx')+"' in "+ "{:.2f}".format(time.time() - startedProcessing,2)+ " seconds.")
-        
+        logger.info("Converted '"+ filecsv + "' to '"+filecsv.replace('pdf','xlsx')+"' in "+ "{:.2f}".format(time.time() - startedProcessing,2)+ " seconds.")
         return "Conversion Complete!"
     
     except Exception as e:
@@ -589,18 +598,23 @@ def generatingPackingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulasheet
         # df_IGST = pd.read_excel(MasterFolderPath+'IGST Master.xlsx',sheet_name='DBF')
         # df_SGST = pd.read_excel(MasterFolderPath+'SGST Master.xlsx',sheet_name='DBF')
         print('Loading Master files for processing...')
+        logger.info('Loading Master files for processing...')
         # Opening Item Master Sheet
         df_IteamMaster = pd.read_excel(MasterFolderPath+'Item Master.xlsx', sheet_name='Item Master',index_col=False)
         print('Item Master loaded.')
+        logger.info('Item Master loaded.')
         # Opening IGST Master Sheet
         df_IGSTMaster = pd.read_excel(MasterFolderPath+'IGST Master.xlsx', sheet_name='DBF',index_col=False)
         print('IGST Master loaded.')
+        logger.info('IGST Master loaded.')
         # Opening SGST Master Sheet
         df_SGSTMaster = pd.read_excel(MasterFolderPath+'SGST Master.xlsx', sheet_name='DBF',index_col=False)
         print('SGST Master loaded.')
+        logger.info('SGST Master loaded.')
         # Opening Location2 Master Sheet
         df_Location2 = pd.read_excel(MasterFolderPath+'Location 2 Master.xlsx',sheet_name='Location2',index_col=False)
         print('Location 2 Master loaded.')
+        logger.info('Location 2 Master loaded.')
         
         start_cols = 3
         
@@ -632,6 +646,7 @@ def generatingPackingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulasheet
             TemplateSheet.cell(1,4).value = InputSheet.cell(start_cols+2,column).value # IGST/SGST Type (5,cols-3)
             if TemplateSheet.cell(1,4).value == None:
                 print("IGST/SGST TYPE = None, Requirment Summary file is not saved. Open the file, save it then process")
+                logger.info("IGST/SGST TYPE = None, Requirment Summary file is not saved. Open the file, save it then process")
                 break
             
 
@@ -721,13 +736,13 @@ def generatingPackingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulasheet
 
 
             
-            TemplateWorkbook.save(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/70-Packing-Slip/"+"PackagingSlip_"+str(filename)+".xlsx")
+            TemplateWorkbook.save(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/70-Packing-Slip/"+"PackingSlip_"+str(filename)+".xlsx")
             TemplateWorkbook.close()
 
 
             # Opening Packing slip using openpyxl to check igst/sgst value
-            sourcePackagingSlip = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/70-Packing-Slip/"+"PackagingSlip_"+str(filename)+".xlsx"
-            TemplateWorkbook = load_workbook(sourcePackagingSlip, data_only=True)
+            sourcePackingSlip = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/70-Packing-Slip/"+"PackingSlip_"+str(filename)+".xlsx"
+            TemplateWorkbook = load_workbook(sourcePackingSlip, data_only=True)
             TemplateSheet = TemplateWorkbook['ORDER']
             # print(TemplateSheet.cell(1,4).value)
             # Getting data from IGST/ SGST Sheet DBF to Tempalate sheet DBF
@@ -736,7 +751,7 @@ def generatingPackingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulasheet
             if TemplateSheet.cell(1,4).value == 'IGST':
 
                 # Opening Packing slip as df for second time to get EAN values
-                df_TempalateWorkbook = pd.read_excel(sourcePackagingSlip,sheet_name='ORDER', skiprows=6,index_col=False)
+                df_TempalateWorkbook = pd.read_excel(sourcePackingSlip,sheet_name='ORDER', skiprows=6,index_col=False)
                 df_TempalateWorkbook.rename(columns = {'EAN':'EAN ID'}, inplace = True)
                 
                 # Temporary df to store EAN ID
@@ -754,7 +769,7 @@ def generatingPackingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulasheet
                 df_GST_hidden = df_SKU_temp.merge(df_IGSTMaster,on='ITEMNAME',how='left')
 
 
-                with pd.ExcelWriter(sourcePackagingSlip, mode='a', engine='openpyxl',if_sheet_exists='replace') as writer:
+                with pd.ExcelWriter(sourcePackingSlip, mode='a', engine='openpyxl',if_sheet_exists='replace') as writer:
                     # Adding Hidden Item Master sheet to the RQ sheet with values 'Style Name', 'EAN', 'Style', 'SKU ID', 'MRP'
                     df_Location2_temp.to_excel(writer,sheet_name='Hidden Item Master',index=False, columns=['Style Name', 'EAN', 'Style', 'SKU', 'MRP','Location 2','BULK  / DTA  BULK  /  EOSS LOC'])
                     # # Adding Hidden DBF sheet to the RQ sheet with values 'Vouchertypename', 'CSNNO','DATE' ETC.
@@ -771,7 +786,7 @@ def generatingPackingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulasheet
             if TemplateSheet.cell(1,4).value == 'SGST':
                 
                 # Opening Packing slip as df for second time to get EAN values
-                df_TempalateWorkbook = pd.read_excel(sourcePackagingSlip,sheet_name='ORDER', skiprows=6,index_col=False)
+                df_TempalateWorkbook = pd.read_excel(sourcePackingSlip,sheet_name='ORDER', skiprows=6,index_col=False)
                 df_TempalateWorkbook.rename(columns = {'EAN':'EAN ID'}, inplace = True)
                 
                 # Temporary df to store EAN ID
@@ -789,7 +804,7 @@ def generatingPackingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulasheet
                 df_GST_hidden = df_SKU_temp.merge(df_SGSTMaster,on='ITEMNAME',how='left')
 
 
-                with pd.ExcelWriter(sourcePackagingSlip, mode='a', engine='openpyxl',if_sheet_exists='replace') as writer:
+                with pd.ExcelWriter(sourcePackingSlip, mode='a', engine='openpyxl',if_sheet_exists='replace') as writer:
                     # Adding Hidden Item Master sheet to the RQ sheet with values 'Style Name', 'EAN', 'Style', 'SKU ID', 'MRP'
                     df_Location2_temp.to_excel(writer,sheet_name='Hidden Item Master',index=False, columns=['Style Name', 'EAN', 'Style', 'SKU', 'MRP','Location 2','BULK  / DTA  BULK  /  EOSS LOC'])
                     # # Adding Hidden DBF sheet to the RQ sheet with values 'Vouchertypename', 'CSNNO','DATE' ETC.
@@ -805,7 +820,7 @@ def generatingPackingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulasheet
             TemplateWorkbook.close()
             
             # Opening Sheet again to hide hidden dbf and item master sheets
-            TemplateWorkbook = load_workbook(sourcePackagingSlip)
+            TemplateWorkbook = load_workbook(sourcePackingSlip)
             hidden_item_master = TemplateWorkbook['Hidden Item Master']
             hidden_dbf = TemplateWorkbook['Hidden DBF']
 
@@ -813,7 +828,7 @@ def generatingPackingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulasheet
             hidden_dbf.sheet_state = 'hidden'
 
             TemplateWorkbook.close()
-            TemplateWorkbook.save(sourcePackagingSlip)
+            TemplateWorkbook.save(sourcePackingSlip)
 
             logger.info("Packing slip generated for: "+str(filename)+ " file in {:.2f}".format(time.time() - startedTemplatingFile,2)+ " seconds.")
             print("Packing slip generated for: "+str(filename)+ " file in {:.2f}".format(time.time() - startedTemplatingFile,2)+ " seconds.")

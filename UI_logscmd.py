@@ -3,41 +3,65 @@ import sys
 import logging
 import tkinter.scrolledtext as st
 
-class PrintLogger(): # create file like object
-    # textbox = st.ScrolledText()
-    
-    def __init__(self,textbox): # pass reference to text widget
-        # self.target_frame = target_frame
-        # logbox = st.ScrolledText(target_frame)
-        # logbox.pack(expand = True,fill ="both",ipady=20,ipadx=10)
-        self.textbox = textbox # keep ref
-        # sys.stdout = self.textbox
+import queue
+import BKE_log
+from config import logFont
 
-    def write(self, text):
-        self.textbox.insert(tk.END, text)
-        self.textbox.yview(tk.END) # write text to textbox
-            # could also scroll to end of textbox here to make sure always visible
-
-    # def flush(self): # needed for file like object
-    #     pass
+logger = BKE_log.setup_custom_logger('root')
 
 
-# class TextHandler(logging.Handler):
-    
-#     """This class allows you to log to a Tkinter Text or ScrolledText widget"""
-#     def __init__(self, text):
-#         # run the regular Handler __init__
-#         logging.Handler.__init__(self)
-#         # Store a reference to the Text it will log to
-#         self.text = text
+class QueueHandler(logging.Handler):
+    """Class to send logging records to a queue
 
-#     def emit(self, record):
-#         msg = self.format(record)
-#         def append():
-#             self.text.configure(state='normal')
-#             self.text.insert(Tkinter.END, msg + '\n')
-#             self.text.configure(state='disabled')
-#             # Autoscroll to the bottom
-#             self.text.yview(Tkinter.END)
-#         # This is necessary because we can't modify the Text from other threads
-#         self.text.after(0, append)
+    It can be used from different threads
+    """
+
+    def __init__(self, log_queue):
+        super().__init__()
+        self.log_queue = log_queue
+
+    def emit(self, record):
+        self.log_queue.put(record)
+
+
+class ConsoleUi:
+    """Poll messages from a logging queue and display them in a scrolled text widget"""
+
+    def __init__(self, frame):
+        self.frame = frame
+        # Create a ScrolledText wdiget
+        self.scrolled_text = st.ScrolledText(frame, state='disabled', height=22)
+        self.scrolled_text.pack(expand = True,fill ="both",ipady=20,ipadx=10)
+        self.scrolled_text.configure(font=logFont)
+        self.scrolled_text.tag_config('INFO', foreground='White')
+        self.scrolled_text.tag_config('DEBUG', foreground='gray')
+        self.scrolled_text.tag_config('WARNING', foreground='orange')
+        self.scrolled_text.tag_config('ERROR', foreground='red')
+        self.scrolled_text.tag_config('CRITICAL', foreground='red', underline=1)
+        # Create a logging handler using a queue
+        self.log_queue = queue.Queue()
+        self.queue_handler = QueueHandler(self.log_queue)
+        formatter = logging.Formatter('%(asctime)s: %(message)s')
+        self.queue_handler.setFormatter(formatter)
+        logger.addHandler(self.queue_handler)
+        # Start polling messages from the queue
+        self.frame.after(100, self.poll_log_queue)
+
+    def display(self, record):
+        msg = self.queue_handler.format(record)
+        self.scrolled_text.configure(state='normal')
+        self.scrolled_text.insert(tk.END, msg + '\n', record.levelname)
+        self.scrolled_text.configure(state='disabled')
+        # Autoscroll to the bottom
+        self.scrolled_text.yview(tk.END)
+
+    def poll_log_queue(self):
+        # Check every 100ms if there is a new message in the queue to display
+        while True:
+            try:
+                record = self.log_queue.get(block=False)
+            except queue.Empty:
+                break
+            else:
+                self.display(record)
+        self.frame.after(100, self.poll_log_queue)

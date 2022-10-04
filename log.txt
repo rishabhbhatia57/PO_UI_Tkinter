@@ -98,3 +98,319 @@
 2022-10-04 12:08:08,829 INFO Packing slip generated for: 4000444767 file in 5.08 seconds. 
 2022-10-04 12:08:08,830 INFO Total time taken for generation of packing-slips:  42.19 seconds. 
 2022-10-04 12:08:08,843 INFO Script Ended 
+2022-10-04 12:30:25,325 INFO Client Name: PL Client Code: PL Order Date: 2022-10-04 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-10-04 12:30:25,325 INFO Starting script 
+2022-10-04 12:30:25,333 INFO Creating the new directory... 
+2022-10-04 12:30:25,334 INFO Folder 'PL-2022/2022-10-04' exists. 
+2022-10-04 12:30:25,358 INFO File '4000444765.pdf' copied 
+2022-10-04 12:30:25,380 INFO File '4000444766.pdf' copied 
+2022-10-04 12:30:25,399 INFO File '4000444767.pdf' copied 
+2022-10-04 12:30:25,400 INFO Converting PDF files to Excel... 
+2022-10-04 12:30:25,402 INFO Converting '4000444765.pdf 
+2022-10-04 12:30:45,805 INFO Converting '4000444766.pdf 
+2022-10-04 12:31:30,839 INFO Converting '4000444767.pdf 
+2022-10-04 12:31:53,220 INFO Merged 3 excel files into a single excel file 'Consolidate-Orders.xlsx' 
+2022-10-04 12:32:07,727 INFO Script Ended 
+2022-10-04 12:34:08,383 INFO Client Name: PL Client Code: PL Order Date: 2022-10-04 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-10-04 12:34:08,384 INFO Starting script 
+2022-10-04 12:34:08,388 INFO Creating the new directory... 
+2022-10-04 12:34:08,389 INFO Folder 'PL-2022/2022-10-04' exists. 
+2022-10-04 12:34:08,395 INFO File '4000444765.pdf' copied 
+2022-10-04 12:34:08,402 INFO File '4000444766.pdf' copied 
+2022-10-04 12:34:08,408 INFO File '4000444767.pdf' copied 
+2022-10-04 12:34:08,409 INFO Converting PDF files to Excel... 
+2022-10-04 12:34:08,410 INFO Converting '4000444765.pdf 
+2022-10-04 12:34:26,999 INFO Converting '4000444766.pdf 
+2022-10-04 12:35:22,869 INFO Converting '4000444767.pdf 
+2022-10-04 12:35:44,434 INFO Merged 3 excel files into a single excel file 'Consolidate-Orders.xlsx' 
+2022-10-04 12:36:00,399 INFO Script Ended 
+2022-10-04 12:38:25,715 INFO Client Name: PL Client Code: PL Order Date: 2022-10-04 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-10-04 12:38:25,716 INFO Starting script 
+2022-10-04 12:38:25,720 INFO Creating the new directory... 
+2022-10-04 12:38:25,721 INFO Folder 'PL-2022/2022-10-04' exists. 
+2022-10-04 12:38:25,726 INFO File '4000444765.pdf' copied 
+2022-10-04 12:38:25,733 INFO File '4000444766.pdf' copied 
+2022-10-04 12:38:25,740 INFO File '4000444767.pdf' copied 
+2022-10-04 12:38:25,741 INFO Converting PDF files to Excel... 
+2022-10-04 12:38:25,742 INFO Converting '4000444765.pdf 
+2022-10-04 12:38:43,813 INFO Converting '4000444766.pdf 
+2022-10-04 12:39:28,363 INFO Converting '4000444767.pdf 
+2022-10-04 12:39:52,218 INFO Successfully converted 3 Files in 86.48 seconds! 
+2022-10-04 12:39:53,164 INFO Merged 3 excel files into a single excel file 'Consolidate-Orders.xlsx' 
+2022-10-04 12:40:09,681 INFO Script Ended 
+2022-10-04 12:49:58,200 INFO Client Name: PL Client Code: PL Order Date: 2022-10-04 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-10-04 12:49:58,200 INFO Starting script 
+2022-10-04 12:49:58,201 INFO Do not close this window while processing... 
+2022-10-04 12:49:58,205 INFO Creating the new directory... 
+2022-10-04 12:49:58,205 INFO Folder 'PL-2022/2022-10-04' exists. 
+2022-10-04 12:49:58,206 INFO Copying PDF Files from 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' to 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/Processed Orders/PL-2022/2022-10-04/10-Download-Files/' 
+2022-10-04 12:49:58,212 INFO File '4000444765.pdf' copied 
+2022-10-04 12:49:58,219 INFO File '4000444766.pdf' copied 
+2022-10-04 12:49:58,224 INFO File '4000444767.pdf' copied 
+2022-10-04 12:49:58,226 INFO Converting PDF files to Excel... 
+2022-10-04 12:49:58,227 INFO Converting '4000444765.pdf 
+2022-10-04 12:50:16,232 INFO Converted '4000444765.pdf' to '4000444765.xlsx' in 18.01 seconds. 
+2022-10-04 12:50:16,235 INFO Converting '4000444766.pdf 
+2022-10-04 12:50:58,703 INFO Converted '4000444766.pdf' to '4000444766.xlsx' in 42.47 seconds. 
+2022-10-04 12:50:58,706 INFO Converting '4000444767.pdf 
+2022-10-04 12:51:17,028 INFO Converted '4000444767.pdf' to '4000444767.xlsx' in 18.32 seconds. 
+2022-10-04 12:51:17,030 INFO Successfully converted 3 Files in 78.81 seconds! 
+2022-10-04 12:51:17,032 INFO Merging files... 
+2022-10-04 12:51:17,937 INFO Merged 3 excel files into a single excel file 'Consolidate-Orders.xlsx' 
+2022-10-04 12:51:30,378 INFO Fetching SKU values corresponding to the EAN ID from Item Master... 
+2022-10-04 12:51:30,416 INFO Fetching GST Type values corresponding to the Location from Location Master... 
+2022-10-04 12:51:30,425 INFO Fetching closing stock values from closing stock sheet... 
+2022-10-04 12:51:31,499 INFO Requirements summary sheet generated. 
+2022-10-04 12:51:31,508 INFO Script Ended 
+2022-10-04 12:54:02,829 INFO Client Name: PL Client Code: PL Order Date: 2022-10-04 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-10-04 12:54:02,829 INFO Starting script 
+2022-10-04 12:54:02,831 INFO Do not close this window while processing... 
+2022-10-04 12:54:02,834 INFO Creating the new directory... 
+2022-10-04 12:54:02,835 INFO Folder 'PL-2022/2022-10-04' exists. 
+2022-10-04 12:54:02,836 INFO Copying PDF Files from 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' to 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/Processed Orders/PL-2022/2022-10-04/10-Download-Files/' 
+2022-10-04 12:54:02,841 INFO File '4000444765.pdf' copied 
+2022-10-04 12:54:02,848 INFO File '4000444766.pdf' copied 
+2022-10-04 12:54:02,853 INFO File '4000444767.pdf' copied 
+2022-10-04 12:54:02,854 INFO Converting PDF files to Excel... 
+2022-10-04 12:54:02,855 INFO Converting '4000444765.pdf 
+2022-10-04 12:54:20,528 INFO Converted '4000444765.pdf' to '4000444765.xlsx' in 17.67 seconds. 
+2022-10-04 12:54:20,529 INFO Converting '4000444766.pdf 
+2022-10-04 12:55:04,439 INFO Converted '4000444766.pdf' to '4000444766.xlsx' in 43.91 seconds. 
+2022-10-04 12:55:04,442 INFO Converting '4000444767.pdf 
+2022-10-04 12:55:26,428 INFO Converted '4000444767.pdf' to '4000444767.xlsx' in 21.99 seconds. 
+2022-10-04 12:55:26,430 INFO Successfully converted 3 Files in 83.58 seconds! 
+2022-10-04 12:55:26,432 INFO Merging files... 
+2022-10-04 12:55:27,416 INFO Merged 3 excel files into a single excel file 'Consolidate-Orders.xlsx' 
+2022-10-04 12:55:40,660 INFO Fetching SKU values corresponding to the EAN ID from Item Master... 
+2022-10-04 12:55:40,701 INFO Fetching GST Type values corresponding to the Location from Location Master... 
+2022-10-04 12:55:40,709 INFO Fetching closing stock values from closing stock sheet... 
+2022-10-04 12:55:41,852 INFO Requirements summary sheet generated. 
+2022-10-04 12:55:41,860 INFO Script Ended 
+2022-10-04 12:56:19,149 INFO Starting script 
+2022-10-04 12:56:19,150 INFO Do not close this window while processing... 
+2022-10-04 12:56:19,283 INFO Loading Master files for processing... 
+2022-10-04 12:56:26,352 INFO Item Master loaded. 
+2022-10-04 12:56:40,903 INFO IGST Master loaded. 
+2022-10-04 12:56:56,103 INFO SGST Master loaded. 
+2022-10-04 12:56:57,615 INFO Location 2 Master loaded. 
+2022-10-04 12:56:58,229 ERROR Error while generating packing-slip file: [Errno 2] No such file or directory: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/Processed Orders/PL-2022/2022-10-04/70-Packing-Slip/PackagingSlip_4000444765.xlsx' 
+2022-10-04 12:56:58,230 INFO Script Ended 
+2022-10-04 13:07:07,054 INFO Client Name: OTH1 Client Code: OTH1 Order Date: 2022-10-04 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-10-04 13:07:07,056 INFO Starting script 
+2022-10-04 13:07:07,058 INFO Do not close this window while processing... 
+2022-10-04 13:07:07,066 INFO Creating the new directory... 
+2022-10-04 13:07:07,073 INFO Folder 'OTH1-2022/2022-10-04' is created. 
+2022-10-04 13:07:07,074 INFO Copying PDF Files from 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' to 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/Processed Orders/OTH1-2022/2022-10-04/10-Download-Files/' 
+2022-10-04 13:07:07,082 INFO File '4000444765.pdf' copied 
+2022-10-04 13:07:07,090 INFO File '4000444766.pdf' copied 
+2022-10-04 13:07:07,096 INFO File '4000444767.pdf' copied 
+2022-10-04 13:07:07,097 INFO Converting PDF files to Excel... 
+2022-10-04 13:07:07,098 INFO Converting '4000444765.pdf 
+2022-10-04 13:07:25,754 INFO Converted '4000444765.pdf' to '4000444765.xlsx' in 18.65 seconds. 
+2022-10-04 13:07:25,756 INFO Converting '4000444766.pdf 
+2022-10-04 13:08:07,530 INFO Converted '4000444766.pdf' to '4000444766.xlsx' in 41.77 seconds. 
+2022-10-04 13:08:07,534 INFO Converting '4000444767.pdf 
+2022-10-04 13:08:26,364 INFO Converted '4000444767.pdf' to '4000444767.xlsx' in 18.83 seconds. 
+2022-10-04 13:08:26,367 INFO Successfully converted 3 Files in 79.27 seconds! 
+2022-10-04 13:08:26,368 INFO Merging files... 
+2022-10-04 13:08:27,303 INFO Merged 3 excel files into a single excel file 'Consolidate-Orders.xlsx' 
+2022-10-04 13:08:39,891 INFO Fetching SKU values corresponding to the EAN ID from Item Master... 
+2022-10-04 13:08:39,932 INFO Fetching GST Type values corresponding to the Location from Location Master... 
+2022-10-04 13:08:39,941 INFO Fetching closing stock values from closing stock sheet... 
+2022-10-04 13:08:40,994 INFO Requirements summary sheet generated. 
+2022-10-04 13:08:41,004 INFO Script Ended 
+2022-10-04 13:09:26,413 INFO Starting script 
+2022-10-04 13:09:26,415 INFO Do not close this window while processing... 
+2022-10-04 13:09:26,532 INFO Loading Master files for processing... 
+2022-10-04 13:09:33,822 INFO Item Master loaded. 
+2022-10-04 13:09:48,584 INFO IGST Master loaded. 
+2022-10-04 13:10:04,298 INFO SGST Master loaded. 
+2022-10-04 13:10:05,873 INFO Location 2 Master loaded. 
+2022-10-04 13:10:11,775 INFO Packing slip generated for: 4000444765 file in 5.90 seconds. 
+2022-10-04 13:10:19,071 INFO Packing slip generated for: 4000444766 file in 7.29 seconds. 
+2022-10-04 13:10:25,293 INFO Packing slip generated for: 4000444767 file in 6.22 seconds. 
+2022-10-04 13:10:25,294 INFO Total time taken for generation of packing-slips:  58.88 seconds. 
+2022-10-04 13:10:25,312 INFO Script Ended 
+2022-10-04 13:14:33,550 INFO Client Name: OTH2 Client Code: OTH2 Order Date: 2022-10-04 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-10-04 13:14:33,551 INFO Starting script 
+2022-10-04 13:14:33,554 INFO Do not close this window while processing... 
+2022-10-04 13:14:33,564 INFO Creating the new directory... 
+2022-10-04 13:14:33,576 INFO Folder 'OTH2-2022/2022-10-04' is created. 
+2022-10-04 13:14:33,577 INFO Copying PDF Files from 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' to 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/Processed Orders/OTH2-2022/2022-10-04/10-Download-Files/' 
+2022-10-04 13:14:33,582 INFO File '4000444765.pdf' copied 
+2022-10-04 13:14:33,591 INFO File '4000444766.pdf' copied 
+2022-10-04 13:14:33,597 INFO File '4000444767.pdf' copied 
+2022-10-04 13:14:33,598 INFO Converting PDF files to Excel... 
+2022-10-04 13:14:33,599 INFO Converting '4000444765.pdf 
+2022-10-04 13:14:51,745 INFO Converted '4000444765.pdf' to '4000444765.xlsx' in 18.15 seconds. 
+2022-10-04 13:14:51,747 INFO Converting '4000444766.pdf 
+2022-10-04 13:15:33,382 INFO Converted '4000444766.pdf' to '4000444766.xlsx' in 41.63 seconds. 
+2022-10-04 13:15:33,384 INFO Converting '4000444767.pdf 
+2022-10-04 13:15:51,902 INFO Converted '4000444767.pdf' to '4000444767.xlsx' in 18.52 seconds. 
+2022-10-04 13:15:51,904 INFO Successfully converted 3 Files in 78.31 seconds! 
+2022-10-04 13:15:51,907 INFO Merging files... 
+2022-10-04 13:15:52,817 INFO Merged 3 excel files into a single excel file 'Consolidate-Orders.xlsx' 
+2022-10-04 13:16:05,207 INFO Fetching SKU values corresponding to the EAN ID from Item Master... 
+2022-10-04 13:16:05,248 INFO Fetching GST Type values corresponding to the Location from Location Master... 
+2022-10-04 13:16:05,256 INFO Fetching closing stock values from closing stock sheet... 
+2022-10-04 13:16:06,354 INFO Requirements summary sheet generated. 
+2022-10-04 13:16:06,364 INFO Script Ended 
+2022-10-04 13:54:43,190 INFO Client Name: OTH1 Client Code: OTH1 Order Date: 2022-10-04 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-10-04 13:54:43,191 INFO Starting script 
+2022-10-04 13:54:43,192 INFO Do not close this window while processing... 
+2022-10-04 13:54:43,196 INFO Creating the new directory... 
+2022-10-04 13:54:43,197 INFO Folder 'OTH1-2022/2022-10-04' exists. 
+2022-10-04 13:54:43,198 INFO Copying PDF Files from 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' to 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/Processed Orders/OTH1-2022/2022-10-04/10-Download-Files/' 
+2022-10-04 13:54:43,220 INFO File '4000444765.pdf' copied 
+2022-10-04 13:54:43,239 INFO File '4000444766.pdf' copied 
+2022-10-04 13:54:43,253 INFO File '4000444767.pdf' copied 
+2022-10-04 13:54:43,254 INFO Converting PDF files to Excel... 
+2022-10-04 13:54:43,255 INFO Converting '4000444765.pdf 
+2022-10-04 13:55:01,588 INFO Converted '4000444765.pdf' to '4000444765.xlsx' in 18.33 seconds. 
+2022-10-04 13:55:01,590 INFO Converting '4000444766.pdf 
+2022-10-04 13:55:42,977 INFO Converted '4000444766.pdf' to '4000444766.xlsx' in 41.39 seconds. 
+2022-10-04 13:55:42,980 INFO Converting '4000444767.pdf 
+2022-10-04 13:56:01,806 INFO Converted '4000444767.pdf' to '4000444767.xlsx' in 18.82 seconds. 
+2022-10-04 13:56:01,809 INFO Successfully converted 3 Files in 78.55 seconds! 
+2022-10-04 13:56:01,810 INFO Merging files... 
+2022-10-04 13:56:02,641 INFO Merged 3 excel files into a single excel file 'Consolidate-Orders.xlsx' 
+2022-10-04 13:56:15,541 INFO Fetching SKU values corresponding to the EAN ID from Item Master... 
+2022-10-04 13:56:15,582 INFO Fetching GST Type values corresponding to the Location from Location Master... 
+2022-10-04 13:56:15,592 INFO Fetching closing stock values from closing stock sheet... 
+2022-10-04 13:56:16,627 INFO Requirements summary sheet generated. 
+2022-10-04 13:56:16,638 INFO Script Ended 
+2022-10-04 15:52:51,886 INFO Client Name: PL Client Code: PL Order Date: 2022-10-04 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-10-04 15:52:51,886 INFO Starting script 
+2022-10-04 15:52:51,888 INFO Do not close this window while processing... 
+2022-10-04 15:52:51,892 INFO Creating the new directory... 
+2022-10-04 15:52:51,899 INFO Folder 'PL-2022/2022-10-04' is created. 
+2022-10-04 15:52:51,900 INFO Copying PDF Files from 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' to 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/Processed Orders/PL-2022/2022-10-04/10-Download-Files/' 
+2022-10-04 15:52:51,905 INFO File '4000444765.pdf' copied 
+2022-10-04 15:52:51,912 INFO File '4000444766.pdf' copied 
+2022-10-04 15:52:51,918 INFO File '4000444767.pdf' copied 
+2022-10-04 15:52:51,919 INFO Converting PDF files to Excel... 
+2022-10-04 15:52:51,920 INFO Converting '4000444765.pdf 
+2022-10-04 15:53:11,976 INFO Converted '4000444765.pdf' to '4000444765.xlsx' in 20.06 seconds. 
+2022-10-04 15:53:11,978 INFO Converting '4000444766.pdf 
+2022-10-04 15:53:57,632 INFO Converted '4000444766.pdf' to '4000444766.xlsx' in 45.65 seconds. 
+2022-10-04 15:53:57,635 INFO Converting '4000444767.pdf 
+2022-10-04 15:59:28,005 INFO Client Name: PL Client Code: PL Order Date: 2022-10-04 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-10-04 15:59:28,006 INFO Starting script 
+2022-10-04 15:59:28,007 INFO Do not close this window while processing... 
+2022-10-04 15:59:28,011 INFO Creating the new directory... 
+2022-10-04 15:59:28,012 INFO Folder 'PL-2022/2022-10-04' exists. 
+2022-10-04 15:59:28,013 INFO Copying PDF Files from 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' to 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/Processed Orders/PL-2022/2022-10-04/10-Download-Files/' 
+2022-10-04 15:59:28,018 INFO File '4000444765.pdf' copied 
+2022-10-04 15:59:28,025 INFO File '4000444766.pdf' copied 
+2022-10-04 15:59:28,030 INFO File '4000444767.pdf' copied 
+2022-10-04 15:59:28,031 INFO Converting PDF files to Excel... 
+2022-10-04 15:59:28,033 INFO Converting '4000444765.pdf 
+2022-10-04 15:59:47,762 INFO Converted '4000444765.pdf' to '4000444765.xlsx' in 19.73 seconds. 
+2022-10-04 15:59:47,764 INFO Converting '4000444766.pdf 
+2022-10-04 16:00:23,846 INFO Client Name: PL Client Code: PL Order Date: 2022-10-04 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-10-04 16:00:23,847 INFO Starting script 
+2022-10-04 16:00:23,848 INFO Do not close this window while processing... 
+2022-10-04 16:00:23,852 INFO Creating the new directory... 
+2022-10-04 16:00:23,852 INFO Folder 'PL-2022/2022-10-04' exists. 
+2022-10-04 16:00:23,854 INFO Copying PDF Files from 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' to 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/Processed Orders/PL-2022/2022-10-04/10-Download-Files/' 
+2022-10-04 16:00:23,865 INFO File '4000444765.pdf' copied 
+2022-10-04 16:00:23,872 INFO File '4000444766.pdf' copied 
+2022-10-04 16:00:23,877 INFO File '4000444767.pdf' copied 
+2022-10-04 16:00:23,878 INFO Converting PDF files to Excel... 
+2022-10-04 16:00:23,879 INFO Converting '4000444765.pdf 
+2022-10-04 16:27:35,887 INFO Starting script 
+2022-10-04 16:27:35,888 INFO Do not close this window while processing... 
+2022-10-04 16:27:36,028 INFO Loading Master files for processing... 
+2022-10-04 16:27:42,872 INFO Item Master loaded. 
+2022-10-04 16:27:58,628 INFO IGST Master loaded. 
+2022-10-04 16:28:15,223 INFO SGST Master loaded. 
+2022-10-04 16:28:16,856 INFO Location 2 Master loaded. 
+2022-10-04 16:28:17,447 ERROR Error while generating packing-slip file: [Errno 2] No such file or directory: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/Processed Orders/LSL-2022/2022-10-07/70-Packing-Slip/PackagingSlip_4000444765.xlsx' 
+2022-10-04 16:28:17,448 INFO Script Ended 
+2022-10-04 16:31:04,257 INFO Starting script 
+2022-10-04 16:31:04,258 INFO Do not close this window while processing... 
+2022-10-04 16:31:04,365 INFO Loading Master files for processing... 
+2022-10-04 16:31:11,808 INFO Item Master loaded. 
+2022-10-04 16:31:27,334 INFO IGST Master loaded. 
+2022-10-04 16:31:43,545 INFO SGST Master loaded. 
+2022-10-04 16:31:45,194 INFO Location 2 Master loaded. 
+2022-10-04 16:31:45,845 ERROR Error while generating packing-slip file: [Errno 2] No such file or directory: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/Processed Orders/LSL-2022/2022-10-07/70-Packing-Slip/PackagingSlip_4000444765.xlsx' 
+2022-10-04 16:31:45,847 INFO Script Ended 
+2022-10-04 16:38:39,915 INFO Starting script 
+2022-10-04 16:38:39,916 INFO Do not close this window while processing... 
+2022-10-04 16:38:40,029 INFO Loading Master files for processing... 
+2022-10-04 16:38:46,803 INFO Item Master loaded. 
+2022-10-04 16:39:04,286 INFO IGST Master loaded. 
+2022-10-04 16:39:23,010 INFO SGST Master loaded. 
+2022-10-04 16:39:24,941 INFO Location 2 Master loaded. 
+2022-10-04 16:39:25,652 ERROR Error while generating packing-slip file: [Errno 2] No such file or directory: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/Processed Orders/LSL-2022/2022-10-07/70-Packing-Slip/PackagingSlip_4000444765.xlsx' 
+2022-10-04 16:39:25,653 INFO Script Ended 
+2022-10-04 16:45:13,214 INFO Starting script 
+2022-10-04 16:45:13,216 INFO Do not close this window while processing... 
+2022-10-04 16:45:13,348 INFO Loading Master files for processing... 
+2022-10-04 16:45:20,174 INFO Item Master loaded. 
+2022-10-04 16:45:34,689 INFO IGST Master loaded. 
+2022-10-04 16:45:50,160 INFO SGST Master loaded. 
+2022-10-04 16:45:51,792 INFO Location 2 Master loaded. 
+2022-10-04 16:45:52,386 ERROR Error while generating packing-slip file: [Errno 2] No such file or directory: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/Processed Orders/LSL-2022/2022-10-07/70-Packing-Slip/PackagingSlip_4000444765.xlsx' 
+2022-10-04 16:45:52,388 INFO Script Ended 
+2022-10-04 16:51:30,430 INFO Client Name: PL Client Code: PL Order Date: 2022-10-04 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-10-04 16:51:30,431 INFO Starting script 
+2022-10-04 16:51:30,432 INFO Do not close this window while processing... 
+2022-10-04 16:51:30,436 INFO Creating the new directory... 
+2022-10-04 16:51:30,437 INFO Folder 'PL-2022/2022-10-04' exists. 
+2022-10-04 16:51:30,439 INFO Copying PDF Files from 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' to 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/Processed Orders/PL-2022/2022-10-04/10-Download-Files/' 
+2022-10-04 16:51:30,444 INFO File '4000444765.pdf' copied 
+2022-10-04 16:51:30,450 INFO File '4000444766.pdf' copied 
+2022-10-04 16:51:30,457 INFO File '4000444767.pdf' copied 
+2022-10-04 16:51:30,457 INFO Converting PDF files to Excel... 
+2022-10-04 16:51:30,458 INFO Converting '4000444765.pdf 
+2022-10-04 16:51:52,073 INFO Converted '4000444765.pdf' to '4000444765.xlsx' in 21.61 seconds. 
+2022-10-04 16:51:52,075 INFO Converting '4000444766.pdf 
+2022-10-04 16:52:36,328 INFO Converted '4000444766.pdf' to '4000444766.xlsx' in 44.25 seconds. 
+2022-10-04 16:52:36,331 INFO Converting '4000444767.pdf 
+2022-10-04 16:53:14,766 INFO Converted '4000444767.pdf' to '4000444767.xlsx' in 38.43 seconds. 
+2022-10-04 16:53:14,770 INFO Successfully converted 3 Files in 104.31 seconds! 
+2022-10-04 16:53:14,776 INFO Merging files... 
+2022-10-04 16:53:15,850 INFO Merged 3 excel files into a single excel file 'Consolidate-Orders.xlsx' 
+2022-10-04 16:53:32,619 INFO Fetching SKU values corresponding to the EAN ID from Item Master... 
+2022-10-04 16:53:32,671 INFO Fetching GST Type values corresponding to the Location from Location Master... 
+2022-10-04 16:53:32,677 INFO Fetching closing stock values from closing stock sheet... 
+2022-10-04 16:53:33,924 INFO Requirements summary sheet generated. 
+2022-10-04 16:53:33,938 INFO Script Ended 
+2022-10-04 16:55:00,960 INFO Starting script 
+2022-10-04 16:55:00,961 INFO Do not close this window while processing... 
+2022-10-04 16:55:01,086 INFO Loading Master files for processing... 
+2022-10-04 16:55:07,994 INFO Item Master loaded. 
+2022-10-04 16:55:22,824 INFO IGST Master loaded. 
+2022-10-04 16:55:38,249 INFO SGST Master loaded. 
+2022-10-04 16:55:39,833 INFO Location 2 Master loaded. 
+2022-10-04 16:55:45,864 INFO Packing slip generated for: 4000444765 file in 6.03 seconds. 
+2022-10-04 16:55:53,203 INFO Packing slip generated for: 4000444766 file in 7.34 seconds. 
+2022-10-04 16:55:59,366 INFO Packing slip generated for: 4000444767 file in 6.16 seconds. 
+2022-10-04 16:55:59,367 INFO Total time taken for generation of packing-slips:  58.40 seconds. 
+2022-10-04 16:55:59,385 INFO Script Ended 
+2022-10-04 17:21:15,969 INFO Client Name: PL Client Code: PL Order Date: 2022-10-04 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-10-04 17:21:15,969 INFO Starting script 
+2022-10-04 17:21:15,970 INFO Do not close this window while processing... 
+2022-10-04 17:21:15,975 INFO Creating the new directory... 
+2022-10-04 17:21:15,976 INFO Folder 'PL-2022/2022-10-04' exists. 
+2022-10-04 17:21:15,977 INFO Copying PDF Files from 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' to 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/Processed Orders/PL-2022/2022-10-04/10-Download-Files/' 
+2022-10-04 17:21:15,983 INFO File '4000444765.pdf' copied 
+2022-10-04 17:21:15,990 INFO File '4000444766.pdf' copied 
+2022-10-04 17:21:15,996 INFO File '4000444767.pdf' copied 
+2022-10-04 17:21:15,997 INFO Converting PDF files to Excel... 
+2022-10-04 17:21:15,998 INFO Converting '4000444765.pdf 
+2022-10-04 17:21:37,614 INFO Converted '4000444765.pdf' to '4000444765.xlsx' in 21.62 seconds. 
+2022-10-04 17:21:37,616 INFO Converting '4000444766.pdf 
+2022-10-04 17:22:28,430 INFO Converted '4000444766.pdf' to '4000444766.xlsx' in 50.81 seconds. 
+2022-10-04 17:22:28,433 INFO Converting '4000444767.pdf 
+2022-10-04 17:22:50,584 INFO Converted '4000444767.pdf' to '4000444767.xlsx' in 22.15 seconds. 
+2022-10-04 17:22:50,587 INFO Successfully converted 3 Files in 94.59 seconds! 
+2022-10-04 17:22:50,588 INFO Merging files... 
+2022-10-04 17:22:51,561 INFO Merged 3 excel files into a single excel file 'Consolidate-Orders.xlsx' 
+2022-10-04 17:23:05,966 INFO Fetching SKU values corresponding to the EAN ID from Item Master... 
+2022-10-04 17:23:06,012 INFO Fetching GST Type values corresponding to the Location from Location Master... 
+2022-10-04 17:23:06,021 INFO Fetching closing stock values from closing stock sheet... 
+2022-10-04 17:23:07,170 INFO Requirements summary sheet generated. 
+2022-10-04 17:23:07,179 INFO Script Ended 
