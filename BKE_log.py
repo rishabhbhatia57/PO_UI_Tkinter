@@ -1,5 +1,6 @@
 import logging
 from logging.handlers import RotatingFileHandler
+
 def setup_custom_logger(name):
     filename = "log.txt"
 

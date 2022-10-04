@@ -1,30 +1,17 @@
 import tkinter as tk                    
-from tkinter import ttk
-from tkinter.ttk import *
+from tkinter import ttk, filedialog, scrolledtext, font
+from tkinter.messagebox import showinfo, showwarning
 from tkinter import *
 from screeninfo import get_monitors
 from tkcalendar import DateEntry
-from tkinter import filedialog as fd
-from tkinter.messagebox import showinfo
-import tkinter.scrolledtext as st
-import os
-import threading
-import base64
-import tkinter.font as tkFont
-import json
-import sys
-from pygtail import Pygtail
-import subprocess
-from tkinter.messagebox import showwarning
-import threading
-
+from tkinter.messagebox import showinfo, showwarning
+import json, subprocess, os, threading, base64, sys
+from datetime import datetime
+from tkinter.ttk import *
 from UI_scriptFunctions import select_folder,begin_order_processing,open_folder, open_folder_packaging, select_files
 from config import ConfigFolderPath, headingFont,fieldFont,buttonFont,labelFont,pathFont,logFont,ClientsFolderPath
 from UI_tabs import Tab1, Tab2
-from UI_logscmd import PrintLogger
-
-
-print('Initialzing Program...')
+from UI_logscmd import TextHandler
 
 
 # Getting Screen Dimensions
@@ -60,47 +47,20 @@ logFrame = ttk.Frame(root)
 
 tabControl = ttk.Notebook(tabFrame)
 
-
 filenames = tk.StringVar() 
 selectedDate = tk.StringVar() 
-
-
 # TAB 1
-print('Initialzing PO Orders Screen...')
 tab1 = Tab1(root,tabControl)
 # TAB 2
-print('Initialzing Packing-Slip Screen...')
 tab2 = Tab2(root,tabControl)
-print('Loading Screen...')
 tabControl.pack(fill ="x")
 
 
-# consoleLabel = Label(logFrame,text='Console logs', font=labelFont)
-# consoleLabel.pack(side='top',anchor=NW, padx=20,pady=10)
 
-# logbox = st.ScrolledText(logFrame)
-
-# pl = PrintLogger(logbox)
-# # logbox.insert(tk.INSERT,'Logs:')
-# sys.stdout = pl
-# logbox.pack(expand = True,fill ="both",ipady=20,ipadx=10)
 tabFrame.pack(side='top',anchor=NW,fill ="x")
-# logFrame.pack(side='bottom',anchor=SW,fill ="x")
-# pl.write("HI THERE")
-# logbox.configure(state ='disabled')
-
-
-
-
-
+logFrame.pack(side='bottom',anchor=SW,fill ="x")
 print('UI Loaded...')
 
 
-
-# logbox = st.ScrolledText(logframe)
-# logbox.configure(state ='disabled')
-# consoleLabel = Label(logframe,text='Logs', font=labelFont)
-# consoleLabel.pack(side=tk.LEFT)
-# logbox.pack(logframe,expand = True,fill ="both",ipady=10,ipadx=10)
 
 root.mainloop()  

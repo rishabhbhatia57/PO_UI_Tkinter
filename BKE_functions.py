@@ -9,12 +9,19 @@ from openpyxl import load_workbook,Workbook
 import openpyxl.utils.cell
 import time
 from config import ConfigFolderPath, ClientsFolderPath
+from openpyxl.styles.borders import Border, Side
+from openpyxl.styles import Alignment, Font
+from openpyxl.worksheet.dimensions import ColumnDimension, DimensionHolder
+from openpyxl.utils import get_column_letter
+# from openpyxl.styles import Style
 import tabula
 import csv
 import json
 import sys
+from openpyxl.styles import PatternFill
 
 import BKE_log
+from UI_logscmd import PrintLogger
 from config import MasterFolderPath
 pd.options.mode.chained_assignment = None
 # import warnings
@@ -34,6 +41,8 @@ def downloadFiles(RootFolder,POSource,OrderDate,ClientCode):
     destination_folder = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/10-Download-Files/"
     try:
         print("Copying PDF Files from '"+str(source_folder)+"' to '"+str(destination_folder)+"'")
+        # Tab1.pl.write("Copying PDF Files from '"+str(source_folder)+"' to '"+str(destination_folder)+"'")
+        
         for file_name in os.listdir(POSource):
             # construct full file path
             
@@ -141,6 +150,7 @@ def mergeExcelsToOne(RootFolder,POSource,OrderDate,ClientCode):
         print("Error while merging files: "+str(e))
 
 
+
 def mergeToPivotRQ(RootFolder,POSource,OrderDate,ClientCode,Formulasheet):
 
 
@@ -168,68 +178,124 @@ def mergeToPivotRQ(RootFolder,POSource,OrderDate,ClientCode,Formulasheet):
             print("Could not find the consolidated order folder to generate requirement summary file")
             return
         else:
-            df = pd.read_excel(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/Consolidate-Orders.xlsx")
-            df_pivot = pd.pivot_table(df, index="ArticleEAN", values='Qty', 
-            columns=['Vendor Name','PO Number','Receiving Location'], aggfunc='sum')
+
+            df_consolidated_order = pd.read_excel(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/Consolidate-Orders.xlsx")
+
+            with open(ConfigFolderPath+'config.json', 'r') as jsonFile:
+                config = json.load(jsonFile)
+                df_item_master = pd.read_excel(config['masterFolder']+'Item Master.xlsx')
+                df_location_master = pd.read_excel(config['masterFolder']+'Location Master.xlsx')
+                df_closing_stock = pd.read_excel(config['masterFolder']+'WH Closing Stock.xlsx',skiprows=3)
+
+            df_item_master.rename(columns = {'EAN ID':'ArticleEAN'}, inplace = True)
+            print('Fetching SKU values corresponding to the EAN ID from Item Master...')
+            df_SKU = df_consolidated_order.merge(df_item_master, on='ArticleEAN', how='left')
+            print('Fetching GST Type values corresponding to the Location from Location Master...')
+            df_gst_type = df_SKU.merge(df_location_master, on='Receiving Location', how='left') # Perfoming join to get values of GST
+            print('Fetching closing stock values from closing stock sheet...')
+            df_join = df_gst_type.merge(df_closing_stock, on='SKU', how='left') # Perfoming join to get values of closing stock
+
+            df_join['Order No.'] = '' # adding order number as col
+            df_join['Grand Total'] = '' # adding Grand Total as col
+
+            # Constant Variables used in loops
+            workbook_path = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/60-Requirement-Summary/Requirement-Summary.xlsx"
+            workbook_sheet = 'Requirements_Summary'
+            color = "00FFCC99"
+            start_rows = 3
+            start_cols = 8
+
+            df_pivot = pd.pivot_table(df_join, index=["ArticleEAN",'Actual qty','MRP_y', "SKU" ], values='Qty', 
+            columns=['PO Number','Order No.','Grand Total','SGST/IGST Type','Receiving Location'], aggfunc='sum')
             df_pivot['Grand Total'] = 0
             df_pivot['Closing Stock'] = 0
             df_pivot['Diff CS - GT'] = 0
             df_pivot['Rate'] = 0
-            df_pivot.to_excel(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/60-Requirement-Summary/Requirement-Summary.xlsx")
+    
+            df_pivot.to_excel(workbook_path, sheet_name=workbook_sheet)
 
 
-            # Adding Processing Date, Order Number and Closing Stock, Diffrence Between Grand Total and 
-            # Closing Stock Field into pivot sheet for tempalte
-            pivotWorksheet = load_workbook(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/60-Requirement-Summary/Requirement-Summary.xlsx")
-            pivotSheet = pivotWorksheet.active
+            # open pivot sheet again
+            df_temp_p = pd.read_excel(workbook_path)
+            df_temp = pd.read_excel(workbook_path,skiprows=5)
+            df_temp.to_excel(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/"+"df_temp.xlsx", columns= ['MRP_y', 'Actual qty'],index=False)
+            tempWorkbook = load_workbook(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/"+"df_temp.xlsx")
+            tempSheet = tempWorkbook.active
+            tempSheet.insert_rows(2,5) # Inserting 5 rows to handle the gap between closing stock header and starting(entry) rows
+            tempWorkbook.save(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/"+"df_temp.xlsx") # Saving closing stock and MRP in this temp sheet for later use 
 
-            pivotSheet.insert_rows(1,2)
-            pivotSheet.insert_rows(6,2) # IGST/CGST Type
+            df_temp= pd.read_excel(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/"+"df_temp.xlsx")
+            df_temp_p['Closing Stock'] = df_temp['Actual qty'] # Copying Closing stock from temp file to requirement summary file
+            print('Fetching Rate values from Item Master...')
+            df_temp_p['Rate'] = df_temp['MRP_y'] # Copying MRP from temp file to requirement summary file
+            df_temp_p.to_excel(workbook_path, sheet_name=workbook_sheet, index=False) # Saving RQ Sum after adding CS, MRP
+
+            pivotWorksheet = load_workbook(workbook_path)
+            pivotSheet = pivotWorksheet[workbook_sheet]
+            pivotSheet.delete_cols(2,2) # Deleting the cols for Actual Oty and MRP_y
+            pivotSheet.insert_rows(1,1) # inerting rows for date and cient name
+
+            pivotSheet.cell(1,1).value = 'Order Date'
+            pivotSheet.cell(1,1).font = Font(bold=True)
+            pivotSheet.cell(1,2).value = OrderDate
+            pivotSheet.cell(2,1).value = '' # Removing Unnamed: 0
+
+            pivotSheet.cell(1,3).value = 'ClientName'
+            pivotSheet.cell(1,3).font = Font(bold=True)
+            pivotSheet.cell(1,4).value = key_list[position]
+
+            rows = pivotSheet.max_row # get max rows
+            cols = pivotSheet.max_column # get max rows
             
+
+            for j in range(start_rows,cols-3): #Rows Grand total
+                pivotSheet.cell(start_rows+1,j).value = "=SUM("+openpyxl.utils.cell.get_column_letter(j)+str(start_cols)+":"+openpyxl.utils.cell.get_column_letter(j)+str(rows)+")" # Grand Total on second last col
+                pivotSheet.cell(start_rows,j).fill = PatternFill(start_color=color, end_color=color,fill_type = "solid") # Color to order field
+                
+
+            for i in range(start_cols,rows+1): # Cols Grand total
+                pivotSheet.cell(i,cols-3).value = "=SUM(B"+str(i)+":"+openpyxl.utils.cell.get_column_letter(cols-4)+str(i)+")"
+                pivotSheet.cell(i,cols-1).value = "="+openpyxl.utils.cell.get_column_letter(cols-2)+str(i)+"-"+openpyxl.utils.cell.get_column_letter(cols-3)+str(i)
+
+            print('Improving the appearance of Requirements summary sheet...')
+            pivotSheet.cell(3,2).font = Font(bold=True)
+            pivotSheet.cell(4,2).font = Font(bold=True)
+            pivotSheet.cell(5,2).font = Font(bold=True)
+            pivotSheet.cell(6,2).font = Font(bold=True)
+            pivotSheet.cell(7,2).font = Font(bold=True)
+            pivotSheet.cell(7,1).font = Font(bold=True)
+
+            thin_border = Border(left=Side(style='thin'), 
+                     right=Side(style='thin'), 
+                     top=Side(style='thin'), 
+                     bottom=Side(style='thin'))
+
+            for i in range(1,rows+1):
+                for j in range(1,cols+1):
+                    pivotSheet.cell(row=i, column=j).border = thin_border
+                    pivotSheet.cell(row=i, column=j).alignment = Alignment(horizontal='center', vertical='center')
             
-            df = pd.DataFrame(pivotSheet, index=None)
-            rows = len(df.axes[0])
-            cols = len(df.axes[1])
-            pivotSheet.insert_rows(rows+1) # For Grand Total At bottom of the sheet
+            print('Almost done...')
+            dim_holder = DimensionHolder(worksheet=pivotSheet)
+            for col in range(pivotSheet.min_column, pivotSheet.max_column + 1):
+                dim_holder[get_column_letter(col)] = ColumnDimension(pivotSheet, min=col, max=col, width=20)
+            pivotSheet.column_dimensions = dim_holder
 
-            
+            for r in range(8,rows+1):
+                pivotSheet[f'A{r}'].number_format = '0'
+           
+            pivotWorksheet.save(workbook_path)
 
-            for i in range(9,rows):
-                pivotSheet.cell(i,cols-3).value = "=SUM(B"+str(i)+":"+openpyxl.utils.cell.get_column_letter(cols-4)+str(i)+")" # Grand Total
-                pivotSheet.cell(i,cols-1).value = '='+openpyxl.utils.cell.get_column_letter(cols-2)+str(i)+'-'+openpyxl.utils.cell.get_column_letter(cols-3)+str(i) # Diff CS - GT
-                pivotSheet.cell(i,cols-2).value = "="+formulaSheet.cell(10,2).value.replace("#VAL#",str(i)) # Closing Stock
-                pivotSheet.cell(i,cols).value = "="+formulaSheet.cell(6,2).value.replace("#VAL#",str(i))  # Rate
+            print('Requirements summary sheet generated.')
 
-            
-            pivotSheet.cell(6,1).value = 'IGST/CGST Type'
-            pivotSheet.cell(7,1).value = 'Order No'
-            pivotSheet.cell(rows+1,1).value = 'Grand Total'
-            
-            VAL = ''
-            for j in range(2,cols-3):
-                cellValue = "="+formulaSheet.cell(2,2).value.replace("#VAL#",openpyxl.utils.cell.get_column_letter(j))
-                pivotSheet.cell(6,j).value = cellValue
-                pivotSheet.cell(rows+1,j).value = "=SUM("+openpyxl.utils.cell.get_column_letter(j)+str(9)+":"+openpyxl.utils.cell.get_column_letter(j)+str(rows)+")"
-
-            todayDate = datetime.today().strftime('%Y-%m-%d')
-            pivotSheet.cell(2,3).value = 'Order Date'
-            pivotSheet.cell(2,4).value = OrderDate
-
-            pivotSheet.cell(2,5).value = 'ClientName'
-            pivotSheet.cell(2,6).value = key_list[position]
-
-
-
-            pivotWorksheet.save(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/60-Requirement-Summary/Requirement-Summary.xlsx")
-            logger.info('Generated requirement summary file - order date - '+OrderDate)
-            print('Generated requirement summary file - order date - '+OrderDate)
-
-            formulaWorksheet.close()
             return 'Generated Requirement Summary file'
 
 
     except Exception as e:
         logger.error("Error while generating Requirement-Summary file: "+str(e))
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        print(exc_type, fname, exc_tb.tb_lineno)
         print("Error while generating Requirement-Summary file: "+str(e))
 
 
@@ -536,9 +602,9 @@ def generatingPackaingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulashee
         df_Location2 = pd.read_excel(MasterFolderPath+'Location 2 Master.xlsx',sheet_name='Location2',index_col=False)
         print('Location 2 Master loaded.')
         
+        start_cols = 3
         
-        
-        for column in range(2,cols-3):
+        for column in range(start_cols,cols-3):
             startedTemplatingFile = time.time()
             # Making Copy of template file
             shutil.copy(source, destination)
@@ -551,23 +617,20 @@ def generatingPackaingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulashee
             dbfsheet = TemplateWorkbook['DBF']
 
             
-            TemplateSheet.cell(6,4).value = InputSheet.cell(7,column).value # Order Name
-            TemplateSheet.cell(5,1).value = InputSheet.cell(7,column).value # Order Name
+            TemplateSheet.cell(5,1).value = InputSheet.cell(start_cols,column).value # Order Name
+            # TemplateSheet.cell(5,1).value = InputSheet.cell(7,column).value # Order Name
             # PO Number
-            filename = InputSheet.cell(4,column).value
-            TemplateSheet.cell(5,2).value = InputSheet.cell(4,column).value
-            TemplateSheet.cell(6,2).value = InputSheet.cell(4,column).value
-            TemplateSheet.cell(6,1).value = InputSheet.cell(4,column).value
-            TemplateSheet.cell(6,3).value = InputSheet.cell(4,column).value
-            # Receving Location
-            TemplateSheet.cell(5,3).value = InputSheet.cell(5,column).value
-            TemplateSheet.cell(4,2).value = InputSheet.cell(5,column).value
+            filename = InputSheet.cell(start_cols-1,column).value # (2,col-3)
+            TemplateSheet.cell(5,2).value = InputSheet.cell(start_cols-1,column).value
 
-            TemplateSheet.cell(1,1).value = 'DATE'
-            TemplateSheet.cell(1,2).value = InputSheet.cell(2,4).value # Date
+            # Receving Location
+            TemplateSheet.cell(5,3).value = InputSheet.cell(start_cols+3,column).value
+
+            TemplateSheet.cell(1,1).value = 'Order Date'
+            TemplateSheet.cell(1,2).value = InputSheet.cell(1,2).value # Date
 
             TemplateSheet.cell(1,3).value = 'SGST/IGST'
-            TemplateSheet.cell(1,4).value = InputSheet.cell(6,column).value # IGST/SGST Type
+            TemplateSheet.cell(1,4).value = InputSheet.cell(start_cols+2,column).value # IGST/SGST Type (5,cols-3)
             if TemplateSheet.cell(1,4).value == None:
                 print("IGST/SGST TYPE = None, Requirment Summary file is not saved. Open the file, save it then process")
                 break
@@ -578,7 +641,7 @@ def generatingPackaingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulashee
             Tcols = 5
             dbfrows = 2
             dbfcols = 57
-            for row in range(7,rows):
+            for row in range(8,rows):
                 # if InputSheet.cell(row,column).value != None or InputSheet.cell(row,column).value != "":
                 if str(InputSheet.cell(row,column).value).isnumeric():
                     

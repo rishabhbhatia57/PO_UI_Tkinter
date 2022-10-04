@@ -19,7 +19,6 @@ import sys
 from config import ConfigFolderPath,ClientsFolderPath, headingFont,fieldFont,buttonFont,labelFont,pathFont,logFont
 from BKE_mainFunction import startProcessing
 import threading
-from globalvar import logboxstate
 
 
 
@@ -63,13 +62,13 @@ def select_files(showPath,showReqPath,showOrderdate):
         
         
         ReqSumSheet = ReqSumWorkbook.active
-        showReqPath.set(ReqSumSheet.cell(2,6).value)
-        showOrderdate.set(ReqSumSheet.cell(2,4).value)
+        showReqPath.set(ReqSumSheet.cell(1,4).value)
+        showOrderdate.set(ReqSumSheet.cell(1,2).value)
         
     
     return ReqFileSelected
 
-def openfolder(params,frame):
+def open_folder(params,frame):
     
     year = params[2].strftime('%Y')
     date = str(params[2])
@@ -85,13 +84,13 @@ def openfolder(params,frame):
         print("Path doesn't exists. Please check date or client name.")
     else:
         pyperclip.copy(path)
-        RequirementSummaryPath = Label(frame,text=path,wraplength=800)
-        RequirementSummaryPath.grid(row=5,column=2,padx=20, pady=20,sticky=W)
+        # RequirementSummaryPath = Label(frame,text=path,wraplength=800)
+        # RequirementSummaryPath.grid(row=5,column=2,padx=20, pady=20,sticky=W)
         showinfo(title='Path Copied',message="'"+path+"' is copied to the clipboard.")
         # path = os.path.realpath(path)
         # os.startfile(path)
 
-def openfolderpackaging(params,frame):
+def open_folder_packaging(params,frame):
     # print(params)
     if  params[2] == '' or params[3] == '':
         showinfo(
@@ -120,7 +119,7 @@ def openfolderpackaging(params,frame):
             # path = os.path.realpath(path)
             # os.startfile(path)
     
-def beginOrderProcessing(mode, client, date, path):
+def begin_order_processing(mode, client, date, path):
     
     # print(mode, client, date, path)
     with open(ClientsFolderPath, 'r') as jsonFile:
