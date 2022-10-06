@@ -18,10 +18,12 @@ import subprocess
 import webbrowser
 from tkinter.messagebox import showwarning
 import threading
+from tkinter.font import Font
 
 from UI_scriptFunctions import select_folder,begin_order_processing,open_folder, open_folder_packaging, select_files
 from config import ConfigFolderPath, headingFont,fieldFont,buttonFont,labelFont,pathFont,logFont,ClientsFolderPath
 from UI_tabs import Tab1, Tab2
+
 # from UI_logscmd import PrintLogger
 
 
@@ -56,6 +58,7 @@ root.tk.call("set_theme", "dark")
 s = ttk.Style()
 s.configure('TNotebook.Tab', font=('Calibri','15'), padding=[100, 10])
 
+# print(root.winfo_height()-20,root.winfo_height())
 tabFrame = ttk.Frame(root)
 logFrame = ttk.Frame(root)
 
@@ -74,30 +77,32 @@ print('Initialzing Packing-Slip Screen...')
 tab2 = Tab2(root,tabControl)
 print('Loading Screen...')
 tabControl.pack(fill ="x")
+tabFrame.pack(side='top',anchor=NW,fill ="x",pady=(0,40))
 
 
-
-tabFrame.pack(side='top',anchor=NW,fill ="x")
-
-
-def callback(url):
-   webbrowser.open_new_tab(url)
-
-footer_frame = ttk.Frame(root)
-inside_footer_frame = ttk.Frame(footer_frame)
-inside_footer_frame.grid(row=0,column=0)
-
-footerText = Label(inside_footer_frame, text="Developed by: C-BIA Solutions & Services LLP ",font=(logFont,10), cursor="hand2")
-footerText.grid(row=0,column=1)
-
-link = Label(inside_footer_frame, text="     Website:  https://c-bia.com/" ,font=(logFont,10), cursor="hand2")
-link.grid(row=0,column=2)
-link.bind("<Button-1>", lambda e:
-callback("https://c-bia.com/"))
+# def callback(url):
+#    webbrowser.open_new_tab(url)
 
 
-footer_frame.pack()
+# footer_frame = ttk.Frame(root)
+# inside_footer_frame = ttk.Frame(footer_frame)
+# inside_footer_frame.grid(row=0,column=0)
 
+# Developed_by = Label(inside_footer_frame, text="Developed by   -  ",font=Font(size=10,weight="bold"), cursor="hand2")
+# Developed_by.grid(row=0,column=1)
+
+# Developed_text = Label(inside_footer_frame, text="C-BIA Solutions & Services LLP",font=Font(size=10), cursor="hand2")
+# Developed_text.grid(row=0,column=2)
+
+# Website = Label(inside_footer_frame, text="          Website  -  ",font=Font(size=10,weight="bold"), cursor="hand2")
+# Website.grid(row=0,column=3)
+
+# link = Label(inside_footer_frame, text="https://c-bia.com/" ,font=Font(size=10, underline=1),foreground='#EA0920', cursor="hand2")
+# link.grid(row=0,column=4)
+# link.bind("<Button-1>", lambda e:
+# callback("https://c-bia.com/"))
+# footer_frame.pack()
+# https://docs.python.org/3/library/tkinter.html#threading-model
 
 print('UI Loaded...')
 

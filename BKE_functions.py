@@ -30,6 +30,7 @@ pd.options.mode.chained_assignment = None
 logger = BKE_log.setup_custom_logger('root')
 
 def downloadFiles(RootFolder,POSource,OrderDate,ClientCode):
+    # file_logger = BKE_log.setup_custom_logger_file('root',RootFolder,OrderDate,ClientCode)
     #converting str to datetime
     # print(OrderDate)
     OrderDate = datetime.strptime(OrderDate, '%Y-%m-%d')
@@ -38,10 +39,11 @@ def downloadFiles(RootFolder,POSource,OrderDate,ClientCode):
     # formatting order date {2022-00-00) format
     OrderDate = OrderDate.strftime('%Y-%m-%d')
     source_folder = POSource
-    destination_folder = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/10-Download-Files/"
+    destination_folder = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/99-Working/10-Download-Files/"
     try:
-        print("Copying PDF Files from '"+str(source_folder)+"' to '"+str(destination_folder)+"'")
+        # print("Copying PDF Files from '"+str(source_folder)+"' to '"+str(destination_folder)+"'")
         logger.info("Copying PDF Files from '"+str(source_folder)+"' to '"+str(destination_folder)+"'")
+        # file_logger.info("Copying PDF Files from '"+str(source_folder)+"' to '"+str(destination_folder)+"'")
         # Tab1.pl.write("Copying PDF Files from '"+str(source_folder)+"' to '"+str(destination_folder)+"'")
         
         for file_name in os.listdir(POSource):
@@ -54,9 +56,11 @@ def downloadFiles(RootFolder,POSource,OrderDate,ClientCode):
 
                 shutil.copy(source, destination)
                 logger.info("File '"+file_name+"' copied")# from source '"+source_folder+"' to destination '"+destination_folder+"'")
+                # file_logger.info("File '"+file_name+"' copied")
                 print("File '"+file_name+"' copied")# from source '"+source_folder+"' to destination '"+destination_folder+"'")
     except Exception as e:
         logger.error("Error while copying files: "+str(e))
+        # file_logger.info("Error while copying files: "+str(e))
         print("Error while copying files: "+str(e))
 
 
@@ -75,55 +79,86 @@ def scriptEnded():
     return "Script Ended"
     
 
-def checkFolderStructure(RootFolder,ClientCode,OrderDate):
+def checkFolderStructure(RootFolder,ClientCode,OrderDate, mode):
+    
     try:
         #converting str to datetime
         OrderDate = datetime.strptime(OrderDate, '%Y-%m-%d')
-
         # extracting year from the order date
         year = OrderDate.strftime("%Y")
-
         # formatting order date {2022-00-00) format
         OrderDate = OrderDate.strftime('%Y-%m-%d')
         
         # Checking if the folder exists or not, if doesnt exists, then script will create one.
         # logger.info('Checking if the folder exists or not, if doesnt exists, then script will create one.')
         # print('Checking if the folder exists or not, if doesnt exists, then script will create one.')
-        logger.info("Creating the new directory...")
-        print("Creating the new directory...")
+        
         DatedPath = RootFolder +"/"+ClientCode+"-"+year+"/"+str(OrderDate)
         isExist = os.path.exists(DatedPath)
-        if not isExist:
-            # logger.info("Creating a new folder '"+ClientCode+"-"+year+"/"+str(OrderDate)+"' at location "+ RootFolder)
-            # print("Creating a new folder '"+ClientCode+"-"+year+"/"+str(OrderDate)+"' at location "+ RootFolder)
-            os.makedirs(DatedPath)
-            os.makedirs(DatedPath+"/10-Download-Files")
-            os.makedirs(DatedPath+"/20-Intermediate-Files")
-            os.makedirs(DatedPath+"/30-Extract-CSV")
-            os.makedirs(DatedPath+"/40-Extract-Excel")
-            os.makedirs(DatedPath+"/50-Consolidate-Orders")
-            os.makedirs(DatedPath+"/60-Requirement-Summary")
-            os.makedirs(DatedPath+"/70-Packing-Slip")
-            os.makedirs(DatedPath+"/80-Logs")
+
+        internalDir = ["/99-Working/10-Download-Files","/99-Working/20-Intermediate-Files",
+        "/99-Working/30-Extract-CSV","/99-Working/40-Extract-Excel",
+        "/50-Consolidate-Orders","/60-Requirement-Summary","/70-Packing-Slip","/80-Logs"]
+
+        if mode == 'consolidation':
+            if not isExist:
+                logger.info("Creating the new directory...")
+                # file_logger.info("Creating the new directory...")
+                os.makedirs(DatedPath)
+                for i in range(0,len(internalDir)):
+                    if not os.path.exists(DatedPath+internalDir[i]):
+                        os.makedirs(DatedPath+internalDir[i])
+
+            if isExist:
+                for i in range(0,len(internalDir)):
+                    if not os.path.exists(DatedPath+internalDir[i]):
+                        os.makedirs(DatedPath+internalDir[i])
+
+        if mode == 'packing':
+            if not isExist:
+                logger.info("Creating the new directory...")
+                # file_logger.info("Creating the new directory...")
+                os.makedirs(DatedPath)
+                for i in range(6,len(internalDir)):
+                    if not os.path.exists(DatedPath+internalDir[i]):
+                        os.makedirs(DatedPath+internalDir[i])
+                # os.makedirs(DatedPath+"/70-Packing-Slip")
+                # os.makedirs(DatedPath+"/80-Logs")
+            if isExist:
+                logger.info("Creating the new directory...")
+                # file_logger.info("Creating the new directory...")
+                print("Creating the new directory...")
+                for i in range(6,len(internalDir)):
+                    if not os.path.exists(DatedPath+internalDir[i]):
+                        os.makedirs(DatedPath+internalDir[i])
+                # os.makedirs(DatedPath+"/70-Packing-Slip")
+                # if not log_isExist:
+                #     os.makedirs(DatedPath+"/80-Logs")
+            
             logger.info("Folder '"+ClientCode+"-"+year+"/"+str(OrderDate)+"' is created.")
+            # # file_logger.info("Folder '"+ClientCode+"-"+year+"/"+str(OrderDate)+"' is created.")
             print("Folder '"+ClientCode+"-"+year+"/"+str(OrderDate)+"' is created.")
         else:
             logger.info("Folder '"+ClientCode+"-"+year+"/"+str(OrderDate)+"' exists.")
+            # # file_logger.info("Folder '"+ClientCode+"-"+year+"/"+str(OrderDate)+"' exists.")
             print("Folder '"+ClientCode+"-"+year+"/"+str(OrderDate)+"' exists.")
+        # file_logger = BKE_log.setup_custom_logger_file('root',RootFolder,OrderDate,ClientCode)
 
     except Exception as e:
         logger.error("Error while checking folder structure:  "+str(e))
+        # file_logger.info("Folder '"+ClientCode+"-"+year+"/"+str(OrderDate)+"' exists.")
         print("Error while checking folder structure:  "+str(e))
 
 
-def mergeExcelsToOne(RootFolder,POSource,OrderDate,ClientCode): 
+def mergeExcelsToOne(RootFolder,POSource,OrderDate,ClientCode):
+    # file_logger = BKE_log.setup_custom_logger_file('root',RootFolder,OrderDate,ClientCode)
     #converting str to datetime
     OrderDate = datetime.strptime(OrderDate, '%Y-%m-%d')
     # extracting year from the order date
     year = OrderDate.strftime("%Y")
     # formatting order date {2022-00-00) format
     OrderDate = OrderDate.strftime('%Y-%m-%d')
-    inputpath = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/40-Extract-Excel/"
+    inputpath = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/99-Working/40-Extract-Excel/"
     outputpath = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/"
 
     try:
@@ -131,12 +166,14 @@ def mergeExcelsToOne(RootFolder,POSource,OrderDate,ClientCode):
         file_list =  glob.glob(inputpath+ "/*.xlsx")
         if len(file_list) == 0:
             logger.info('No excel files found to merge.')
+            # file_logger.info('No excel files found to merge.')
             print('No excel files found to merge.')
             return
         else:
             excl_list = []
             print("Merging files...")
             logger.info("Merging files...")
+            # file_logger.info("Merging files...")
             for f in os.listdir(inputpath):
                 # logger.info("Accessing '"+f+"' right now: ")
                 # print("Accessing '"+f+"' right now: ")
@@ -146,15 +183,18 @@ def mergeExcelsToOne(RootFolder,POSource,OrderDate,ClientCode):
             excl_merged = pd.concat(excl_list, ignore_index=True,)
             excl_merged.to_excel(outputpath+"/"+'Consolidate-Orders.xlsx', index=False)
             logger.info("Merged "+str(len(file_list))+ " excel files into a single excel file 'Consolidate-Orders.xlsx'")
+            # file_logger.info("Merged "+str(len(file_list))+ " excel files into a single excel file 'Consolidate-Orders.xlsx'")
             print("Merged "+str(len(file_list))+ " excel files into a single excel file 'Consolidate-Orders.xlsx'")
             return 'All excels are merged into a single excel file'
     except Exception as e:
         logger.info("Error while merging files: "+str(e))
+        # file_logger.info("Error while merging files: "+str(e))
         print("Error while merging files: "+str(e))
 
 
 
 def mergeToPivotRQ(RootFolder,POSource,OrderDate,ClientCode,Formulasheet):
+    # file_logger = BKE_log.setup_custom_logger_file('root',RootFolder,OrderDate,ClientCode)
 
 
     with open(ClientsFolderPath, 'r') as jsonFile:
@@ -178,6 +218,7 @@ def mergeToPivotRQ(RootFolder,POSource,OrderDate,ClientCode,Formulasheet):
         formulaSheet = formulaWorksheet['FormulaSheet']
         if not os.path.exists(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/Consolidate-Orders.xlsx"):
             logger.info("Could not find the consolidated order folder to generate requirement summary file")
+            # file_logger.info("Could not find the consolidated order folder to generate requirement summary file")
             print("Could not find the consolidated order folder to generate requirement summary file")
             return
         else:
@@ -193,12 +234,15 @@ def mergeToPivotRQ(RootFolder,POSource,OrderDate,ClientCode,Formulasheet):
             df_item_master.rename(columns = {'EAN ID':'ArticleEAN'}, inplace = True)
             print('Fetching SKU values corresponding to the EAN ID from Item Master...')
             logger.info('Fetching SKU values corresponding to the EAN ID from Item Master...')
+            # file_logger.info('Fetching SKU values corresponding to the EAN ID from Item Master...')
             df_SKU = df_consolidated_order.merge(df_item_master, on='ArticleEAN', how='left')
             print('Fetching GST Type values corresponding to the Location from Location Master...')
             logger.info('Fetching GST Type values corresponding to the Location from Location Master...')
+            # file_logger.info('Fetching SKU values corresponding to the EAN ID from Item Master...')
             df_gst_type = df_SKU.merge(df_location_master, on='Receiving Location', how='left') # Perfoming join to get values of GST
             print('Fetching closing stock values from closing stock sheet...')
             logger.info('Fetching closing stock values from closing stock sheet...')
+            # file_logger.info('Fetching SKU values corresponding to the EAN ID from Item Master...')
             df_join = df_gst_type.merge(df_closing_stock, on='SKU', how='left') # Perfoming join to get values of closing stock
 
             df_join['Order No.'] = '' # adding order number as col
@@ -295,12 +339,14 @@ def mergeToPivotRQ(RootFolder,POSource,OrderDate,ClientCode,Formulasheet):
 
             print('Requirements summary sheet generated.')
             logger.info('Requirements summary sheet generated.')
+            # file_logger.info('Requirements summary sheet generated.')
 
             return 'Generated Requirement Summary file'
 
 
     except Exception as e:
         logger.error("Error while generating Requirement-Summary file: "+str(e))
+        # file_logger.error("Error while generating Requirement-Summary file: "+str(e))
         exc_type, exc_obj, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
         print(exc_type, fname, exc_tb.tb_lineno)
@@ -308,6 +354,7 @@ def mergeToPivotRQ(RootFolder,POSource,OrderDate,ClientCode,Formulasheet):
 
 
 def getFilesToProcess(RootFolder,POSource,OrderDate,ClientCode):
+    # file_logger = BKE_log.setup_custom_logger_file('root',RootFolder,OrderDate,ClientCode)
     #converting str to datetime
     OrderDate = datetime.strptime(OrderDate, '%Y-%m-%d')
     # extracting year from the order date
@@ -315,16 +362,18 @@ def getFilesToProcess(RootFolder,POSource,OrderDate,ClientCode):
     # formatting order date {2022-00-00) format
     OrderDate = OrderDate.strftime('%Y-%m-%d')
     try:
-        inputFolderPath = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/10-Download-Files/"
-        outputFolderPath = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/40-Extract-Excel/"
+        inputFolderPath = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/99-Working/10-Download-Files/"
+        outputFolderPath = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/99-Working/40-Extract-Excel/"
         startedProcessing = time.time()
         
         if len(os.listdir(inputFolderPath)) == 0:
             logger.info("'"+inputFolderPath+"' Folder is empty, add pdf files to convert")
+            # file_logger.info("'"+inputFolderPath+"' Folder is empty, add pdf files to convert")
             print("'"+inputFolderPath+"' Folder is empty, add pdf files to convert")
             return
         else:
             logger.info("Converting PDF files to Excel...")
+            # file_logger.info("Converting PDF files to Excel...")
             print("Converting PDF files to Excel...")
             count = 0
 
@@ -335,18 +384,22 @@ def getFilesToProcess(RootFolder,POSource,OrderDate,ClientCode):
             
             print("Successfully converted "+str(count)+" Files in "+"{:.2f}".format(time.time() - startedProcessing,2)+ " seconds!")
             logger.info("Successfully converted "+str(count)+" Files in "+"{:.2f}".format(time.time() - startedProcessing,2)+ " seconds!")
+            # file_logger.info("Successfully converted "+str(count)+" Files in "+"{:.2f}".format(time.time() - startedProcessing,2)+ " seconds!")
             # print("Completed in "+"{:.2f}".format(time.time() - startedProcessing,2)+ " seconds!")
     except Exception as e:
         logger.error("Error while processing files: "+str(e))
+        # file_logger.error("Error while processing files: "+str(e))
         print("Error while processing files: "+str(e))
 
 
 def pdfToTable(inputPath,outputPath,RootFolder,POSource,OrderDate,ClientCode,filecsv):
+    # file_logger = BKE_log.setup_custom_logger_file('root',RootFolder,OrderDate,ClientCode)
 
     try:
         logger.info("Converting '"+ filecsv)# +"' to excel '"+filecsv.replace('.pdf', '.xlsx')+"'")
+        # file_logger.info("Converting '"+ filecsv)
         # print("Converting '"+ filecsv)# +"' to excel '"+filecsv.replace('.pdf', '.xlsx')+"'")
-        #converting str to datetime
+        #converting str to datetimedatetime
         OrderDate = datetime.strptime(OrderDate, '%Y-%m-%d')
         # extracting year from the order date
         year = OrderDate.strftime("%Y")
@@ -355,10 +408,10 @@ def pdfToTable(inputPath,outputPath,RootFolder,POSource,OrderDate,ClientCode,fil
 
         startedProcessing = time.time()
 
-        intermediateCSV = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/30-Extract-CSV/"+filecsv.replace('.pdf', '.csv')
-        intermediateExcel = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/20-Intermediate-Files/1_"+filecsv.replace('.pdf', '.xlsx')
-        intermediateExcel2 = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/20-Intermediate-Files/2_"+filecsv.replace('.pdf', '.xlsx')
-        intermediateoutputPath = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/20-Intermediate-Files/3_"+filecsv.replace('.pdf', '.xlsx')
+        intermediateCSV = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/99-Working/30-Extract-CSV/"+filecsv.replace('.pdf', '.csv')
+        intermediateExcel = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/99-Working/20-Intermediate-Files/1_"+filecsv.replace('.pdf', '.xlsx')
+        intermediateExcel2 = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/99-Working/20-Intermediate-Files/2_"+filecsv.replace('.pdf', '.xlsx')
+        intermediateoutputPath = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/99-Working/20-Intermediate-Files/3_"+filecsv.replace('.pdf', '.xlsx')
 
         tabula.convert_into(input_path= inputPath , output_path= intermediateCSV , pages = 'all', lattice= True)
 
@@ -551,14 +604,17 @@ def pdfToTable(inputPath,outputPath,RootFolder,POSource,OrderDate,ClientCode,fil
         # print("Converted '"+ inputPath + "' to '" + outputPath+"'"+ " in "+ "{:.2f}".format(time.time() - startedProcessing,2)+ " seconds.")
         print("Converted '"+ filecsv + "' to '"+filecsv.replace('pdf','xlsx')+"' in "+ "{:.2f}".format(time.time() - startedProcessing,2)+ " seconds.")
         logger.info("Converted '"+ filecsv + "' to '"+filecsv.replace('pdf','xlsx')+"' in "+ "{:.2f}".format(time.time() - startedProcessing,2)+ " seconds.")
+        # file_logger.info("Converted '"+ filecsv + "' to '"+filecsv.replace('pdf','xlsx')+"' in "+ "{:.2f}".format(time.time() - startedProcessing,2)+ " seconds.")
         return "Conversion Complete!"
     
     except Exception as e:
         logger.error("Error while processing file: "+str(e))
+        # file_logger.error("Error while processing file: "+str(e))
         print("Error while processing file: "+str(e))
 
 
 def generatingPackingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulasheet,TemplateFiles):
+    # file_logger = BKE_log.setup_custom_logger_file('root',RootFolder,OrderDate,ClientCode)
     try:
         #converting str to datetime
         OrderDate = datetime.strptime(OrderDate, '%Y-%m-%d')
@@ -599,22 +655,28 @@ def generatingPackingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulasheet
         # df_SGST = pd.read_excel(MasterFolderPath+'SGST Master.xlsx',sheet_name='DBF')
         print('Loading Master files for processing...')
         logger.info('Loading Master files for processing...')
+        # file_logger.info('Loading Master files for processing...')
         # Opening Item Master Sheet
         df_IteamMaster = pd.read_excel(MasterFolderPath+'Item Master.xlsx', sheet_name='Item Master',index_col=False)
         print('Item Master loaded.')
         logger.info('Item Master loaded.')
+        # file_logger.info('Item Master loaded.')
         # Opening IGST Master Sheet
         df_IGSTMaster = pd.read_excel(MasterFolderPath+'IGST Master.xlsx', sheet_name='DBF',index_col=False)
         print('IGST Master loaded.')
         logger.info('IGST Master loaded.')
+        # file_logger.info('IGST Master loaded.')
         # Opening SGST Master Sheet
         df_SGSTMaster = pd.read_excel(MasterFolderPath+'SGST Master.xlsx', sheet_name='DBF',index_col=False)
         print('SGST Master loaded.')
         logger.info('SGST Master loaded.')
+        # file_logger.info('SGST Master loaded.')
         # Opening Location2 Master Sheet
         df_Location2 = pd.read_excel(MasterFolderPath+'Location 2 Master.xlsx',sheet_name='Location2',index_col=False)
         print('Location 2 Master loaded.')
         logger.info('Location 2 Master loaded.')
+        # file_logger.info('Location 2 Master loaded.')
+
         
         start_cols = 3
         
@@ -647,6 +709,7 @@ def generatingPackingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulasheet
             if TemplateSheet.cell(1,4).value == None:
                 print("IGST/SGST TYPE = None, Requirment Summary file is not saved. Open the file, save it then process")
                 logger.info("IGST/SGST TYPE = None, Requirment Summary file is not saved. Open the file, save it then process")
+                # file_logger.info("IGST/SGST TYPE = None, Requirment Summary file is not saved. Open the file, save it then process")
                 break
             
 
@@ -831,13 +894,16 @@ def generatingPackingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulasheet
             TemplateWorkbook.save(sourcePackingSlip)
 
             logger.info("Packing slip generated for: "+str(filename)+ " file in {:.2f}".format(time.time() - startedTemplatingFile,2)+ " seconds.")
+            # file_logger.info("Packing slip generated for: "+str(filename)+ " file in {:.2f}".format(time.time() - startedTemplatingFile,2)+ " seconds.")
             print("Packing slip generated for: "+str(filename)+ " file in {:.2f}".format(time.time() - startedTemplatingFile,2)+ " seconds.")
             
         logger.info("Total time taken for generation of packing-slips:  {:.2f}".format(time.time() - startedTemplating,2)+ " seconds.")
+        # file_logger.info("Total time taken for generation of packing-slips:  {:.2f}".format(time.time() - startedTemplating,2)+ " seconds.")
         print("Total time taken for generation of packing-slips:  {:.2f}".format(time.time() - startedTemplating,2)+ " seconds.")
         return 'Completed!'
     except Exception as e:
         logger.error("Error while generating packing-slip file: "+str(e))
+        # file_logger.info("Error while generating packing-slip file: "+str(e))
         exc_type, exc_obj, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
         print(exc_type, fname, exc_tb.tb_lineno)

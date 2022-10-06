@@ -48,7 +48,8 @@ def startProcessing(mode,clientname,orderdate,processing_source):
                 # 1. Notify that the script is Started
                 scriptStarted()
                 # 2. Checking the folder structure 
-                checkFolderStructure(RootFolder=destinationpath,ClientCode=clientcode,OrderDate=orderdate)
+                print(destinationpath,clientcode,orderdate,'consolidation')
+                checkFolderStructure(RootFolder=destinationpath,ClientCode=clientcode,OrderDate=orderdate,mode = 'consolidation')
                 # 3. To download PDF Files from Google Drive and Store it in week/DownloadFiles Folder
                 downloadFiles(RootFolder=destinationpath,POSource=processing_source,OrderDate=orderdate,ClientCode=clientcode) # Done
                 # 4. Converted PDF files to Excel Files, perform Cleaning, and store to week/uploadFiles Folder
@@ -60,6 +61,7 @@ def startProcessing(mode,clientname,orderdate,processing_source):
                 scriptEnded()
 
             if mode == 'packing':
+                clientcode = clientname
                 # print(clientname)
                 # with open(ClientsFolderPath, 'r') as jsonFile:
                 #     config = json.load(jsonFile)
@@ -73,6 +75,7 @@ def startProcessing(mode,clientname,orderdate,processing_source):
                 # print("Client Name: "+clientname+" Client Code: "+clientname+" Order Date: "+orderdate+" PO Folder Path: '"+processing_source+"'")
             # Phase II
                 scriptStarted()
+                checkFolderStructure(RootFolder=destinationpath,ClientCode=clientcode,OrderDate=orderdate,mode = 'packing')
                 generatingPackingSlip(RootFolder=destinationpath,ReqSource=processing_source,OrderDate=orderdate,ClientCode=clientname,Formulasheet=formulasheetpath,TemplateFiles=templatespath)
             # 7. Notify that the script is Ended
                 scriptEnded()

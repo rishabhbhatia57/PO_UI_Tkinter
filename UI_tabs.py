@@ -15,6 +15,8 @@ from UI_scriptFunctions import select_folder,begin_order_processing,open_folder,
 from config import ConfigFolderPath, headingFont,fieldFont,buttonFont,labelFont,pathFont,logFont,ClientsFolderPath
 
 
+
+
 class Tab1():
     def __init__(self, root,tabControl):
 
@@ -71,8 +73,10 @@ class Tab1():
         po_folder_path_value.grid(row=2,column=2,padx=10, pady=10,sticky=W, columnspan=8)
 
 
-       
-        po_process_btn = Button(po_main_frame, command=threading.Thread(target=lambda:begin_order_processing(mode ='consolidation', client=po_selected_client.get(), date=po_order_date_btn.get_date(), path=po_folder_path_value['text'], consoleLabel=po_consoleLabel)).start, text="Process",font=buttonFont)
+        po_thread = threading.Thread(target=lambda:begin_order_processing(mode ='consolidation', client=po_selected_client.get(), 
+        date=po_order_date_btn.get_date(), path=po_folder_path_value['text'], consoleLabel=po_consoleLabel, thread_name=po_thread),
+        name='po_thread').start
+        po_process_btn = Button(po_main_frame, command=po_thread, text="Process",font=buttonFont)
         # po_process_btn = Button(po_main_frame, command=lambda:begin_order_processing(mode ='consolidation', client=po_selected_client.get(), date=po_order_date_btn.get_date(), path=po_folder_path_value['text'], consoleLabel=po_consoleLabel), text="Process",font=buttonFont)
         po_process_btn.grid(row=4,column=1,padx=10, pady=10,sticky=W)
 
@@ -160,7 +164,8 @@ class Tab2():
         pkg_order_date_value = Label(pkg_main_frame, textvariable=pkg_date_var,font=labelFont)
         pkg_order_date_value.grid(row=2,column=4,padx=10, pady=10,sticky=W,columnspan=3)
 
-        pkg_process_btn = Button(pkg_main_frame, command=threading.Thread(target=lambda:begin_order_processing(mode ='packing', client=pkg_client_Name_value.cget("text"), date=pkg_order_date_value.cget("text"), path=pkg_requirements_summary_path.cget("text"), consoleLabel=pkg_consoleLabel)).start, text="Process",font=buttonFont)
+        pkg_thread = threading.Thread(target=lambda:begin_order_processing(mode ='packing', client=pkg_client_Name_value.cget("text"), date=pkg_order_date_value.cget("text"), path=pkg_requirements_summary_path.cget("text"), consoleLabel=pkg_consoleLabel, thread_name=pkg_thread), name='pkg_thread').start
+        pkg_process_btn = Button(pkg_main_frame, command=pkg_thread, text="Process",font=buttonFont)
         pkg_process_btn.grid(row=4,column=1,padx=10, pady=10,sticky=W)
 
         pkg_cancel_btn = Button(pkg_main_frame, text="Cancel", font=buttonFont)

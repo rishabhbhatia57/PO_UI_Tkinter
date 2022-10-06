@@ -21,15 +21,16 @@ from BKE_mainFunction import startProcessing
 import threading
 
 
+running_threads = []
 
-global flag
+
 def select_folder(showPath):
     filetypes = (
         ('pdf files', '*.pdf'),
         ('All files', '*.*')
     )
     global POFolderSelected 
-    POFolderSelected = fd.askdirectory()
+    POFolderSelected = fd.askdirectory()    
     if POFolderSelected == '':
         showPath.config(text='No Folder selected')
         showinfo(
@@ -119,9 +120,9 @@ def open_folder_packaging(params,frame):
             # path = os.path.realpath(path)
             # os.startfile(path)
     
-def begin_order_processing(mode, client, date, path, consoleLabel):
+def begin_order_processing(mode, client, date, path, consoleLabel, thread_name):
     
-    # print(mode, client, date, path)
+    print(mode, client, date, path, thread_name)
     with open(ClientsFolderPath, 'r') as jsonFile:
             config = json.load(jsonFile)
             ClientCode = config
@@ -147,21 +148,15 @@ def begin_order_processing(mode, client, date, path, consoleLabel):
                 message="Please selected Client Name from dropdowm menu."
             )
         else:
-            global logboxstate
-            logboxstate = True
-            consoleLabel.config(text='Console logs 🔄')
-            # print(logboxstate)
-            encodedClientCodeSelected = ClientCode[ClientCodeSelected]
-            encodedOrderDateSelected = str(OrderDateSelected).replace(' ', "#")
-            enodedPOFolderSelected = requestedpath.replace(' ', "#") 
-            # Running code on CMD
-            # print(pythonenvpath,pythonScriptPath,mode,encodedClientCodeSelected,encodedOrderDateSelected,enodedPOFolderSelected)
+            running_threads.append(thread_name)
+            # print(running_threads)
+            # for t in running_threads:
+            # if t.is_alive():
+                # get results from thread
+                # t.handled = True
+            consoleLabel.config(text='Console logs    -    🔄    -    Processing...')
             startProcessing(mode=mode,clientname=ClientCode[ClientCodeSelected],orderdate=str(OrderDateSelected),processing_source=requestedpath)
-            # t1 = threading.Thread(target=(startProcessing(mode=mode,clientname=ClientCode[ClientCodeSelected],orderdate=str(OrderDateSelected),processing_source=requestedpath)))
-            # t1.start()
-            # t1.join()
-            
-
-            consoleLabel.config(text='Console logs ✅')
+            consoleLabel.config(text='Console logs    -    ✅    -    Completed!')
+            running_threads.remove(thread_name)
 
             # os.system(pythonenvpath +" "+ pythonScriptPath+" "+mode+" "+encodedClientCodeSelected+" "+encodedOrderDateSelected+" "+enodedPOFolderSelected)

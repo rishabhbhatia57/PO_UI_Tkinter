@@ -2,6 +2,11 @@ import tkinter as tk
 import sys
 import logging
 import tkinter.scrolledtext as st
+from tkinter import ttk
+import webbrowser
+from tkinter.ttk import *
+from tkinter import *
+from tkinter.font import Font
 
 import queue
 import BKE_log
@@ -30,8 +35,8 @@ class ConsoleUi:
     def __init__(self, frame):
         self.frame = frame
         # Create a ScrolledText wdiget
-        self.scrolled_text = st.ScrolledText(frame, state='disabled', height=22)
-        self.scrolled_text.pack(expand = True,fill ="both",ipady=20,ipadx=10)
+        self.scrolled_text = st.ScrolledText(frame, state='disabled')#height=20
+        self.scrolled_text.pack(expand = True,fill ="x",ipady=20,ipadx=10)
         self.scrolled_text.configure(font=logFont)
         self.scrolled_text.tag_config('INFO', foreground='White')
         self.scrolled_text.tag_config('DEBUG', foreground='gray')
@@ -41,7 +46,7 @@ class ConsoleUi:
         # Create a logging handler using a queue
         self.log_queue = queue.Queue()
         self.queue_handler = QueueHandler(self.log_queue)
-        formatter = logging.Formatter('%(asctime)s: %(message)s')
+        formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
         self.queue_handler.setFormatter(formatter)
         logger.addHandler(self.queue_handler)
         # Start polling messages from the queue
