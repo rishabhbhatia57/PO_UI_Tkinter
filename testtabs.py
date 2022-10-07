@@ -1,66 +1,52 @@
-import tkinter as tk                    
-from tkinter import ttk, filedialog, scrolledtext, font
-from tkinter.messagebox import showinfo, showwarning
-from tkinter import *
-from screeninfo import get_monitors
-from tkcalendar import DateEntry
-from tkinter.messagebox import showinfo, showwarning
-import json, subprocess, os, threading, base64, sys
-from datetime import datetime
-from tkinter.ttk import *
-from UI_scriptFunctions import select_folder,begin_order_processing,open_folder, open_folder_packaging, select_files
-from config import ConfigFolderPath, headingFont,fieldFont,buttonFont,labelFont,pathFont,logFont,ClientsFolderPath
-from UI_tabs import Tab1, Tab2
-from UI_logscmd import TextHandler
+import tkinter as tk
+from threading import Thread
+import time
 
+def long_running_function():
+    print('start sleep')
+    time.sleep(10)
+    print('end sleep')
 
-# Getting Screen Dimensions
-DeviceScreenHeight = ''
-DeviceScreenWidth = ''
-for m in get_monitors():
-   DeviceScreenWidth =str(m.width)
-   DeviceScreenHeight = str(m.height)
+def start_thread():
+    global t
+    global counter
 
+    b['state'] = 'disable'
+    counter = 0
 
-root = Tk()
-root.geometry(DeviceScreenWidth+"x"+DeviceScreenHeight)
-root.minsize(int(DeviceScreenWidth)-300,int(DeviceScreenHeight)-250)
-root.maxsize(int(DeviceScreenWidth),int(DeviceScreenHeight)-50)
+    t = Thread(target=long_running_function)
+    t.start()
 
-# root.iconbitmap('C:/Users/HP/Documents/GitHub/Triumph.ico')
+    check_thread()
+    # or check after 100ms
+    # root.after(100, check_thread) 
 
-root.title("Purchase Orders")
+def check_thread():
+    global counter
 
-with open(ConfigFolderPath+'config.json', 'r') as jsonFile:
-  config = json.load(jsonFile)
-  themepath = config['appTheme']
+    if not t.is_alive():
+        b['state'] = 'normal'
+        l['text'] = ''
+    else:
+        l['text'] = str(counter)
+        counter += 0.1
 
-root.tk.call("source", themepath)
-root.tk.call("set_theme", "dark")
+        # check again after 100ms
+        root.after(100, check_thread) 
 
+#-----------------------------------------------------
 
-s = ttk.Style()
-s.configure('TNotebook.Tab', font=('Calibri','15'), padding=[100, 10])
-
-tabFrame = ttk.Frame(root)
-logFrame = ttk.Frame(root)
-
-tabControl = ttk.Notebook(tabFrame)
-
-filenames = tk.StringVar() 
-selectedDate = tk.StringVar() 
-# TAB 1
-tab1 = Tab1(root,tabControl)
-# TAB 2
-tab2 = Tab2(root,tabControl)
-tabControl.pack(fill ="x")
+# counter displayed when thread is running        
+counter = 0
 
 
 
-tabFrame.pack(side='top',anchor=NW,fill ="x")
-logFrame.pack(side='bottom',anchor=SW,fill ="x")
-print('UI Loaded...')
+root = tk.Tk()
 
+l = tk.Label(root)
+l.pack()
 
+b = tk.Button(root, text="Start", command=start_thread)
+b.pack()
 
-root.mainloop()  
+root.mainloop()

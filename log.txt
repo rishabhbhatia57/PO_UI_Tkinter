@@ -156,3 +156,362 @@
 2022-10-06 12:35:51,055 INFO Fetching closing stock values from closing stock sheet... 
 2022-10-06 12:35:52,279 INFO Requirements summary sheet generated. 
 2022-10-06 12:35:52,290 INFO Script Ended 
+2022-10-06 13:10:55,207 INFO Client Name: PL Client Code: PL Order Date: 2022-10-06 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-10-06 13:10:55,208 INFO Starting script 
+2022-10-06 13:10:55,209 INFO Do not close this window while processing... 
+2022-10-06 13:10:55,215 INFO Folder 'PL-2022/2022-10-06' exists. 
+2022-10-06 13:10:55,216 INFO Copying PDF Files from 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' to 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/Processed Orders/PL-2022/2022-10-06/99-Working/10-Download-Files/' 
+2022-10-06 13:10:55,220 INFO File '4000444765.pdf' copied 
+2022-10-06 13:10:55,229 INFO File '4000444766.pdf' copied 
+2022-10-06 13:10:55,235 INFO File '4000444767.pdf' copied 
+2022-10-06 13:10:55,236 INFO Converting PDF files to Excel... 
+2022-10-06 13:10:55,237 INFO Converting '4000444765.pdf 
+2022-10-06 13:11:16,715 INFO Converted '4000444765.pdf' to '4000444765.xlsx' in 21.48 seconds. 
+2022-10-06 13:11:16,717 INFO Converting '4000444766.pdf 
+2022-10-06 13:12:06,070 INFO Converted '4000444766.pdf' to '4000444766.xlsx' in 49.35 seconds. 
+2022-10-06 13:12:06,073 INFO Converting '4000444767.pdf 
+2022-10-06 13:12:27,293 INFO Converted '4000444767.pdf' to '4000444767.xlsx' in 21.22 seconds. 
+2022-10-06 13:12:27,296 INFO Successfully converted 3 Files in 92.06 seconds! 
+2022-10-06 13:12:27,297 INFO Merging files... 
+2022-10-06 13:12:28,236 INFO Merged 3 excel files into a single excel file 'Consolidate-Orders.xlsx' 
+2022-10-06 13:12:42,585 INFO Fetching SKU values corresponding to the EAN ID from Item Master... 
+2022-10-06 13:12:42,615 INFO Fetching GST Type values corresponding to the Location from Location Master... 
+2022-10-06 13:12:42,624 INFO Fetching closing stock values from closing stock sheet... 
+2022-10-06 13:12:43,745 INFO Requirements summary sheet generated. 
+2022-10-06 13:12:43,755 INFO Script Ended 
+2022-10-06 14:58:56,518 INFO Client Name: PL Client Code: PL Order Date: 2022-10-06 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-10-06 14:58:56,518 INFO Starting script 
+2022-10-06 14:58:56,519 INFO Do not close this window while processing... 
+2022-10-06 14:58:56,529 INFO Folder 'PL-2022/2022-10-06' exists. 
+2022-10-06 14:58:56,529 INFO Copying PDF Files from 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' to 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/Processed Orders/PL-2022/2022-10-06/99-Working/10-Download-Files/' 
+2022-10-06 14:58:56,556 INFO File '4000444765.pdf' copied 
+2022-10-06 14:58:56,577 INFO File '4000444766.pdf' copied 
+2022-10-06 14:58:56,603 INFO File '4000444767.pdf' copied 
+2022-10-06 14:58:56,604 INFO Converting PDF files to Excel... 
+2022-10-06 14:58:56,605 INFO Converting '4000444765.pdf 
+2022-10-06 14:59:21,075 INFO Converted '4000444765.pdf' to '4000444765.xlsx' in 24.47 seconds. 
+2022-10-06 14:59:21,078 INFO Converting '4000444766.pdf 
+2022-10-06 15:00:11,048 INFO Converted '4000444766.pdf' to '4000444766.xlsx' in 49.97 seconds. 
+2022-10-06 15:00:11,051 INFO Converting '4000444767.pdf 
+2022-10-06 15:00:33,956 INFO Converted '4000444767.pdf' to '4000444767.xlsx' in 22.90 seconds. 
+2022-10-06 15:00:33,958 INFO Successfully converted 3 Files in 97.35 seconds! 
+2022-10-06 15:00:33,960 INFO Merging files... 
+2022-10-06 15:00:34,777 INFO Merged 3 excel files into a single excel file 'Consolidate-Orders.xlsx' 
+2022-10-06 15:00:47,790 INFO Fetching SKU values corresponding to the EAN ID from Item Master... 
+2022-10-06 15:00:47,831 INFO Fetching GST Type values corresponding to the Location from Location Master... 
+2022-10-06 15:00:47,839 INFO Fetching closing stock values from closing stock sheet... 
+2022-10-06 15:00:50,477 INFO Requirements summary sheet generated. 
+2022-10-06 15:00:50,489 INFO Script Ended 
+2022-10-06 16:07:13,343 INFO Client Name: PL Client Code: PL Order Date: 2022-10-12 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-10-06 16:07:13,344 INFO Starting script 
+2022-10-06 16:07:13,345 INFO Do not close this window while processing... 
+2022-10-06 16:07:13,349 INFO Creating the new directory... 
+2022-10-06 16:07:13,355 INFO Folder 'PL-2022/2022-10-12' exists. 
+2022-10-06 16:07:13,356 INFO Copying PDF Files from 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' to 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/Processed Orders/PL-2022/2022-10-12/99-Working/10-Download-Files/' 
+2022-10-06 16:07:13,370 INFO File '4000444765.pdf' copied 
+2022-10-06 16:07:13,385 INFO File '4000444766.pdf' copied 
+2022-10-06 16:07:13,399 INFO File '4000444767.pdf' copied 
+2022-10-06 16:07:13,411 INFO File '4000444799.pdf' copied 
+2022-10-06 16:07:13,412 INFO Converting PDF files to Excel... 
+2022-10-06 16:07:13,413 INFO Converting '4000444765.pdf 
+2022-10-06 16:07:31,730 INFO Converted '4000444765.pdf' to '4000444765.xlsx' in 18.32 seconds. 
+2022-10-06 16:07:31,732 INFO Converting '4000444766.pdf 
+2022-10-06 16:08:14,042 INFO Converted '4000444766.pdf' to '4000444766.xlsx' in 42.31 seconds. 
+2022-10-06 16:08:14,044 INFO Converting '4000444767.pdf 
+2022-10-06 16:08:32,680 INFO Converted '4000444767.pdf' to '4000444767.xlsx' in 18.63 seconds. 
+2022-10-06 16:08:32,683 INFO Converting '4000444799.pdf 
+2022-10-06 16:08:34,371 INFO Converted '4000444799.pdf' to '4000444799.xlsx' in 1.69 seconds. 
+2022-10-06 16:08:34,372 INFO Successfully converted 4 Files in 80.96 seconds! 
+2022-10-06 16:08:34,374 INFO Merging files... 
+2022-10-06 16:08:35,219 INFO Merged 4 excel files into a single excel file 'Consolidate-Orders.xlsx' 
+2022-10-06 16:08:49,459 INFO Fetching SKU values corresponding to the EAN ID from Item Master... 
+2022-10-06 16:08:49,494 INFO Fetching GST Type values corresponding to the Location from Location Master... 
+2022-10-06 16:08:49,500 INFO Fetching closing stock values from closing stock sheet... 
+2022-10-06 16:08:51,832 INFO Requirements summary sheet generated. 
+2022-10-06 16:08:51,840 INFO Script Ended 
+2022-10-06 18:38:59,109 INFO Client Name: OTH1 Client Code: OTH1 Order Date: 2022-10-06 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-10-06 18:38:59,109 INFO Starting script 
+2022-10-06 18:38:59,111 INFO Do not close this window while processing... 
+2022-10-06 18:38:59,115 INFO Creating the new directory... 
+2022-10-06 18:38:59,126 INFO Folder 'OTH1-2022/2022-10-06' exists. 
+2022-10-06 18:38:59,126 INFO Copying PDF Files from 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' to 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/Processed Orders/OTH1-2022/2022-10-06/99-Working/10-Download-Files/' 
+2022-10-06 18:38:59,132 INFO File '4000444765.pdf' copied 
+2022-10-06 18:38:59,139 INFO File '4000444766.pdf' copied 
+2022-10-06 18:38:59,144 INFO File '4000444767.pdf' copied 
+2022-10-06 18:38:59,147 INFO File '4000444799.pdf' copied 
+2022-10-06 18:38:59,148 INFO Converting PDF files to Excel... 
+2022-10-06 18:38:59,149 INFO Converting '4000444765.pdf 
+2022-10-06 18:39:23,221 INFO Converted '4000444765.pdf' to '4000444765.xlsx' in 24.07 seconds. 
+2022-10-06 18:39:23,224 INFO Converting '4000444766.pdf 
+2022-10-06 18:40:16,525 INFO Converted '4000444766.pdf' to '4000444766.xlsx' in 53.30 seconds. 
+2022-10-06 18:40:16,528 INFO Converting '4000444767.pdf 
+2022-10-06 18:40:38,158 INFO Converted '4000444767.pdf' to '4000444767.xlsx' in 21.63 seconds. 
+2022-10-06 18:40:38,160 INFO Converting '4000444799.pdf 
+2022-10-06 18:40:40,289 INFO Converted '4000444799.pdf' to '4000444799.xlsx' in 2.13 seconds. 
+2022-10-06 18:40:40,291 INFO Successfully converted 4 Files in 101.14 seconds! 
+2022-10-06 18:40:40,292 INFO Merging files... 
+2022-10-06 18:40:41,321 INFO Merged 4 excel files into a single excel file 'Consolidate-Orders.xlsx' 
+2022-10-06 18:40:55,958 ERROR Error while generating Requirement-Summary file: [Errno 22] Invalid argument: 'RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/"+"df_SKU.xlsx"' 
+2022-10-06 18:40:55,959 INFO Script Ended 
+2022-10-06 18:42:41,350 INFO Client Name: OTH1 Client Code: OTH1 Order Date: 2022-10-06 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-10-06 18:42:41,351 INFO Starting script 
+2022-10-06 18:42:41,352 INFO Do not close this window while processing... 
+2022-10-06 18:42:41,359 INFO Folder 'OTH1-2022/2022-10-06' exists. 
+2022-10-06 18:42:41,359 INFO Copying PDF Files from 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' to 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/Processed Orders/OTH1-2022/2022-10-06/99-Working/10-Download-Files/' 
+2022-10-06 18:42:41,365 INFO File '4000444765.pdf' copied 
+2022-10-06 18:42:41,372 INFO File '4000444766.pdf' copied 
+2022-10-06 18:42:41,378 INFO File '4000444767.pdf' copied 
+2022-10-06 18:42:41,380 INFO File '4000444799.pdf' copied 
+2022-10-06 18:42:41,381 INFO Converting PDF files to Excel... 
+2022-10-06 18:42:41,382 INFO Converting '4000444765.pdf 
+2022-10-06 18:42:59,712 INFO Converted '4000444765.pdf' to '4000444765.xlsx' in 18.33 seconds. 
+2022-10-06 18:42:59,715 INFO Converting '4000444766.pdf 
+2022-10-06 18:43:41,377 INFO Converted '4000444766.pdf' to '4000444766.xlsx' in 41.66 seconds. 
+2022-10-06 18:43:41,379 INFO Converting '4000444767.pdf 
+2022-10-06 18:43:59,754 INFO Converted '4000444767.pdf' to '4000444767.xlsx' in 18.37 seconds. 
+2022-10-06 18:43:59,757 INFO Converting '4000444799.pdf 
+2022-10-06 18:44:01,783 INFO Converted '4000444799.pdf' to '4000444799.xlsx' in 2.03 seconds. 
+2022-10-06 18:44:01,785 INFO Successfully converted 4 Files in 80.40 seconds! 
+2022-10-06 18:44:01,786 INFO Merging files... 
+2022-10-06 18:44:02,750 INFO Merged 4 excel files into a single excel file 'Consolidate-Orders.xlsx' 
+2022-10-06 18:44:16,316 ERROR Error while generating Requirement-Summary file: name 'df_join' is not defined 
+2022-10-06 18:44:16,317 INFO Script Ended 
+2022-10-06 18:50:33,952 INFO Client Name: PL Client Code: PL Order Date: 2022-10-06 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-10-06 18:50:33,952 INFO Starting script 
+2022-10-06 18:50:33,953 INFO Do not close this window while processing... 
+2022-10-06 18:50:33,958 INFO Creating the new directory... 
+2022-10-06 18:50:33,967 INFO Folder 'PL-2022/2022-10-06' exists. 
+2022-10-06 18:50:33,968 INFO Copying PDF Files from 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' to 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/Processed Orders/PL-2022/2022-10-06/99-Working/10-Download-Files/' 
+2022-10-06 18:50:33,974 INFO File '4000444765.pdf' copied 
+2022-10-06 18:50:33,981 INFO File '4000444766.pdf' copied 
+2022-10-06 18:50:33,987 INFO File '4000444767.pdf' copied 
+2022-10-06 18:50:33,990 INFO File '4000444799.pdf' copied 
+2022-10-06 18:50:33,991 INFO Converting PDF files to Excel... 
+2022-10-06 18:50:33,992 INFO Converting '4000444765.pdf 
+2022-10-06 18:50:59,113 INFO Converted '4000444765.pdf' to '4000444765.xlsx' in 25.12 seconds. 
+2022-10-06 18:50:59,116 INFO Converting '4000444766.pdf 
+2022-10-06 18:51:49,478 INFO Converted '4000444766.pdf' to '4000444766.xlsx' in 50.36 seconds. 
+2022-10-06 18:51:49,481 INFO Converting '4000444767.pdf 
+2022-10-06 18:52:08,549 INFO Converted '4000444767.pdf' to '4000444767.xlsx' in 19.07 seconds. 
+2022-10-06 18:52:08,552 INFO Converting '4000444799.pdf 
+2022-10-06 18:52:10,451 INFO Converted '4000444799.pdf' to '4000444799.xlsx' in 1.90 seconds. 
+2022-10-06 18:52:10,452 INFO Successfully converted 4 Files in 96.46 seconds! 
+2022-10-06 18:52:10,453 INFO Merging files... 
+2022-10-06 18:52:11,378 INFO Merged 4 excel files into a single excel file 'Consolidate-Orders.xlsx' 
+2022-10-06 18:52:25,278 ERROR Error while generating Requirement-Summary file: read_excel() got an unexpected keyword argument 'index' 
+2022-10-06 18:52:25,280 INFO Script Ended 
+2022-10-06 18:53:26,254 INFO Client Name: PL Client Code: PL Order Date: 2022-10-06 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-10-06 18:53:26,255 INFO Starting script 
+2022-10-06 18:53:26,256 INFO Do not close this window while processing... 
+2022-10-06 18:53:26,261 INFO Creating the new directory... 
+2022-10-06 18:53:26,270 INFO Folder 'PL-2022/2022-10-06' exists. 
+2022-10-06 18:53:26,271 INFO Copying PDF Files from 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' to 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/Processed Orders/PL-2022/2022-10-06/99-Working/10-Download-Files/' 
+2022-10-06 18:53:26,277 INFO File '4000444765.pdf' copied 
+2022-10-06 18:53:26,283 INFO File '4000444766.pdf' copied 
+2022-10-06 18:53:26,289 INFO File '4000444767.pdf' copied 
+2022-10-06 18:53:26,292 INFO File '4000444799.pdf' copied 
+2022-10-06 18:53:26,293 INFO Converting PDF files to Excel... 
+2022-10-06 18:53:26,294 INFO Converting '4000444765.pdf 
+2022-10-06 18:53:56,103 INFO Converted '4000444765.pdf' to '4000444765.xlsx' in 29.81 seconds. 
+2022-10-06 18:53:56,105 INFO Converting '4000444766.pdf 
+2022-10-06 18:54:42,127 INFO Converted '4000444766.pdf' to '4000444766.xlsx' in 46.02 seconds. 
+2022-10-06 18:54:42,130 INFO Converting '4000444767.pdf 
+2022-10-06 18:55:00,235 INFO Converted '4000444767.pdf' to '4000444767.xlsx' in 18.10 seconds. 
+2022-10-06 18:55:00,237 INFO Converting '4000444799.pdf 
+2022-10-06 18:55:02,098 INFO Converted '4000444799.pdf' to '4000444799.xlsx' in 1.86 seconds. 
+2022-10-06 18:55:02,100 INFO Successfully converted 4 Files in 95.81 seconds! 
+2022-10-06 18:55:02,101 INFO Merging files... 
+2022-10-06 18:55:03,073 INFO Merged 4 excel files into a single excel file 'Consolidate-Orders.xlsx' 
+2022-10-06 18:55:17,640 ERROR Error while generating Requirement-Summary file: index 0 is out of bounds for axis 0 with size 0 
+2022-10-06 18:55:17,641 INFO Script Ended 
+2022-10-06 19:03:24,251 INFO Client Name: PL Client Code: PL Order Date: 2022-10-06 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-10-06 19:03:24,251 INFO Starting script 
+2022-10-06 19:03:24,252 INFO Do not close this window while processing... 
+2022-10-06 19:03:24,257 INFO Folder 'PL-2022/2022-10-06' exists. 
+2022-10-06 19:03:24,257 INFO Copying PDF Files from 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' to 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/Processed Orders/PL-2022/2022-10-06/99-Working/10-Download-Files/' 
+2022-10-06 19:03:24,263 INFO File '4000444765.pdf' copied 
+2022-10-06 19:03:24,270 INFO File '4000444766.pdf' copied 
+2022-10-06 19:03:24,277 INFO File '4000444767.pdf' copied 
+2022-10-06 19:03:24,280 INFO File '4000444799.pdf' copied 
+2022-10-06 19:03:24,281 INFO Converting PDF files to Excel... 
+2022-10-06 19:03:24,282 INFO Converting '4000444765.pdf 
+2022-10-06 19:03:42,542 INFO Converted '4000444765.pdf' to '4000444765.xlsx' in 18.26 seconds. 
+2022-10-06 19:03:42,544 INFO Converting '4000444766.pdf 
+2022-10-06 19:04:25,128 INFO Converted '4000444766.pdf' to '4000444766.xlsx' in 42.58 seconds. 
+2022-10-06 19:04:25,131 INFO Converting '4000444767.pdf 
+2022-10-06 19:04:43,744 INFO Converted '4000444767.pdf' to '4000444767.xlsx' in 18.61 seconds. 
+2022-10-06 19:04:43,747 INFO Converting '4000444799.pdf 
+2022-10-06 19:04:45,434 INFO Converted '4000444799.pdf' to '4000444799.xlsx' in 1.69 seconds. 
+2022-10-06 19:04:45,435 INFO Successfully converted 4 Files in 81.15 seconds! 
+2022-10-06 19:04:45,437 INFO Merging files... 
+2022-10-06 19:04:46,359 INFO Merged 4 excel files into a single excel file 'Consolidate-Orders.xlsx' 
+2022-10-06 19:05:00,109 ERROR Error while generating Requirement-Summary file: Writing to Excel with MultiIndex columns and no index ('index'=False) is not yet implemented. 
+2022-10-06 19:05:00,110 INFO Script Ended 
+2022-10-07 11:10:21,681 INFO Client Name: PL Client Code: PL Order Date: 2022-10-07 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-10-07 11:10:21,682 INFO Starting script 
+2022-10-07 11:10:21,682 INFO Do not close this window while processing... 
+2022-10-07 11:10:21,686 INFO Creating the new directory... 
+2022-10-07 11:10:21,694 INFO Folder 'PL-2022/2022-10-07' exists. 
+2022-10-07 11:10:21,695 INFO Copying PDF Files from 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' to 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/Processed Orders/PL-2022/2022-10-07/99-Working/10-Download-Files/' 
+2022-10-07 11:10:21,723 INFO File '4000444765.pdf' copied 
+2022-10-07 11:10:21,754 INFO File '4000444766.pdf' copied 
+2022-10-07 11:10:21,783 INFO File '4000444767.pdf' copied 
+2022-10-07 11:10:21,798 INFO File '4000444799.pdf' copied 
+2022-10-07 11:10:21,799 INFO Converting PDF files to Excel... 
+2022-10-07 11:10:21,800 INFO Converting '4000444765.pdf 
+2022-10-07 11:10:39,879 INFO Converted '4000444765.pdf' to '4000444765.xlsx' in 18.08 seconds. 
+2022-10-07 11:10:39,881 INFO Converting '4000444766.pdf 
+2022-10-07 11:11:20,931 INFO Converted '4000444766.pdf' to '4000444766.xlsx' in 41.05 seconds. 
+2022-10-07 11:11:20,934 INFO Converting '4000444767.pdf 
+2022-10-07 11:11:38,872 INFO Converted '4000444767.pdf' to '4000444767.xlsx' in 17.94 seconds. 
+2022-10-07 11:11:38,874 INFO Converting '4000444799.pdf 
+2022-10-07 11:11:40,516 INFO Converted '4000444799.pdf' to '4000444799.xlsx' in 1.64 seconds. 
+2022-10-07 11:11:40,517 INFO Successfully converted 4 Files in 78.72 seconds! 
+2022-10-07 11:11:40,519 INFO Merging files... 
+2022-10-07 11:11:41,388 INFO Merged 4 excel files into a single excel file 'Consolidate-Orders.xlsx' 
+2022-10-07 11:11:54,294 ERROR Error while generating Requirement-Summary file: Cannot save file into a non-existent directory: 'C:\Users\HP\Documents\GitHub\PO_UI_Tkinter\dist\Triumph Data\Processed Orders\PL-2022\2022-10-07\50-Consolidate-Orders\df_join_cl_stk.xlsx' 
+2022-10-07 11:11:54,295 INFO Script Ended 
+2022-10-07 11:13:23,191 INFO Client Name: PL Client Code: PL Order Date: 2022-10-07 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-10-07 11:13:23,191 INFO Starting script 
+2022-10-07 11:13:23,192 INFO Do not close this window while processing... 
+2022-10-07 11:13:23,198 INFO Creating the new directory... 
+2022-10-07 11:13:23,207 INFO Folder 'PL-2022/2022-10-07' exists. 
+2022-10-07 11:13:23,207 INFO Copying PDF Files from 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' to 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/Processed Orders/PL-2022/2022-10-07/99-Working/10-Download-Files/' 
+2022-10-07 11:13:23,212 INFO File '4000444765.pdf' copied 
+2022-10-07 11:13:23,218 INFO File '4000444766.pdf' copied 
+2022-10-07 11:13:23,224 INFO File '4000444767.pdf' copied 
+2022-10-07 11:13:23,227 INFO File '4000444799.pdf' copied 
+2022-10-07 11:13:23,228 INFO Converting PDF files to Excel... 
+2022-10-07 11:13:23,229 INFO Converting '4000444765.pdf 
+2022-10-07 11:13:43,233 INFO Converted '4000444765.pdf' to '4000444765.xlsx' in 20.00 seconds. 
+2022-10-07 11:13:43,235 INFO Converting '4000444766.pdf 
+2022-10-07 11:14:23,786 INFO Converted '4000444766.pdf' to '4000444766.xlsx' in 40.55 seconds. 
+2022-10-07 11:14:23,789 INFO Converting '4000444767.pdf 
+2022-10-07 11:14:41,852 INFO Converted '4000444767.pdf' to '4000444767.xlsx' in 18.06 seconds. 
+2022-10-07 11:14:41,855 INFO Converting '4000444799.pdf 
+2022-10-07 11:14:43,430 INFO Converted '4000444799.pdf' to '4000444799.xlsx' in 1.57 seconds. 
+2022-10-07 11:14:43,431 INFO Successfully converted 4 Files in 80.20 seconds! 
+2022-10-07 11:14:43,433 INFO Merging files... 
+2022-10-07 11:14:44,289 INFO Merged 4 excel files into a single excel file 'Consolidate-Orders.xlsx' 
+2022-10-07 11:14:57,564 ERROR Error while generating Requirement-Summary file: module 'pandas' has no attribute 'read' 
+2022-10-07 11:14:57,565 INFO Script Ended 
+2022-10-07 11:15:38,503 INFO Client Name: PL Client Code: PL Order Date: 2022-10-07 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-10-07 11:15:38,504 INFO Starting script 
+2022-10-07 11:15:38,505 INFO Do not close this window while processing... 
+2022-10-07 11:15:38,509 INFO Creating the new directory... 
+2022-10-07 11:15:38,515 INFO Folder 'PL-2022/2022-10-07' exists. 
+2022-10-07 11:15:38,516 INFO Copying PDF Files from 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' to 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/Processed Orders/PL-2022/2022-10-07/99-Working/10-Download-Files/' 
+2022-10-07 11:15:38,521 INFO File '4000444765.pdf' copied 
+2022-10-07 11:15:38,529 INFO File '4000444766.pdf' copied 
+2022-10-07 11:15:38,535 INFO File '4000444767.pdf' copied 
+2022-10-07 11:15:38,538 INFO File '4000444799.pdf' copied 
+2022-10-07 11:15:38,539 INFO Converting PDF files to Excel... 
+2022-10-07 11:15:38,539 INFO Converting '4000444765.pdf 
+2022-10-07 11:15:56,664 INFO Converted '4000444765.pdf' to '4000444765.xlsx' in 18.12 seconds. 
+2022-10-07 11:15:56,666 INFO Converting '4000444766.pdf 
+2022-10-07 11:16:37,193 INFO Converted '4000444766.pdf' to '4000444766.xlsx' in 40.53 seconds. 
+2022-10-07 11:16:37,196 INFO Converting '4000444767.pdf 
+2022-10-07 11:16:55,072 INFO Converted '4000444767.pdf' to '4000444767.xlsx' in 17.87 seconds. 
+2022-10-07 11:16:55,074 INFO Converting '4000444799.pdf 
+2022-10-07 11:16:56,681 INFO Converted '4000444799.pdf' to '4000444799.xlsx' in 1.61 seconds. 
+2022-10-07 11:16:56,682 INFO Successfully converted 4 Files in 78.14 seconds! 
+2022-10-07 11:16:56,684 INFO Merging files... 
+2022-10-07 11:16:57,520 INFO Merged 4 excel files into a single excel file 'Consolidate-Orders.xlsx' 
+2022-10-07 11:17:10,807 ERROR Error while generating Requirement-Summary file: [Errno 2] No such file or directory: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/Processed Orders/PL-2022/2022-10-07/50-Consolidate-Orders/df_join_cl_stk.xlsx/df_join_pivot.xlsx' 
+2022-10-07 11:17:10,808 INFO Script Ended 
+2022-10-07 11:18:11,349 INFO Client Name: PL Client Code: PL Order Date: 2022-10-07 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-10-07 11:18:11,351 INFO Starting script 
+2022-10-07 11:18:11,352 INFO Do not close this window while processing... 
+2022-10-07 11:18:11,356 INFO Creating the new directory... 
+2022-10-07 11:18:11,365 INFO Folder 'PL-2022/2022-10-07' exists. 
+2022-10-07 11:18:11,366 INFO Copying PDF Files from 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' to 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/Processed Orders/PL-2022/2022-10-07/99-Working/10-Download-Files/' 
+2022-10-07 11:18:11,370 INFO File '4000444765.pdf' copied 
+2022-10-07 11:18:11,380 INFO File '4000444766.pdf' copied 
+2022-10-07 11:18:11,392 INFO File '4000444767.pdf' copied 
+2022-10-07 11:18:11,396 INFO File '4000444799.pdf' copied 
+2022-10-07 11:18:11,397 INFO Converting PDF files to Excel... 
+2022-10-07 11:18:11,398 INFO Converting '4000444765.pdf 
+2022-10-07 11:18:29,330 INFO Converted '4000444765.pdf' to '4000444765.xlsx' in 17.93 seconds. 
+2022-10-07 11:18:29,332 INFO Converting '4000444766.pdf 
+2022-10-07 11:19:09,940 INFO Converted '4000444766.pdf' to '4000444766.xlsx' in 40.61 seconds. 
+2022-10-07 11:19:09,942 INFO Converting '4000444767.pdf 
+2022-10-07 11:19:27,820 INFO Converted '4000444767.pdf' to '4000444767.xlsx' in 17.88 seconds. 
+2022-10-07 11:19:27,822 INFO Converting '4000444799.pdf 
+2022-10-07 11:19:29,433 INFO Converted '4000444799.pdf' to '4000444799.xlsx' in 1.61 seconds. 
+2022-10-07 11:19:29,434 INFO Successfully converted 4 Files in 78.04 seconds! 
+2022-10-07 11:19:29,436 INFO Merging files... 
+2022-10-07 11:19:30,271 INFO Merged 4 excel files into a single excel file 'Consolidate-Orders.xlsx' 
+2022-10-07 11:19:43,718 ERROR Error while generating Requirement-Summary file: index 0 is out of bounds for axis 0 with size 0 
+2022-10-07 11:19:43,719 INFO Script Ended 
+2022-10-07 11:25:41,354 INFO Client Name: PL Client Code: PL Order Date: 2022-10-07 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-10-07 11:25:41,355 INFO Starting script 
+2022-10-07 11:25:41,356 INFO Do not close this window while processing... 
+2022-10-07 11:25:41,361 INFO Creating the new directory... 
+2022-10-07 11:25:41,368 INFO Folder 'PL-2022/2022-10-07' exists. 
+2022-10-07 11:25:41,368 INFO Copying PDF Files from 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' to 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/Processed Orders/PL-2022/2022-10-07/99-Working/10-Download-Files/' 
+2022-10-07 11:25:41,374 INFO File '4000444765.pdf' copied 
+2022-10-07 11:25:41,381 INFO File '4000444766.pdf' copied 
+2022-10-07 11:25:41,386 INFO File '4000444767.pdf' copied 
+2022-10-07 11:25:41,389 INFO File '4000444799.pdf' copied 
+2022-10-07 11:25:41,392 INFO Converting PDF files to Excel... 
+2022-10-07 11:25:41,393 INFO Converting '4000444765.pdf 
+2022-10-07 11:26:03,468 INFO Converted '4000444765.pdf' to '4000444765.xlsx' in 22.07 seconds. 
+2022-10-07 11:26:03,470 INFO Converting '4000444766.pdf 
+2022-10-07 11:26:55,360 INFO Converted '4000444766.pdf' to '4000444766.xlsx' in 51.89 seconds. 
+2022-10-07 11:26:55,364 INFO Converting '4000444767.pdf 
+2022-10-07 11:27:13,689 INFO Converted '4000444767.pdf' to '4000444767.xlsx' in 18.32 seconds. 
+2022-10-07 11:27:13,691 INFO Converting '4000444799.pdf 
+2022-10-07 11:27:15,294 INFO Converted '4000444799.pdf' to '4000444799.xlsx' in 1.60 seconds. 
+2022-10-07 11:27:15,295 INFO Successfully converted 4 Files in 93.90 seconds! 
+2022-10-07 11:27:15,297 INFO Merging files... 
+2022-10-07 11:27:16,157 INFO Merged 4 excel files into a single excel file 'Consolidate-Orders.xlsx' 
+2022-10-07 11:27:28,938 ERROR Error while generating Requirement-Summary file: [Errno 2] No such file or directory: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/Processed Orders/PL-2022/2022-10-07/50-Consolidate-Orders/df_gst_type.xlsx' 
+2022-10-07 11:27:28,940 INFO Script Ended 
+2022-10-07 11:28:08,277 INFO Client Name: PL Client Code: PL Order Date: 2022-10-07 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-10-07 11:28:08,277 INFO Starting script 
+2022-10-07 11:28:08,278 INFO Do not close this window while processing... 
+2022-10-07 11:28:08,282 INFO Creating the new directory... 
+2022-10-07 11:28:08,293 INFO Folder 'PL-2022/2022-10-07' exists. 
+2022-10-07 11:28:08,294 INFO Copying PDF Files from 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' to 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/Processed Orders/PL-2022/2022-10-07/99-Working/10-Download-Files/' 
+2022-10-07 11:28:08,299 INFO File '4000444765.pdf' copied 
+2022-10-07 11:28:08,306 INFO File '4000444766.pdf' copied 
+2022-10-07 11:28:08,312 INFO File '4000444767.pdf' copied 
+2022-10-07 11:28:08,315 INFO File '4000444799.pdf' copied 
+2022-10-07 11:28:08,316 INFO Converting PDF files to Excel... 
+2022-10-07 11:28:08,317 INFO Converting '4000444765.pdf 
+2022-10-07 11:28:26,358 INFO Converted '4000444765.pdf' to '4000444765.xlsx' in 18.04 seconds. 
+2022-10-07 11:28:26,361 INFO Converting '4000444766.pdf 
+2022-10-07 11:29:06,666 INFO Converted '4000444766.pdf' to '4000444766.xlsx' in 40.30 seconds. 
+2022-10-07 11:29:06,669 INFO Converting '4000444767.pdf 
+2022-10-07 11:29:24,732 INFO Converted '4000444767.pdf' to '4000444767.xlsx' in 18.06 seconds. 
+2022-10-07 11:29:24,735 INFO Converting '4000444799.pdf 
+2022-10-07 11:29:26,320 INFO Converted '4000444799.pdf' to '4000444799.xlsx' in 1.58 seconds. 
+2022-10-07 11:29:26,322 INFO Successfully converted 4 Files in 78.01 seconds! 
+2022-10-07 11:29:26,323 INFO Merging files... 
+2022-10-07 11:29:27,173 INFO Merged 4 excel files into a single excel file 'Consolidate-Orders.xlsx' 
+2022-10-07 11:29:40,879 ERROR Error while generating Requirement-Summary file: "Not all names specified in 'columns' are found" 
+2022-10-07 11:29:40,881 INFO Script Ended 
+2022-10-07 11:30:38,913 INFO Client Name: PL Client Code: PL Order Date: 2022-10-07 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-10-07 11:30:38,914 INFO Starting script 
+2022-10-07 11:30:38,915 INFO Do not close this window while processing... 
+2022-10-07 11:30:38,920 INFO Creating the new directory... 
+2022-10-07 11:30:38,929 INFO Folder 'PL-2022/2022-10-07' exists. 
+2022-10-07 11:30:38,930 INFO Copying PDF Files from 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' to 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/Processed Orders/PL-2022/2022-10-07/99-Working/10-Download-Files/' 
+2022-10-07 11:30:38,936 INFO File '4000444765.pdf' copied 
+2022-10-07 11:30:38,943 INFO File '4000444766.pdf' copied 
+2022-10-07 11:30:38,950 INFO File '4000444767.pdf' copied 
+2022-10-07 11:30:38,953 INFO File '4000444799.pdf' copied 
+2022-10-07 11:30:38,955 INFO Converting PDF files to Excel... 
+2022-10-07 11:30:38,956 INFO Converting '4000444765.pdf 
+2022-10-07 11:30:56,772 INFO Converted '4000444765.pdf' to '4000444765.xlsx' in 17.82 seconds. 
+2022-10-07 11:30:56,775 INFO Converting '4000444766.pdf 
+2022-10-07 11:31:37,254 INFO Converted '4000444766.pdf' to '4000444766.xlsx' in 40.48 seconds. 
+2022-10-07 11:31:37,257 INFO Converting '4000444767.pdf 
+2022-10-07 11:31:55,080 INFO Converted '4000444767.pdf' to '4000444767.xlsx' in 17.82 seconds. 
+2022-10-07 11:31:55,083 INFO Converting '4000444799.pdf 
+2022-10-07 11:31:56,682 INFO Converted '4000444799.pdf' to '4000444799.xlsx' in 1.60 seconds. 
+2022-10-07 11:31:56,683 INFO Successfully converted 4 Files in 77.73 seconds! 
+2022-10-07 11:31:56,685 INFO Merging files... 
+2022-10-07 11:31:57,528 INFO Merged 4 excel files into a single excel file 'Consolidate-Orders.xlsx' 
+2022-10-07 11:32:12,049 INFO Requirements summary sheet generated. 
+2022-10-07 11:32:12,059 INFO Script Ended 

@@ -231,22 +231,48 @@ def mergeToPivotRQ(RootFolder,POSource,OrderDate,ClientCode,Formulasheet):
                 df_location_master = pd.read_excel(config['masterFolder']+'Location Master.xlsx')
                 df_closing_stock = pd.read_excel(config['masterFolder']+'WH Closing Stock.xlsx',skiprows=3)
 
+            #--------------------
+            # Renaming EAN ID as Articale number to perform join using ArticleEAN
             df_item_master.rename(columns = {'EAN ID':'ArticleEAN'}, inplace = True)
-            print('Fetching SKU values corresponding to the EAN ID from Item Master...')
-            logger.info('Fetching SKU values corresponding to the EAN ID from Item Master...')
-            # file_logger.info('Fetching SKU values corresponding to the EAN ID from Item Master...')
-            df_SKU = df_consolidated_order.merge(df_item_master, on='ArticleEAN', how='left')
-            print('Fetching GST Type values corresponding to the Location from Location Master...')
-            logger.info('Fetching GST Type values corresponding to the Location from Location Master...')
-            # file_logger.info('Fetching SKU values corresponding to the EAN ID from Item Master...')
-            df_gst_type = df_SKU.merge(df_location_master, on='Receiving Location', how='left') # Perfoming join to get values of GST
-            print('Fetching closing stock values from closing stock sheet...')
-            logger.info('Fetching closing stock values from closing stock sheet...')
-            # file_logger.info('Fetching SKU values corresponding to the EAN ID from Item Master...')
-            df_join = df_gst_type.merge(df_closing_stock, on='SKU', how='left') # Perfoming join to get values of closing stock
 
-            df_join['Order No.'] = '' # adding order number as col
-            df_join['Grand Total'] = '' # adding Grand Total as col
+            # Merge on EAN from Item master
+            df_SKU = df_consolidated_order.merge(df_item_master, on='ArticleEAN', how='left')
+
+            df_SKU.rename(columns = {'MRP_x':'MRP'}, inplace = True)
+            df_SKU_nodups = df_SKU.drop_duplicates() # dropping duplicates
+
+            df_SKU_nodups.to_excel(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/df_join_SKU.xlsx", columns=['ArticleEAN','SKU','Qty','MRP','Receiving Location','Style','Style Name','PO Number'], index=False)
+            #Opening df_SKU excel as df_SKU dataframe
+            df_SKU = pd.read_excel(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/df_join_SKU.xlsx")
+
+            df_gst_type = df_SKU.merge(df_location_master, on='Receiving Location', how='left') # Perfoming join to get values of GST
+            df_gst_type_nodups = df_gst_type.drop_duplicates() # dropping duplicates
+            df_gst_type_nodups.to_excel(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/df_join_gst_type.xlsx", index=False)
+            #Opening df_gst_type excel as df_gst_type dataframe
+            df_gst_type = pd.read_excel(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/df_join_gst_type.xlsx")
+
+            df_join_cl_stk = df_gst_type.merge(df_closing_stock, on='SKU', how='left') # Perfoming join to get values of closing stock
+
+            df_join_cl_stk_nodups = df_join_cl_stk.drop_duplicates() # dropping duplicates
+
+            df_join_cl_stk_nodups['Actual qty'] = df_join_cl_stk_nodups['Actual qty'].fillna(0)
+
+            df_join_cl_stk_nodups.rename(columns = {'Style_x':'Style','Style Name_x':'Style Name'}, inplace = True)
+
+            df_join_cl_stk_nodups.to_excel(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/df_join_cl_stk.xlsx", index=False, columns=['ArticleEAN','SKU','Qty','MRP',
+            'Receiving Location','Style','Style Name',	'PO Number','SGST/IGST Type', 'Actual qty'])
+
+            #Opening df_gst_type excel as df_gst_type dataframe
+            df_join_cl_stk = pd.read_excel(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/df_join_cl_stk.xlsx")
+
+            df_join_cl_stk['Order No.'] = '' # adding order number as col
+            df_join_cl_stk['Grand Total'] = '' # adding Grand Total as col
+
+
+            # final file used by requirement summary to make pivot
+            df_join_cl_stk.to_excel(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/df_join_pivot.xlsx",index=False)
+            df_pivot_final_join = pd.read_excel(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/df_join_pivot.xlsx")
+            #--------------------
 
             # Constant Variables used in loops
             workbook_path = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/60-Requirement-Summary/Requirement-Summary.xlsx"
@@ -255,8 +281,9 @@ def mergeToPivotRQ(RootFolder,POSource,OrderDate,ClientCode,Formulasheet):
             start_rows = 3
             start_cols = 8
 
-            df_pivot = pd.pivot_table(df_join, index=["ArticleEAN",'Actual qty','MRP_y', "SKU" ], values='Qty', 
+            df_pivot = pd.pivot_table(df_join_cl_stk, index=["ArticleEAN",'Actual qty','MRP', "SKU" ], values='Qty', 
             columns=['PO Number','Order No.','Grand Total','SGST/IGST Type','Receiving Location'], aggfunc='sum')
+            
             df_pivot['Grand Total'] = 0
             df_pivot['Closing Stock'] = 0
             df_pivot['Diff CS - GT'] = 0
@@ -268,7 +295,8 @@ def mergeToPivotRQ(RootFolder,POSource,OrderDate,ClientCode,Formulasheet):
             # open pivot sheet again
             df_temp_p = pd.read_excel(workbook_path)
             df_temp = pd.read_excel(workbook_path,skiprows=5)
-            df_temp.to_excel(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/"+"df_temp.xlsx", columns= ['MRP_y', 'Actual qty'],index=False)
+            df_temp.to_excel(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/"+"df_temp.xlsx", 
+            columns= ['MRP', 'Actual qty'],index=False)
             tempWorkbook = load_workbook(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/"+"df_temp.xlsx")
             tempSheet = tempWorkbook.active
             tempSheet.insert_rows(2,5) # Inserting 5 rows to handle the gap between closing stock header and starting(entry) rows
@@ -277,7 +305,7 @@ def mergeToPivotRQ(RootFolder,POSource,OrderDate,ClientCode,Formulasheet):
             df_temp= pd.read_excel(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/"+"df_temp.xlsx")
             df_temp_p['Closing Stock'] = df_temp['Actual qty'] # Copying Closing stock from temp file to requirement summary file
             print('Fetching Rate values from Item Master...')
-            df_temp_p['Rate'] = df_temp['MRP_y'] # Copying MRP from temp file to requirement summary file
+            df_temp_p['Rate'] = df_temp['MRP'] # Copying MRP from temp file to requirement summary file
             df_temp_p.to_excel(workbook_path, sheet_name=workbook_sheet, index=False) # Saving RQ Sum after adding CS, MRP
 
             pivotWorksheet = load_workbook(workbook_path)
