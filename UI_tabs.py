@@ -49,17 +49,17 @@ class Tab1():
         po_selected_client = StringVar()
         po_selected_client.set('--select--') # Default Value selected
         po_client_option = OptionMenu(po_main_frame,po_selected_client,*client_options)
-        po_client_option.grid(row=1,column=1,padx=10, pady=10,sticky=W,columnspan=3)
+        po_client_option.grid(row=1,column=1,padx=10, pady=10,sticky=W,columnspan=4)
         po_client_option.config(font=font.Font(family='Calibri', size=15))
         menuo_ptions = po_main_frame.nametowidget(po_client_option.menuname)
         menuo_ptions.config(font=font.Font(family='Calibri', size=15))
 
         po_order_date = Label(po_main_frame,text='Order Date', font=labelFont)
-        po_order_date.grid(row=1,column=2,padx=10, pady=10,sticky=W)
+        po_order_date.grid(row=1,column=3,padx=10, pady=10,sticky=W)
 
         po_selected_date= StringVar()
         po_order_date_btn = DateEntry(po_main_frame,selectmode='day',date_pattern='dd-mm-Y',textvariable=po_selected_date,font=buttonFont)
-        po_order_date_btn.grid(row=1,column=3,padx=10, pady=10,sticky=W)
+        po_order_date_btn.grid(row=1,column=4,padx=10, pady=10,sticky=W)
 
     
         po_folder_path = ttk.Label(po_main_frame,text='POFolderPath',font=labelFont)
