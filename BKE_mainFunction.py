@@ -57,7 +57,7 @@ def startProcessing(mode,clientname,orderdate,processing_source):
                 # 5. Merge all the coverted excel file to a single excel file and store in week/MergeExcelsFiles folder
                 mergeExcelsToOne(RootFolder=destinationpath,POSource=processing_source,OrderDate=orderdate,ClientCode=clientcode)
                 # 6. PivotTable - Template Creation
-                mergeToPivotRQ(RootFolder=destinationpath,POSource=processing_source,OrderDate=orderdate,ClientCode=clientcode,Formulasheet=formulasheetpath)
+                mergeToPivotRQ(RootFolder=destinationpath,POSource=processing_source,OrderDate=orderdate,ClientCode=clientcode,Formulasheet=formulasheetpath, TemplateFiles=templatespath)
                 scriptEnded()
 
             if mode == 'packing':

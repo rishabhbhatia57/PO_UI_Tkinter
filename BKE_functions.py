@@ -19,6 +19,7 @@ import csv
 import json
 import sys
 from openpyxl.styles import PatternFill
+from flask import jsonify
 
 import BKE_log
 # from UI_logscmd import PrintLogger
@@ -192,10 +193,30 @@ def mergeExcelsToOne(RootFolder,POSource,OrderDate,ClientCode):
         print("Error while merging files: "+str(e))
 
 
+def validateColumnNames(df_formula_cols, column_list, file_name):
 
-def mergeToPivotRQ(RootFolder,POSource,OrderDate,ClientCode,Formulasheet):
+    # df_validate_columns = pd.read_excel(Formulasheet, sheet_name= "Validate Column Names")
+    
+    df_validate = df_formula_cols[df_formula_cols['Master Files'] == file_name]
+    # print(df_validate['Column Names'])
+    # print(df_formula_cols[df_formula_cols['Master Files'] == file_name]['Column Names'])
+    # df_filtered = df_validate[df_validate['Column Names'].isin(column_list)]
+    df_filtered = df_validate.merge(column_list, on='Column Names', how = "outer")
+    # df_validate['isCommon'] = np.where(df_validate['Column Names'] == column_list, True, False)
+    print(df_filtered.head(10))
+
+    if condition == True:
+        return jsonify(
+            cols_name = [],
+            status = True
+        )
+    
+    pass
+
+def mergeToPivotRQ(RootFolder,POSource,OrderDate,ClientCode,Formulasheet, TemplateFiles):
     # file_logger = BKE_log.setup_custom_logger_file('root',RootFolder,OrderDate,ClientCode)
 
+    
 
     with open(ClientsFolderPath, 'r') as jsonFile:
         config = json.load(jsonFile)
@@ -216,6 +237,16 @@ def mergeToPivotRQ(RootFolder,POSource,OrderDate,ClientCode,Formulasheet):
         formulaWorksheet = load_workbook(Formulasheet,data_only=True) 
         # Data_only = True is used to get evaluated formula value instead of formula
         formulaSheet = formulaWorksheet['FormulaSheet']
+        df_formula_cols = pd.read_excel(Formulasheet, sheet_name= "Validate Column Names")
+
+        # df_validate_item_master = list(df_validate_columns[df_validate_columns['Master Files'] == 'Item Master']['Column Names'])
+        # print(df_validate_item_master)
+        # df_validate_location2_master = df_validate_columns[df_validate_columns['Master Files'] == 'Location 2 Master']
+        # df_validate_closingstock_master = df_validate_columns[df_validate_columns['Master Files'] == 'WH Closing Stock']
+        # df_validate_igst_master = df_validate_columns[df_validate_columns['Master Files'] == 'IGST Master']
+        # df_validate_sgst_master = df_validate_columns[df_validate_columns['Master Files'] == 'SGST Master']
+        # df_validate_location_master = df_validate_columns[df_validate_columns['Master Files'] == 'Location Master']
+        
         if not os.path.exists(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/Consolidate-Orders.xlsx"):
             logger.info("Could not find the consolidated order folder to generate requirement summary file")
             # file_logger.info("Could not find the consolidated order folder to generate requirement summary file")
@@ -224,16 +255,35 @@ def mergeToPivotRQ(RootFolder,POSource,OrderDate,ClientCode,Formulasheet):
         else:
 
             df_consolidated_order = pd.read_excel(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/Consolidate-Orders.xlsx")
-
+            
             with open(ConfigFolderPath+'config.json', 'r') as jsonFile:
                 config = json.load(jsonFile)
                 df_item_master = pd.read_excel(config['masterFolder']+'Item Master.xlsx')
+                df_item_master_columns = pd.DataFrame(list(df_item_master.columns), columns =['Column Names'])
+                print(df_item_master_columns)
+                # VALIDATION CODE#
+                result = validateColumnNames(df_formula_cols, df_item_master_columns, "Item Master")
+                result_data =  json.loads(result)
+                if result_data.status == False:
+                    logger.info("Kindly check the Item Master, "+ result_data.data+ " column/s are not found" )
+                    return
+                # VALIDATION CODE ENDS#
+
+                
+
+                print(type(df_item_master_columns))
+                print(df_item_master_columns)
+                ############
+
                 df_location_master = pd.read_excel(config['masterFolder']+'Location Master.xlsx')
                 df_closing_stock = pd.read_excel(config['masterFolder']+'WH Closing Stock.xlsx',skiprows=3)
 
+
             #--------------------
-            # Renaming EAN ID as Articale number to perform join using ArticleEAN
-            df_item_master.rename(columns = {'EAN ID':'ArticleEAN'}, inplace = True)
+            # Renaming EAN as Article number to perform join using ArticleEAN
+            df_item_master.rename(columns = {'EAN':'ArticleEAN'}, inplace = True)
+            
+            # common_columns = df_validate_item_master.merge(df_item_master, on= )
 
             # Merge on EAN from Item master
             df_SKU = df_consolidated_order.merge(df_item_master, on='ArticleEAN', how='left')
@@ -276,7 +326,7 @@ def mergeToPivotRQ(RootFolder,POSource,OrderDate,ClientCode,Formulasheet):
 
             # Constant Variables used in loops
             workbook_path = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/60-Requirement-Summary/Requirement-Summary.xlsx"
-            workbook_sheet = 'Requirements_Summary'
+            workbook_sheet = 'Requirement Summary'
             color = "00FFCC99"
             start_rows = 3
             start_cols = 8
@@ -288,13 +338,14 @@ def mergeToPivotRQ(RootFolder,POSource,OrderDate,ClientCode,Formulasheet):
             df_pivot['Closing Stock'] = 0
             df_pivot['Diff CS - GT'] = 0
             df_pivot['Rate'] = 0
-    
+
             df_pivot.to_excel(workbook_path, sheet_name=workbook_sheet)
+            
 
 
             # open pivot sheet again
-            df_temp_p = pd.read_excel(workbook_path)
-            df_temp = pd.read_excel(workbook_path,skiprows=5)
+            df_temp_p = pd.read_excel(workbook_path, sheet_name= workbook_sheet)
+            df_temp = pd.read_excel(workbook_path, sheet_name= workbook_sheet, skiprows=5)
             df_temp.to_excel(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/"+"df_temp.xlsx", 
             columns= ['MRP', 'Actual qty'],index=False)
             tempWorkbook = load_workbook(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/"+"df_temp.xlsx")
@@ -306,9 +357,20 @@ def mergeToPivotRQ(RootFolder,POSource,OrderDate,ClientCode,Formulasheet):
             df_temp_p['Closing Stock'] = df_temp['Actual qty'] # Copying Closing stock from temp file to requirement summary file
             print('Fetching Rate values from Item Master...')
             df_temp_p['Rate'] = df_temp['MRP'] # Copying MRP from temp file to requirement summary file
-            df_temp_p.to_excel(workbook_path, sheet_name=workbook_sheet, index=False) # Saving RQ Sum after adding CS, MRP
+            
+            
+            rq_template_source = TemplateFiles+"Requirement-Summary-Template.xlsx"
+            rq_summary_destination = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/60-Requirement-Summary/Temp-Requirement-Summary.xlsx"
+            
+            shutil.copy(rq_template_source, rq_summary_destination)
 
-            pivotWorksheet = load_workbook(workbook_path)
+            
+
+            with pd.ExcelWriter(rq_summary_destination, mode='a', engine='openpyxl',if_sheet_exists='replace') as rq_sum_writer:
+                df_temp_p.to_excel(rq_sum_writer, sheet_name=workbook_sheet, index=False) # Saving RQ Sum after adding CS, MRP
+            
+
+            pivotWorksheet = load_workbook(rq_summary_destination)
             pivotSheet = pivotWorksheet[workbook_sheet]
             pivotSheet.delete_cols(2,2) # Deleting the cols for Actual Oty and MRP_y
             pivotSheet.insert_rows(1,1) # inerting rows for date and cient name
@@ -362,8 +424,11 @@ def mergeToPivotRQ(RootFolder,POSource,OrderDate,ClientCode,Formulasheet):
 
             for r in range(8,rows+1):
                 pivotSheet[f'A{r}'].number_format = '0'
-           
+            
+
             pivotWorksheet.save(workbook_path)
+            os.remove(rq_summary_destination)
+
 
             print('Requirements summary sheet generated.')
             logger.info('Requirements summary sheet generated.')
@@ -685,7 +750,12 @@ def generatingPackingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulasheet
         logger.info('Loading Master files for processing...')
         # file_logger.info('Loading Master files for processing...')
         # Opening Item Master Sheet
-        df_IteamMaster = pd.read_excel(MasterFolderPath+'Item Master.xlsx', sheet_name='Item Master',index_col=False)
+        df_item_master = pd.read_excel(MasterFolderPath+'Item Master.xlsx', sheet_name='Item Master',index_col=False)
+        # if df_item_master != True:
+        #     logger.info('<Column name> does not exist, please check item master')
+        #     return
+
+
         print('Item Master loaded.')
         logger.info('Item Master loaded.')
         # file_logger.info('Item Master loaded.')
@@ -843,25 +913,26 @@ def generatingPackingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulasheet
 
                 # Opening Packing slip as df for second time to get EAN values
                 df_TempalateWorkbook = pd.read_excel(sourcePackingSlip,sheet_name='ORDER', skiprows=6,index_col=False)
-                df_TempalateWorkbook.rename(columns = {'EAN':'EAN ID'}, inplace = True)
+                # df_TempalateWorkbook.rename(columns = {'EAN':'EAN ID'}, inplace = True)
                 
-                # Temporary df to store EAN ID
-                df_EAN_temp = df_TempalateWorkbook[['EAN ID']]
+                # Temporary df to store EAN
+                df_EAN_temp = df_TempalateWorkbook[['EAN']]
                 # Applying join using EAN ID to get hidden_item_master to get SKU and Other fields
-                df_hidden_item_master = df_EAN_temp.merge(df_IteamMaster,on='EAN ID',how='left')
+                df_hidden_item_master = df_EAN_temp.merge(df_item_master,on='EAN',how='left')
 
-                df_Location2_temp = df_hidden_item_master.merge(df_Location2,on='EAN ID',how='left')
-                # print(df_Location2_temp)
+                df_Location2_temp = df_hidden_item_master.merge(df_Location2,on='EAN',how='left')
+                # print(df_Location2_temp.head(10))
+                df_Location2_temp.rename(columns= {'SKU ID':'SKU'}, inplace = True)
 
                 # Temporary df to store SKU
-                df_SKU_temp = df_hidden_item_master[['SKU ID']]
-                df_SKU_temp.rename(columns = {'SKU ID':'ITEMNAME'}, inplace = True)
+                df_SKU_temp = df_hidden_item_master[['SKU']]
+                df_SKU_temp.rename(columns = {'SKU':'ITEMNAME'}, inplace = True)
                 # Applying join using ITEMNAME to get hidden_dbf (from IGST/SGST sheet) to get SKU and Other fields
                 df_GST_hidden = df_SKU_temp.merge(df_IGSTMaster,on='ITEMNAME',how='left')
 
 
                 with pd.ExcelWriter(sourcePackingSlip, mode='a', engine='openpyxl',if_sheet_exists='replace') as writer:
-                    # Adding Hidden Item Master sheet to the RQ sheet with values 'Style Name', 'EAN', 'Style', 'SKU ID', 'MRP'
+                    # Adding Hidden Item Master sheet to the RQ sheet with values 'Style Name', 'EAN', 'Style', 'SKU', 'MRP'
                     df_Location2_temp.to_excel(writer,sheet_name='Hidden Item Master',index=False, columns=['Style Name', 'EAN', 'Style', 'SKU', 'MRP','Location 2','BULK  / DTA  BULK  /  EOSS LOC'])
                     # # Adding Hidden DBF sheet to the RQ sheet with values 'Vouchertypename', 'CSNNO','DATE' ETC.
                     df_GST_hidden.to_excel(writer,sheet_name='Hidden DBF', index=False, columns=['Vouchertypename', 'CSNNO','DATE',
@@ -878,25 +949,25 @@ def generatingPackingSlip(RootFolder,ReqSource,OrderDate,ClientCode,Formulasheet
                 
                 # Opening Packing slip as df for second time to get EAN values
                 df_TempalateWorkbook = pd.read_excel(sourcePackingSlip,sheet_name='ORDER', skiprows=6,index_col=False)
-                df_TempalateWorkbook.rename(columns = {'EAN':'EAN ID'}, inplace = True)
+                # df_TempalateWorkbook.rename(columns = {'EAN':'EAN ID'}, inplace = True)
                 
                 # Temporary df to store EAN ID
-                df_EAN_temp = df_TempalateWorkbook[['EAN ID']]
+                df_EAN_temp = df_TempalateWorkbook[['EAN']]
                 # Applying join using EAN ID to get hidden_item_master to get SKU and Other fields
-                df_hidden_item_master = df_EAN_temp.merge(df_IteamMaster,on='EAN ID',how='left')
+                df_hidden_item_master = df_EAN_temp.merge(df_item_master,on='EAN',how='left')
 
-                df_Location2_temp = df_hidden_item_master.merge(df_Location2,on='EAN ID',how='left')
+                df_Location2_temp = df_hidden_item_master.merge(df_Location2,on='EAN',how='left')
                 # print(df_Location2_temp)
 
                 # Temporary df to store SKU
-                df_SKU_temp = df_hidden_item_master[['SKU ID']]
-                df_SKU_temp.rename(columns = {'SKU ID':'ITEMNAME'}, inplace = True)
+                df_SKU_temp = df_hidden_item_master[['SKU']]
+                df_SKU_temp.rename(columns = {'SKU':'ITEMNAME'}, inplace = True)
                 # Applying join using ITEMNAME to get hidden_dbf (from IGST/SGST sheet) to get SKU and Other fields
                 df_GST_hidden = df_SKU_temp.merge(df_SGSTMaster,on='ITEMNAME',how='left')
 
 
                 with pd.ExcelWriter(sourcePackingSlip, mode='a', engine='openpyxl',if_sheet_exists='replace') as writer:
-                    # Adding Hidden Item Master sheet to the RQ sheet with values 'Style Name', 'EAN', 'Style', 'SKU ID', 'MRP'
+                    # Adding Hidden Item Master sheet to the RQ sheet with values 'Style Name', 'EAN', 'Style', 'SKU', 'MRP'
                     df_Location2_temp.to_excel(writer,sheet_name='Hidden Item Master',index=False, columns=['Style Name', 'EAN', 'Style', 'SKU', 'MRP','Location 2','BULK  / DTA  BULK  /  EOSS LOC'])
                     # # Adding Hidden DBF sheet to the RQ sheet with values 'Vouchertypename', 'CSNNO','DATE' ETC.
                     df_GST_hidden.to_excel(writer,sheet_name='Hidden DBF',index=False, columns=['Vouchertypename', 'CSNNO','DATE',
