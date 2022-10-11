@@ -40,8 +40,8 @@ for m in get_monitors():
 
 root = Tk()
 root.geometry(DeviceScreenWidth+"x"+DeviceScreenHeight)
-root.minsize(int(DeviceScreenWidth)-300,int(DeviceScreenHeight)-250)
-root.maxsize(int(DeviceScreenWidth),int(DeviceScreenHeight)-50)
+root.minsize(int(DeviceScreenWidth)-300,int(DeviceScreenHeight)-200)
+root.maxsize(int(DeviceScreenWidth),int(DeviceScreenHeight))
 
 # root.iconbitmap('C:/Users/HP/Documents/GitHub/Triumph.ico')
 
@@ -62,6 +62,10 @@ s.configure('TNotebook.Tab', font=('Calibri','15'), padding=[100, 10])
 tabFrame = ttk.Frame(root)
 logFrame = ttk.Frame(root)
 
+root.columnconfigure(0, weight=1)
+root.rowconfigure(1, weight=95) # 80%
+root.rowconfigure(2, weight=5) # 10%
+
 tabControl = ttk.Notebook(tabFrame)
 
 
@@ -77,41 +81,38 @@ print('Initialzing Packing-Slip Screen...')
 tab2 = Tab2(root,tabControl)
 print('Loading Screen...')
 tabControl.pack(fill ="x")
-tabFrame.pack(side='top',anchor=NW,fill ="x",pady=(0,40))
+# tabFrame.pack(side='top',anchor=NW,fill ="x") #,pady=(0,40)
+
+root.iconbitmap('Triumph_International_Logo.ico')
+def callback(url):
+   webbrowser.open_new_tab(url)
 
 
-# def callback(url):
-#    webbrowser.open_new_tab(url)
+footer_frame = ttk.Frame(root)
+inside_footer_frame = ttk.Frame(footer_frame)
+inside_footer_frame.grid(row=0,column=0)
 
+Developed_by = Label(inside_footer_frame, text="Developed by   -  ",font=Font(size=10,weight="bold"))
+Developed_by.grid(row=0,column=1)
 
-# footer_frame = ttk.Frame(root)
-# inside_footer_frame = ttk.Frame(footer_frame)
-# inside_footer_frame.grid(row=0,column=0)
+Developed_text = Label(inside_footer_frame, text="C-BIA Solutions & Services LLP",font=Font(size=10))
+Developed_text.grid(row=0,column=2)
 
-# Developed_by = Label(inside_footer_frame, text="Developed by   -  ",font=Font(size=10,weight="bold"), cursor="hand2")
-# Developed_by.grid(row=0,column=1)
+Website = Label(inside_footer_frame, text="          Website  -  ",font=Font(size=10,weight="bold"))
+Website.grid(row=0,column=3)
 
-# Developed_text = Label(inside_footer_frame, text="C-BIA Solutions & Services LLP",font=Font(size=10), cursor="hand2")
-# Developed_text.grid(row=0,column=2)
+link = Label(inside_footer_frame, text="https://c-bia.com/" ,font=Font(size=10, underline=1), cursor="hand2")
+link.grid(row=0,column=4)
+link.bind("<Button-1>", lambda e:
+callback("https://c-bia.com/"))
 
-# Website = Label(inside_footer_frame, text="          Website  -  ",font=Font(size=10,weight="bold"), cursor="hand2")
-# Website.grid(row=0,column=3)
-
-# link = Label(inside_footer_frame, text="https://c-bia.com/" ,font=Font(size=10, underline=1),foreground='#EA0920', cursor="hand2")
-# link.grid(row=0,column=4)
-# link.bind("<Button-1>", lambda e:
-# callback("https://c-bia.com/"))
-# footer_frame.pack()
 # https://docs.python.org/3/library/tkinter.html#threading-model
 
 print('UI Loaded...')
 
+tabFrame.grid(row=1, sticky='news')
+footer_frame.grid(row=2,pady=10)
 
 
-# logbox = st.ScrolledText(logframe)
-# logbox.configure(state ='disabled')
-# consoleLabel = Label(logframe,text='Logs', font=labelFont)
-# consoleLabel.pack(side=tk.LEFT)
-# logbox.pack(logframe,expand = True,fill ="both",ipady=10,ipadx=10)
 
 root.mainloop()  

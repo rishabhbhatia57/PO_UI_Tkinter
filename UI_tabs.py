@@ -11,6 +11,7 @@ from UI_logscmd import ConsoleUi
 from PIL import ImageTk, Image
 
 
+
 from UI_scriptFunctions import select_folder,begin_order_processing,open_folder, open_folder_packaging, select_files
 from config import ConfigFolderPath, headingFont,fieldFont,buttonFont,labelFont,pathFont,logFont,ClientsFolderPath
 
@@ -37,7 +38,11 @@ class Tab1():
         po_heading = Label(po_main_frame,text='PO Order Processing',font=headingFont)
         po_heading.grid(row=0,column=0,padx=10, pady=10,sticky=W,columnspan=2)
 
-        # po_img = ImageTk.PhotoImage(Image.open("Triumph_International_Logo.png"))
+        # po_img = ImageTk.PhotoImage(Image.open("Capture.PNG"))
+        # label = Frame(po_main_frame,  highlightbackground="blue", highlightthickness=2,height=10,width=10)
+        # label1 = Label(label, image = po_img)
+        # label1.pack()
+        # label.grid(row=0,column=2,columnspan=3)
         # Button(po_main_frame, image = po_img)
         # Button.grid(row=0,column=1,padx=10, pady=10,sticky=E)
 

@@ -9,7 +9,7 @@ import base64
 from tkinter.messagebox import showinfo
 from config import ConfigFolderPath, MasterFolderPath, ClientsFolderPath
 import BKE_log
-from BKE_functions import scriptStarted, downloadFiles, scriptEnded, checkFolderStructure, mergeExcelsToOne,mergeToPivotRQ, generatingPackingSlip, pdfToTable,getFilesToProcess
+from BKE_functions import scriptStarted, downloadFiles, scriptEnded, checkFolderStructure, mergeExcelsToOne,mergeToPivotRQ, generatingPackingSlip, pdfToTable,getFilesToProcess, check_master_files
 
 
 with open(ConfigFolderPath+'config.json', 'r') as jsonFile:
@@ -49,16 +49,23 @@ def startProcessing(mode,clientname,orderdate,processing_source):
                 scriptStarted()
                 # 2. Checking the folder structure 
                 print(destinationpath,clientcode,orderdate,'consolidation')
-                checkFolderStructure(RootFolder=destinationpath,ClientCode=clientcode,OrderDate=orderdate,mode = 'consolidation')
-                # 3. To download PDF Files from Google Drive and Store it in week/DownloadFiles Folder
-                downloadFiles(RootFolder=destinationpath,POSource=processing_source,OrderDate=orderdate,ClientCode=clientcode) # Done
-                # 4. Converted PDF files to Excel Files, perform Cleaning, and store to week/uploadFiles Folder
-                getFilesToProcess(RootFolder=destinationpath,POSource=processing_source,OrderDate=orderdate,ClientCode=clientcode)
-                # 5. Merge all the coverted excel file to a single excel file and store in week/MergeExcelsFiles folder
-                mergeExcelsToOne(RootFolder=destinationpath,POSource=processing_source,OrderDate=orderdate,ClientCode=clientcode)
-                # 6. PivotTable - Template Creation
-                mergeToPivotRQ(RootFolder=destinationpath,POSource=processing_source,OrderDate=orderdate,ClientCode=clientcode,Formulasheet=formulasheetpath, TemplateFiles=templatespath)
-                scriptEnded()
+
+                checkmasterfiles = check_master_files(RootFolder=destinationpath,OrderDate=orderdate,ClientCode=clientcode,formulaWorksheet=formulasheetpath, TemplateFiles=templatespath)
+                if checkmasterfiles['valid'] == True:
+                    logger.info('All master files are validated!')
+                    checkFolderStructure(RootFolder=destinationpath,ClientCode=clientcode,OrderDate=orderdate,mode = 'consolidation')
+                    # 3. To download PDF Files from Google Drive and Store it in week/DownloadFiles Folder
+                    downloadFiles(RootFolder=destinationpath,POSource=processing_source,OrderDate=orderdate,ClientCode=clientcode) # Done
+                    # 4. Converted PDF files to Excel Files, perform Cleaning, and store to week/uploadFiles Folder
+                    getFilesToProcess(RootFolder=destinationpath,POSource=processing_source,OrderDate=orderdate,ClientCode=clientcode)
+                    # 5. Merge all the coverted excel file to a single excel file and store in week/MergeExcelsFiles folder
+                    mergeExcelsToOne(RootFolder=destinationpath,POSource=processing_source,OrderDate=orderdate,ClientCode=clientcode)
+                    # 6. PivotTable - Template Creation
+                    mergeToPivotRQ(RootFolder=destinationpath,POSource=processing_source,OrderDate=orderdate,ClientCode=clientcode,formulaWorksheet=formulasheetpath, TemplateFiles=templatespath)
+
+                    scriptEnded()
+                else:
+                    scriptEnded()
 
             if mode == 'packing':
                 clientcode = clientname
@@ -76,11 +83,12 @@ def startProcessing(mode,clientname,orderdate,processing_source):
             # Phase II
                 scriptStarted()
                 checkFolderStructure(RootFolder=destinationpath,ClientCode=clientcode,OrderDate=orderdate,mode = 'packing')
-                generatingPackingSlip(RootFolder=destinationpath,ReqSource=processing_source,OrderDate=orderdate,ClientCode=clientname,Formulasheet=formulasheetpath,TemplateFiles=templatespath)
+                generatingPackingSlip(RootFolder=destinationpath,ReqSource=processing_source,OrderDate=orderdate,ClientCode=clientname,formulaWorksheet=formulasheetpath,TemplateFiles=templatespath)
             # 7. Notify that the script is Ended
                 scriptEnded()
 
     except Exception as e:
+        logger.error("Exception: "+ str(e))
         print("Exception: "+ str(e))
         exc_type, exc_obj, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
