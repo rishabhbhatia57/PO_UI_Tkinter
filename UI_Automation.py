@@ -83,7 +83,7 @@ print('Loading Screen...')
 tabControl.pack(fill ="x")
 # tabFrame.pack(side='top',anchor=NW,fill ="x") #,pady=(0,40)
 
-root.iconbitmap('Triumph_International_Logo.ico')
+root.iconbitmap('./config/Triumph_International_Logo.ico')
 def callback(url):
    webbrowser.open_new_tab(url)
 

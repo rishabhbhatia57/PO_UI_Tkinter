@@ -39,7 +39,7 @@ class Tab1():
         po_heading.grid(row=0,column=0,padx=10, pady=10,sticky=W,columnspan=2)
 
 
-        self.po_img = ImageTk.PhotoImage(Image.open("config\Triumph_International_Logo.png"))
+        self.po_img = ImageTk.PhotoImage(Image.open("./config/Triumph_International_Logo.png"))
         po_image_frame = Frame(po_main_frame) #,  highlightbackground="blue", highlightthickness=2, height=10,width=10
         po_image_frame.grid(row=0,column=2,columnspan=3)
         po_image_frame.place(anchor='ne', relx=0.99, rely=0.03)
@@ -148,7 +148,7 @@ class Tab2():
         pkg_heading = Label(pkg_main_frame,text='Generating Packing Slip',font=headingFont)
         pkg_heading.grid(row=0,column=0,padx=10, pady=10,sticky=W,columnspan=2) 
 
-        self.pkg_img = ImageTk.PhotoImage(Image.open("config\Triumph_International_Logo.png"))
+        self.pkg_img = ImageTk.PhotoImage(Image.open("./config/Triumph_International_Logo.png"))
         pkg_image_frame = Frame(pkg_main_frame) #,  highlightbackground="blue", highlightthickness=2, height=10,width=10
         pkg_image_frame.grid(row=0,column=2,columnspan=3)
         pkg_image_frame.place(anchor='ne', relx=0.99, rely=0.03)
