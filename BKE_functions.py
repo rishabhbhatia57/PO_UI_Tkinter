@@ -53,6 +53,7 @@ def validate_column_names(df_formula_cols, df_master, file_name):
             return results
         else:
             print('Validated '+str(file_name)+'.')
+            logger.info('Validated '+str(file_name)+'.')
             results = {
                 "cols_name": "",
                 "cols_not_found": False
@@ -65,7 +66,7 @@ def validate_column_names(df_formula_cols, df_master, file_name):
         print(exc_type, fname, exc_tb.tb_lineno)
 
 
-def check_master_files(RootFolder, OrderDate, ClientCode, formulaWorksheet, TemplateFiles):
+def po_check_master_files(formulaWorksheet):
 
     valid_result = {
         'valid': True
@@ -108,6 +109,89 @@ def check_master_files(RootFolder, OrderDate, ClientCode, formulaWorksheet, Temp
                 df_formula_cols, df_closing_stock, file_name)
             if result2['cols_not_found'] == True:
                 return invalid_result
+
+            # # checking  IGST Master 4
+            # file_name = "IGST Master"
+            # df_igst_master = pd.read_excel(
+            #     config['masterFolder']+'IGST Master.xlsx', sheet_name='DBF')
+            # result3 = validate_column_names(
+            #     df_formula_cols, df_igst_master, file_name)
+            # if result3['cols_not_found'] == True:
+            #     return invalid_result
+
+            # # checking  SGST Master 5
+            # file_name = "SGST Master"
+            # df_sgst_master = pd.read_excel(
+            #     config['masterFolder']+'SGST Master.xlsx', sheet_name='DBF')
+            # result4 = validate_column_names(
+            #     df_formula_cols, df_sgst_master, file_name)
+            # if result4['cols_not_found'] == True:
+            #     return invalid_result
+
+            # checking  Location 2 Master 6
+            file_name = "Location 2 Master"
+            df_location_2_master = pd.read_excel(
+                config['masterFolder']+'Location 2 Master.xlsx', sheet_name='Location2')
+            result5 = validate_column_names(
+                df_formula_cols, df_location_2_master, file_name)
+            if result5['cols_not_found'] == True:
+                return invalid_result
+
+        return valid_result
+
+    except Exception as e:
+        print(e)
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        print(exc_type, fname, exc_tb.tb_lineno)
+        logger.error("Error while checking "+str(file_name)+" file: "+str(e))
+        return invalid_result
+
+
+
+def pkg_check_master_files(formulaWorksheet):
+
+    valid_result = {
+        'valid': True
+    }
+
+    invalid_result = {
+        'valid': False
+    }
+    try:
+        logger.info('Validating master files. This may take few minutes...')
+        df_formula_cols = pd.read_excel(
+            formulaWorksheet, sheet_name="Validate Column Names")
+
+        with open(ConfigFolderPath+'config.json', 'r') as jsonFile:
+            config = json.load(jsonFile)
+
+            # file_name = "Item Master"
+            # df_item_master = pd.read_excel(
+            #     config['masterFolder']+'Item Master.xlsx', sheet_name='Item Master')
+            # # checking  Item Master 1
+            # result = validate_column_names(
+            #     df_formula_cols, df_item_master, file_name)
+            # if result['cols_not_found'] == True:  # Problem exists
+            #     return invalid_result
+
+            #  # checking  Location Master 2
+            # file_name = "Location Master"
+            # df_location_master = pd.read_excel(
+            #     config['masterFolder']+file_name+'.xlsx', sheet_name='Location Master')
+            # result1 = validate_column_names(
+            #     df_formula_cols, df_location_master, file_name)
+            # if result1['cols_not_found'] == True:
+            #     return invalid_result
+
+            # # checking  Location Master 3
+            # file_name = "WH Closing Stock"
+            # df_closing_stock = pd.read_excel(
+            #     config['masterFolder']+'WH Closing Stock.xlsx', sheet_name='ClosingStock', skiprows=3)  # ClosingStock
+            # result2 = validate_column_names(
+            #     df_formula_cols, df_closing_stock, file_name)
+            # if result2['cols_not_found'] == True:
+            #     return invalid_result
 
             # checking  IGST Master 4
             file_name = "IGST Master"
@@ -184,6 +268,8 @@ def downloadFiles(RootFolder, POSource, OrderDate, ClientCode):
         logger.error("Error while copying files: "+str(e))
         # file_logger.info("Error while copying files: "+str(e))
         print("Error while copying files: "+str(e))
+
+
 
 
 

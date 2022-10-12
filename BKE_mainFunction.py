@@ -9,7 +9,7 @@ import base64
 from tkinter.messagebox import showinfo
 from config import ConfigFolderPath, MasterFolderPath, ClientsFolderPath
 import BKE_log
-from BKE_functions import scriptStarted, downloadFiles, scriptEnded, checkFolderStructure, mergeExcelsToOne,mergeToPivotRQ, generatingPackingSlip, pdfToTable,getFilesToProcess, check_master_files
+from BKE_functions import scriptStarted, downloadFiles, scriptEnded, checkFolderStructure, mergeExcelsToOne,mergeToPivotRQ, generatingPackingSlip, pdfToTable,getFilesToProcess, po_check_master_files, pkg_check_master_files
 
 
 with open(ConfigFolderPath+'config.json', 'r') as jsonFile:
@@ -50,7 +50,7 @@ def startProcessing(mode,clientname,orderdate,processing_source):
                 # 2. Checking the folder structure 
                 # print(destinationpath,clientcode,orderdate,'consolidation')
 
-                checkmasterfiles = check_master_files(RootFolder=destinationpath,OrderDate=orderdate,ClientCode=clientcode,formulaWorksheet=formulasheetpath, TemplateFiles=templatespath)
+                checkmasterfiles = po_check_master_files(formulaWorksheet=formulasheetpath)
                 if checkmasterfiles['valid'] == True:
                     logger.info('All master files are validated!')
                     checkFolderStructure(RootFolder=destinationpath,ClientCode=clientcode,OrderDate=orderdate,mode = 'consolidation')
@@ -82,7 +82,7 @@ def startProcessing(mode,clientname,orderdate,processing_source):
                 # print("Client Name: "+clientname+" Client Code: "+clientname+" Order Date: "+orderdate+" PO Folder Path: '"+processing_source+"'")
             # Phase II
                 scriptStarted()
-                checkmasterfiles = check_master_files(RootFolder=destinationpath,OrderDate=orderdate,ClientCode=clientcode,formulaWorksheet=formulasheetpath, TemplateFiles=templatespath)
+                checkmasterfiles = pkg_check_master_files(formulaWorksheet=formulasheetpath)
                 if checkmasterfiles['valid'] == True:
                     checkFolderStructure(RootFolder=destinationpath,ClientCode=clientcode,OrderDate=orderdate,mode = 'packing')
                     generatingPackingSlip(RootFolder=destinationpath,ReqSource=processing_source,OrderDate=orderdate,ClientCode=clientname,formulaWorksheet=formulasheetpath,TemplateFiles=templatespath)

@@ -83,7 +83,7 @@ print('Loading Screen...')
 tabControl.pack(fill ="x")
 # tabFrame.pack(side='top',anchor=NW,fill ="x") #,pady=(0,40)
 
-root.iconbitmap('./config/Triumph_International_Logo.ico')
+root.iconbitmap('./config/icon.ico')
 def callback(url):
    webbrowser.open_new_tab(url)
 
@@ -101,10 +101,10 @@ Developed_text.grid(row=0,column=2)
 Website = Label(inside_footer_frame, text="          Website  -  ",font=Font(size=10,weight="bold"))
 Website.grid(row=0,column=3)
 
-link = Label(inside_footer_frame, text="https://c-bia.com/" ,font=Font(size=10, underline=1), cursor="hand2")
+link = Label(inside_footer_frame, text="https://www.c-bia.com" ,font=Font(size=10, underline=1), cursor="hand2")
 link.grid(row=0,column=4)
 link.bind("<Button-1>", lambda e:
-callback("https://c-bia.com/"))
+callback("https://www.c-bia.com/"))
 
 # https://docs.python.org/3/library/tkinter.html#threading-model
 
