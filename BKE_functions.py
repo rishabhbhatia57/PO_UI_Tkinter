@@ -186,6 +186,7 @@ def downloadFiles(RootFolder, POSource, OrderDate, ClientCode):
         print("Error while copying files: "+str(e))
 
 
+
 def scriptStarted():
     logger.info('Starting script')
     print('Starting script')

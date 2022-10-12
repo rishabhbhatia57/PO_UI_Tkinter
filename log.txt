@@ -1176,3 +1176,27 @@
 2022-10-11 21:58:47,195 INFO Packing slip generated for: 4000444799 file in 3.95 seconds. 
 2022-10-11 21:58:47,196 INFO Total time taken for generation of packing-slips:  48.01 seconds. 
 2022-10-11 21:58:47,215 INFO Script Ended 
+2022-10-12 10:00:10,477 INFO Client Name: PL Client Code: PL Order Date: 2022-10-12 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-10-12 10:00:10,478 INFO Starting script 
+2022-10-12 10:00:10,479 INFO Do not close this window while processing... 
+2022-10-12 10:00:10,480 INFO Validating master files. This may take few minutes... 
+2022-10-12 10:00:10,980 ERROR Error while checking Item Master file: Worksheet named 'Item Master21' not found 
+2022-10-12 10:00:10,980 INFO Script Ended 
+2022-10-12 10:48:19,817 INFO Client Name: OTH3 Client Code: OTH3 Order Date: 2022-10-12 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-10-12 10:48:19,818 INFO Starting script 
+2022-10-12 10:48:19,819 INFO Do not close this window while processing... 
+2022-10-12 10:48:19,820 INFO Validating master files. This may take few minutes... 
+2022-10-12 10:48:20,336 ERROR Error while checking Item Master file: Worksheet named 'Item Master21' not found 
+2022-10-12 10:48:20,336 INFO Script Ended 
+2022-10-12 10:49:34,550 INFO Client Name: OTH3 Client Code: OTH3 Order Date: 2022-10-12 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-10-12 10:49:34,551 INFO Starting script 
+2022-10-12 10:49:34,552 INFO Do not close this window while processing... 
+2022-10-12 10:49:34,553 INFO Validating master files. This may take few minutes... 
+2022-10-12 10:49:35,045 ERROR Error while checking Item Master file: Worksheet named 'Item Master21' not found 
+2022-10-12 10:49:35,046 INFO Script Ended 
+2022-10-12 10:51:52,342 INFO Client Name: OTH3 Client Code: OTH3 Order Date: 2022-10-12 PO Folder Path: 'C:/Users/HP/Documents/GitHub/PO_UI_Tkinter/dist/Triumph Data/POSourceFiles' 
+2022-10-12 10:51:52,342 INFO Starting script 
+2022-10-12 10:51:52,344 INFO Do not close this window while processing... 
+2022-10-12 10:51:52,344 INFO Validating master files. This may take few minutes... 
+2022-10-12 10:51:52,881 ERROR Error while checking Item Master file: Worksheet named 'Item Master21' not found 
+2022-10-12 10:51:52,881 INFO Script Ended 

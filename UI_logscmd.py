@@ -35,33 +35,13 @@ class ConsoleUi:
     def __init__(self, frame):
         
         self.frame = frame
-        # def callback(url):
-        #     webbrowser.open_new_tab(url)
-        # footer_frame = ttk.Frame(frame)
-        # inside_footer_frame = ttk.Frame(footer_frame)
-        # inside_footer_frame.grid(row=0,column=0)
 
-        # Developed_by = Label(inside_footer_frame, text="Developed by   -  ",font=Font(size=10,weight="bold"), cursor="hand2")
-        # Developed_by.grid(row=0,column=1)
-
-        # Developed_text = Label(inside_footer_frame, text="C-BIA Solutions & Services LLP",font=Font(size=10), cursor="hand2")
-        # Developed_text.grid(row=0,column=2)
-
-        # Website = Label(inside_footer_frame, text="          Website  -  ",font=Font(size=10,weight="bold"), cursor="hand2")
-        # Website.grid(row=0,column=3)
-
-        # link = Label(inside_footer_frame, text="https://c-bia.com/" ,font=Font(size=10, underline=1), cursor="hand2") #foreground='#EA0920'
-        # link.grid(row=0,column=4)
-        # link.bind("<Button-1>", lambda e:
-        # callback("https://c-bia.com/"))
-        # footer_frame.pack()
-        # https://docs.python.org/3/library/tkinter.html#threading-model
         
         # Create a ScrolledText wdiget
         self.scrolled_text = st.ScrolledText(frame, state='disabled')#height=20
         self.scrolled_text.pack(expand = True,fill ="x",ipady=20,ipadx=10)
         self.scrolled_text.configure(font=logFont)
-        self.scrolled_text.tag_config('INFO', foreground='White')
+        self.scrolled_text.tag_config('INFO')
         self.scrolled_text.tag_config('DEBUG', foreground='gray')
         self.scrolled_text.tag_config('WARNING', foreground='orange')
         self.scrolled_text.tag_config('ERROR', foreground='red')

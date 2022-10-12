@@ -38,13 +38,14 @@ class Tab1():
         po_heading = Label(po_main_frame,text='PO Order Processing',font=headingFont)
         po_heading.grid(row=0,column=0,padx=10, pady=10,sticky=W,columnspan=2)
 
-        # po_img = ImageTk.PhotoImage(Image.open("Capture.PNG"))
-        # label = Frame(po_main_frame,  highlightbackground="blue", highlightthickness=2,height=10,width=10)
-        # label1 = Label(label, image = po_img)
-        # label1.pack()
-        # label.grid(row=0,column=2,columnspan=3)
-        # Button(po_main_frame, image = po_img)
-        # Button.grid(row=0,column=1,padx=10, pady=10,sticky=E)
+
+        self.po_img = ImageTk.PhotoImage(Image.open("config\Triumph_International_Logo.png"))
+        po_image_frame = Frame(po_main_frame) #,  highlightbackground="blue", highlightthickness=2, height=10,width=10
+        po_image_frame.grid(row=0,column=2,columnspan=3)
+        po_image_frame.place(anchor='ne', relx=0.99, rely=0.03)
+        po_img_label = Label(po_image_frame, image = self.po_img)
+        po_img_label.pack()
+        
 
         po_client_Name = Label(po_main_frame,text='Client Name',font=labelFont)
         po_client_Name.grid(row=1,column=0,padx=10, pady=10,sticky=W)
@@ -145,7 +146,14 @@ class Tab2():
         pkg_frame.grid(row=0,column=0)
 
         pkg_heading = Label(pkg_main_frame,text='Generating Packing Slip',font=headingFont)
-        pkg_heading.grid(row=0,column=0,padx=10, pady=10,sticky=W,columnspan=2)  
+        pkg_heading.grid(row=0,column=0,padx=10, pady=10,sticky=W,columnspan=2) 
+
+        self.pkg_img = ImageTk.PhotoImage(Image.open("config\Triumph_International_Logo.png"))
+        pkg_image_frame = Frame(pkg_main_frame) #,  highlightbackground="blue", highlightthickness=2, height=10,width=10
+        pkg_image_frame.grid(row=0,column=2,columnspan=3)
+        pkg_image_frame.place(anchor='ne', relx=0.99, rely=0.03)
+        pkg_img_label = Label(pkg_image_frame, image = self.pkg_img)
+        pkg_img_label.pack() 
 
         pkg_requirements_summary = ttk.Label(pkg_main_frame,text='Requirements Summary Path',font=labelFont)
         pkg_requirements_summary.grid(row=1,column=0,padx=10, pady=10,sticky=W)
