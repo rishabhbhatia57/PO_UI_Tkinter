@@ -1,9 +1,11 @@
 import logging
 from logging.handlers import RotatingFileHandler
-from datetime import datetime
+from datetime import datetime, date
 
 def setup_custom_logger(name):
-    filename = "log.txt"
+    today = date.today()
+    d3 = today.strftime("%Y-%m-%d")
+    filename = './Logs/'+str(d3)+" log.txt"
 
     logging.basicConfig(handlers=[RotatingFileHandler(filename, maxBytes=10485760, backupCount=5)],
                         level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s ')
