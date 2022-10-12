@@ -48,7 +48,7 @@ def startProcessing(mode,clientname,orderdate,processing_source):
                 # 1. Notify that the script is Started
                 scriptStarted()
                 # 2. Checking the folder structure 
-                print(destinationpath,clientcode,orderdate,'consolidation')
+                # print(destinationpath,clientcode,orderdate,'consolidation')
 
                 checkmasterfiles = check_master_files(RootFolder=destinationpath,OrderDate=orderdate,ClientCode=clientcode,formulaWorksheet=formulasheetpath, TemplateFiles=templatespath)
                 if checkmasterfiles['valid'] == True:
@@ -82,10 +82,14 @@ def startProcessing(mode,clientname,orderdate,processing_source):
                 # print("Client Name: "+clientname+" Client Code: "+clientname+" Order Date: "+orderdate+" PO Folder Path: '"+processing_source+"'")
             # Phase II
                 scriptStarted()
-                checkFolderStructure(RootFolder=destinationpath,ClientCode=clientcode,OrderDate=orderdate,mode = 'packing')
-                generatingPackingSlip(RootFolder=destinationpath,ReqSource=processing_source,OrderDate=orderdate,ClientCode=clientname,formulaWorksheet=formulasheetpath,TemplateFiles=templatespath)
-            # 7. Notify that the script is Ended
-                scriptEnded()
+                checkmasterfiles = check_master_files(RootFolder=destinationpath,OrderDate=orderdate,ClientCode=clientcode,formulaWorksheet=formulasheetpath, TemplateFiles=templatespath)
+                if checkmasterfiles['valid'] == True:
+                    checkFolderStructure(RootFolder=destinationpath,ClientCode=clientcode,OrderDate=orderdate,mode = 'packing')
+                    generatingPackingSlip(RootFolder=destinationpath,ReqSource=processing_source,OrderDate=orderdate,ClientCode=clientname,formulaWorksheet=formulasheetpath,TemplateFiles=templatespath)
+                # 7. Notify that the script is Ended
+                    scriptEnded()
+                else:
+                    scriptEnded()
 
     except Exception as e:
         logger.error("Exception: "+ str(e))

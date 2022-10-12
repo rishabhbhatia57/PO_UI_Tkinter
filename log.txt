@@ -1200,3 +1200,17 @@
 2022-10-12 10:51:52,344 INFO Validating master files. This may take few minutes... 
 2022-10-12 10:51:52,881 ERROR Error while checking Item Master file: Worksheet named 'Item Master21' not found 
 2022-10-12 10:51:52,881 INFO Script Ended 
+2022-10-12 11:31:35,580 INFO Starting script 
+2022-10-12 11:31:35,582 INFO Do not close this window while processing... 
+2022-10-12 11:31:35,582 INFO Validating master files. This may take few minutes... 
+2022-10-12 11:32:20,051 INFO Creating the new directory... 
+2022-10-12 11:32:20,052 INFO Folder 'OTH3-2022/2022-10-12' is created. 
+2022-10-12 11:32:20,160 INFO Loading Master files for processing... 
+2022-10-12 11:32:27,189 INFO Item Master loaded. 
+2022-10-12 11:32:41,946 INFO IGST Master loaded. 
+2022-10-12 11:32:56,754 INFO SGST Master loaded. 
+2022-10-12 11:32:58,188 INFO Location 2 Master loaded. 
+2022-10-12 11:33:04,031 INFO Packing slip generated for: 4000444765 file in 5.84 seconds. 
+2022-10-12 11:33:08,035 INFO Packing slip generated for: 4000444799 file in 4.00 seconds. 
+2022-10-12 11:33:08,036 INFO Total time taken for generation of packing-slips:  47.98 seconds. 
+2022-10-12 11:33:08,056 INFO Script Ended 
