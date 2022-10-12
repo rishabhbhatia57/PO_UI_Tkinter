@@ -76,7 +76,7 @@ def po_check_master_files(formulaWorksheet):
         'valid': False
     }
     try:
-        logger.info('Validating master files. This may take few minutes...')
+        logger.info('Validating master files...')
         df_formula_cols = pd.read_excel(
             formulaWorksheet, sheet_name="Validate Column Names")
 
@@ -159,21 +159,21 @@ def pkg_check_master_files(formulaWorksheet):
         'valid': False
     }
     try:
-        logger.info('Validating master files. This may take few minutes...')
+        logger.info('Validating master files...')
         df_formula_cols = pd.read_excel(
             formulaWorksheet, sheet_name="Validate Column Names")
 
         with open(ConfigFolderPath+'config.json', 'r') as jsonFile:
             config = json.load(jsonFile)
 
-            # file_name = "Item Master"
-            # df_item_master = pd.read_excel(
-            #     config['masterFolder']+'Item Master.xlsx', sheet_name='Item Master')
-            # # checking  Item Master 1
-            # result = validate_column_names(
-            #     df_formula_cols, df_item_master, file_name)
-            # if result['cols_not_found'] == True:  # Problem exists
-            #     return invalid_result
+            file_name = "Item Master"
+            df_item_master = pd.read_excel(
+                config['masterFolder']+'Item Master.xlsx', sheet_name='Item Master')
+            # checking  Item Master 1
+            result = validate_column_names(
+                df_formula_cols, df_item_master, file_name)
+            if result['cols_not_found'] == True:  # Problem exists
+                return invalid_result
 
             #  # checking  Location Master 2
             # file_name = "Location Master"
@@ -1149,15 +1149,14 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
 
                 # Temporary df to store EAN
                 df_EAN_temp = df_TempalateWorkbook[['EAN']]
-                # Applying join using EAN ID to get hidden_item_master to get SKU and Other fields
+                # Applying join using EAN ID to get hidden_item_master to geSKU IDt SKU and Other fields
                 df_hidden_item_master = df_EAN_temp.merge(
                     df_item_master, on='EAN', how='left')
 
                 df_Location2_temp = df_hidden_item_master.merge(
                     df_Location2, on='EAN', how='left')
                 # print(df_Location2_temp.head(10))
-                df_Location2_temp.rename(
-                    columns={'SKU ID': 'SKU'}, inplace=True)
+                df_Location2_temp.rename(columns={'SKU_x': 'SKU'}, inplace=True)
 
                 # Temporary df to store SKU
                 df_SKU_temp = df_hidden_item_master[['SKU']]
