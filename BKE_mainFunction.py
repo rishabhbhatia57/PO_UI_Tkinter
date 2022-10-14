@@ -52,7 +52,6 @@ def startProcessing(mode,clientname,orderdate,processing_source):
 
                 checkmasterfiles = po_check_master_files(formulaWorksheet=formulasheetpath)
                 if checkmasterfiles['valid'] == True:
-                    logger.info('All master files are validated!')
                     checkFolderStructure(RootFolder=destinationpath,ClientCode=clientcode,OrderDate=orderdate,mode = 'consolidation')
                     # 3. To download PDF Files from Google Drive and Store it in week/DownloadFiles Folder
                     downloadFiles(RootFolder=destinationpath,POSource=processing_source,OrderDate=orderdate,ClientCode=clientcode) # Done

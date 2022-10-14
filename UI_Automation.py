@@ -39,7 +39,8 @@ for m in get_monitors():
 
 
 root = Tk()
-root.geometry(DeviceScreenWidth+"x"+DeviceScreenHeight)
+# root.attributes('-fullscreen', True)
+# root.geometry(DeviceScreenWidth+"x"+DeviceScreenHeight)
 root.minsize(int(DeviceScreenWidth)-300,int(DeviceScreenHeight)-200)
 root.maxsize(int(DeviceScreenWidth),int(DeviceScreenHeight))
 

@@ -62,7 +62,7 @@ def select_files(showPath,showReqPath,showOrderdate):
             showinfo(title='Invalid Selection',
             message='Wrong file selected. Only excel workbook with extenstion ".xlsx" can be selected.')
         else:
-            showinfo(title='Please wait',message="Fetching Client Name and Order Date...")
+            showinfo(title='Please wait',message="Fetching Client Name and Order Date...\nClick OK to continue.")
             showPath.config(text=ReqFileSelected)
             ReqSumWorkbook = load_workbook(ReqFileSelected,data_only=True)
             ReqSumSheet = ReqSumWorkbook.active
