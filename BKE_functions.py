@@ -919,7 +919,7 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
         df = pd.DataFrame(InputSheet, index=None)
         rows = len(df.axes[0])
         cols = len(df.axes[1])
-
+        print(formulaWorksheet)
         formulaWorksheet = load_workbook(formulaWorksheet, data_only=True)
         formulaSheet = formulaWorksheet['FormulaSheet']
         DBFformula = formulaWorksheet['DBF']
@@ -971,7 +971,7 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
             TemplateSheet.cell(5, 2).value = InputSheet.cell(start_cols-1, column).value
 
             # Receving Location
-            TemplateSheet.cell(5, 3).value = InputSheet.cell(start_cols+3, column).value
+            TemplateSheet.cell(5, 3).value = InputSheet.cell(start_cols+4, column).value
 
             TemplateSheet.cell(1, 1).value = 'Order Date'
             TemplateSheet.cell(1, 2).value = InputSheet.cell(1, 2).value  # Date
@@ -980,9 +980,9 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
             TemplateSheet.cell(1, 4).value = InputSheet.cell(start_cols+3, column).value  # IGST/SGST Type (6,cols-3)
             if TemplateSheet.cell(1, 4).value == None:
                 print(
-                    "IGST/SGST TYPE = None, Requirment Summary file is not saved. Open the file, save it then process")
+                    "IGST/SGST TYPE = None, Requirment Summary file is not saved. Open the file, save it then process again")
                 logger.info(
-                    "IGST/SGST TYPE = None, Requirment Summary file is not saved. Open the file, save it then process")
+                    "IGST/SGST TYPE = None, Requirment Summary file is not saved. Open the file, save it then process again")
                 # file_logger.info("IGST/SGST TYPE = None, Requirment Summary file is not saved. Open the file, save it then process")
                 break
 
@@ -1005,7 +1005,7 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
                     # Copy EAN to template sheet
                     TemplateSheet.cell(Trows, Tcols-3).value = InputSheet.cell(row, 1).value
 
-                    # VLOOKUP
+                    # VLOOKUP - formula sheet
                     # StyleName
                     
                     TemplateSheet.cell(Trows,Tcols-4).value = "="+formulaSheet.cell(3,2).value.replace("#VAL#",str(Trows-6))
@@ -1116,7 +1116,7 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
                 with pd.ExcelWriter(sourcePackingSlip, mode='a', engine='openpyxl', if_sheet_exists='replace') as writer:
                     # Adding Hidden Item Master sheet to the RQ sheet with values 'Style Name', 'EAN', 'Style', 'SKU', 'MRP'
                     df_Location2_temp.to_excel(writer, sheet_name='Hidden Item Master', index=False, columns=[
-                                               'Style Name', 'EAN', 'Style', 'SKU', 'MRP','Location 2', 'BULK  / DTA  BULK  /  EOSS LOC','MRP Change Flag'])
+                    'Style Name', 'EAN', 'Style', 'SKU', 'MRP','Location 2', 'BULK  / DTA  BULK  /  EOSS LOC','MRP Change Flag'])
                     # # Adding Hidden DBF sheet to the RQ sheet with values 'Vouchertypename', 'CSNNO','DATE' ETC.
                     df_GST_hidden.to_excel(writer, sheet_name='Hidden DBF', index=False, columns=['Vouchertypename', 'CSNNO', 'DATE',
                                                                                                   'REFERENCE', 'REF1', 'DEALNAME', 'PRICELEVEL', 'ITEMNAME', 'GODOWN', 'QTY', 'RATE', 'SUBTOTAL', 'DISCPERC',
@@ -1130,38 +1130,39 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
             if TemplateSheet.cell(1, 4).value == 'SGST':
 
                 # Opening Packing slip as df for second time to get EAN values
-                df_TempalateWorkbook = pd.read_excel(
-                    sourcePackingSlip, sheet_name='ORDER', skiprows=6, index_col=False)
+                df_TempalateWorkbook = pd.read_excel(sourcePackingSlip, sheet_name='ORDER', skiprows=6, index_col=False)
                 # df_TempalateWorkbook.rename(columns = {'EAN':'EAN ID'}, inplace = True)
 
                 # Temporary df to store EAN ID
                 df_EAN_temp = df_TempalateWorkbook[['EAN']]
                 # Applying join using EAN ID to get hidden_item_master to get SKU and Other fields
-                df_hidden_item_master = df_EAN_temp.merge(
-                    df_item_master, on='EAN', how='left')
 
-                df_Location2_temp = df_hidden_item_master.merge(
-                    df_Location2, on='EAN', how='left')
+                df_hidden_item_master = df_EAN_temp.merge(df_item_master, on='EAN', how='left')
+
+                df_Location2_temp = df_hidden_item_master.merge(df_Location2, on='EAN', how='left')
                 # print(df_Location2_temp)
+                df_Location2_temp.rename(columns={'SKU_x': 'SKU'}, inplace=True)
 
                 # Temporary df to store SKU
                 df_SKU_temp = df_hidden_item_master[['SKU']]
                 df_SKU_temp.rename(columns={'SKU': 'ITEMNAME'}, inplace=True)
                 # Applying join using ITEMNAME to get hidden_dbf (from IGST/SGST sheet) to get SKU and Other fields
-                df_GST_hidden = df_SKU_temp.merge(
-                    df_SGSTMaster, on='ITEMNAME', how='left')
-
+                df_GST_hidden = df_SKU_temp.merge(df_SGSTMaster, on='ITEMNAME', how='left')
+                for col in df_Location2_temp.columns:
+                    print(col)
                 with pd.ExcelWriter(sourcePackingSlip, mode='a', engine='openpyxl', if_sheet_exists='replace') as writer:
                     # Adding Hidden Item Master sheet to the RQ sheet with values 'Style Name', 'EAN', 'Style', 'SKU', 'MRP'
-                    df_Location2_temp.to_excel(writer, sheet_name='Hidden Item Master', index=False, columns=['Style Name', 'EAN', 'Style', 'SKU', 'MRP','Location 2', 'BULK  / DTA  BULK  /  EOSS LOC','MRP Change Flag'])
+                    df_Location2_temp.to_excel(writer, sheet_name='Hidden Item Master', index=False, columns=
+                    ['Style Name', 'EAN', 'Style', 'SKU', 'MRP','Location 2', 'BULK  / DTA  BULK  /  EOSS LOC','MRP Change Flag'])
                     # # Adding Hidden DBF sheet to the RQ sheet with values 'Vouchertypename', 'CSNNO','DATE' ETC.
-                    df_GST_hidden.to_excel(writer, sheet_name='Hidden DBF', index=False, columns=['Vouchertypename', 'CSNNO', 'DATE',
-                                                                                                  'REFERENCE', 'REF1', 'DEALNAME', 'PRICELEVEL', 'ITEMNAME', 'GODOWN', 'QTY', 'RATE', 'SUBTOTAL', 'DISCPERC',
-                                                                                                  'DISCAMT', 'ITEMVALUE', 'LedgerAcct', 'CATEGORY1', 'COSTCENT1', 'CATEGORY2', 'COSTCENT2', 'CATEGORY3', 'COSTCENT3',
-                                                                                                  'CATEGORY4', 'COSTCENT4', 'ITEMTOTAL', 'TOTALQTY', 'CDISCHEAD', 'CDISCPERC', 'COMMONDISC', 'BEFORETAX',
-                                                                                                  'TAXHEAD', 'TAXPERC', 'TAXAMT', 'STAXHEAD', 'STAXPERC', 'STAXAMT', 'ITAXHEAD', 'ITAXPERC', 'ITAXAMT', 'NETAMT',
-                                                                                                  'ROUND', 'ROUND1', 'REFTYPE', 'Name', 'REFAMT', 'Narration', 'Transport', 'transmode', 'pymtterm', 'ordno',
-                                                                                                  'orddate', 'DANO', 'Delyadd1', 'Delyadd2', 'Delyadd3', 'Delyadd4'])
+                    df_GST_hidden.to_excel(writer, sheet_name='Hidden DBF', index=False, columns=[
+                        'Vouchertypename', 'CSNNO', 'DATE','REFERENCE', 'REF1', 'DEALNAME', 'PRICELEVEL', 'ITEMNAME', 
+                        'GODOWN', 'QTY', 'RATE', 'SUBTOTAL', 'DISCPERC','DISCAMT', 'ITEMVALUE', 'LedgerAcct', 'CATEGORY1', 
+                        'COSTCENT1', 'CATEGORY2', 'COSTCENT2', 'CATEGORY3', 'COSTCENT3','CATEGORY4', 'COSTCENT4', 'ITEMTOTAL', 
+                        'TOTALQTY', 'CDISCHEAD', 'CDISCPERC', 'COMMONDISC', 'BEFORETAX','TAXHEAD', 'TAXPERC', 'TAXAMT', 'STAXHEAD', 
+                        'STAXPERC', 'STAXAMT', 'ITAXHEAD', 'ITAXPERC', 'ITAXAMT', 'NETAMT','ROUND', 'ROUND1', 'REFTYPE', 'Name', 
+                        'REFAMT', 'Narration', 'Transport', 'transmode', 'pymtterm', 'ordno','orddate', 'DANO', 'Delyadd1', 'Delyadd2', 
+                        'Delyadd3', 'Delyadd4'])
                 pass
 
             # Full Item Master
