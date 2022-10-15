@@ -1007,19 +1007,21 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
 
                     # VLOOKUP
                     # StyleName
-                    # TemplateSheet.cell(Trows,Tcols-4).value = "="+formulaSheet.cell(3,2).value.replace("#VAL#",str(Trows))
-                    TemplateSheet.cell(Trows, Tcols-4).value = "='Hidden Item Master'!A"+str(Trows-6)
+                    
+                    TemplateSheet.cell(Trows,Tcols-4).value = "="+formulaSheet.cell(3,2).value.replace("#VAL#",str(Trows-6))
+                    #TemplateSheet.cell(Trows, Tcols-4).value = "='Hidden Item Master'!A"+str(Trows-6)
 
                     # style
-                    # TemplateSheet.cell(Trows,Tcols-2).value =  "="+formulaSheet.cell(4,2).value.replace("#VAL#",str(Trows))
-                    TemplateSheet.cell(Trows, Tcols-2).value = "='Hidden Item Master'!C"+str(Trows-6)
+                    TemplateSheet.cell(Trows,Tcols-2).value =  "="+formulaSheet.cell(4,2).value.replace("#VAL#",str(Trows-6))
+                    #TemplateSheet.cell(Trows, Tcols-2).value = "='Hidden Item Master'!C"+str(Trows-6)
 
                     # SADM SKU
-                    # TemplateSheet.cell(Trows,Tcols-1).value = "="+formulaSheet.cell(5,2).value.replace("#VAL#",str(Trows))
-                    TemplateSheet.cell(Trows, Tcols-1).value = "='Hidden Item Master'!D"+str(Trows-6)
+                    TemplateSheet.cell(Trows,Tcols-1).value = "="+formulaSheet.cell(5,2).value.replace("#VAL#",str(Trows-6))
+                    #TemplateSheet.cell(Trows, Tcols-1).value = "='Hidden Item Master'!D"+str(Trows-6)
 
                     # MRP Change Flag
-                    TemplateSheet.cell(Trows, Tcols+19).value = "=IF('Hidden Item Master'!H"+str(Trows-6)+'<>"","*","")'
+                    TemplateSheet.cell(Trows, Tcols+19).value = "="+formulaSheet.cell(6,2).value.replace("#VAL#",str(Trows-6))
+                    #TemplateSheet.cell(Trows, Tcols+19).value = "=IF('Hidden Item Master'!H"+str(Trows-6)+'<>"","*","")'
                     
 
 
@@ -1028,40 +1030,40 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
                     # TemplateSheet.cell(Trows, Tcols+3).value = "='Hidden Item Master'!E"+str(Trows-6)
 
                     # Cls stk vs order
-                    # TemplateSheet.cell(Trows,Tcols+6).value = TemplateSheet.cell(Trows,Tcols+5).value - TemplateSheet.cell(Trows,Tcols+2).value
+                    #TemplateSheet.cell(Trows,Tcols+6).value = TemplateSheet.cell(Trows,Tcols+5).value - TemplateSheet.cell(Trows,Tcols+2).value
                     TemplateSheet.cell(Trows, Tcols+6).value = "="+openpyxl.utils.cell.get_column_letter(Tcols+5)+str(Trows) + '-'+openpyxl.utils.cell.get_column_letter(Tcols+2)+str(Trows)
 
                     # LOCATION2
-                    # TemplateSheet.cell(Trows,Tcols+7).value = "="+formulaSheet.cell(7,2).value.replace("#VAL#",str(Trows))
-                    TemplateSheet.cell(Trows, Tcols+7).value = "='Hidden Item Master'!F"+str(Trows-6)
+                    TemplateSheet.cell(Trows,Tcols+7).value = "="+formulaSheet.cell(8,2).value.replace("#VAL#",str(Trows-6))
+                    #TemplateSheet.cell(Trows, Tcols+7).value = "='Hidden Item Master'!F"+str(Trows-6)
 
                     # BULK  / DTA  BULK  /  EOSS LOC
-                    # TemplateSheet.cell(Trows,Tcols+8).value = "="+formulaSheet.cell(8,2).value.replace("#VAL#",str(Trows))
-                    TemplateSheet.cell(Trows, Tcols+8).value = "='Hidden Item Master'!G"+str(Trows-6)
+                    TemplateSheet.cell(Trows,Tcols+8).value = "="+formulaSheet.cell(9,2).value.replace("#VAL#",str(Trows-6))
+                    #TemplateSheet.cell(Trows, Tcols+8).value = "='Hidden Item Master'!G"+str(Trows-6)
 
                     # MRP
-                    # TemplateSheet.cell(Trows,Tcols+9).value = "="+formulaSheet.cell(9,2).value.replace("#VAL#",str(Trows))
-                    TemplateSheet.cell(Trows, Tcols+9).value = "='Hidden Item Master'!E"+str(Trows-6)
+                    TemplateSheet.cell(Trows,Tcols+9).value = "="+formulaSheet.cell(10,2).value.replace("#VAL#",str(Trows-6))
+                    #TemplateSheet.cell(Trows, Tcols+9).value = "='Hidden Item Master'!E"+str(Trows-6)
 
                     # Closing stk
                     # TemplateSheet.cell(Trows,Tcols+5).value = "="+formulaSheet.cell(11,2).value.replace("#VAL#",str(Trows))
                     TemplateSheet.cell(Trows, Tcols+5).value = InputSheet.cell(row, cols-2).value
 
                     # SCAN
-                    # TemplateSheet.cell(Trows,Tcols+10).value = "="+formulaSheet.cell(12,2).value.replace("#VAL#",str(Trows))
-                    TemplateSheet.cell(Trows, Tcols+10).value = "=SUMIF('packing slip'!$B$3:$B$999,$B"+str(Trows)+",'packing slip'!$C$3:$C$999)"
+                    TemplateSheet.cell(Trows,Tcols+10).value = "="+formulaSheet.cell(11,2).value.replace("#VAL#",str(Trows))
+                    # TemplateSheet.cell(Trows, Tcols+10).value = "=SUMIF('packing slip'!$B$3:$B$999,$B"+str(Trows)+",'packing slip'!$C$3:$C$999)"
 
                     # SCAN VS DIFF
-                    # TemplateSheet.cell(Trows,Tcols+11).value = "="+formulaSheet.cell(13,2).value.replace("#VAL#",str(Trows))
-                    TemplateSheet.cell(Trows, Tcols+11).value = "=O"+str(Trows)+"-G"+str(Trows)
+                    TemplateSheet.cell(Trows,Tcols+11).value = "="+formulaSheet.cell(12,2).value.replace("#VAL#",str(Trows))
+                    # TemplateSheet.cell(Trows, Tcols+11).value = "=O"+str(Trows)+"-G"+str(Trows)
 
                     # ERROR
-                    # TemplateSheet.cell(Trows,Tcols+12).value = "="+formulaSheet.cell(14,2).value.replace("#VAL#",str(Trows))
-                    TemplateSheet.cell(Trows, Tcols+12).value = "=IF(P"+str(Trows)+"<>0,1,0)"
+                    TemplateSheet.cell(Trows,Tcols+12).value = "="+formulaSheet.cell(13,2).value.replace("#VAL#",str(Trows))
+                    # TemplateSheet.cell(Trows, Tcols+12).value = "=IF(P"+str(Trows)+"<>0,1,0)"
 
                     # STYLE COLOR
-                    # TemplateSheet.cell(Trows,Tcols+13).value = "="+formulaSheet.cell(15,2).value.replace("#VAL#",str(Trows))
-                    TemplateSheet.cell(Trows, Tcols+13).value = "=IF(P"+str(Trows)+"<=0,0,1)"
+                    TemplateSheet.cell(Trows,Tcols+13).value = "="+formulaSheet.cell(14,2).value.replace("#VAL#",str(Trows))
+                    # TemplateSheet.cell(Trows, Tcols+13).value = "=IF(P"+str(Trows)+"<=0,0,1)"
 
                     # Adding values to DBF
                     for i in range(1, dbfcols):
@@ -1114,7 +1116,7 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
                 with pd.ExcelWriter(sourcePackingSlip, mode='a', engine='openpyxl', if_sheet_exists='replace') as writer:
                     # Adding Hidden Item Master sheet to the RQ sheet with values 'Style Name', 'EAN', 'Style', 'SKU', 'MRP'
                     df_Location2_temp.to_excel(writer, sheet_name='Hidden Item Master', index=False, columns=[
-                                               'Style Name', 'EAN', 'Style', 'SKU', 'MRP', 'Location 2', 'BULK  / DTA  BULK  /  EOSS LOC','MRP Change Flag'])
+                                               'Style Name', 'EAN', 'Style', 'SKU', 'MRP','Location 2', 'BULK  / DTA  BULK  /  EOSS LOC','MRP Change Flag'])
                     # # Adding Hidden DBF sheet to the RQ sheet with values 'Vouchertypename', 'CSNNO','DATE' ETC.
                     df_GST_hidden.to_excel(writer, sheet_name='Hidden DBF', index=False, columns=['Vouchertypename', 'CSNNO', 'DATE',
                                                                                                   'REFERENCE', 'REF1', 'DEALNAME', 'PRICELEVEL', 'ITEMNAME', 'GODOWN', 'QTY', 'RATE', 'SUBTOTAL', 'DISCPERC',
@@ -1151,7 +1153,7 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
 
                 with pd.ExcelWriter(sourcePackingSlip, mode='a', engine='openpyxl', if_sheet_exists='replace') as writer:
                     # Adding Hidden Item Master sheet to the RQ sheet with values 'Style Name', 'EAN', 'Style', 'SKU', 'MRP'
-                    df_Location2_temp.to_excel(writer, sheet_name='Hidden Item Master', index=False, columns=['Style Name', 'EAN', 'Style', 'SKU', 'MRP', 'Location 2', 'BULK  / DTA  BULK  /  EOSS LOC','MRP Change Flag'])
+                    df_Location2_temp.to_excel(writer, sheet_name='Hidden Item Master', index=False, columns=['Style Name', 'EAN', 'Style', 'SKU', 'MRP','Location 2', 'BULK  / DTA  BULK  /  EOSS LOC','MRP Change Flag'])
                     # # Adding Hidden DBF sheet to the RQ sheet with values 'Vouchertypename', 'CSNNO','DATE' ETC.
                     df_GST_hidden.to_excel(writer, sheet_name='Hidden DBF', index=False, columns=['Vouchertypename', 'CSNNO', 'DATE',
                                                                                                   'REFERENCE', 'REF1', 'DEALNAME', 'PRICELEVEL', 'ITEMNAME', 'GODOWN', 'QTY', 'RATE', 'SUBTOTAL', 'DISCPERC',
