@@ -406,29 +406,40 @@ def autoAllocation(workbook_path, workbook_sheet):
         req_sum_workbook = load_workbook(workbook_path)
         req_sum_sheet = req_sum_workbook[workbook_sheet]
 
-        # req_sum_workbook = load_workbook(workbook_path, data_only= True)
-        # req_sum_sheet = req_sum_workbook[workbook_sheet]
-
         max_rows = req_sum_sheet.max_row
         max_cols = req_sum_sheet.max_column
-        for i in range(9, max_rows):
-            print(req_sum_sheet.cell(i, max_cols-1).value, type(req_sum_sheet.cell(i, max_cols-1).value), i, max_cols-1)
-            if req_sum_sheet.cell(i, max_cols-1).value != None and int(req_sum_sheet.cell(i, max_cols-1).value) < 0 :
-                # print()
-                print(req_sum_sheet.cell(i, max_cols-1).value, i, max_cols-1)
-                pass
-                # closing_stock = req_sum_sheet.cell(i, max_cols-2).value
-                # for j in range(3, max_cols-3):
-                #     if closing_stock >= req_sum_sheet.cell(i, j).value:
-                #         closing_stock = closing_stock - req_sum_sheet.cell(i, j).value
-                #     elif closing_stock == 0:
-                #         req_sum_sheet.cell(i, j).value = closing_stock
-                #     elif closing_stock < req_sum_sheet.cell(i, j).value and closing_stock < 0 :
-                #         req_sum_sheet.cell(i, j).value = closing_stock
-                #         closing_stock = 0
+        
+
+        for i in range(9, max_rows+1):
+            cls_stk = 0
+            grand_total = 0
+            diff_gt_cs = 0
+            cls_stk =  req_sum_sheet.cell(i,max_cols-2).value
+
+            for j in range(3, max_cols-3): # to calculate Grand Total of qty
+                # print(req_sum_sheet.cell(i,j).value)
+                if str(req_sum_sheet.cell(i,j).value).isnumeric(): # Removing Nonetype
+                    grand_total = grand_total + req_sum_sheet.cell(i,j).value
+            
+            diff_gt_cs = cls_stk - grand_total # calculating diff between closing stock and grand total 
+            # print(cls_stk, grand_total, diff_gt_cs)
+            if diff_gt_cs < 0:
+                for k in range(3, max_cols-3):
+                    if str(req_sum_sheet.cell(i,k).value).isnumeric():
+                        if cls_stk >= int(str(req_sum_sheet.cell(i, k).value)):
+                            cls_stk = cls_stk - int(str(req_sum_sheet.cell(i, k).value))
+                        elif cls_stk == 0:
+                            req_sum_sheet.cell(i, k).value = cls_stk
+                        elif cls_stk < int(str(req_sum_sheet.cell(i, k).value)) and cls_stk > 0:
+                            req_sum_sheet.cell(i, k).value = cls_stk
+                            cls_stk = 0
+            
         
         req_sum_workbook.save(workbook_path)
     except Exception as e:
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        print(exc_type, fname, exc_tb.tb_lineno)
         logger.error('Error while auto allocation of quantity'+str(e))
 
 
@@ -632,13 +643,13 @@ def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet
                 pivotSheet[f'A{r}'].number_format = '0'
             
             # For loop to remove unnamed values from allocation order row
-            counter = 0
+            # counter = 0
             for j in range(3, cols-3):
                 check_unnamed = str(pivotSheet.cell(2,j).value)
                 if check_unnamed.__contains__('Unnamed'):
                     pivotSheet.cell(2,j).value = pivotSheet.cell(2,j-1).value
-                    counter +=1
-                    print(counter)
+                    # counter +=1
+                    # print(counter)
 
             # Making copy of Requirment Summary sheet
             Sheet2 = pivotWorksheet.copy_worksheet(pivotSheet)
@@ -656,10 +667,10 @@ def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet
             os.remove(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/"+"df_temp.xlsx")
 
             # Auto Allocate Functionality###########################################################################################################
-            with open('config\config.json', 'r') as jsonFile:
+            with open(ConfigFolderPath+'config.json', 'r') as jsonFile:
                 config = json.load(jsonFile) 
                 if config['autoAllocation'] == 'Y':
-                    print(config['autoAllocation'])
+                    # print(config['autoAllocation'])
                     autoAllocation(workbook_path, workbook_sheet)
 
 
