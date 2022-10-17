@@ -502,7 +502,7 @@ def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet
             start_cols = 9
 
             df_pivot = pd.pivot_table(df_join_cl_stk, index=["ArticleEAN", 'Actual qty', 'MRP', "SKU"], values='Qty',
-                                      columns=['PO Number','Allocation Order', 'Order No.', 'Grand Total', 'SGST/IGST Type', 'Receiving Location'], aggfunc='sum')
+                                      columns=['Allocation Order', 'PO Number', 'Order No.', 'Grand Total', 'SGST/IGST Type', 'Receiving Location'], aggfunc='sum')
 
             df_pivot['Grand Total'] = 0
             df_pivot['Closing Stock'] = 0
@@ -967,8 +967,8 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
             TemplateSheet.cell(5, 1).value = InputSheet.cell(start_cols+1, column).value  # Order Name
 
             # PO Number
-            filename = InputSheet.cell(start_cols-1, column).value  # (2,col-3)
-            TemplateSheet.cell(5, 2).value = InputSheet.cell(start_cols-1, column).value
+            filename = InputSheet.cell(start_cols, column).value  # (2,col-3)
+            TemplateSheet.cell(5, 2).value = InputSheet.cell(start_cols, column).value
 
             # Receving Location
             TemplateSheet.cell(5, 3).value = InputSheet.cell(start_cols+4, column).value
