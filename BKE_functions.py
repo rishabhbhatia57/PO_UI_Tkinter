@@ -400,6 +400,39 @@ def mergeExcelsToOne(RootFolder, POSource, OrderDate, ClientCode):
         print("Error while merging files: "+str(e))
 
 
+def autoAllocation(workbook_path, workbook_sheet):
+    try:
+        logger.info('Auto Allocation of quantity based on Closing Stock is in progress...')
+        req_sum_workbook = load_workbook(workbook_path)
+        req_sum_sheet = req_sum_workbook[workbook_sheet]
+
+        # req_sum_workbook = load_workbook(workbook_path, data_only= True)
+        # req_sum_sheet = req_sum_workbook[workbook_sheet]
+
+        max_rows = req_sum_sheet.max_row
+        max_cols = req_sum_sheet.max_column
+        for i in range(9, max_rows):
+            print(req_sum_sheet.cell(i, max_cols-1).value, type(req_sum_sheet.cell(i, max_cols-1).value), i, max_cols-1)
+            if req_sum_sheet.cell(i, max_cols-1).value != None and int(req_sum_sheet.cell(i, max_cols-1).value) < 0 :
+                # print()
+                print(req_sum_sheet.cell(i, max_cols-1).value, i, max_cols-1)
+                pass
+                # closing_stock = req_sum_sheet.cell(i, max_cols-2).value
+                # for j in range(3, max_cols-3):
+                #     if closing_stock >= req_sum_sheet.cell(i, j).value:
+                #         closing_stock = closing_stock - req_sum_sheet.cell(i, j).value
+                #     elif closing_stock == 0:
+                #         req_sum_sheet.cell(i, j).value = closing_stock
+                #     elif closing_stock < req_sum_sheet.cell(i, j).value and closing_stock < 0 :
+                #         req_sum_sheet.cell(i, j).value = closing_stock
+                #         closing_stock = 0
+        
+        req_sum_workbook.save(workbook_path)
+    except Exception as e:
+        logger.error('Error while auto allocation of quantity'+str(e))
+
+
+
 def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet, TemplateFiles):
     with open(ClientsFolderPath, 'r') as jsonFile:
         config = json.load(jsonFile)
@@ -597,12 +630,21 @@ def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet
 
             for r in range(9, rows+1):
                 pivotSheet[f'A{r}'].number_format = '0'
+            
+            # For loop to remove unnamed values from allocation order row
+            counter = 0
+            for j in range(3, cols-3):
+                check_unnamed = str(pivotSheet.cell(2,j).value)
+                if check_unnamed.__contains__('Unnamed'):
+                    pivotSheet.cell(2,j).value = pivotSheet.cell(2,j-1).value
+                    counter +=1
+                    print(counter)
 
-            # Makeing copy of Requirment Summary sheet
+            # Making copy of Requirment Summary sheet
             Sheet2 = pivotWorksheet.copy_worksheet(pivotSheet)
             # Changing sheet name from 'Requirement Summary Copy' to 'Original Requirement Summary'
             Sheet2 = pivotWorksheet['Requirement Summary Copy']
-            Sheet2.title  = 'Original Requirement Summary'
+            Sheet2.title  = 'Requirement Summary(Original)'
             # Saving workbook
             pivotWorksheet.save(workbook_path)
             # Removing temporary files
@@ -612,6 +654,14 @@ def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet
             os.remove(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/"+"df_join_pivot.xlsx")
             os.remove(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/"+"df_join_SKU.xlsx")
             os.remove(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/"+"df_temp.xlsx")
+
+            # Auto Allocate Functionality###########################################################################################################
+            with open('config\config.json', 'r') as jsonFile:
+                config = json.load(jsonFile) 
+                if config['autoAllocation'] == 'Y':
+                    print(config['autoAllocation'])
+                    autoAllocation(workbook_path, workbook_sheet)
+
 
             print('Requirements summary sheet generated.')
             logger.info('Requirements summary sheet generated.')
