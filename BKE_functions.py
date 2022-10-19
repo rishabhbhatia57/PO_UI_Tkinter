@@ -22,7 +22,7 @@ from openpyxl.styles import PatternFill
 from flask import jsonify
 
 import BKE_log
-from config import MasterFolderPath
+from config import itemMasterPath, igstMasterPath, sgstMasterPath, locationMasterPath, location2MasterPath, closingStockMasterPath #, MasterFolderPath
 pd.options.mode.chained_assignment = None
 # import warnings
 # warnings.simplefilter(action='ignore', category=SettingWithCopyWarning)
@@ -79,12 +79,12 @@ def po_check_master_files(formulaWorksheet):
         df_formula_cols = pd.read_excel(
             formulaWorksheet, sheet_name="Validate Column Names")
 
-        with open(ConfigFolderPath+'config.json', 'r') as jsonFile:
+        with open(ConfigFolderPath, 'r') as jsonFile:
             config = json.load(jsonFile)
 
             file_name = "Item Master"
             df_item_master = pd.read_excel(
-                config['masterFolder']+'Item Master.xlsx', sheet_name='Item Master')
+                config['itemMasterPath'], sheet_name='Item Master')
             # checking  Item Master 1
             result = validate_column_names(
                 df_formula_cols, df_item_master, file_name)
@@ -94,7 +94,7 @@ def po_check_master_files(formulaWorksheet):
              # checking  Location Master 2
             file_name = "Location Master"
             df_location_master = pd.read_excel(
-                config['masterFolder']+file_name+'.xlsx', sheet_name='Location Master')
+                config['locationMasterPath'], sheet_name='Location Master')
             result1 = validate_column_names(
                 df_formula_cols, df_location_master, file_name)
             if result1['cols_not_found'] == True:
@@ -103,7 +103,7 @@ def po_check_master_files(formulaWorksheet):
             # checking  Location Master 3
             file_name = "WH Closing Stock"
             df_closing_stock = pd.read_excel(
-                config['masterFolder']+'WH Closing Stock.xlsx', sheet_name='ClosingStock', skiprows=3)  # ClosingStock
+                config['closingStockMasterPath'], sheet_name='ClosingStock', skiprows=3)  # ClosingStock
             result2 = validate_column_names(
                 df_formula_cols, df_closing_stock, file_name)
             if result2['cols_not_found'] == True:
@@ -112,7 +112,7 @@ def po_check_master_files(formulaWorksheet):
             # # checking  IGST Master 4
             # file_name = "IGST Master"
             # df_igst_master = pd.read_excel(
-            #     config['masterFolder']+'IGST Master.xlsx', sheet_name='DBF')
+            #     config['igstMasterPath'], sheet_name='DBF')
             # result3 = validate_column_names(
             #     df_formula_cols, df_igst_master, file_name)
             # if result3['cols_not_found'] == True:
@@ -121,7 +121,7 @@ def po_check_master_files(formulaWorksheet):
             # # checking  SGST Master 5
             # file_name = "SGST Master"
             # df_sgst_master = pd.read_excel(
-            #     config['masterFolder']+'SGST Master.xlsx', sheet_name='DBF')
+            #     config['sgstMasterPath'], sheet_name='DBF')
             # result4 = validate_column_names(
             #     df_formula_cols, df_sgst_master, file_name)
             # if result4['cols_not_found'] == True:
@@ -130,7 +130,7 @@ def po_check_master_files(formulaWorksheet):
             # checking  Location 2 Master 6
             file_name = "Location 2 Master"
             df_location_2_master = pd.read_excel(
-                config['masterFolder']+'Location 2 Master.xlsx', sheet_name='Location2')
+                config['location2MasterPath'], sheet_name='Location2')
             result5 = validate_column_names(
                 df_formula_cols, df_location_2_master, file_name)
             if result5['cols_not_found'] == True:
@@ -161,12 +161,12 @@ def pkg_check_master_files(formulaWorksheet):
         df_formula_cols = pd.read_excel(
             formulaWorksheet, sheet_name="Validate Column Names")
 
-        with open(ConfigFolderPath+'config.json', 'r') as jsonFile:
+        with open(ConfigFolderPath, 'r') as jsonFile:
             config = json.load(jsonFile)
 
             file_name = "Item Master"
             df_item_master = pd.read_excel(
-                config['masterFolder']+'Item Master.xlsx', sheet_name='Item Master')
+                config['itemMasterPath'], sheet_name='Item Master')
             # checking  Item Master 1
             result = validate_column_names(
                 df_formula_cols, df_item_master, file_name)
@@ -176,7 +176,7 @@ def pkg_check_master_files(formulaWorksheet):
             #  # checking  Location Master 2
             # file_name = "Location Master"
             # df_location_master = pd.read_excel(
-            #     config['masterFolder']+file_name+'.xlsx', sheet_name='Location Master')
+            #     config['location2MasterPath'], sheet_name='Location Master')
             # result1 = validate_column_names(
             #     df_formula_cols, df_location_master, file_name)
             # if result1['cols_not_found'] == True:
@@ -185,7 +185,7 @@ def pkg_check_master_files(formulaWorksheet):
             # # checking  Location Master 3
             # file_name = "WH Closing Stock"
             # df_closing_stock = pd.read_excel(
-            #     config['masterFolder']+'WH Closing Stock.xlsx', sheet_name='ClosingStock', skiprows=3)  # ClosingStock
+            #     config['closingStockMasterPath']+'WH Closing Stock.xlsx', sheet_name='ClosingStock', skiprows=3)  # ClosingStock
             # result2 = validate_column_names(
             #     df_formula_cols, df_closing_stock, file_name)
             # if result2['cols_not_found'] == True:
@@ -194,7 +194,7 @@ def pkg_check_master_files(formulaWorksheet):
             # checking  IGST Master 4
             file_name = "IGST Master"
             df_igst_master = pd.read_excel(
-                config['masterFolder']+'IGST Master.xlsx', sheet_name='DBF')
+                config['igstMasterPath'], sheet_name='DBF')
             result3 = validate_column_names(
                 df_formula_cols, df_igst_master, file_name)
             if result3['cols_not_found'] == True:
@@ -203,7 +203,7 @@ def pkg_check_master_files(formulaWorksheet):
             # checking  SGST Master 5
             file_name = "SGST Master"
             df_sgst_master = pd.read_excel(
-                config['masterFolder']+'SGST Master.xlsx', sheet_name='DBF')
+                config['sgstMasterPath'], sheet_name='DBF')
             result4 = validate_column_names(
                 df_formula_cols, df_sgst_master, file_name)
             if result4['cols_not_found'] == True:
@@ -212,7 +212,7 @@ def pkg_check_master_files(formulaWorksheet):
             # checking  Location 2 Master 6
             file_name = "Location 2 Master"
             df_location_2_master = pd.read_excel(
-                config['masterFolder']+'Location 2 Master.xlsx', sheet_name='Location2')
+                config['location2MasterPath'], sheet_name='Location2')
             result5 = validate_column_names(
                 df_formula_cols, df_location_2_master, file_name)
             if result5['cols_not_found'] == True:
@@ -307,12 +307,12 @@ def checkFolderStructure(RootFolder, ClientCode, OrderDate, mode):
                 logger.info("Creating the new directory...")
                 # file_logger.info("Creating the new directory...")
                 os.makedirs(DatedPath)
-                for i in range(0, len(internalDir)):
+                for i in range(len(internalDir)):
                     if not os.path.exists(DatedPath+internalDir[i]):
                         os.makedirs(DatedPath+internalDir[i])
 
             if isExist:
-                for i in range(0, len(internalDir)):
+                for i in range(len(internalDir)):
                     if not os.path.exists(DatedPath+internalDir[i]):
                         os.makedirs(DatedPath+internalDir[i])
 
@@ -385,8 +385,20 @@ def mergeExcelsToOne(RootFolder, POSource, OrderDate, ClientCode):
                 df = pd.read_excel(inputpath+"/"+f)
                 df.insert(0, "file_name", f)
                 excl_list.append(df)
-            excl_merged = pd.concat(excl_list, ignore_index=True,)
-            excl_merged.to_excel(
+            
+            excl_merged = pd.concat(excl_list, ignore_index=True)
+            #Loading Item Master
+            with open(ConfigFolderPath, 'r') as jsonFile:
+                config = json.load(jsonFile)
+                df_item_master = pd.read_excel(config['itemMasterPath'])
+            
+            # Renaming EAN to Article EAN for merge
+            df_item_master.rename(columns={'EAN': 'ArticleEAN', 'MRP': 'Rate(Item Mster)'}, inplace=True)
+            df_item_master = df_item_master[['ArticleEAN', 'Rate(Item Mster)', 'MRP Change Flag']]
+        
+            df_join_consolidate = excl_merged.merge(df_item_master, on= 'ArticleEAN', how="left")
+
+            df_join_consolidate.to_excel(
                 outputpath+"/"+'Consolidate-Orders.xlsx', index=False)
             logger.info("Merged "+str(len(file_list)) +
                         " excel files into a single excel file 'Consolidate-Orders.xlsx'")
@@ -402,6 +414,8 @@ def mergeExcelsToOne(RootFolder, POSource, OrderDate, ClientCode):
 
 def autoAllocation(workbook_path, workbook_sheet):
     try:
+        start_cols = 3
+        start_rows = 11
         logger.info('Auto Allocation of quantity based on Closing Stock is in progress...')
         req_sum_workbook = load_workbook(workbook_path)
         req_sum_sheet = req_sum_workbook[workbook_sheet]
@@ -410,13 +424,13 @@ def autoAllocation(workbook_path, workbook_sheet):
         max_cols = req_sum_sheet.max_column
         
 
-        for i in range(9, max_rows+1):
+        for i in range(start_rows, max_rows+1):
             cls_stk = 0
             grand_total = 0
             diff_gt_cs = 0
             cls_stk =  req_sum_sheet.cell(i,max_cols-2).value
 
-            for j in range(3, max_cols-3): # to calculate Grand Total of qty
+            for j in range(start_cols, max_cols-3): # to calculate Grand Total of qty
                 # print(req_sum_sheet.cell(i,j).value)
                 if str(req_sum_sheet.cell(i,j).value).isnumeric(): # Removing Nonetype
                     grand_total = grand_total + req_sum_sheet.cell(i,j).value
@@ -424,7 +438,7 @@ def autoAllocation(workbook_path, workbook_sheet):
             diff_gt_cs = cls_stk - grand_total # calculating diff between closing stock and grand total 
             # print(cls_stk, grand_total, diff_gt_cs)
             if diff_gt_cs < 0:
-                for k in range(3, max_cols-3):
+                for k in range(start_cols, max_cols-3):
                     if str(req_sum_sheet.cell(i,k).value).isnumeric():
                         if cls_stk >= int(str(req_sum_sheet.cell(i, k).value)):
                             cls_stk = cls_stk - int(str(req_sum_sheet.cell(i, k).value))
@@ -478,14 +492,14 @@ def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet
             df_consolidated_order = pd.read_excel(
                 RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/Consolidate-Orders.xlsx")
 
-            with open(ConfigFolderPath+'config.json', 'r') as jsonFile:
+            with open(ConfigFolderPath, 'r') as jsonFile:
                 config = json.load(jsonFile)
                 df_item_master = pd.read_excel(
-                    config['masterFolder']+'Item Master.xlsx')
+                    config['itemMasterPath'])
                 df_location_master = pd.read_excel(
-                    config['masterFolder']+'Location Master.xlsx')
+                    config['locationMasterPath'])
                 df_closing_stock = pd.read_excel(
-                    config['masterFolder']+'WH Closing Stock.xlsx', skiprows=3)
+                    config['closingStockMasterPath'], skiprows=3)
 
             # --------------------
             # Renaming EAN as Article number to perform join using ArticleEAN
@@ -542,8 +556,8 @@ def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet
             workbook_path = RootFolder+"/"+ClientCode+"-"+year+"/" + OrderDate+"/60-Requirement-Summary/Requirement-Summary.xlsx"
             workbook_sheet = 'Requirement Summary'
             color = "00FFCC99"
-            start_rows = 3
-            start_cols = 9
+            start_cols = 3
+            start_rows = 11
 
             df_pivot = pd.pivot_table(df_join_cl_stk, index=["ArticleEAN", 'Actual qty', 'MRP', "SKU"], values='Qty',
                                       columns=['Allocation Order', 'PO Number', 'Order No.', 'Grand Total', 'SGST/IGST Type', 'Receiving Location'], aggfunc='sum')
@@ -591,36 +605,38 @@ def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet
             # Deleting the cols for Actual Oty and MRP_y
             pivotSheet.delete_cols(2, 2)
             # inerting rows for date and cient name
-            pivotSheet.insert_rows(1, 1)
+            pivotSheet.insert_rows(1, 3)
 
-            pivotSheet.cell(1, 1).value = 'Order Date'
+            pivotSheet.cell(1, 1).value = 'ClientName'
             pivotSheet.cell(1, 1).font = Font(bold=True)
-            pivotSheet.cell(1, 2).value = OrderDate
-            pivotSheet.cell(2, 1).value = ''  # Removing Unnamed: 0
+            pivotSheet.cell(1, 2).value = key_list[position]
 
-            pivotSheet.cell(1, 3).value = 'ClientName'
-            pivotSheet.cell(1, 3).font = Font(bold=True)
-            pivotSheet.cell(1, 4).value = key_list[position]
+            pivotSheet.cell(2, 1).value = 'Order Date'
+            pivotSheet.cell(2, 1).font = Font(bold=True)
+            pivotSheet.cell(2, 2).value = OrderDate
+            pivotSheet.cell(4, 1).value = ''  # Removing Unnamed: 0
+
+            
 
             rows = pivotSheet.max_row  # get max rows
             cols = pivotSheet.max_column  # get max rows
 
-            for j in range(start_rows, cols-3):  # Rows Grand total
-                pivotSheet.cell(start_rows+2, j).value = "=SUM("+openpyxl.utils.cell.get_column_letter(j)+str(start_cols)+":"+openpyxl.utils.cell.get_column_letter(j)+str(rows)+")"  # Grand Total on second last col
-                pivotSheet.cell(start_rows+1, j).fill = PatternFill(start_color=color, end_color=color, fill_type="solid")  # Color to order field
+            for j in range(start_cols, cols-3):  # Rows Grand total
+                pivotSheet.cell(start_cols+4, j).value = "=SUM("+openpyxl.utils.cell.get_column_letter(j)+str(start_rows)+":"+openpyxl.utils.cell.get_column_letter(j)+str(rows)+")"  # Grand Total on second last col
+                pivotSheet.cell(start_cols+3, j).fill = PatternFill(start_color=color, end_color=color, fill_type="solid")  # Color to order field
 
-            for i in range(start_cols, rows+1):  # Cols Grand total
+            for i in range(start_rows, rows+1):  # Cols Grand total
                 pivotSheet.cell(i, cols-3).value = "=SUM(B"+str(i)+":" + openpyxl.utils.cell.get_column_letter(cols-4)+str(i)+")"
                 pivotSheet.cell(i, cols-1).value = "="+openpyxl.utils.cell.get_column_letter(cols-2)+str(i)+"-"+openpyxl.utils.cell.get_column_letter(cols-3)+str(i)
 
             # Applying Bold text
-            pivotSheet.cell(3, 2).font = Font(bold=True) # PO Number
-            pivotSheet.cell(4, 2).font = Font(bold=True) # Order No.
-            pivotSheet.cell(5, 2).font = Font(bold=True) # Grand Total
-            pivotSheet.cell(6, 2).font = Font(bold=True) # SGST/IGST Type
-            pivotSheet.cell(7, 2).font = Font(bold=True) # Receiving Location
-            pivotSheet.cell(8, 1).font = Font(bold=True) # ArticleEAN
-            pivotSheet.cell(8, 2).font = Font(bold=True) # SKU
+            pivotSheet.cell(5, 2).font = Font(bold=True) # PO Number
+            pivotSheet.cell(6, 2).font = Font(bold=True) # Order No.
+            pivotSheet.cell(7, 2).font = Font(bold=True) # Grand Total
+            pivotSheet.cell(8, 2).font = Font(bold=True) # SGST/IGST Type
+            pivotSheet.cell(9, 2).font = Font(bold=True) # Receiving Location
+            pivotSheet.cell(10, 1).font = Font(bold=True) # ArticleEAN
+            pivotSheet.cell(10, 2).font = Font(bold=True) # SKU
 
             thin_border = Border(left=Side(style='thin'),
                                  right=Side(style='thin'),
@@ -639,15 +655,15 @@ def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet
                     pivotSheet, min=col, max=col, width=20)
             pivotSheet.column_dimensions = dim_holder
 
-            for r in range(9, rows+1):
+            for r in range(11, rows+1):
                 pivotSheet[f'A{r}'].number_format = '0'
             
             # For loop to remove unnamed values from allocation order row
             # counter = 0
             for j in range(3, cols-3):
-                check_unnamed = str(pivotSheet.cell(2,j).value)
+                check_unnamed = str(pivotSheet.cell(4,j).value)
                 if check_unnamed.__contains__('Unnamed'):
-                    pivotSheet.cell(2,j).value = pivotSheet.cell(2,j-1).value
+                    pivotSheet.cell(4,j).value = pivotSheet.cell(4,j-1).value
                     # counter +=1
                     # print(counter)
 
@@ -667,7 +683,7 @@ def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet
             os.remove(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/"+"df_temp.xlsx")
 
             # Auto Allocate Functionality###########################################################################################################
-            with open(ConfigFolderPath+'config.json', 'r') as jsonFile:
+            with open(ConfigFolderPath, 'r') as jsonFile:
                 config = json.load(jsonFile) 
                 if config['autoAllocation'] == 'Y':
                     # print(config['autoAllocation'])
@@ -950,6 +966,57 @@ def pdfToTable(inputPath, outputPath, RootFolder, POSource, OrderDate, ClientCod
         print("Error while processing file: "+str(e))
 
 
+
+def validateRequirementSummary(InputSheet, cls_stk_column):
+    try:
+        logger.info("Validating Requirement Summary file")
+        error = False
+        # print(InputSheet.cell("B10").value)
+        # if str(InputSheet.cell(4,2).value) == "Allocation Order" :#and InputSheet.cell(5,2) == "PO Number" and InputSheet.cell(6,2) == "Order No." and InputSheet.cell(7,2) == "Grand Total" and InputSheet.cell(8,2) == "SGST/IGST Type" and InputSheet.cell(9,2) == "Receiving Location" and InputSheet.cell(10,1) == "ArticleEAN" and InputSheet.cell(10,2) == "SKU" and InputSheet.cell(4,cls_stk_column-1) == "Grand Total" and InputSheet.cell(4,cls_stk_column) == "Closing Stock" and InputSheet.cell(4,cls_stk_column+1) == "Diff CS - GT" and InputSheet.cell(4,cls_stk_column+2) == "Rate":
+        #     allocation_column = 2
+        if str(InputSheet.cell(4,2).value) != "Allocation Order" :
+            error = True
+            logger.error("Please check Requirement Summary sheet, Allocation Order row not found")
+        if str(InputSheet.cell(5,2).value) != "PO Number" :
+            error = True
+            logger.error("Please check Requirement Summary sheet, 'PO Number' row not found")
+        if str(InputSheet.cell(6,2).value) != "Order No." :
+            error = True
+            logger.error("Please check Requirement Summary sheet, 'Order No.' row not found")
+        if str(InputSheet.cell(7,2).value) != "Grand Total" :
+            error = True
+            logger.error("Please check Requirement Summary sheet, 'Grand Total' row not found")
+        if str(InputSheet.cell(8,2).value) != "SGST/IGST Type" :
+            error = True
+            logger.error("Please check Requirement Summary sheet, 'SGST/IGST Type' row not found")
+        if str(InputSheet.cell(9,2).value) != "Receiving Location" :
+            error = True
+            logger.error("Please check Requirement Summary sheet, 'Receiving Location' row not found")
+        if str(InputSheet.cell(10,1).value) != "ArticleEAN" :
+            error = True
+            logger.error("Please check Requirement Summary sheet, 'ArticleEAN' column not found")
+        if str(InputSheet.cell(10,2).value) != "SKU" :
+            error = True
+            logger.error("Please check Requirement Summary sheet, 'SKU' column not found")
+        if str(InputSheet.cell(4,cls_stk_column-1).value) != "Grand Total" :
+            error = True
+            logger.error("Please check Requirement Summary sheet, 'Grand Total' column not found")
+        if str(InputSheet.cell(4,cls_stk_column+1).value) != "Diff CS - GT" :
+            error = True
+            logger.error("Please check Requirement Summary sheet, 'Diff CS - GT' column not found")
+        if str(InputSheet.cell(4,cls_stk_column+2).value) != "Rate" :
+            error = True
+            logger.error("Please check Requirement Summary sheet, 'Rate' column not found")
+        
+        return error
+    except Exception as e:
+        logger.error("Error while validating requirement summary: "+ str(e))
+        return error
+    
+
+
+
+
 def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaWorksheet, TemplateFiles):
     # file_logger = BKE_log.setup_custom_logger_file('root',RootFolder,OrderDate,ClientCode)
     try:
@@ -973,43 +1040,57 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
         InputWorkbook = load_workbook(sourcePivot, data_only=True)
         # TemplateWorkbook = load_workbook(destination)
 
-        InputSheet = InputWorkbook.active
+        InputSheet = InputWorkbook['Requirement Summary']
         # TemplateSheet = TemplateWorkbook['ORDER']
+        cls_stk_column = 0
+        for j in range(1, 10000):
+                if str(InputSheet.cell(4, j).value) == 'Closing Stock':
+                    cls_stk_column = j
+                    break
+        
+        allocation_column = 2
+
+        error = validateRequirementSummary(InputSheet, cls_stk_column)
+        if error == True: 
+            return
+            
 
         # Get rows and Column count
         df = pd.DataFrame(InputSheet, index=None)
         rows = len(df.axes[0])
-        cols = len(df.axes[1])
+        # cols = len(df.axes[1])
+        cols = cls_stk_column + 2
+        
         print(formulaWorksheet)
         formulaWorksheet = load_workbook(formulaWorksheet, data_only=True)
         formulaSheet = formulaWorksheet['FormulaSheet']
         DBFformula = formulaWorksheet['DBF']
 
-        # df_itemMaster = pd.read_excel(MasterFolderPath+'Item Master.xlsx',sheet_name='Item Master')
-        # df_IGST = pd.read_excel(MasterFolderPath+'IGST Master.xlsx',sheet_name='DBF')
-        # df_SGST = pd.read_excel(MasterFolderPath+'SGST Master.xlsx',sheet_name='DBF')
+        # df_itemMaster = pd.read_excel(itemMasterPath,sheet_name='Item Master')
+        # df_IGST = pd.read_excel(igstMasterPath,sheet_name='DBF')
+        # df_SGST = pd.read_excel(sgstMasterPath,sheet_name='DBF')
         print('Loading Master files for processing...')
         logger.info('Loading Master files for processing...')
 
         # Opening Item Master Sheet
-        df_item_master = pd.read_excel(MasterFolderPath+'Item Master.xlsx', sheet_name='Item Master', index_col=False)
+        df_item_master = pd.read_excel(itemMasterPath, sheet_name='Item Master', index_col=False)
         print('Item Master loaded.')
         logger.info('Item Master loaded.')
         # Opening IGST Master Sheet
-        df_IGSTMaster = pd.read_excel(MasterFolderPath+'IGST Master.xlsx', sheet_name='DBF', index_col=False)
+        df_IGSTMaster = pd.read_excel(igstMasterPath, sheet_name='DBF', index_col=False)
         print('IGST Master loaded.')
         logger.info('IGST Master loaded.')
         # Opening SGST Master Sheet
-        df_SGSTMaster = pd.read_excel(MasterFolderPath+'SGST Master.xlsx', sheet_name='DBF', index_col=False)
+        df_SGSTMaster = pd.read_excel(sgstMasterPath, sheet_name='DBF', index_col=False)
         print('SGST Master loaded.')
         logger.info('SGST Master loaded.')
         # Opening Location2 Master Sheet
-        df_Location2 = pd.read_excel(MasterFolderPath+'Location 2 Master.xlsx', sheet_name='Location2', index_col=False)
+        df_Location2 = pd.read_excel(location2MasterPath, sheet_name='Location2', index_col=False)
         print('Location 2 Master loaded.')
         logger.info('Location 2 Master loaded.')
 
 
-        start_cols = 3
+        start_cols = allocation_column + 1
 
 
         for column in range(start_cols, cols-3):
@@ -1024,21 +1105,23 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
             TemplateSheet = TemplateWorkbook['ORDER']
             PackingSheet = TemplateWorkbook['Packing Slip']
             dbfsheet = TemplateWorkbook['DBF']
+            
+        
 
-            TemplateSheet.cell(5, 1).value = InputSheet.cell(start_cols+1, column).value  # Order Name
+            TemplateSheet.cell(5, 1).value = InputSheet.cell(start_cols+3, column).value  # Order Name
 
             # PO Number
-            filename = InputSheet.cell(start_cols, column).value  # (2,col-3)
-            TemplateSheet.cell(5, 2).value = InputSheet.cell(start_cols, column).value
+            filename = InputSheet.cell(start_cols+2, column).value  # (3,col-3)
+            TemplateSheet.cell(5, 2).value = InputSheet.cell(start_cols+2, column).value
 
             # Receving Location
-            TemplateSheet.cell(5, 3).value = InputSheet.cell(start_cols+4, column).value
+            TemplateSheet.cell(5, 3).value = InputSheet.cell(start_cols+6, column).value
 
             TemplateSheet.cell(1, 1).value = 'Order Date'
-            TemplateSheet.cell(1, 2).value = InputSheet.cell(1, 2).value  # Date
+            TemplateSheet.cell(1, 2).value = InputSheet.cell(2, 2).value  # Date
 
             TemplateSheet.cell(1, 3).value = 'SGST/IGST'
-            TemplateSheet.cell(1, 4).value = InputSheet.cell(start_cols+3, column).value  # IGST/SGST Type (6,cols-3)
+            TemplateSheet.cell(1, 4).value = InputSheet.cell(start_cols+5, column).value  # IGST/SGST Type (6,cols-3)
             if TemplateSheet.cell(1, 4).value == None:
                 print(
                     "IGST/SGST TYPE = None, Requirment Summary file is not saved. Open the file, save it then process again")
@@ -1049,13 +1132,14 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
 
             # Copy EAN to template sheet
             Trows = 8
-            InRows = 9
+            InRows = 11
             Tcols = 5
             dbfrows = 2
             dbfcols = 57
+            dbf_start_col = 1
             for row in range(InRows, rows):
                 # if InputSheet.cell(row,column).value != None or InputSheet.cell(row,column).value != "":
-                if str(InputSheet.cell(row, column).value).isnumeric():
+                if str(InputSheet.cell(row, column).value).isnumeric() and str(InputSheet.cell(row, column).value) != "0":
 
                     # Copy Qty to template sheet
                     TemplateSheet.cell(Trows, Tcols).value = InputSheet.cell(row, column).value
@@ -1082,7 +1166,7 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
 
                     # MRP Change Flag
                     TemplateSheet.cell(Trows, Tcols+19).value = "="+formulaSheet.cell(6,2).value.replace("#VAL#",str(Trows-6))
-                    #TemplateSheet.cell(Trows, Tcols+19).value = "=IF('Hidden Item Master'!H"+str(Trows-6)+'<>"","*","")'
+                    # TemplateSheet.cell(Trows, Tcols+19).value = "=IF('Hidden Item Master'!H"+str(Trows-6)+'<>"","*","")'
                     
 
 
@@ -1127,8 +1211,8 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
                     # TemplateSheet.cell(Trows, Tcols+13).value = "=IF(P"+str(Trows)+"<=0,0,1)"
 
                     # Adding values to DBF
-                    for i in range(1, dbfcols):
-                        dbfsheet.cell(dbfrows, i).value = '='+DBFformula.cell(2, i+1).value.replace(
+                    for j in range(dbf_start_col, dbfcols):
+                        dbfsheet.cell(dbfrows, j).value = '='+DBFformula.cell(2, j+1).value.replace(
                             "#VAL#", str(Trows)).replace("#DBFROWS#", str(dbfrows))
 
                     Trows += 1

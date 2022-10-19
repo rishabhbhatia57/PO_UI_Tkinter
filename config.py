@@ -6,11 +6,17 @@ import json
 
 
 # Path used to get config path, client path and app theme
-ConfigFolderPath = "./config/"
+ConfigFolderPath = "./config/config.json"
 
-with open(ConfigFolderPath+'config.json', 'r') as jsonFile:
+with open(ConfigFolderPath, 'r') as jsonFile:
   config = json.load(jsonFile)
-  MasterFolderPath = config['masterFolder']
+  itemMasterPath = config['itemMasterPath']
+  igstMasterPath = config['igstMasterPath']
+  sgstMasterPath = config['sgstMasterPath']
+  locationMasterPath = config['locationMasterPath']
+  location2MasterPath = config['location2MasterPath']
+  closingStockMasterPath = config['closingStockMasterPath']
+  # MasterFolderPath = config['masterFolder']
   ClientsFolderPath = config['clients']
 
 # Fonts used throughout application

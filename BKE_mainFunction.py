@@ -7,15 +7,21 @@ import sys
 import json
 import base64
 from tkinter.messagebox import showinfo
-from config import ConfigFolderPath, MasterFolderPath, ClientsFolderPath
+from config import ConfigFolderPath, ClientsFolderPath, itemMasterPath, igstMasterPath, sgstMasterPath, locationMasterPath, location2MasterPath, closingStockMasterPath
 import BKE_log
 from BKE_functions import scriptStarted, downloadFiles, scriptEnded, checkFolderStructure, mergeExcelsToOne,mergeToPivotRQ, generatingPackingSlip, pdfToTable,getFilesToProcess, po_check_master_files, pkg_check_master_files
 
 
-with open(ConfigFolderPath+'config.json', 'r') as jsonFile:
+with open(ConfigFolderPath, 'r') as jsonFile:
     config = json.load(jsonFile)
-    formulasheetpath = config['formulaFolder']
-    masterspath = config['masterFolder']
+    formulasheetpath = config['formulaSheetPath']
+    itemMasterPath = config['itemMasterPath']
+    igstMasterPath = config['igstMasterPath']
+    sgstMasterPath = config['sgstMasterPath']
+    locationMasterPath = config['locationMasterPath']
+    location2MasterPath = config['location2MasterPath']
+    closingStockMasterPath = config['closingStockMasterPath']
+    # masterspath = config['masterFolder']
     # configpath = config['formulaFolder']
     templatespath = config['templateFolder']
     destinationpath = config['targetFolder']
@@ -27,12 +33,18 @@ logger = BKE_log.setup_custom_logger('root')
 def startProcessing(mode,clientname,orderdate,processing_source):
     try:
         isExistConfigFolderPath = os.path.exists(ConfigFolderPath)
-        isExistMasterFolderPath = os.path.exists(MasterFolderPath)
+        # isExistMasterFolderPath = os.path.exists(MasterFolderPath)
+        isExistitemMasterPath = os.path.exists(itemMasterPath)
+        isExistigstMasterPath = os.path.exists(igstMasterPath)
+        isExistsgstMasterPath = os.path.exists(sgstMasterPath)
+        isExistlocationMasterPath = os.path.exists(locationMasterPath)
+        isExistlocation2MasterPath = os.path.exists(location2MasterPath)
+        isExistclosingStockMasterPath = os.path.exists(closingStockMasterPath)
 
-        if isExistConfigFolderPath == False and isExistMasterFolderPath== False:
+        if isExistConfigFolderPath == False and isExistitemMasterPath== False and isExistigstMasterPath== False and isExistsgstMasterPath== False and isExistlocationMasterPath== False and isExistlocation2MasterPath== False and isExistclosingStockMasterPath== False  :
             showinfo(
             title='Invalid Selection',
-            message='Can not find path to Config and Master Folder'
+            message='Can not find path to Config and Master Files'
         )
         else:
             print("Mode: ",mode)

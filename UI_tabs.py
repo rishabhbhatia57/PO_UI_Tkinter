@@ -92,7 +92,7 @@ class Tab1():
         po_requirements_summary = Label(po_main_frame,text='Requirements Summary Path ', font=labelFont)
         po_requirements_summary.grid(row=5,column=0,padx=10, pady=10,sticky=W)
 
-        with open(ConfigFolderPath+'config.json', 'r') as jsonFile:
+        with open(ConfigFolderPath, 'r') as jsonFile:
             config = json.load(jsonFile)
 
             po_requirements_summary_btn = Button(po_main_frame,text='Copy Path',command=lambda:open_folder(params=[config['targetFolder'], po_client_code[po_selected_client.get()], po_order_date_btn.get_date(), '60-Requirement-Summary'],frame=po_main_frame),font=buttonFont)
@@ -179,7 +179,7 @@ class Tab2():
         pkg_packing_slip = Label(pkg_main_frame,text='Packing slip Folder Path ', font=labelFont)
         pkg_packing_slip.grid(row=5,column=0,padx=10, pady=10,sticky=W)
 
-        with open(ConfigFolderPath+'config.json', 'r') as jsonFile:
+        with open(ConfigFolderPath, 'r') as jsonFile:
 
             config = json.load(jsonFile)
 

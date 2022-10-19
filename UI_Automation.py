@@ -48,7 +48,7 @@ root.maxsize(int(DeviceScreenWidth),int(DeviceScreenHeight))
 
 root.title("Purchase Orders")
 
-with open(ConfigFolderPath+'config.json', 'r') as jsonFile:
+with open(ConfigFolderPath, 'r') as jsonFile:
   config = json.load(jsonFile)
   themepath = config['appTheme']
 
@@ -101,6 +101,14 @@ Developed_text.grid(row=0,column=2)
 
 Website = Label(inside_footer_frame, text="          Website  -  ",font=Font(size=10,weight="bold"))
 Website.grid(row=0,column=3)
+
+version = Label(inside_footer_frame, text="          Version  -  ",font=Font(size=10,weight="bold"))
+version.grid(row=0, column=5)
+
+with open(ConfigFolderPath, 'r') as jsonFile:
+   config = json.load(jsonFile)
+   versionValue = Label(inside_footer_frame, text=config['version'],font=Font(size=10))
+   versionValue.grid(row=0, column=6)
 
 link = Label(inside_footer_frame, text="https://www.c-bia.com" ,font=Font(size=10, underline=1), cursor="hand2")
 link.grid(row=0,column=4)

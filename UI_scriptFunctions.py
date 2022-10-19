@@ -66,8 +66,8 @@ def select_files(showPath,showReqPath,showOrderdate):
             showPath.config(text=ReqFileSelected)
             ReqSumWorkbook = load_workbook(ReqFileSelected,data_only=True)
             ReqSumSheet = ReqSumWorkbook.active
-            showReqPath.set(ReqSumSheet.cell(1,4).value)
-            showOrderdate.set(ReqSumSheet.cell(1,2).value)
+            showReqPath.set(ReqSumSheet.cell(1,2).value)
+            showOrderdate.set(ReqSumSheet.cell(2,2).value)
         return ReqFileSelected
     except Exception as e:
         print(e)
@@ -152,7 +152,7 @@ def begin_order_processing(mode, client, date, path, consoleLabel, thread_name):
             message="Invalid Client Name, path or Order Date Selected"
         )
         else:
-            with open(ConfigFolderPath+'config.json', 'r') as jsonFile:
+            with open(ConfigFolderPath, 'r') as jsonFile:
                 config = json.load(jsonFile)    
                 # pythonenvpath = config['pythonPath']
                 # pythonScriptPath = config['appsScriptPath']
