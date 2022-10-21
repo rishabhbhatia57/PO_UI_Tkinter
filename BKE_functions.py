@@ -229,18 +229,17 @@ def pkg_check_master_files(formulaWorksheet):
         return invalid_result
 
 
-def downloadFiles(RootFolder, POSource, OrderDate, ClientCode):
+def downloadFiles(RootFolder, POSource, OrderDate, ClientCode, base_path):
     # file_logger = BKE_log.setup_custom_logger_file('root',RootFolder,OrderDate,ClientCode)
     # converting str to datetime
     # print(OrderDate)
-    OrderDate = datetime.strptime(OrderDate, '%Y-%m-%d')
-    # extracting year from the order date
-    year = OrderDate.strftime("%Y")
-    # formatting order date {2022-00-00) format
-    OrderDate = OrderDate.strftime('%Y-%m-%d')
+    # OrderDate = datetime.strptime(OrderDate, '%Y-%m-%d')
+    # # extracting year from the order date
+    # year = OrderDate.strftime("%Y")
+    # # formatting order date {2022-00-00) format
+    # OrderDate = OrderDate.strftime('%Y-%m-%d')
     source_folder = POSource
-    destination_folder = RootFolder+"/"+ClientCode+"-" + \
-        year+"/"+OrderDate+"/99-Working/10-Download-Files/"
+    destination_folder = base_path + "/99-Working/10-Download-Files/"
     try:
         # print("Copying PDF Files from '"+str(source_folder)+"' to '"+str(destination_folder)+"'")
         logger.info("Copying PDF Files from '"+str(source_folder) +
@@ -262,6 +261,9 @@ def downloadFiles(RootFolder, POSource, OrderDate, ClientCode):
                 print("File '"+file_name+"' copied")
     except Exception as e:
         logger.error("Error while copying files: "+str(e))
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        print(exc_type, fname, exc_tb.tb_lineno)
         # file_logger.info("Error while copying files: "+str(e))
         print("Error while copying files: "+str(e))
 
@@ -281,21 +283,21 @@ def scriptEnded():
     return "Script Ended"
 
 
-def checkFolderStructure(RootFolder, ClientCode, OrderDate, mode):
+def checkFolderStructure(RootFolder, ClientCode, OrderDate, mode, base_path):
 
     try:
-        # converting str to datetime
-        OrderDate = datetime.strptime(OrderDate, '%Y-%m-%d')
-        # extracting year from the order date
-        year = OrderDate.strftime("%Y")
-        # formatting order date {2022-00-00) format
-        OrderDate = OrderDate.strftime('%Y-%m-%d')
+        # # converting str to datetime
+        # OrderDate = datetime.strptime(OrderDate, '%Y-%m-%d')
+        # # extracting year from the order date
+        # year = OrderDate.strftime("%Y")
+        # # formatting order date {2022-00-00) format
+        # OrderDate = OrderDate.strftime('%Y-%m-%d')
 
         # Checking if the folder exists or not, if doesnt exists, then script will create one.
         # logger.info('Checking if the folder exists or not, if doesnt exists, then script will create one.')
         # print('Checking if the folder exists or not, if doesnt exists, then script will create one.')
 
-        DatedPath = RootFolder + "/"+ClientCode+"-"+year+"/"+str(OrderDate)
+        DatedPath = base_path
         isExist = os.path.exists(DatedPath)
 
         internalDir = ["/99-Working/10-Download-Files", "/99-Working/20-Intermediate-Files",
@@ -334,26 +336,22 @@ def checkFolderStructure(RootFolder, ClientCode, OrderDate, mode):
                         os.makedirs(DatedPath+internalDir[i])
                 # os.makedirs(DatedPath+"/70-Packing-Slip")
 
-            logger.info("Folder '"+ClientCode+"-"+year +
-                        "/"+str(OrderDate)+"' is created.")
-            # # file_logger.info("Folder '"+ClientCode+"-"+year+"/"+str(OrderDate)+"' is created.")
-            print("Folder '"+ClientCode+"-"+year +
-                  "/"+str(OrderDate)+"' is created.")
+            # logger.info("Folder '"+ClientCode+"-"+year +
+            #             "/"+str(OrderDate)+"' is created.")
         else:
-            logger.info("Folder '"+ClientCode+"-"+year +
-                        "/"+str(OrderDate)+"' exists.")
-            # # file_logger.info("Folder '"+ClientCode+"-"+year+"/"+str(OrderDate)+"' exists.")
-            print("Folder '"+ClientCode+"-"+year +
-                  "/"+str(OrderDate)+"' exists.")
-        # file_logger = BKE_log.setup_custom_logger_file('root',RootFolder,OrderDate,ClientCode)
+            pass
+            # logger.info("Folder '"+ClientCode+"-"+year +"/"+str(OrderDate)+"' exists.")
 
     except Exception as e:
         logger.error("Error while checking folder structure:  "+str(e))
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        print(exc_type, fname, exc_tb.tb_lineno)
         # file_logger.info("Folder '"+ClientCode+"-"+year+"/"+str(OrderDate)+"' exists.")
         print("Error while checking folder structure:  "+str(e))
 
 
-def mergeExcelsToOne(RootFolder, POSource, OrderDate, ClientCode):
+def mergeExcelsToOne(RootFolder, POSource, OrderDate, ClientCode, base_path):
     # file_logger = BKE_log.setup_custom_logger_file('root',RootFolder,OrderDate,ClientCode)
     # converting str to datetime
     OrderDate = datetime.strptime(OrderDate, '%Y-%m-%d')
@@ -361,10 +359,8 @@ def mergeExcelsToOne(RootFolder, POSource, OrderDate, ClientCode):
     year = OrderDate.strftime("%Y")
     # formatting order date {2022-00-00) format
     OrderDate = OrderDate.strftime('%Y-%m-%d')
-    inputpath = RootFolder+"/"+ClientCode+"-"+year + \
-        "/"+OrderDate+"/99-Working/40-Extract-Excel/"
-    outputpath = RootFolder+"/"+ClientCode+"-" + \
-        year+"/"+OrderDate+"/50-Consolidate-Orders/"
+    inputpath = base_path + "/99-Working/40-Extract-Excel/"
+    outputpath = base_path + "/50-Consolidate-Orders/"
 
     try:
         # logger.info('Checking 40-Extract-Excel directory exists or not.')
@@ -408,6 +404,9 @@ def mergeExcelsToOne(RootFolder, POSource, OrderDate, ClientCode):
             return 'All excels are merged into a single excel file'
     except Exception as e:
         logger.info("Error while merging files: "+str(e))
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        print(exc_type, fname, exc_tb.tb_lineno)
         # file_logger.info("Error while merging files: "+str(e))
         print("Error while merging files: "+str(e))
 
@@ -458,7 +457,7 @@ def autoAllocation(workbook_path, workbook_sheet):
 
 
 
-def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet, TemplateFiles):
+def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet, TemplateFiles, base_path, reqSumTemplatePath):
     with open(ClientsFolderPath, 'r') as jsonFile:
         config = json.load(jsonFile)
         ClientName = config
@@ -468,19 +467,20 @@ def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet
         position = val_list.index(ClientCode)
 
     try:
-        # converting str to datetime
-        OrderDate = datetime.strptime(OrderDate, '%Y-%m-%d')
-        # extracting year from the order date
-        year = OrderDate.strftime("%Y")
-        # formatting order date {2022-00-00) format
-        OrderDate = OrderDate.strftime('%Y-%m-%d')
+        # # converting str to datetime
+        # OrderDate = datetime.strptime(OrderDate, '%Y-%m-%d')
+        # # extracting year from the order date
+        # year = OrderDate.strftime("%Y")
+        # # formatting order date {2022-00-00) format
+        # OrderDate = OrderDate.strftime('%Y-%m-%d')
 
         # formulaWorksheet1 = load_workbook(formulaWorksheet,data_only=True)
         # formulaSheet = formulaWorksheet['FormulaSheet']
         df_formula_cols = pd.read_excel(
             formulaWorksheet, sheet_name="Validate Column Names")
 
-        if not os.path.exists(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/Consolidate-Orders.xlsx"):
+        # if not os.path.exists(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/Consolidate-Orders.xlsx"):
+        if not os.path.exists(base_path + "/50-Consolidate-Orders/Consolidate-Orders.xlsx"):
             logger.info(
                 "Could not find the consolidated order folder to generate requirement summary file")
             # file_logger.info("Could not find the consolidated order folder to generate requirement summary file")
@@ -490,7 +490,7 @@ def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet
         else:
 
             df_consolidated_order = pd.read_excel(
-                RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/Consolidate-Orders.xlsx")
+                base_path + "/50-Consolidate-Orders/Consolidate-Orders.xlsx")
 
             with open(ConfigFolderPath, 'r') as jsonFile:
                 config = json.load(jsonFile)
@@ -513,20 +513,20 @@ def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet
             df_SKU.rename(columns={'MRP_x': 'MRP'}, inplace=True)
             df_SKU_nodups = df_SKU.drop_duplicates()  # dropping duplicates
 
-            df_SKU_nodups.to_excel(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/df_join_SKU.xlsx", columns=[
+            df_SKU_nodups.to_excel(base_path + "/50-Consolidate-Orders/df_join_SKU.xlsx", columns=[
                                    'ArticleEAN', 'SKU', 'Qty', 'MRP', 'Receiving Location', 'Style', 'Style Name', 'PO Number'], index=False)
             # Opening df_SKU excel as df_SKU dataframe
-            df_SKU = pd.read_excel(RootFolder+"/"+ClientCode+"-"+year +"/"+OrderDate+"/50-Consolidate-Orders/df_join_SKU.xlsx")
+            df_SKU = pd.read_excel(base_path + "/50-Consolidate-Orders/df_join_SKU.xlsx")
 
             # Perfoming join to get values of GST/ Allocation order
             df_gst_type = df_SKU.merge(df_location_master, on='Receiving Location', how='left')
 
             df_gst_type_nodups = df_gst_type.drop_duplicates()  # dropping duplicates
 
-            df_gst_type_nodups.to_excel(RootFolder+"/"+ClientCode+"-"+year+"/" +OrderDate+"/50-Consolidate-Orders/df_join_gst_type.xlsx", index=False)
+            df_gst_type_nodups.to_excel(base_path + "/50-Consolidate-Orders/df_join_gst_type.xlsx", index=False)
 
             # Opening df_gst_type excel as df_gst_type dataframe
-            df_gst_type = pd.read_excel(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/df_join_gst_type.xlsx")
+            df_gst_type = pd.read_excel(base_path + "/50-Consolidate-Orders/df_join_gst_type.xlsx")
 
             # Perfoming join to get values of closing stock
             df_join_cl_stk = df_gst_type.merge(df_closing_stock, on='SKU', how='left')
@@ -537,23 +537,23 @@ def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet
 
             df_join_cl_stk_nodups.rename(columns={'Style_x': 'Style', 'Style Name_x': 'Style Name'}, inplace=True)
 
-            df_join_cl_stk_nodups.to_excel(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/df_join_cl_stk.xlsx", index=False, 
+            df_join_cl_stk_nodups.to_excel(base_path + "/50-Consolidate-Orders/df_join_cl_stk.xlsx", index=False, 
             columns=['ArticleEAN', 'SKU', 'Qty', 'MRP','Receiving Location', 'Style', 'Style Name',	'PO Number', 'SGST/IGST Type','Allocation Order', 'Actual qty'])
 
             # Opening df_gst_type excel as df_gst_type dataframe
-            df_join_cl_stk = pd.read_excel(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/df_join_cl_stk.xlsx")
+            df_join_cl_stk = pd.read_excel(base_path + "/50-Consolidate-Orders/df_join_cl_stk.xlsx")
 
             df_join_cl_stk['Order No.'] = ''  # adding order number as col
             df_join_cl_stk['Grand Total'] = ''  # adding Grand Total as col
 
             # final file used by requirement summary to make pivot
-            df_join_cl_stk.to_excel(RootFolder+"/"+ClientCode+"-"+year+"/" +OrderDate+"/50-Consolidate-Orders/df_join_pivot.xlsx", index=False)
+            df_join_cl_stk.to_excel(base_path + "/50-Consolidate-Orders/df_join_pivot.xlsx", index=False)
             
-            df_pivot_final_join = pd.read_excel(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/df_join_pivot.xlsx")
+            df_pivot_final_join = pd.read_excel(base_path + "/50-Consolidate-Orders/df_join_pivot.xlsx")
             # --------------------
 
             # Constant Variables used in loops
-            workbook_path = RootFolder+"/"+ClientCode+"-"+year+"/" + OrderDate+"/60-Requirement-Summary/Requirement-Summary.xlsx"
+            workbook_path = base_path + "/60-Requirement-Summary/Requirement-Summary.xlsx"
             workbook_sheet = 'Requirement Summary'
             color = "00FFCC99"
             start_cols = 3
@@ -572,26 +572,23 @@ def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet
             # open pivot sheet again
             df_temp_p = pd.read_excel(workbook_path, sheet_name=workbook_sheet)
             df_temp = pd.read_excel(workbook_path, sheet_name=workbook_sheet, skiprows=6)
-            df_temp.to_excel(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/"+"df_temp.xlsx",columns=['MRP', 'Actual qty'], index=False)
-            tempWorkbook = load_workbook(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/"+"df_temp.xlsx")
+            df_temp.to_excel(base_path + "/50-Consolidate-Orders/"+"df_temp.xlsx",columns=['MRP', 'Actual qty'], index=False)
+            tempWorkbook = load_workbook(base_path + "/50-Consolidate-Orders/"+"df_temp.xlsx")
             tempSheet = tempWorkbook.active
             # Inserting 5 rows to handle the gap between closing stock header and starting(entry) rows
             tempSheet.insert_rows(2, 6)
             # Saving closing stock and MRP in this temp sheet for later use
-            tempWorkbook.save(RootFolder+"/"+ClientCode+"-"+year +
-                              "/"+OrderDate+"/50-Consolidate-Orders/"+"df_temp.xlsx")
+            tempWorkbook.save(base_path + "/50-Consolidate-Orders/"+"df_temp.xlsx")
 
-            df_temp = pd.read_excel(RootFolder+"/"+ClientCode+"-"+year +
-                                    "/"+OrderDate+"/50-Consolidate-Orders/"+"df_temp.xlsx")
+            df_temp = pd.read_excel(base_path + "/50-Consolidate-Orders/"+"df_temp.xlsx")
             # Copying Closing stock from temp file to requirement summary file
             df_temp_p['Closing Stock'] = df_temp['Actual qty']
             print('Fetching Rate values from Item Master...')
             # Copying MRP from temp file to requirement summary file
             df_temp_p['Rate'] = df_temp['MRP']
 
-            rq_template_source = TemplateFiles+"Requirement-Summary-Template.xlsx"
-            rq_summary_destination = RootFolder+"/"+ClientCode+"-"+year+"/" + \
-                OrderDate+"/60-Requirement-Summary/Temp-Requirement-Summary.xlsx"
+            rq_template_source = reqSumTemplatePath
+            rq_summary_destination = base_path +"/60-Requirement-Summary/Temp-Requirement-Summary.xlsx"
 
             shutil.copy(rq_template_source, rq_summary_destination)
 
@@ -676,11 +673,11 @@ def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet
             pivotWorksheet.save(workbook_path)
             # Removing temporary files
             os.remove(rq_summary_destination)
-            os.remove(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/"+"df_join_cl_stk.xlsx")
-            os.remove(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/"+"df_join_gst_type.xlsx")
-            os.remove(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/"+"df_join_pivot.xlsx")
-            os.remove(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/"+"df_join_SKU.xlsx")
-            os.remove(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/"+"df_temp.xlsx")
+            os.remove(base_path + "/50-Consolidate-Orders/"+"df_join_cl_stk.xlsx")
+            os.remove(base_path + "/50-Consolidate-Orders/"+"df_join_gst_type.xlsx")
+            os.remove(base_path + "/50-Consolidate-Orders/"+"df_join_pivot.xlsx")
+            os.remove(base_path + "/50-Consolidate-Orders/"+"df_join_SKU.xlsx")
+            os.remove(base_path + "/50-Consolidate-Orders/"+"df_temp.xlsx")
 
             # Auto Allocate Functionality###########################################################################################################
             with open(ConfigFolderPath, 'r') as jsonFile:
@@ -703,7 +700,7 @@ def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet
         print("Error while generating Requirement-Summary file: "+str(e))
 
 
-def getFilesToProcess(RootFolder, POSource, OrderDate, ClientCode):
+def getFilesToProcess(RootFolder, POSource, OrderDate, ClientCode, base_path):
     # converting str to datetime
     OrderDate = datetime.strptime(OrderDate, '%Y-%m-%d')
     # extracting year from the order date
@@ -711,10 +708,8 @@ def getFilesToProcess(RootFolder, POSource, OrderDate, ClientCode):
     # formatting order date {2022-00-00) format
     OrderDate = OrderDate.strftime('%Y-%m-%d')
     try:
-        inputFolderPath = RootFolder+"/"+ClientCode+"-" + \
-            year+"/"+OrderDate+"/99-Working/10-Download-Files/"
-        outputFolderPath = RootFolder+"/"+ClientCode+"-" + \
-            year+"/"+OrderDate+"/99-Working/40-Extract-Excel/"
+        inputFolderPath = base_path + "/99-Working/10-Download-Files/"
+        outputFolderPath = base_path +"/99-Working/40-Extract-Excel/"
         startedProcessing = time.time()
 
         if len(os.listdir(inputFolderPath)) == 0:
@@ -732,7 +727,7 @@ def getFilesToProcess(RootFolder, POSource, OrderDate, ClientCode):
             for f in os.listdir(inputFolderPath):
                 fOutputExtension = f.replace('.pdf', '.xlsx')
                 pdfToTable(inputFolderPath+f, outputFolderPath+fOutputExtension,
-                           RootFolder, POSource, OrderDate, ClientCode, f)
+                           RootFolder, POSource, OrderDate, ClientCode, f, base_path)
                 count += 1
 
             print("Successfully converted "+str(count)+" Files in " +
@@ -742,11 +737,14 @@ def getFilesToProcess(RootFolder, POSource, OrderDate, ClientCode):
             # print("Completed in "+"{:.2f}".format(time.time() - startedProcessing,2)+ " seconds!")
     except Exception as e:
         logger.error("Error while processing files: "+str(e))
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        print(exc_type, fname, exc_tb.tb_lineno)
         # file_logger.error("Error while processing files: "+str(e))
         print("Error while processing files: "+str(e))
 
 
-def pdfToTable(inputPath, outputPath, RootFolder, POSource, OrderDate, ClientCode, filecsv):
+def pdfToTable(inputPath, outputPath, RootFolder, POSource, OrderDate, ClientCode, filecsv, base_path):
 
     try:
         # logger.info("Converting '"+ filecsv)# +"' to excel '"+filecsv.replace('.pdf', '.xlsx')+"'")
@@ -760,10 +758,10 @@ def pdfToTable(inputPath, outputPath, RootFolder, POSource, OrderDate, ClientCod
 
         startedProcessing = time.time()
 
-        intermediateCSV = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate +"/99-Working/30-Extract-CSV/"+filecsv.replace('.pdf', '.csv')
-        intermediateExcel = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate +"/99-Working/20-Intermediate-Files/1_" +filecsv.replace('.pdf', '.xlsx')
-        intermediateExcel2 = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate +"/99-Working/20-Intermediate-Files/2_" +filecsv.replace('.pdf', '.xlsx')
-        intermediateoutputPath = RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate +"/99-Working/20-Intermediate-Files/3_" +filecsv.replace('.pdf', '.xlsx')
+        intermediateCSV = base_path +"/99-Working/30-Extract-CSV/"+filecsv.replace('.pdf', '.csv')
+        intermediateExcel = base_path +"/99-Working/20-Intermediate-Files/1_" +filecsv.replace('.pdf', '.xlsx')
+        intermediateExcel2 = base_path +"/99-Working/20-Intermediate-Files/2_" +filecsv.replace('.pdf', '.xlsx')
+        intermediateoutputPath = base_path +"/99-Working/20-Intermediate-Files/3_" +filecsv.replace('.pdf', '.xlsx')
 
         tabula.convert_into(input_path=inputPath, output_path=intermediateCSV, pages='all', lattice=True)
 
@@ -962,6 +960,9 @@ def pdfToTable(inputPath, outputPath, RootFolder, POSource, OrderDate, ClientCod
 
     except Exception as e:
         logger.error("Error while processing file: "+str(e))
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        print(exc_type, fname, exc_tb.tb_lineno)
         # file_logger.error("Error while processing file: "+str(e))
         print("Error while processing file: "+str(e))
 
@@ -1011,13 +1012,16 @@ def validateRequirementSummary(InputSheet, cls_stk_column):
         return error
     except Exception as e:
         logger.error("Error while validating requirement summary: "+ str(e))
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        print(exc_type, fname, exc_tb.tb_lineno)
         return error
     
 
 
 
 
-def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaWorksheet, TemplateFiles):
+def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaWorksheet, TemplateFiles, base_path, packingSlipTemplatePath):
     # file_logger = BKE_log.setup_custom_logger_file('root',RootFolder,OrderDate,ClientCode)
     try:
         # converting str to datetime
@@ -1029,8 +1033,8 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
 
         startedTemplating = time.time()
         sourcePivot = ReqSource
-        source = TemplateFiles+"PackingSlip-Template.xlsx"
-        destination = TemplateFiles+"TemplateFile.xlsx"
+        source = packingSlipTemplatePath
+        destination = base_path + "/99-Working/TemplateFile.xlsx"
 
         # Making Copy of template file
         # shutil.copy(source, destination)
@@ -1222,13 +1226,11 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
             TemplateSheet.cell(5, 6).value = "=SUM(F8:F"+str(Trows-1)+")"
             TemplateSheet.cell(5, 7).value = "=SUM(G8:G"+str(Trows-1)+")"
 
-            TemplateWorkbook.save(RootFolder+"/"+ClientCode+"-"+year+"/" +
-                                  OrderDate+"/70-Packing-Slip/"+"PackingSlip_"+str(filename)+".xlsx")
+            TemplateWorkbook.save(base_path + "/70-Packing-Slip/"+"PackingSlip_"+str(filename)+".xlsx")
             TemplateWorkbook.close()
 
             # Opening Packing slip using openpyxl to check igst/sgst value
-            sourcePackingSlip = RootFolder+"/"+ClientCode+"-"+year+"/" + \
-                OrderDate+"/70-Packing-Slip/" + \
+            sourcePackingSlip = base_path + "/70-Packing-Slip/" + \
                 "PackingSlip_"+str(filename)+".xlsx"
             TemplateWorkbook = load_workbook(sourcePackingSlip, data_only=True)
             TemplateSheet = TemplateWorkbook['ORDER']

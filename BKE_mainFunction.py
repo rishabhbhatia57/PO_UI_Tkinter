@@ -7,24 +7,26 @@ import sys
 import json
 import base64
 from tkinter.messagebox import showinfo
-from config import ConfigFolderPath, ClientsFolderPath, itemMasterPath, igstMasterPath, sgstMasterPath, locationMasterPath, location2MasterPath, closingStockMasterPath
+from config import ConfigFolderPath, ClientsFolderPath, itemMasterPath, igstMasterPath, sgstMasterPath, locationMasterPath, location2MasterPath, closingStockMasterPath, packingSlipTemplatePath, reqSumTemplatePath, formulasheetpath, destinationpath, templatespath
 import BKE_log
 from BKE_functions import scriptStarted, downloadFiles, scriptEnded, checkFolderStructure, mergeExcelsToOne,mergeToPivotRQ, generatingPackingSlip, pdfToTable,getFilesToProcess, po_check_master_files, pkg_check_master_files
 
 
-with open(ConfigFolderPath, 'r') as jsonFile:
-    config = json.load(jsonFile)
-    formulasheetpath = config['formulaSheetPath']
-    itemMasterPath = config['itemMasterPath']
-    igstMasterPath = config['igstMasterPath']
-    sgstMasterPath = config['sgstMasterPath']
-    locationMasterPath = config['locationMasterPath']
-    location2MasterPath = config['location2MasterPath']
-    closingStockMasterPath = config['closingStockMasterPath']
-    # masterspath = config['masterFolder']
-    # configpath = config['formulaFolder']
-    templatespath = config['templateFolder']
-    destinationpath = config['targetFolder']
+# with open(ConfigFolderPath, 'r') as jsonFile:
+#     config = json.load(jsonFile)
+#     formulasheetpath = config['formulaSheetPath']
+#     itemMasterPath = config['itemMasterPath']
+#     igstMasterPath = config['igstMasterPath']
+#     sgstMasterPath = config['sgstMasterPath']
+#     locationMasterPath = config['locationMasterPath']
+#     location2MasterPath = config['location2MasterPath']
+#     closingStockMasterPath = config['closingStockMasterPath']
+#     # masterspath = config['masterFolder']
+#     # configpath = config['formulaFolder']
+#     templatespath = config['templateFolder']
+#     packingSlipTemplatePath = config['packingSlipTemplatePath']
+#     reqSumTemplatePath = config['reqSumTemplatePath']
+#     destinationpath = config['targetFolder']
 
 
 logger = BKE_log.setup_custom_logger('root')
@@ -64,15 +66,23 @@ def startProcessing(mode,clientname,orderdate,processing_source):
 
                 checkmasterfiles = po_check_master_files(formulaWorksheet=formulasheetpath)
                 if checkmasterfiles['valid'] == True:
-                    checkFolderStructure(RootFolder=destinationpath,ClientCode=clientcode,OrderDate=orderdate,mode = 'consolidation')
+                    # converting str to datetime
+                    OrderDate = datetime.strptime(orderdate, '%Y-%m-%d')
+                    # extracting year from the order date
+                    year = OrderDate.strftime("%Y")
+                    # formatting order date {2022-00-00) format
+                    OrderDate = OrderDate.strftime('%Y-%m-%d')
+
+                    base_path = destinationpath + '/' + clientcode + '-' + year + '/' + str(OrderDate) 
+                    checkFolderStructure(RootFolder=destinationpath,ClientCode=clientcode,OrderDate=orderdate,mode = 'consolidation', base_path=base_path)
                     # 3. To download PDF Files from Google Drive and Store it in week/DownloadFiles Folder
-                    downloadFiles(RootFolder=destinationpath,POSource=processing_source,OrderDate=orderdate,ClientCode=clientcode) # Done
+                    downloadFiles(RootFolder=destinationpath,POSource=processing_source,OrderDate=orderdate,ClientCode=clientcode, base_path=base_path) # Done
                     # 4. Converted PDF files to Excel Files, perform Cleaning, and store to week/uploadFiles Folder
-                    getFilesToProcess(RootFolder=destinationpath,POSource=processing_source,OrderDate=orderdate,ClientCode=clientcode)
+                    getFilesToProcess(RootFolder=destinationpath,POSource=processing_source,OrderDate=orderdate,ClientCode=clientcode, base_path=base_path)
                     # 5. Merge all the coverted excel file to a single excel file and store in week/MergeExcelsFiles folder
-                    mergeExcelsToOne(RootFolder=destinationpath,POSource=processing_source,OrderDate=orderdate,ClientCode=clientcode)
+                    mergeExcelsToOne(RootFolder=destinationpath,POSource=processing_source,OrderDate=orderdate,ClientCode=clientcode, base_path=base_path)
                     # 6. PivotTable - Template Creation
-                    mergeToPivotRQ(RootFolder=destinationpath,POSource=processing_source,OrderDate=orderdate,ClientCode=clientcode,formulaWorksheet=formulasheetpath, TemplateFiles=templatespath)
+                    mergeToPivotRQ(RootFolder=destinationpath,POSource=processing_source,OrderDate=orderdate,ClientCode=clientcode,formulaWorksheet=formulasheetpath, TemplateFiles=templatespath, base_path=base_path, reqSumTemplatePath=reqSumTemplatePath)
 
                     scriptEnded()
                 else:
@@ -93,10 +103,18 @@ def startProcessing(mode,clientname,orderdate,processing_source):
                 # print("Client Name: "+clientname+" Client Code: "+clientname+" Order Date: "+orderdate+" PO Folder Path: '"+processing_source+"'")
             # Phase II
                 scriptStarted()
+                # converting str to datetime
+                OrderDate = datetime.strptime(orderdate, '%Y-%m-%d')
+                # extracting year from the order date
+                year = OrderDate.strftime("%Y")
+                # formatting order date {2022-00-00) format
+                OrderDate = OrderDate.strftime('%Y-%m-%d')
+
+                base_path = destinationpath + '/' + clientcode + '-' + year + '/' + str(OrderDate)
                 checkmasterfiles = pkg_check_master_files(formulaWorksheet=formulasheetpath)
                 if checkmasterfiles['valid'] == True:
-                    checkFolderStructure(RootFolder=destinationpath,ClientCode=clientcode,OrderDate=orderdate,mode = 'packing')
-                    generatingPackingSlip(RootFolder=destinationpath,ReqSource=processing_source,OrderDate=orderdate,ClientCode=clientname,formulaWorksheet=formulasheetpath,TemplateFiles=templatespath)
+                    checkFolderStructure(RootFolder=destinationpath,ClientCode=clientcode,OrderDate=orderdate,mode = 'packing', base_path=base_path)
+                    generatingPackingSlip(RootFolder=destinationpath,ReqSource=processing_source,OrderDate=orderdate,ClientCode=clientname,formulaWorksheet=formulasheetpath,TemplateFiles=templatespath, base_path=base_path, packingSlipTemplatePath=packingSlipTemplatePath)
                 # 7. Notify that the script is Ended
                     scriptEnded()
                 else:

@@ -18,6 +18,11 @@ with open(ConfigFolderPath, 'r') as jsonFile:
   closingStockMasterPath = config['closingStockMasterPath']
   # MasterFolderPath = config['masterFolder']
   ClientsFolderPath = config['clients']
+  packingSlipTemplatePath = config['packingSlipTemplatePath']
+  reqSumTemplatePath = config['reqSumTemplatePath']
+  formulasheetpath = config['formulaSheetPath']
+  destinationpath = config['targetFolder']
+  templatespath = config['templateFolder']
 
 # Fonts used throughout application
 headingFont = ("Calibri",30)
