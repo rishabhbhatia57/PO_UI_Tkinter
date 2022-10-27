@@ -8,7 +8,7 @@ import numpy as np
 from openpyxl import load_workbook, Workbook
 import openpyxl.utils.cell
 import time
-from config import ConfigFolderPath, ClientsFolderPath
+from config import ConfigFolderPath, CLIENTSFOLDERPATH
 from openpyxl.styles.borders import Border, Side
 from openpyxl.styles import Alignment, Font
 from openpyxl.worksheet.dimensions import ColumnDimension, DimensionHolder
@@ -22,7 +22,7 @@ from openpyxl.styles import PatternFill
 from flask import jsonify
 
 import BKE_log
-from config import itemMasterPath, igstMasterPath, sgstMasterPath, locationMasterPath, location2MasterPath, closingStockMasterPath #, MasterFolderPath
+from config import ITEMMASTERPATH, IGSTMASTERPATH, SGSTMASTERPATH, LOCATIONMASTERPATH, LOCATION2MASTERPATH, CLOSINGSTOCKMASTERPATH, get_client_code, get_client_name, REQSUMTEMPLATEPATH, TEMPLATESPATH, PACKINGSLIPTEMPLATEPATH
 pd.options.mode.chained_assignment = None
 # import warnings
 # warnings.simplefilter(action='ignore', category=SettingWithCopyWarning)
@@ -84,7 +84,7 @@ def po_check_master_files(formulaWorksheet):
 
             file_name = "Item Master"
             df_item_master = pd.read_excel(
-                config['itemMasterPath'], sheet_name='Item Master')
+                ITEMMASTERPATH, sheet_name='Item Master')
             # checking  Item Master 1
             result = validate_column_names(
                 df_formula_cols, df_item_master, file_name)
@@ -93,8 +93,7 @@ def po_check_master_files(formulaWorksheet):
 
              # checking  Location Master 2
             file_name = "Location Master"
-            df_location_master = pd.read_excel(
-                config['locationMasterPath'], sheet_name='Location Master')
+            df_location_master = pd.read_excel(LOCATIONMASTERPATH, sheet_name='Location Master')
             result1 = validate_column_names(
                 df_formula_cols, df_location_master, file_name)
             if result1['cols_not_found'] == True:
@@ -102,8 +101,7 @@ def po_check_master_files(formulaWorksheet):
 
             # checking  Location Master 3
             file_name = "WH Closing Stock"
-            df_closing_stock = pd.read_excel(
-                config['closingStockMasterPath'], sheet_name='ClosingStock', skiprows=3)  # ClosingStock
+            df_closing_stock = pd.read_excel(CLOSINGSTOCKMASTERPATH, sheet_name='ClosingStock', skiprows=3)  # ClosingStock
             result2 = validate_column_names(
                 df_formula_cols, df_closing_stock, file_name)
             if result2['cols_not_found'] == True:
@@ -112,7 +110,7 @@ def po_check_master_files(formulaWorksheet):
             # # checking  IGST Master 4
             # file_name = "IGST Master"
             # df_igst_master = pd.read_excel(
-            #     config['igstMasterPath'], sheet_name='DBF')
+            #     config['IGSTMASTERPATH'], sheet_name='DBF')
             # result3 = validate_column_names(
             #     df_formula_cols, df_igst_master, file_name)
             # if result3['cols_not_found'] == True:
@@ -121,7 +119,7 @@ def po_check_master_files(formulaWorksheet):
             # # checking  SGST Master 5
             # file_name = "SGST Master"
             # df_sgst_master = pd.read_excel(
-            #     config['sgstMasterPath'], sheet_name='DBF')
+            #     config['SGSTMASTERPATH'], sheet_name='DBF')
             # result4 = validate_column_names(
             #     df_formula_cols, df_sgst_master, file_name)
             # if result4['cols_not_found'] == True:
@@ -129,8 +127,7 @@ def po_check_master_files(formulaWorksheet):
 
             # checking  Location 2 Master 6
             file_name = "Location 2 Master"
-            df_location_2_master = pd.read_excel(
-                config['location2MasterPath'], sheet_name='Location2')
+            df_location_2_master = pd.read_excel(LOCATION2MASTERPATH, sheet_name='Location2')
             result5 = validate_column_names(
                 df_formula_cols, df_location_2_master, file_name)
             if result5['cols_not_found'] == True:
@@ -166,7 +163,7 @@ def pkg_check_master_files(formulaWorksheet):
 
             file_name = "Item Master"
             df_item_master = pd.read_excel(
-                config['itemMasterPath'], sheet_name='Item Master')
+                ITEMMASTERPATH, sheet_name='Item Master')
             # checking  Item Master 1
             result = validate_column_names(
                 df_formula_cols, df_item_master, file_name)
@@ -175,8 +172,7 @@ def pkg_check_master_files(formulaWorksheet):
 
             #  # checking  Location Master 2
             # file_name = "Location Master"
-            # df_location_master = pd.read_excel(
-            #     config['location2MasterPath'], sheet_name='Location Master')
+            # df_location_master = pd.read_excel(LOCATION2MASTERPATH, sheet_name='Location Master')
             # result1 = validate_column_names(
             #     df_formula_cols, df_location_master, file_name)
             # if result1['cols_not_found'] == True:
@@ -184,8 +180,7 @@ def pkg_check_master_files(formulaWorksheet):
 
             # # checking  Location Master 3
             # file_name = "WH Closing Stock"
-            # df_closing_stock = pd.read_excel(
-            #     config['closingStockMasterPath']+'WH Closing Stock.xlsx', sheet_name='ClosingStock', skiprows=3)  # ClosingStock
+            # df_closing_stock = pd.read_excel(CLOSINGSTOCKMASTERPATH, sheet_name='ClosingStock', skiprows=3)  # ClosingStock
             # result2 = validate_column_names(
             #     df_formula_cols, df_closing_stock, file_name)
             # if result2['cols_not_found'] == True:
@@ -193,8 +188,7 @@ def pkg_check_master_files(formulaWorksheet):
 
             # checking  IGST Master 4
             file_name = "IGST Master"
-            df_igst_master = pd.read_excel(
-                config['igstMasterPath'], sheet_name='DBF')
+            df_igst_master = pd.read_excel( IGSTMASTERPATH , sheet_name='DBF')
             result3 = validate_column_names(
                 df_formula_cols, df_igst_master, file_name)
             if result3['cols_not_found'] == True:
@@ -202,8 +196,7 @@ def pkg_check_master_files(formulaWorksheet):
 
             # checking  SGST Master 5
             file_name = "SGST Master"
-            df_sgst_master = pd.read_excel(
-                config['sgstMasterPath'], sheet_name='DBF')
+            df_sgst_master = pd.read_excel(SGSTMASTERPATH, sheet_name='DBF')
             result4 = validate_column_names(
                 df_formula_cols, df_sgst_master, file_name)
             if result4['cols_not_found'] == True:
@@ -211,8 +204,7 @@ def pkg_check_master_files(formulaWorksheet):
 
             # checking  Location 2 Master 6
             file_name = "Location 2 Master"
-            df_location_2_master = pd.read_excel(
-                config['location2MasterPath'], sheet_name='Location2')
+            df_location_2_master = pd.read_excel(LOCATION2MASTERPATH, sheet_name='Location2')
             result5 = validate_column_names(
                 df_formula_cols, df_location_2_master, file_name)
             if result5['cols_not_found'] == True:
@@ -230,18 +222,10 @@ def pkg_check_master_files(formulaWorksheet):
 
 
 def downloadFiles(RootFolder, POSource, OrderDate, ClientCode, base_path):
-    # file_logger = BKE_log.setup_custom_logger_file('root',RootFolder,OrderDate,ClientCode)
-    # converting str to datetime
-    # print(OrderDate)
-    # OrderDate = datetime.strptime(OrderDate, '%Y-%m-%d')
-    # # extracting year from the order date
-    # year = OrderDate.strftime("%Y")
-    # # formatting order date {2022-00-00) format
-    # OrderDate = OrderDate.strftime('%Y-%m-%d')
+
     source_folder = POSource
     destination_folder = base_path + "/99-Working/10-Download-Files/"
     try:
-        # print("Copying PDF Files from '"+str(source_folder)+"' to '"+str(destination_folder)+"'")
         logger.info("Copying PDF Files from '"+str(source_folder) +
                     "' to '"+str(destination_folder)+"'")
 
@@ -256,7 +240,6 @@ def downloadFiles(RootFolder, POSource, OrderDate, ClientCode, base_path):
                 shutil.copy(source, destination)
                 # from source '"+source_folder+"' to destination '"+destination_folder+"'")
                 logger.info("File '"+file_name+"' copied")
-                # file_logger.info("File '"+file_name+"' copied")
                 # from source '"+source_folder+"' to destination '"+destination_folder+"'")
                 print("File '"+file_name+"' copied")
     except Exception as e:
@@ -264,7 +247,6 @@ def downloadFiles(RootFolder, POSource, OrderDate, ClientCode, base_path):
         exc_type, exc_obj, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
         print(exc_type, fname, exc_tb.tb_lineno)
-        # file_logger.info("Error while copying files: "+str(e))
         print("Error while copying files: "+str(e))
 
 
@@ -286,17 +268,6 @@ def scriptEnded():
 def checkFolderStructure(RootFolder, ClientCode, OrderDate, mode, base_path):
 
     try:
-        # # converting str to datetime
-        # OrderDate = datetime.strptime(OrderDate, '%Y-%m-%d')
-        # # extracting year from the order date
-        # year = OrderDate.strftime("%Y")
-        # # formatting order date {2022-00-00) format
-        # OrderDate = OrderDate.strftime('%Y-%m-%d')
-
-        # Checking if the folder exists or not, if doesnt exists, then script will create one.
-        # logger.info('Checking if the folder exists or not, if doesnt exists, then script will create one.')
-        # print('Checking if the folder exists or not, if doesnt exists, then script will create one.')
-
         DatedPath = base_path
         isExist = os.path.exists(DatedPath)
 
@@ -307,7 +278,6 @@ def checkFolderStructure(RootFolder, ClientCode, OrderDate, mode, base_path):
         if mode == 'consolidation':
             if not isExist:
                 logger.info("Creating the new directory...")
-                # file_logger.info("Creating the new directory...")
                 os.makedirs(DatedPath)
                 for i in range(len(internalDir)):
                     if not os.path.exists(DatedPath+internalDir[i]):
@@ -321,7 +291,6 @@ def checkFolderStructure(RootFolder, ClientCode, OrderDate, mode, base_path):
         if mode == 'packing':
             if not isExist:
                 logger.info("Creating the new directory...")
-                # file_logger.info("Creating the new directory...")
                 os.makedirs(DatedPath)
                 for i in range(6, len(internalDir)):
                     if not os.path.exists(DatedPath+internalDir[i]):
@@ -329,15 +298,13 @@ def checkFolderStructure(RootFolder, ClientCode, OrderDate, mode, base_path):
                 # os.makedirs(DatedPath+"/70-Packing-Slip")
             if isExist:
                 logger.info("Creating the new directory...")
-                # file_logger.info("Creating the new directory...")
                 print("Creating the new directory...")
                 for i in range(6, len(internalDir)):
                     if not os.path.exists(DatedPath+internalDir[i]):
                         os.makedirs(DatedPath+internalDir[i])
                 # os.makedirs(DatedPath+"/70-Packing-Slip")
 
-            # logger.info("Folder '"+ClientCode+"-"+year +
-            #             "/"+str(OrderDate)+"' is created.")
+
         else:
             pass
             # logger.info("Folder '"+ClientCode+"-"+year +"/"+str(OrderDate)+"' exists.")
@@ -347,12 +314,10 @@ def checkFolderStructure(RootFolder, ClientCode, OrderDate, mode, base_path):
         exc_type, exc_obj, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
         print(exc_type, fname, exc_tb.tb_lineno)
-        # file_logger.info("Folder '"+ClientCode+"-"+year+"/"+str(OrderDate)+"' exists.")
         print("Error while checking folder structure:  "+str(e))
 
 
 def mergeExcelsToOne(RootFolder, POSource, OrderDate, ClientCode, base_path):
-    # file_logger = BKE_log.setup_custom_logger_file('root',RootFolder,OrderDate,ClientCode)
     # converting str to datetime
     OrderDate = datetime.strptime(OrderDate, '%Y-%m-%d')
     # extracting year from the order date
@@ -367,7 +332,6 @@ def mergeExcelsToOne(RootFolder, POSource, OrderDate, ClientCode, base_path):
         file_list = glob.glob(inputpath + "/*.xlsx")
         if len(file_list) == 0:
             logger.info('No excel files found to merge.')
-            # file_logger.info('No excel files found to merge.')
             print('No excel files found to merge.')
             return
         else:
@@ -386,7 +350,7 @@ def mergeExcelsToOne(RootFolder, POSource, OrderDate, ClientCode, base_path):
             #Loading Item Master
             with open(ConfigFolderPath, 'r') as jsonFile:
                 config = json.load(jsonFile)
-                df_item_master = pd.read_excel(config['itemMasterPath'])
+                df_item_master = pd.read_excel(ITEMMASTERPATH)
             
             # Renaming EAN to Article EAN for merge
             df_item_master.rename(columns={'EAN': 'ArticleEAN', 'MRP': 'Rate(Item Mster)'}, inplace=True)
@@ -398,7 +362,6 @@ def mergeExcelsToOne(RootFolder, POSource, OrderDate, ClientCode, base_path):
                 outputpath+"/"+'Consolidate-Orders.xlsx', index=False)
             logger.info("Merged "+str(len(file_list)) +
                         " excel files into a single excel file 'Consolidate-Orders.xlsx'")
-            # file_logger.info("Merged "+str(len(file_list))+ " excel files into a single excel file 'Consolidate-Orders.xlsx'")
             print("Merged "+str(len(file_list)) +
                   " excel files into a single excel file 'Consolidate-Orders.xlsx'")
             return 'All excels are merged into a single excel file'
@@ -407,7 +370,6 @@ def mergeExcelsToOne(RootFolder, POSource, OrderDate, ClientCode, base_path):
         exc_type, exc_obj, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
         print(exc_type, fname, exc_tb.tb_lineno)
-        # file_logger.info("Error while merging files: "+str(e))
         print("Error while merging files: "+str(e))
 
 
@@ -458,24 +420,9 @@ def autoAllocation(workbook_path, workbook_sheet):
 
 
 def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet, TemplateFiles, base_path, reqSumTemplatePath):
-    with open(ClientsFolderPath, 'r') as jsonFile:
-        config = json.load(jsonFile)
-        ClientName = config
 
-        key_list = list(ClientName.keys())
-        val_list = list(ClientName.values())
-        position = val_list.index(ClientCode)
 
     try:
-        # # converting str to datetime
-        # OrderDate = datetime.strptime(OrderDate, '%Y-%m-%d')
-        # # extracting year from the order date
-        # year = OrderDate.strftime("%Y")
-        # # formatting order date {2022-00-00) format
-        # OrderDate = OrderDate.strftime('%Y-%m-%d')
-
-        # formulaWorksheet1 = load_workbook(formulaWorksheet,data_only=True)
-        # formulaSheet = formulaWorksheet['FormulaSheet']
         df_formula_cols = pd.read_excel(
             formulaWorksheet, sheet_name="Validate Column Names")
 
@@ -483,7 +430,6 @@ def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet
         if not os.path.exists(base_path + "/50-Consolidate-Orders/Consolidate-Orders.xlsx"):
             logger.info(
                 "Could not find the consolidated order folder to generate requirement summary file")
-            # file_logger.info("Could not find the consolidated order folder to generate requirement summary file")
             print(
                 "Could not find the consolidated order folder to generate requirement summary file")
             return
@@ -494,12 +440,9 @@ def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet
 
             with open(ConfigFolderPath, 'r') as jsonFile:
                 config = json.load(jsonFile)
-                df_item_master = pd.read_excel(
-                    config['itemMasterPath'])
-                df_location_master = pd.read_excel(
-                    config['locationMasterPath'])
-                df_closing_stock = pd.read_excel(
-                    config['closingStockMasterPath'], skiprows=3)
+                df_item_master = pd.read_excel(ITEMMASTERPATH)
+                df_location_master = pd.read_excel(LOCATIONMASTERPATH)
+                df_closing_stock = pd.read_excel(CLOSINGSTOCKMASTERPATH, skiprows=3)
 
             # --------------------
             # Renaming EAN as Article number to perform join using ArticleEAN
@@ -587,7 +530,7 @@ def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet
             # Copying MRP from temp file to requirement summary file
             df_temp_p['Rate'] = df_temp['MRP']
 
-            rq_template_source = reqSumTemplatePath
+            rq_template_source = REQSUMTEMPLATEPATH
             rq_summary_destination = base_path +"/60-Requirement-Summary/Temp-Requirement-Summary.xlsx"
 
             shutil.copy(rq_template_source, rq_summary_destination)
@@ -606,7 +549,7 @@ def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet
 
             pivotSheet.cell(1, 1).value = 'ClientName'
             pivotSheet.cell(1, 1).font = Font(bold=True)
-            pivotSheet.cell(1, 2).value = key_list[position]
+            pivotSheet.cell(1, 2).value = get_client_name(ClientCode)
 
             pivotSheet.cell(2, 1).value = 'Order Date'
             pivotSheet.cell(2, 1).font = Font(bold=True)
@@ -715,12 +658,10 @@ def getFilesToProcess(RootFolder, POSource, OrderDate, ClientCode, base_path):
         if len(os.listdir(inputFolderPath)) == 0:
             logger.info("'"+inputFolderPath +
                         "' Folder is empty, add pdf files to convert")
-            # file_logger.info("'"+inputFolderPath+"' Folder is empty, add pdf files to convert")
             print("'"+inputFolderPath+"' Folder is empty, add pdf files to convert")
             return
         else:
             logger.info("Converting PDF files to Excel...")
-            # file_logger.info("Converting PDF files to Excel...")
             print("Converting PDF files to Excel...")
             count = 0
 
@@ -740,7 +681,6 @@ def getFilesToProcess(RootFolder, POSource, OrderDate, ClientCode, base_path):
         exc_type, exc_obj, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
         print(exc_type, fname, exc_tb.tb_lineno)
-        # file_logger.error("Error while processing files: "+str(e))
         print("Error while processing files: "+str(e))
 
 
@@ -955,7 +895,6 @@ def pdfToTable(inputPath, outputPath, RootFolder, POSource, OrderDate, ClientCod
               "' in " + "{:.2f}".format(time.time() - startedProcessing, 2) + " seconds.")
         logger.info("Converted '" + filecsv + "' to '"+filecsv.replace('pdf', 'xlsx') +
                     "' in " + "{:.2f}".format(time.time() - startedProcessing, 2) + " seconds.")
-        # file_logger.info("Converted '"+ filecsv + "' to '"+filecsv.replace('pdf','xlsx')+"' in "+ "{:.2f}".format(time.time() - startedProcessing,2)+ " seconds.")
         return "Conversion Complete!"
 
     except Exception as e:
@@ -963,7 +902,6 @@ def pdfToTable(inputPath, outputPath, RootFolder, POSource, OrderDate, ClientCod
         exc_type, exc_obj, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
         print(exc_type, fname, exc_tb.tb_lineno)
-        # file_logger.error("Error while processing file: "+str(e))
         print("Error while processing file: "+str(e))
 
 
@@ -1022,7 +960,6 @@ def validateRequirementSummary(InputSheet, cls_stk_column):
 
 
 def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaWorksheet, TemplateFiles, base_path, packingSlipTemplatePath):
-    # file_logger = BKE_log.setup_custom_logger_file('root',RootFolder,OrderDate,ClientCode)
     try:
         # converting str to datetime
         OrderDate = datetime.strptime(OrderDate, '%Y-%m-%d')
@@ -1033,7 +970,7 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
 
         startedTemplating = time.time()
         sourcePivot = ReqSource
-        source = packingSlipTemplatePath
+        source = PACKINGSLIPTEMPLATEPATH
         destination = base_path + "/99-Working/TemplateFile.xlsx"
 
         # Making Copy of template file
@@ -1070,26 +1007,26 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
         formulaSheet = formulaWorksheet['FormulaSheet']
         DBFformula = formulaWorksheet['DBF']
 
-        # df_itemMaster = pd.read_excel(itemMasterPath,sheet_name='Item Master')
-        # df_IGST = pd.read_excel(igstMasterPath,sheet_name='DBF')
-        # df_SGST = pd.read_excel(sgstMasterPath,sheet_name='DBF')
+
+
+        # df_SGST = pd.read_excel(SGSTMASTERPATH,sheet_name='DBF')
         print('Loading Master files for processing...')
         logger.info('Loading Master files for processing...')
 
         # Opening Item Master Sheet
-        df_item_master = pd.read_excel(itemMasterPath, sheet_name='Item Master', index_col=False)
+        df_item_master = pd.read_excel(ITEMMASTERPATH, sheet_name='Item Master', index_col=False)
         print('Item Master loaded.')
         logger.info('Item Master loaded.')
         # Opening IGST Master Sheet
-        df_IGSTMaster = pd.read_excel(igstMasterPath, sheet_name='DBF', index_col=False)
+        df_IGSTMaster = pd.read_excel(IGSTMASTERPATH, sheet_name='DBF', index_col=False)
         print('IGST Master loaded.')
         logger.info('IGST Master loaded.')
         # Opening SGST Master Sheet
-        df_SGSTMaster = pd.read_excel(sgstMasterPath, sheet_name='DBF', index_col=False)
+        df_SGSTMaster = pd.read_excel(SGSTMASTERPATH, sheet_name='DBF', index_col=False)
         print('SGST Master loaded.')
         logger.info('SGST Master loaded.')
         # Opening Location2 Master Sheet
-        df_Location2 = pd.read_excel(location2MasterPath, sheet_name='Location2', index_col=False)
+        df_Location2 = pd.read_excel(LOCATION2MASTERPATH, sheet_name='Location2', index_col=False)
         print('Location 2 Master loaded.')
         logger.info('Location 2 Master loaded.')
 
@@ -1131,7 +1068,6 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
                     "IGST/SGST TYPE = None, Requirment Summary file is not saved. Open the file, save it then process again")
                 logger.info(
                     "IGST/SGST TYPE = None, Requirment Summary file is not saved. Open the file, save it then process again")
-                # file_logger.info("IGST/SGST TYPE = None, Requirment Summary file is not saved. Open the file, save it then process")
                 break
 
             # Copy EAN to template sheet
@@ -1339,13 +1275,11 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
 
         logger.info("Total time taken for generation of packing-slips:  {:.2f}".format(
             time.time() - startedTemplating, 2) + " seconds.")
-        # file_logger.info("Total time taken for generation of packing-slips:  {:.2f}".format(time.time() - startedTemplating,2)+ " seconds.")
         print("Total time taken for generation of packing-slips:  {:.2f}".format(
             time.time() - startedTemplating, 2) + " seconds.")
         return 'Completed!'
     except Exception as e:
         logger.error("Error while generating packing-slip file: "+str(e))
-        # file_logger.info("Error while generating packing-slip file: "+str(e))
         exc_type, exc_obj, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
         print(exc_type, fname, exc_tb.tb_lineno)

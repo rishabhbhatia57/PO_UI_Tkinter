@@ -21,7 +21,7 @@ import threading
 from tkinter.font import Font
 
 from UI_scriptFunctions import select_folder,begin_order_processing,open_folder, open_folder_packaging, select_files
-from config import ConfigFolderPath, headingFont,fieldFont,buttonFont,labelFont,pathFont,logFont,ClientsFolderPath
+from config import ConfigFolderPath, headingFont,fieldFont,buttonFont,labelFont,pathFont,logFont,CLIENTSFOLDERPATH
 from UI_tabs import Tab1, Tab2
 
 # from UI_logscmd import PrintLogger

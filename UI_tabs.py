@@ -13,7 +13,7 @@ from PIL import ImageTk, Image
 
 
 from UI_scriptFunctions import select_folder,begin_order_processing,open_folder, open_folder_packaging, select_files
-from config import ConfigFolderPath, headingFont,fieldFont,buttonFont,labelFont,pathFont,logFont,ClientsFolderPath
+from config import ConfigFolderPath, headingFont,fieldFont,buttonFont,labelFont,pathFont,logFont,CLIENTSFOLDERPATH, PO_CLIENTS, PKG_CLIENTS, get_client_code, get_client_name, REQSUMTEMPLATEPATH, TEMPLATESPATH
 
 
 
@@ -21,9 +21,10 @@ from config import ConfigFolderPath, headingFont,fieldFont,buttonFont,labelFont,
 class Tab1():
     def __init__(self, root,tabControl):
 
-        with open(ClientsFolderPath, 'r') as jsonFile:
-            config = json.load(jsonFile)
-            po_client_code = config
+        # with open(CLIENTSFOLDERPATH, 'r') as jsonFile:
+        #     config = json.load(jsonFile)
+        # print(PO_CLIENTS)
+        # po_client_code = 
 
         po_tab = ttk.Frame(tabControl)
         tabControl.add(po_tab, text ='PO Orders')
@@ -50,7 +51,8 @@ class Tab1():
         po_client_Name = Label(po_main_frame,text='Client Name',font=labelFont)
         po_client_Name.grid(row=1,column=0,padx=10, pady=10,sticky=W)
 
-        client_options = list(po_client_code.keys()) # loads from client.json
+        client_options = PO_CLIENTS # loads from client.json
+        # print(client_options)
 
         po_selected_client = StringVar()
         po_selected_client.set('--select--') # Default Value selected
@@ -68,7 +70,7 @@ class Tab1():
         po_order_date_btn.grid(row=1,column=4,padx=10, pady=10,sticky=W)
 
     
-        po_folder_path = ttk.Label(po_main_frame,text='POFolderPath',font=labelFont)
+        po_folder_path = ttk.Label(po_main_frame,text='PO Folder Path',font=labelFont)
         po_folder_path.grid(row=2,column=0,padx=10, pady=10,sticky=W)
 
 
@@ -79,11 +81,10 @@ class Tab1():
         po_folder_path_value.grid(row=2,column=2,padx=10, pady=10,sticky=W, columnspan=8)
 
 
-        po_thread = threading.Thread(target=lambda:begin_order_processing(mode ='consolidation', client=po_selected_client.get(), 
+        po_thread = threading.Thread(target=lambda:begin_order_processing(mode ='consolidation', client=get_client_code(po_selected_client.get()), 
         date=po_order_date_btn.get_date(), path=po_folder_path_value['text'], consoleLabel=po_consoleLabel, thread_name=po_thread),
         name='po_thread').start
         po_process_btn = Button(po_main_frame, command=po_thread, text="Process",font=buttonFont)
-        # po_process_btn = Button(po_main_frame, command=lambda:begin_order_processing(mode ='consolidation', client=po_selected_client.get(), date=po_order_date_btn.get_date(), path=po_folder_path_value['text'], consoleLabel=po_consoleLabel), text="Process",font=buttonFont)
         po_process_btn.grid(row=4,column=1,padx=10, pady=10,sticky=W)
 
         po_cancel_btn = Button(po_main_frame, text="Cancel",font=buttonFont)
@@ -95,7 +96,7 @@ class Tab1():
         with open(ConfigFolderPath, 'r') as jsonFile:
             config = json.load(jsonFile)
 
-            po_requirements_summary_btn = Button(po_main_frame,text='Copy Path',command=lambda:open_folder(params=[config['targetFolder'], po_client_code[po_selected_client.get()], po_order_date_btn.get_date(), '60-Requirement-Summary'],frame=po_main_frame),font=buttonFont)
+            po_requirements_summary_btn = Button(po_main_frame,text='Copy Path',command=lambda:open_folder(params=[config['targetFolder'], get_client_code(po_selected_client.get()), po_order_date_btn.get_date(), '60-Requirement-Summary'],frame=po_main_frame),font=buttonFont)
             po_requirements_summary_btn.grid(row=5,column=1,padx=10, pady=10,sticky=W)
 
             po_requirements_summary_path = Label(po_main_frame,text='No Path selected',font=pathFont, wraplength=800)
@@ -106,7 +107,8 @@ class Tab1():
                 po_changed_date = po_selected_date.get()
                 year = po_changed_date[6:10]
                 date = po_changed_date[6:10] + "-"+ po_changed_date[3:5] + "-" + po_changed_date[0:2]
-                po_changed_client_code = po_client_code[po_selected_client.get()]
+                
+                po_changed_client_code = get_client_code(po_selected_client.get())
                 
                 temp_req_sum_path = config['targetFolder']+'/'+po_changed_client_code+'-'+year+'/'+date+'/'+'60-Requirement-Summary'
                 po_requirements_summary_path.config(text=temp_req_sum_path,wraplength=800)
@@ -169,7 +171,7 @@ class Tab2():
         pkg_order_date_value = Label(pkg_main_frame, textvariable=pkg_date_var,font=labelFont)
         pkg_order_date_value.grid(row=2,column=4,padx=10, pady=10,sticky=W,columnspan=3)
 
-        pkg_thread = threading.Thread(target=lambda:begin_order_processing(mode ='packing', client=pkg_client_Name_value.cget("text"), date=pkg_order_date_value.cget("text"), path=pkg_requirements_summary_path.cget("text"), consoleLabel=pkg_consoleLabel, thread_name=pkg_thread), name='pkg_thread').start
+        pkg_thread = threading.Thread(target=lambda:begin_order_processing(mode ='packing', client=get_client_code(pkg_client_Name_value.cget("text")), date=pkg_order_date_value.cget("text"), path=pkg_requirements_summary_path.cget("text"), consoleLabel=pkg_consoleLabel, thread_name=pkg_thread), name='pkg_thread').start
         pkg_process_btn = Button(pkg_main_frame, command=pkg_thread, text="Process",font=buttonFont)
         pkg_process_btn.grid(row=4,column=1,padx=10, pady=10,sticky=W)
 
@@ -183,7 +185,7 @@ class Tab2():
 
             config = json.load(jsonFile)
 
-            pkg_packing_slip_btn = Button(pkg_main_frame,text='Copy Path',command=lambda:open_folder_packaging(params=[config['targetFolder'], pkg_client_var.get(), pkg_date_var.get(), '70-Packing-Slip'],frame=pkg_main_frame),font=buttonFont)
+            pkg_packing_slip_btn = Button(pkg_main_frame,text='Copy Path',command=lambda:open_folder_packaging(params=[config['targetFolder'], get_client_code(pkg_client_var.get()), pkg_date_var.get(), '70-Packing-Slip'],frame=pkg_main_frame),font=buttonFont)
             pkg_packing_slip_btn.grid(row=5,column=1,padx=10, pady=10,sticky=W)
 
             pkg_packing_slip_folder_path = Label(pkg_main_frame,text='No Path Selected', font=pathFont, wraplength=800)
@@ -196,15 +198,11 @@ class Tab2():
                 
                 pkg_year = pkg_changed_date[0:4]
                 pkg_date = pkg_changed_date[0:4]+ "-" + pkg_changed_date[5:7] + "-"+ pkg_changed_date[8:11]
-                print(pkg_changed_date,pkg_date)
-                pkg_changed_client = pkg_client_var.get()
+                # print(pkg_changed_date,pkg_date)
+                pkg_changed_client = get_client_code(pkg_client_var.get())
 
-                
-                with open(ClientsFolderPath, 'r') as jsonFile:
-                    pkg_client_code = json.load(jsonFile)
-                    pkg_client_code = pkg_client_code[pkg_changed_client]
 
-                temp_pkg_slip_path = config['targetFolder']+'/'+pkg_client_code+'-'+pkg_year+'/'+pkg_date+'/'+'70-Packing-Slip'
+                temp_pkg_slip_path = config['targetFolder']+'/'+pkg_changed_client+'-'+pkg_year+'/'+pkg_date+'/'+'70-Packing-Slip'
                 pkg_packing_slip_folder_path.config(text=temp_pkg_slip_path)
 
             pkg_client_var.trace('w',pkg_date_client)
