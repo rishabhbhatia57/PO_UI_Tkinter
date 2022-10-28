@@ -270,6 +270,7 @@ def checkFolderStructure(RootFolder, ClientCode, OrderDate, mode, base_path):
     try:
         DatedPath = base_path
         isExist = os.path.exists(DatedPath)
+        working_99_Exists = os.path.exists(DatedPath+'/99-Working')
 
         internalDir = ["/99-Working/10-Download-Files", "/99-Working/20-Intermediate-Files",
                        "/99-Working/30-Extract-CSV", "/99-Working/40-Extract-Excel",
@@ -302,6 +303,8 @@ def checkFolderStructure(RootFolder, ClientCode, OrderDate, mode, base_path):
                 for i in range(6, len(internalDir)):
                     if not os.path.exists(DatedPath+internalDir[i]):
                         os.makedirs(DatedPath+internalDir[i])
+            if not working_99_Exists:
+                os.makedirs(DatedPath+'/99-Working')
                 # os.makedirs(DatedPath+"/70-Packing-Slip")
 
 
