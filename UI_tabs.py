@@ -87,7 +87,7 @@ class Tab1():
         po_process_btn = Button(po_main_frame, command=po_thread, text="Process",font=buttonFont)
         po_process_btn.grid(row=4,column=1,padx=10, pady=10,sticky=W)
 
-        po_cancel_btn = Button(po_main_frame, text="Cancel",font=buttonFont)
+        po_cancel_btn = Button(po_main_frame, command=lambda:root.destroy(),text="Close",font=buttonFont)
         po_cancel_btn.grid(row=4,column=2,padx=10, pady=10,sticky=W)
 
         po_requirements_summary = Label(po_main_frame,text='Requirements Summary Path ', font=labelFont)
@@ -175,7 +175,7 @@ class Tab2():
         pkg_process_btn = Button(pkg_main_frame, command=pkg_thread, text="Process",font=buttonFont)
         pkg_process_btn.grid(row=4,column=1,padx=10, pady=10,sticky=W)
 
-        pkg_cancel_btn = Button(pkg_main_frame, text="Cancel", font=buttonFont)
+        pkg_cancel_btn = Button(pkg_main_frame, command=lambda:root.destroy(),text="Close", font=buttonFont)
         pkg_cancel_btn.grid(row=4,column=2,padx=10, pady=10,sticky=W)
 
         pkg_packing_slip = Label(pkg_main_frame,text='Packing slip Folder Path ', font=labelFont)
