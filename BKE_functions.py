@@ -1055,8 +1055,14 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
             TemplateSheet.cell(5, 1).value = InputSheet.cell(start_cols+3, column).value  # Order Name
 
             # PO Number
-            filename = InputSheet.cell(start_cols+2, column).value  # (3,col-3)
+            filename = TemplateSheet.cell(5, 1).value  
+            if filename == '' or filename == None:
+                logger.error("Order number field is empty. Please check Requirement Summary.")
+                return
+            filename = "".join(x for x in filename if x.isalnum()) # this handles and reomoves special character(!@#$%^&*()_+{}:"|<>?")
             TemplateSheet.cell(5, 2).value = InputSheet.cell(start_cols+2, column).value
+
+            #
 
             # Receving Location
             TemplateSheet.cell(5, 3).value = InputSheet.cell(start_cols+6, column).value
@@ -1165,12 +1171,11 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
             TemplateSheet.cell(5, 6).value = "=SUM(F8:F"+str(Trows-1)+")"
             TemplateSheet.cell(5, 7).value = "=SUM(G8:G"+str(Trows-1)+")"
 
-            TemplateWorkbook.save(base_path + "/70-Packing-Slip/"+"PackingSlip_"+str(filename)+".xlsx")
+            TemplateWorkbook.save(base_path + "/70-Packing-Slip/"+""+str(filename)+".xlsx")
             TemplateWorkbook.close()
 
             # Opening Packing slip using openpyxl to check igst/sgst value
-            sourcePackingSlip = base_path + "/70-Packing-Slip/" + \
-                "PackingSlip_"+str(filename)+".xlsx"
+            sourcePackingSlip = base_path + "/70-Packing-Slip/" +str(filename)+".xlsx"
             TemplateWorkbook = load_workbook(sourcePackingSlip, data_only=True)
             TemplateSheet = TemplateWorkbook['ORDER']
             # print(TemplateSheet.cell(1,4).value)
@@ -1270,8 +1275,8 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
             TemplateWorkbook.close()
             TemplateWorkbook.save(sourcePackingSlip)
 
-            logger.info("Packing slip generated for: "+str(filename) +
-                        " file in {:.2f}".format(time.time() - startedTemplatingFile, 2) + " seconds.")
+            logger.info("Packing slip generated for order number "+str(filename) +
+                        " in {:.2f}".format(time.time() - startedTemplatingFile, 2) + " seconds.")
             # file_logger.info("Packing slip generated for: "+str(filename)+ " file in {:.2f}".format(time.time() - startedTemplatingFile,2)+ " seconds.")
             print("Packing slip generated for: "+str(filename) +
                   " file in {:.2f}".format(time.time() - startedTemplatingFile, 2) + " seconds.")

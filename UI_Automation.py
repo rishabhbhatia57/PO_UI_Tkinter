@@ -51,9 +51,10 @@ root.title("Purchase Orders")
 with open(ConfigFolderPath, 'r') as jsonFile:
   config = json.load(jsonFile)
   themepath = config['appTheme']
+  themeColor = config['themeColor']
 
 root.tk.call("source", themepath)
-root.tk.call("set_theme", "dark")
+root.tk.call("set_theme", themeColor)
 
 
 s = ttk.Style()
