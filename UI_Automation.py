@@ -44,6 +44,7 @@ root.geometry(DeviceScreenWidth+"x"+DeviceScreenHeight)
 root.minsize(int(DeviceScreenWidth)-300,int(DeviceScreenHeight)-200)
 root.maxsize(int(DeviceScreenWidth),int(DeviceScreenHeight))
 
+root.state("zoomed")
 # root.iconbitmap('C:/Users/HP/Documents/GitHub/Triumph.ico')
 
 root.title("Purchase Orders")

@@ -235,8 +235,7 @@ def downloadFiles(RootFolder, POSource, OrderDate, ClientCode, base_path):
             source = source_folder + "/" + file_name
             destination = destination_folder
             # copy only files
-            if os.path.isfile(source):
-
+            if os.path.isfile(source) and file_name.endswith('.pdf'):
                 shutil.copy(source, destination)
                 # from source '"+source_folder+"' to destination '"+destination_folder+"'")
                 logger.info("File '"+file_name+"' copied")
@@ -491,7 +490,10 @@ def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet
 
             df_join_cl_stk['Order No.'] = ''  # adding order number as col
             df_join_cl_stk['Grand Total'] = ''  # adding Grand Total as col
-
+            # print(df_join_cl_stk.tail(10))
+            df_join_cl_stk['SGST/IGST Type'] = df_join_cl_stk['SGST/IGST Type'].fillna('---')
+            df_join_cl_stk['Allocation Order'] = df_join_cl_stk['Allocation Order'].fillna('---')
+            # print(df_join_cl_stk.tail(10))
             # final file used by requirement summary to make pivot
             df_join_cl_stk.to_excel(base_path + "/50-Consolidate-Orders/df_join_pivot.xlsx", index=False)
             
@@ -502,10 +504,11 @@ def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet
             workbook_path = base_path + "/60-Requirement-Summary/Requirement-Summary.xlsx"
             workbook_sheet = 'Requirement Summary'
             color = "00FFCC99"
+            red_color = "00FF0000"
             start_cols = 3
             start_rows = 11
 
-            df_pivot = pd.pivot_table(df_join_cl_stk, index=["ArticleEAN", 'Actual qty', 'MRP', "SKU"], values='Qty',
+            df_pivot = pd.pivot_table(df_join_cl_stk, index=["ArticleEAN", 'Actual qty', "SKU"], values='Qty',
                                       columns=['Allocation Order', 'PO Number', 'Order No.', 'Grand Total', 'SGST/IGST Type', 'Receiving Location'], aggfunc='sum')
 
             df_pivot['Grand Total'] = 0
@@ -518,7 +521,7 @@ def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet
             # open pivot sheet again
             df_temp_p = pd.read_excel(workbook_path, sheet_name=workbook_sheet)
             df_temp = pd.read_excel(workbook_path, sheet_name=workbook_sheet, skiprows=6)
-            df_temp.to_excel(base_path + "/50-Consolidate-Orders/"+"df_temp.xlsx",columns=['MRP', 'Actual qty'], index=False)
+            df_temp.to_excel(base_path + "/50-Consolidate-Orders/"+"df_temp.xlsx",columns=['Actual qty'], index=False)
             tempWorkbook = load_workbook(base_path + "/50-Consolidate-Orders/"+"df_temp.xlsx")
             tempSheet = tempWorkbook.active
             # Inserting 5 rows to handle the gap between closing stock header and starting(entry) rows
@@ -531,7 +534,7 @@ def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet
             df_temp_p['Closing Stock'] = df_temp['Actual qty']
             print('Fetching Rate values from Item Master...')
             # Copying MRP from temp file to requirement summary file
-            df_temp_p['Rate'] = df_temp['MRP']
+            # df_temp_p['Rate'] = 0
 
             rq_template_source = REQSUMTEMPLATEPATH
             rq_summary_destination = base_path +"/60-Requirement-Summary/Temp-Requirement-Summary.xlsx"
@@ -546,7 +549,7 @@ def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet
             pivotWorksheet = load_workbook(rq_summary_destination)
             pivotSheet = pivotWorksheet[workbook_sheet]
             # Deleting the cols for Actual Oty and MRP_y
-            pivotSheet.delete_cols(2, 2)
+            pivotSheet.delete_cols(2, 1)
             # inerting rows for date and cient name
             pivotSheet.insert_rows(1, 3)
 
@@ -588,6 +591,8 @@ def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet
 
             for i in range(1, rows+1):
                 for j in range(1, cols+1):
+                    # if pivotSheet.cell(row=i, column=j).value == '---':
+                    #     pivotSheet.cell(row=i, column=j).fill = PatternFill(start_color=red_color, end_color=red_color, fill_type="solid")
                     pivotSheet.cell(row=i, column=j).border = thin_border
                     pivotSheet.cell(row=i, column=j).alignment = Alignment(
                         horizontal='center', vertical='center')
@@ -706,8 +711,12 @@ def pdfToTable(inputPath, outputPath, RootFolder, POSource, OrderDate, ClientCod
         intermediateExcel2 = base_path +"/99-Working/20-Intermediate-Files/2_" +filecsv.replace('.pdf', '.xlsx')
         intermediateoutputPath = base_path +"/99-Working/20-Intermediate-Files/3_" +filecsv.replace('.pdf', '.xlsx')
 
-        tabula.convert_into(input_path=inputPath, output_path=intermediateCSV, pages='all', lattice=True)
-
+        try:
+            tabula.convert_into(input_path=inputPath, output_path=intermediateCSV, pages='all', lattice=True)
+        except Exception as e:
+            print("Error while converting file "+str(e))
+            logger("Error while converting file "+inputPath+" "+str(e))
+            return
         # making a dataframe using csv
         df = pd.read_csv(filepath_or_buffer=intermediateCSV,skiprows=[1, 2, 3])
 
@@ -1005,7 +1014,7 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
         # cols = len(df.axes[1])
         cols = cls_stk_column + 2
         
-        print(formulaWorksheet)
+        # print(formulaWorksheet)
         formulaWorksheet = load_workbook(formulaWorksheet, data_only=True)
         formulaSheet = formulaWorksheet['FormulaSheet']
         DBFformula = formulaWorksheet['DBF']
@@ -1055,10 +1064,11 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
             TemplateSheet.cell(5, 1).value = InputSheet.cell(start_cols+3, column).value  # Order Name
 
             # PO Number
-            filename = TemplateSheet.cell(5, 1).value  
+            filename = str(TemplateSheet.cell(5, 1).value)
             if filename == '' or filename == None:
                 logger.error("Order number field is empty. Please check Requirement Summary.")
                 return
+            # print(filename)
             filename = "".join(x for x in filename if x.isalnum()) # this handles and reomoves special character(!@#$%^&*()_+{}:"|<>?")
             TemplateSheet.cell(5, 2).value = InputSheet.cell(start_cols+2, column).value
 
@@ -1072,12 +1082,14 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
 
             TemplateSheet.cell(1, 3).value = 'SGST/IGST'
             TemplateSheet.cell(1, 4).value = InputSheet.cell(start_cols+5, column).value  # IGST/SGST Type (6,cols-3)
-            if TemplateSheet.cell(1, 4).value == None:
+            if TemplateSheet.cell(1, 4).value == None or TemplateSheet.cell(1, 4).value == '---':
                 print(
-                    "IGST/SGST TYPE = None, Requirment Summary file is not saved. Open the file, save it then process again")
-                logger.info(
-                    "IGST/SGST TYPE = None, Requirment Summary file is not saved. Open the file, save it then process again")
+                    "IGST/SGST TYPE is not found for order number "+filename+" ! Please check the Requirment Summary file and process again.")
+                logger.error(
+                    "IGST/SGST TYPE is not found for order number "+filename+" ! Please check the Requirment Summary file and process again.")
                 break
+                return
+                
 
             # Copy EAN to template sheet
             Trows = 8
@@ -1239,8 +1251,8 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
                 df_SKU_temp.rename(columns={'SKU': 'ITEMNAME'}, inplace=True)
                 # Applying join using ITEMNAME to get hidden_dbf (from IGST/SGST sheet) to get SKU and Other fields
                 df_GST_hidden = df_SKU_temp.merge(df_SGSTMaster, on='ITEMNAME', how='left')
-                for col in df_Location2_temp.columns:
-                    print(col)
+                # for col in df_Location2_temp.columns:
+                #     print(col)
                 with pd.ExcelWriter(sourcePackingSlip, mode='a', engine='openpyxl', if_sheet_exists='replace') as writer:
                     # Adding Hidden Item Master sheet to the RQ sheet with values 'Style Name', 'EAN', 'Style', 'SKU', 'MRP'
                     df_Location2_temp.to_excel(writer, sheet_name='Hidden Item Master', index=False, columns=
