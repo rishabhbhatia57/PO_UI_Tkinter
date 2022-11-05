@@ -8,7 +8,7 @@ import BKE_log
 logger = BKE_log.setup_custom_logger('root')
 
 # Path used to get config path, client path and app theme
-ConfigFolderPath = "./config/config.json"
+ConfigFolderPath = "D:/Triuphm Automation/Triumph PO Automation/Config/config.json"
 PO_CLIENTS = []
 PKG_CLIENTS = []
 
@@ -27,6 +27,8 @@ with open(ConfigFolderPath, 'r') as jsonFile:
   DESTINATIONPATH = config['targetFolder']
   TEMPLATESPATH = config['templateFolder']
   CLIENTSFOLDERPATH = config['clients']
+  ICONIMAGE = config['logoImage']
+  LOGOIMAGE = config['iconImage']
 
 
 

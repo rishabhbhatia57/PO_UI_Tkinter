@@ -13,7 +13,7 @@ from PIL import ImageTk, Image
 
 
 from UI_scriptFunctions import select_folder,begin_order_processing,open_folder, open_folder_packaging, select_files
-from config import ConfigFolderPath, headingFont,fieldFont,buttonFont,labelFont,pathFont,logFont,CLIENTSFOLDERPATH, PO_CLIENTS, PKG_CLIENTS, get_client_code, get_client_name, REQSUMTEMPLATEPATH, TEMPLATESPATH
+from config import ConfigFolderPath, headingFont,fieldFont,buttonFont,labelFont,pathFont,logFont,CLIENTSFOLDERPATH, PO_CLIENTS, PKG_CLIENTS, get_client_code, get_client_name, REQSUMTEMPLATEPATH, TEMPLATESPATH, ICONIMAGE,LOGOIMAGE
 
 
 
@@ -40,7 +40,7 @@ class Tab1():
         po_heading.grid(row=0,column=0,padx=10, pady=10,sticky=W,columnspan=2)
 
 
-        self.po_img = ImageTk.PhotoImage(Image.open("./config/logo.png"))
+        self.po_img = ImageTk.PhotoImage(Image.open(LOGOIMAGE))
         po_image_frame = Frame(po_main_frame) #,  highlightbackground="blue", highlightthickness=2, height=10,width=10
         po_image_frame.grid(row=0,column=2,columnspan=3)
         po_image_frame.place(anchor='ne', relx=0.99, rely=0.03)
@@ -142,7 +142,7 @@ class Tab2():
         pkg_heading = Label(pkg_main_frame,text='Generating Packing Slip',font=headingFont)
         pkg_heading.grid(row=0,column=0,padx=10, pady=10,sticky=W,columnspan=2) 
 
-        self.pkg_img = ImageTk.PhotoImage(Image.open("./config/logo.png"))
+        self.pkg_img = ImageTk.PhotoImage(Image.open(LOGOIMAGE))
         pkg_image_frame = Frame(pkg_main_frame) #,  highlightbackground="blue", highlightthickness=2, height=10,width=10
         pkg_image_frame.grid(row=0,column=2,columnspan=3)
         pkg_image_frame.place(anchor='ne', relx=0.99, rely=0.03)
