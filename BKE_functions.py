@@ -843,7 +843,7 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
             dbfrows = 2
             dbfcols = 57
             dbf_start_col = 1
-            for row in range(InRows, rows):
+            for row in range(InRows, rows+1):
                 # if InputSheet.cell(row,column).value != None or InputSheet.cell(row,column).value != "":
                 if str(InputSheet.cell(row, column).value).isnumeric() and str(InputSheet.cell(row, column).value) != "0":
 
