@@ -24,7 +24,6 @@ from UI_scriptFunctions import select_folder,begin_order_processing,open_folder,
 from config import ConfigFolderPath, headingFont,fieldFont,buttonFont,labelFont,pathFont,logFont,CLIENTSFOLDERPATH, ICONIMAGE
 from UI_tabs import Tab1, Tab2
 
-# from UI_logscmd import PrintLogger
 
 
 print('Initialzing Program...')
@@ -61,7 +60,6 @@ root.tk.call("set_theme", themeColor)
 s = ttk.Style()
 s.configure('TNotebook.Tab', font=('Calibri','15'), padding=[100, 10])
 
-# print(root.winfo_height()-20,root.winfo_height())
 tabFrame = ttk.Frame(root)
 logFrame = ttk.Frame(root)
 
@@ -86,7 +84,7 @@ print('Loading Screen...')
 tabControl.pack(fill ="x")
 # tabFrame.pack(side='top',anchor=NW,fill ="x") #,pady=(0,40)
 
-print(ICONIMAGE)
+
 root.iconbitmap(ICONIMAGE)
 def callback(url):
    webbrowser.open_new_tab(url)

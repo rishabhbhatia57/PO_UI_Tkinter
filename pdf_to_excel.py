@@ -57,9 +57,9 @@ def getFilesToProcess(RootFolder, POSource, OrderDate, ClientCode, base_path):
                            RootFolder, POSource, OrderDate, ClientCode, f, base_path)
                 count += 1
 
-            print("Successfully converted "+str(count)+" Files in " +
+            print("Converted "+str(count)+" Files in " +
                   "{:.2f}".format(time.time() - startedProcessing, 2) + " seconds!")
-            logger.info("Successfully converted "+str(count)+" Files in " +
+            logger.info("Converted "+str(count)+" Files in " +
                         "{:.2f}".format(time.time() - startedProcessing, 2) + " seconds!")
             # print("Completed in "+"{:.2f}".format(time.time() - startedProcessing,2)+ " seconds!")
     except Exception as e:

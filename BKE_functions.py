@@ -60,6 +60,7 @@ def validate_column_names(df_formula_cols, df_master, file_name):
             return results
     except Exception as e:
         print(e)
+        logger.error("Error while validating column names....")
         exc_type, exc_obj, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
         print(exc_type, fname, exc_tb.tb_lineno)
@@ -340,10 +341,9 @@ def mergeExcelsToOne(RootFolder, POSource, OrderDate, ClientCode, base_path):
             excl_list = []
             print("Merging files...")
             logger.info("Merging files...")
-            # file_logger.info("Merging files...")
+            
             for f in os.listdir(inputpath):
-                # logger.info("Accessing '"+f+"' right now: ")
-                # print("Accessing '"+f+"' right now: ")
+                
                 df = pd.read_excel(inputpath+"/"+f)
                 df.insert(0, "file_name", f)
                 excl_list.append(df)
@@ -394,12 +394,12 @@ def autoAllocation(workbook_path, workbook_sheet):
             cls_stk =  req_sum_sheet.cell(i,max_cols-2).value
 
             for j in range(start_cols, max_cols-3): # to calculate Grand Total of qty
-                # print(req_sum_sheet.cell(i,j).value)
+                
                 if str(req_sum_sheet.cell(i,j).value).isnumeric(): # Removing Nonetype
                     grand_total = grand_total + req_sum_sheet.cell(i,j).value
             
             diff_gt_cs = cls_stk - grand_total # calculating diff between closing stock and grand total 
-            # print(cls_stk, grand_total, diff_gt_cs)
+            
             if diff_gt_cs < 0:
                 for k in range(start_cols, max_cols-3):
                     if str(req_sum_sheet.cell(i,k).value).isnumeric():
@@ -494,10 +494,10 @@ def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet
 
             df_join_cl_stk['Order No.'] = ''  # adding order number as col
             df_join_cl_stk['Grand Total'] = ''  # adding Grand Total as col
-            # print(df_join_cl_stk.tail(10))
+           
             df_join_cl_stk['SGST/IGST Type'] = df_join_cl_stk['SGST/IGST Type'].fillna('---')
             df_join_cl_stk['Allocation Order'] = df_join_cl_stk['Allocation Order'].fillna('---')
-            # print(df_join_cl_stk.tail(10))
+            
             # final file used by requirement summary to make pivot
             df_join_cl_stk.to_excel(base_path + "/50-Consolidate-Orders/df_join_pivot.xlsx", index=False)
             
@@ -611,13 +611,12 @@ def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet
                 pivotSheet[f'A{r}'].number_format = '0'
             
             # For loop to remove unnamed values from allocation order row
-            # counter = 0
+           
             for j in range(3, cols-3):
                 check_unnamed = str(pivotSheet.cell(4,j).value)
                 if check_unnamed.__contains__('Unnamed'):
                     pivotSheet.cell(4,j).value = pivotSheet.cell(4,j-1).value
-                    # counter +=1
-                    # print(counter)
+                    
 
             # Making copy of Requirment Summary sheet
             Sheet2 = pivotWorksheet.copy_worksheet(pivotSheet)
@@ -635,11 +634,11 @@ def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet
             os.remove(base_path + "/50-Consolidate-Orders/"+"df_temp.xlsx")
             os.remove(base_path + "/50-Consolidate-Orders/df_gst_type_merge_Receiving Location_left.xlsx")
 
-            # Auto Allocate Functionality###########################################################################################################
+            # Auto Allocate Functionality
             with open(ConfigFolderPath, 'r') as jsonFile:
                 config = json.load(jsonFile) 
                 if config['autoAllocation'] == 'Y':
-                    # print(config['autoAllocation'])
+                    
                     autoAllocation(workbook_path, workbook_sheet)
 
 
@@ -667,9 +666,9 @@ def validateRequirementSummary(InputSheet, cls_stk_column):
     try:
         logger.info("Validating Requirement Summary file")
         error = False
-        # print(InputSheet.cell("B10").value)
+       
         # if str(InputSheet.cell(4,2).value) == "Allocation Order" :#and InputSheet.cell(5,2) == "PO Number" and InputSheet.cell(6,2) == "Order No." and InputSheet.cell(7,2) == "Grand Total" and InputSheet.cell(8,2) == "SGST/IGST Type" and InputSheet.cell(9,2) == "Receiving Location" and InputSheet.cell(10,1) == "ArticleEAN" and InputSheet.cell(10,2) == "SKU" and InputSheet.cell(4,cls_stk_column-1) == "Grand Total" and InputSheet.cell(4,cls_stk_column) == "Closing Stock" and InputSheet.cell(4,cls_stk_column+1) == "Diff CS - GT" and InputSheet.cell(4,cls_stk_column+2) == "Rate":
-        #     allocation_column = 2
+        
         if str(InputSheet.cell(4,2).value) != "Allocation Order" :
             error = True
             logger.error("Please check Requirement Summary sheet, Allocation Order row not found")
@@ -730,10 +729,6 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
         source = PACKINGSLIPTEMPLATEPATH
         destination = base_path + "/99-Working/TemplateFile.xlsx"
 
-        # Making Copy of template file
-        # shutil.copy(source, destination)
-        # print("File copied successfully.")
-
         # Load work vook and sheets
         InputWorkbook = load_workbook(sourcePivot, data_only=True)
         # TemplateWorkbook = load_workbook(destination)
@@ -759,7 +754,7 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
         # cols = len(df.axes[1])
         cols = cls_stk_column + 2
         
-        # print(formulaWorksheet)
+        
         formulaWorksheet = load_workbook(formulaWorksheet, data_only=True)
         formulaSheet = formulaWorksheet['FormulaSheet']
         DBFformula = formulaWorksheet['DBF']
@@ -795,8 +790,7 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
             startedTemplatingFile = time.time()
             # Making Copy of template file
             shutil.copy(source, destination)
-            # logger.info("Template File copied successfully for generating packing-slip")
-            # print("Template File copied successfully for generating packing-slip")
+           
 
             # Load work vook and sheets
             TemplateWorkbook = load_workbook(destination)
@@ -813,7 +807,7 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
             if filename == '' or filename == None:
                 logger.error("Order number field is empty. Please check Requirement Summary.")
                 return
-            # print(filename)
+            
             filename = "".join(x for x in filename if x.isalnum()) # this handles and reomoves special character(!@#$%^&*()_+{}:"|<>?")
             TemplateSheet.cell(5, 2).value = InputSheet.cell(start_cols+2, column).value
 
@@ -935,7 +929,7 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
             sourcePackingSlip = base_path + "/70-Packing-Slip/" +str(filename)+".xlsx"
             TemplateWorkbook = load_workbook(sourcePackingSlip, data_only=True)
             TemplateSheet = TemplateWorkbook['ORDER']
-            # print(TemplateSheet.cell(1,4).value)
+            
             # Getting data from IGST/ SGST Sheet DBF to Tempalate sheet DBF
 
             # If IGST then open IGST Master
@@ -951,7 +945,7 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
                 df_hidden_item_master = df_EAN_temp.merge(df_item_master, on='EAN', how='left')
 
                 df_Location2_temp = df_hidden_item_master.merge(df_Location2, on='EAN', how='left')
-                # print(df_Location2_temp.head(10))
+                
                 df_Location2_temp.rename(columns={'SKU_x': 'SKU'}, inplace=True)
 
                 # Temporary df to store SKU
@@ -988,7 +982,7 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
                 df_hidden_item_master = df_EAN_temp.merge(df_item_master, on='EAN', how='left')
 
                 df_Location2_temp = df_hidden_item_master.merge(df_Location2, on='EAN', how='left')
-                # print(df_Location2_temp)
+                
                 df_Location2_temp.rename(columns={'SKU_x': 'SKU'}, inplace=True)
 
                 # Temporary df to store SKU
@@ -996,8 +990,7 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
                 df_SKU_temp.rename(columns={'SKU': 'ITEMNAME'}, inplace=True)
                 # Applying join using ITEMNAME to get hidden_dbf (from IGST/SGST sheet) to get SKU and Other fields
                 df_GST_hidden = df_SKU_temp.merge(df_SGSTMaster, on='ITEMNAME', how='left')
-                # for col in df_Location2_temp.columns:
-                #     print(col)
+            
                 with pd.ExcelWriter(sourcePackingSlip, mode='a', engine='openpyxl', if_sheet_exists='replace') as writer:
                     # Adding Hidden Item Master sheet to the RQ sheet with values 'Style Name', 'EAN', 'Style', 'SKU', 'MRP'
                     df_Location2_temp.to_excel(writer, sheet_name='Hidden Item Master', index=False, columns=
