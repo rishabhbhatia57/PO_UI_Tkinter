@@ -86,6 +86,7 @@ print('Loading Screen...')
 tabControl.pack(fill ="x")
 # tabFrame.pack(side='top',anchor=NW,fill ="x") #,pady=(0,40)
 
+print(ICONIMAGE)
 root.iconbitmap(ICONIMAGE)
 def callback(url):
    webbrowser.open_new_tab(url)

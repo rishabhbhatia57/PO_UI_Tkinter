@@ -27,8 +27,8 @@ with open(ConfigFolderPath, 'r') as jsonFile:
   DESTINATIONPATH = config['targetFolder']
   TEMPLATESPATH = config['templateFolder']
   CLIENTSFOLDERPATH = config['clients']
-  ICONIMAGE = config['logoImage']
-  LOGOIMAGE = config['iconImage']
+  ICONIMAGE = config['iconImage']
+  LOGOIMAGE = config['logoImage']
 
 
 
