@@ -52,10 +52,11 @@ def getFilesToProcess(RootFolder, POSource, OrderDate, ClientCode, base_path):
             count = 0
 
             for f in os.listdir(inputFolderPath):
-                fOutputExtension = f.replace('.pdf', '.xlsx')
-                pdfToTable(inputFolderPath+f, outputFolderPath+fOutputExtension,
-                           RootFolder, POSource, OrderDate, ClientCode, f, base_path)
-                count += 1
+                if f.endswith('.pdf'):
+                    fOutputExtension = f.replace('.pdf', '.xlsx')
+                    pdfToTable(inputFolderPath+f, outputFolderPath+fOutputExtension,
+                            RootFolder, POSource, OrderDate, ClientCode, f, base_path)
+                    count += 1
 
             print("Converted "+str(count)+" Files in " +
                   "{:.2f}".format(time.time() - startedProcessing, 2) + " seconds!")
