@@ -22,7 +22,7 @@ from openpyxl.styles import PatternFill
 from flask import jsonify
 
 import BKE_log
-from config import ITEMMASTERPATH, IGSTMASTERPATH, SGSTMASTERPATH, LOCATIONMASTERPATH, LOCATION2MASTERPATH, CLOSINGSTOCKMASTERPATH, get_client_code, get_client_name, REQSUMTEMPLATEPATH, TEMPLATESPATH, PACKINGSLIPTEMPLATEPATH
+from config import ITEMMASTERPATH, IGSTMASTERPATH, SGSTMASTERPATH, LOCATIONMASTERPATH, LOCATION2MASTERPATH, CLOSINGSTOCKMASTERPATH, get_client_code, get_client_name, REQSUMTEMPLATEPATH, TEMPLATESPATH, PACKINGSLIPTEMPLATEPATH, ORDERN0TO5DIGIT
 pd.options.mode.chained_assignment = None
 # import warnings
 # warnings.simplefilter(action='ignore', category=SettingWithCopyWarning)
@@ -334,7 +334,7 @@ def mergeExcelsToOne(RootFolder, POSource, OrderDate, ClientCode, base_path):
         # logger.info('Checking 40-Extract-Excel directory exists or not.')
         file_list = glob.glob(inputpath + "/*.xlsx")
         if len(file_list) == 0:
-            logger.info('No excel files found to merge.')
+            logger.error('No excel files found to merge.')
             print('No excel files found to merge.')
             return
         else:
@@ -430,7 +430,7 @@ def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet
 
         # if not os.path.exists(RootFolder+"/"+ClientCode+"-"+year+"/"+OrderDate+"/50-Consolidate-Orders/Consolidate-Orders.xlsx"):
         if not os.path.exists(base_path + "/50-Consolidate-Orders/Consolidate-Orders.xlsx"):
-            logger.info(
+            logger.error(
                 "Could not find the consolidated order folder to generate requirement summary file")
             print(
                 "Could not find the consolidated order folder to generate requirement summary file")
@@ -808,10 +808,24 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
                 logger.error("Order number field is empty. Please check Requirement Summary.")
                 return
             
-            filename = "".join(x for x in filename if x.isalnum()) # this handles and reomoves special character(!@#$%^&*()_+{}:"|<>?")
+            # this handles and reomoves special character(!@#$%^&*()_+{}:"|<>?")
+            filename = "".join(x for x in filename if x.isalnum()) 
+
+            if ORDERN0TO5DIGIT == 'Y':
+                # Slices the order name, to get the last 5 digits
+                if len(filename) < 5: # If the len is < 5, copy it as it
+                    filename = filename[-5:]
+                else: # else reduce to just last 5 digits - 123456789 => 56789
+                    filename = filename[-5:]
+
+
+            # Specail case if order number contains all special charaters then show error
+            if filename == '' or filename == None:
+                logger.error("Order number field must contain number or alphabets. Please check Requirement Summary.")
+                return
+            
             TemplateSheet.cell(5, 2).value = InputSheet.cell(start_cols+2, column).value
 
-            #
 
             # Receving Location
             TemplateSheet.cell(5, 3).value = InputSheet.cell(start_cols+6, column).value
@@ -823,9 +837,9 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
             TemplateSheet.cell(1, 4).value = InputSheet.cell(start_cols+5, column).value  # IGST/SGST Type (6,cols-3)
             if TemplateSheet.cell(1, 4).value == None or TemplateSheet.cell(1, 4).value == '---':
                 print(
-                    "IGST/SGST TYPE is not found for order number "+filename+" ! Please check the Requirment Summary file and process again.")
+                    "SGST/IGST TYPE is not found for order number "+filename+" ! Please check the Requirment Summary file('Requirement Summary' sheet) and process again.")
                 logger.error(
-                    "IGST/SGST TYPE is not found for order number "+filename+" ! Please check the Requirment Summary file and process again.")
+                    "SGST/IGST TYPE is not found for order number "+filename+" ! Please check the Requirment Summary file('Requirement Summary' sheet) and process again.")
                 break
                 return
                 

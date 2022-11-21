@@ -30,6 +30,10 @@ with open(ConfigFolderPath, 'r') as jsonFile:
   ICONIMAGE = config['iconImage']
   LOGOIMAGE = config['logoImage']
 
+  if "orderNo_to_5_digit_format" in config:
+    ORDERN0TO5DIGIT = config['orderNo_to_5_digit_format']
+  else:
+    ORDERN0TO5DIGIT = 'N'
 
 
 def get_client_code(clientname):

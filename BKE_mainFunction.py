@@ -11,6 +11,7 @@ from config import ConfigFolderPath, CLIENTSFOLDERPATH, ITEMMASTERPATH, IGSTMAST
 import BKE_log
 from BKE_functions import scriptStarted, downloadFiles, scriptEnded, checkFolderStructure, mergeExcelsToOne,mergeToPivotRQ, generatingPackingSlip, po_check_master_files, pkg_check_master_files
 from pdf_to_excel import getFilesToProcess
+from pdf_to_excel_rrl import getFilesToProcess_RRL
 
 
 logger = BKE_log.setup_custom_logger('root')
@@ -40,6 +41,7 @@ def startProcessing(mode,clientname,orderdate,processing_source):
             # Phase I
             if mode == 'consolidation':
                 clientcode = clientname
+                print(clientcode)
                 logger.info("Client Name: "+clientname+" Client Code: "+clientcode+" Order Date: "+orderdate+" PO Folder Path: '"+processing_source+"'" )
                 # print(mode)
                 # logger.info(mode)
@@ -62,7 +64,10 @@ def startProcessing(mode,clientname,orderdate,processing_source):
                     # 3. To download PDF Files from Google Drive and Store it in week/DownloadFiles Folder
                     downloadFiles(RootFolder=DESTINATIONPATH,POSource=processing_source,OrderDate=orderdate,ClientCode=clientcode, base_path=base_path) # Done
                     # 4. Converted PDF files to Excel Files, perform Cleaning, and store to week/uploadFiles Folder
-                    getFilesToProcess(RootFolder=DESTINATIONPATH,POSource=processing_source,OrderDate=orderdate,ClientCode=clientcode, base_path=base_path)
+                    if clientcode == 'PL':
+                        getFilesToProcess(RootFolder=DESTINATIONPATH,POSource=processing_source,OrderDate=orderdate,ClientCode=clientcode, base_path=base_path)
+                    if clientcode == 'RRL':
+                        getFilesToProcess_RRL(RootFolder=DESTINATIONPATH,POSource=processing_source,OrderDate=orderdate,ClientCode=clientcode, base_path=base_path)
                     # 5. Merge all the coverted excel file to a single excel file and store in week/MergeExcelsFiles folder
                     mergeExcelsToOne(RootFolder=DESTINATIONPATH,POSource=processing_source,OrderDate=orderdate,ClientCode=clientcode, base_path=base_path)
                     # 6. PivotTable - Template Creation
