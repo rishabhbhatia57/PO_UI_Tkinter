@@ -456,13 +456,28 @@ def mergeToPivotRQ(RootFolder, POSource, OrderDate, ClientCode, formulaWorksheet
 
             df_SKU.rename(columns={'MRP_x': 'MRP'}, inplace=True)
             df_SKU_nodups = df_SKU.drop_duplicates()  # dropping duplicates
+            # print(df_SKU_nodups)
+
+            # print(df_SKU_nodups.loc[(df_SKU_nodups['SKU'] == '' or df_SKU_nodups['SKU'] == 'NaN')]) # || (df_SKU_nodups['SKU'] == None)])
 
             df_SKU_nodups.to_excel(base_path + "/50-Consolidate-Orders/df_join_SKU.xlsx", columns=[
                                    'POItem','ArticleEAN', 'SKU', 'Qty', 'MRP', 'Receiving Location', 'Style', 'Style Name', 'PO Number'], index=False)
             # Opening df_SKU excel as df_SKU dataframe
             df_SKU = pd.read_excel(base_path + "/50-Consolidate-Orders/df_join_SKU.xlsx")
 
+            workbook_sku = load_workbook(base_path + "/50-Consolidate-Orders/df_join_SKU.xlsx")
+            sheet_sku = workbook_sku.active
+            max_rows = sheet_sku.max_row
+            
+            missing_ean = []
+            for i in range(2,max_rows+1):
+                if sheet_sku.cell(i,3).value == None or sheet_sku.cell(i,3).value == '':
+                    missing_ean.append(str(sheet_sku.cell(i,2).value))
 
+            if len(missing_ean) != 0:
+                logger.error("The following EANs are missing in the Item Master: "+ str(missing_ean))
+                print("The following EANs are missing in the Item Master: "+ str(missing_ean))
+                return
 
             # Perfoming join to get values of GST/ Allocation order
             df_gst_type = df_SKU.merge(df_location_master, on='Receiving Location', how='left')
@@ -804,8 +819,8 @@ def generatingPackingSlip(RootFolder, ReqSource, OrderDate, ClientCode, formulaW
 
             # PO Number
             filename = str(TemplateSheet.cell(5, 1).value)
-            if filename == '' or filename == None:
-                logger.error("Order number field is empty. Please check Requirement Summary.")
+            if filename == '' or filename == None or filename == 'None':
+                logger.error("Order number field is empty. Please check the Requirement Summary.")
                 return
             
             # this handles and reomoves special character(!@#$%^&*()_+{}:"|<>?")
