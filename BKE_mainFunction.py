@@ -66,7 +66,7 @@ def startProcessing(mode,clientname,orderdate,processing_source):
                     # 4. Converted PDF files to Excel Files, perform Cleaning, and store to week/uploadFiles Folder
                     if clientcode == 'PL':
                         getFilesToProcess(RootFolder=DESTINATIONPATH,POSource=processing_source,OrderDate=orderdate,ClientCode=clientcode, base_path=base_path)
-                    if clientcode == 'RRL':
+                    if clientcode == 'RRL' or clientcode == 'RRR' or clientcode == 'RRC':
                         getFilesToProcess_RRL(RootFolder=DESTINATIONPATH,POSource=processing_source,OrderDate=orderdate,ClientCode=clientcode, base_path=base_path)
                     # 5. Merge all the coverted excel file to a single excel file and store in week/MergeExcelsFiles folder
                     mergeExcelsToOne(RootFolder=DESTINATIONPATH,POSource=processing_source,OrderDate=orderdate,ClientCode=clientcode, base_path=base_path)

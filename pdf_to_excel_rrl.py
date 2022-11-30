@@ -47,30 +47,39 @@ def pdfToTable_RRL(RootFolder, POSource, OrderDate, ClientCode, f, base_path):
             # print (text)
             for line in text.split('\n'):
                 # print(line)
-                #  or line.__contains__('SELLER')
+                #  or line.__contains__('SELLER') # line.__contains__('GOODS') or 
                 if line.__contains__('REGISTERED OFFICE') or line.__contains__('computer generated') or \
-                    line.__contains__('PURCHASEORDER') or line.__contains__('OWNER') or line.__contains__('CIN') or \
+                    line.__contains__('OWNER') or line.__contains__('CIN') or \
                     line.__contains__('Telephone:') or line.__contains__('Date') or line.__contains__('throughSRMPortal.Failureto')\
                     or line.__contains__('GSTINNo') or line.__contains__('Pin-Code') or line.__contains__('CourtHouse')\
                     or line.__contains__('VendorStatus') or line.__contains__('DeliveryAddress') or line.__contains__('Payment Terms')\
                     or line.__contains__('Thisisacomputergenerateddocumentnot') or line.__contains__('Tel:/Fax:') or line.__contains__('Phone'):  
                     pass
                 else:
-                    # print(line)
-                    if line.__contains__('SELLER PURCHASE ORDER'):
+                    # print("#####################\n" , line , "\n######################")
+                    # Logic for using PDFPlumber and Tabula based on "Purchase Order -Preview" or "Purchase Order"
+                    # if line.__contains__('SELLER') and line.__contains__('PURCHASE') and line.__contains__('ORDER'):
+                    if line.__contains__('SELLER PURCHASE ORDER') or line.__contains__('SELLER PURCHASEORDER'):
                         order_type = 'SELLER PURCHASE ORDER'
-                    if line.__contains__('SELLER PURCHASE ORDER -PREVIEW'):
+                    # elif line.__contains__('SELLER') and line.__contains__('PURCHASE') and line.__contains__('ORDER') and line.__contains__('PREVIEW'):
+                    if line.__contains__('SELLER PURCHASE ORDER -PREVIEW') or line.__contains__('SELLER PURCHASEORDER -PREVIEW'):
                         order_type = 'SELLER PURCHASE ORDER -PREVIEW'
+                    # else:
+                    #     logger.error("PDF format not valid. Unable to extract data from PDF for file: " + file_name)
+                    #     return
 
 
                     
-                    if line.__contains__('PONo') or line.__contains__('PO NO'):
+                    if line.__contains__('PONo') or line.__contains__('PO NO') or line.__contains__('PO No') :
                         # print(line)
                         linesData.append(line.split(' '))
-                        # print("\nLines data: "+str(linesData))
                         if order_type == 'SELLER PURCHASE ORDER -PREVIEW':
-                            po_number = str(linesData[0][1]).replace('PONo.:', '')
-                        # print(po_number)
+                            if line.__contains__('PONo'):
+                                po_number = str(linesData[0][1]).replace('PONo.:', '')
+                            if line.__contains__('PO No'):
+                                temp_line_data = str(linesData[0][2])
+                                index_site = temp_line_data.find('Site')
+                                po_number = temp_line_data[0:index_site].replace('No.:', '')
                         if order_type == 'SELLER PURCHASE ORDER':
                             po_number = str(linesData[0][15])
 
@@ -89,7 +98,8 @@ def pdfToTable_RRL(RootFolder, POSource, OrderDate, ClientCode, f, base_path):
         # print(po_number,Receving_location)
 
         # Excract EAN Data from Page 2 to len(Pages of PDF)
-        if order_type == "SELLER PURCHASE ORDER -PREVIEW": 
+        if order_type == "SELLER PURCHASE ORDER -PREVIEW":
+            print("\nRunning PDF PLUMBER code\n") 
             with pdfplumber.open(base_path+'/99-Working/10-Download-Files/'+str(f)) as pdf:
                 pages = pdf.pages
                 # print(pages)
@@ -197,7 +207,7 @@ def pdfToTable_RRL(RootFolder, POSource, OrderDate, ClientCode, f, base_path):
                     logger.info("Converted '" + file_name + "' to '"+po_number +".xlsx' in " + "{:.2f}".format(time.time() - startedProcessing, 2) + " seconds.")
 
         if order_type == "SELLER PURCHASE ORDER":
-
+            print("\nRunning TABULA code\n")
             intermediateCSV = base_path+'/99-Working/30-Extract-CSV/'+str(f).replace('pdf', 'csv')
             intermediateExcel = base_path+'/99-Working/20-Intermediate-Files/'+str(f).replace('pdf', 'xlsx')
 
@@ -249,7 +259,6 @@ def pdfToTable_RRL(RootFolder, POSource, OrderDate, ClientCode, f, base_path):
             df.drop(df.tail(1).index, inplace=True)
             rows = len(df.axes[0])
             cols = len(df.axes[1])
-
 
             # Removing unwanted characters (,) in numeric values
             df['BasicCostPrice(TaxableValue)'] = df['BasicCostPrice(TaxableValue)'].str.replace(',', '')
@@ -303,8 +312,8 @@ def pdfToTable_RRL(RootFolder, POSource, OrderDate, ClientCode, f, base_path):
     
     
     except Exception as e:
-        print('Error while po_exctract_data '+str(e))
-        logger.error('Error while po_exctract_data '+str(e))
+        print('Error while po_exctract_data in '+ file_name + " " +str(e))
+        logger.error('Error while po_exctract_data in '+ file_name + " " +str(e))
         exc_type, exc_obj, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
         print(exc_type, fname, exc_tb.tb_lineno)
