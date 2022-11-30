@@ -304,6 +304,7 @@ def pdfToTable_RRL(RootFolder, POSource, OrderDate, ClientCode, f, base_path):
     
     except Exception as e:
         print('Error while po_exctract_data '+str(e))
+        logger.error('Error while po_exctract_data '+str(e))
         exc_type, exc_obj, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
         print(exc_type, fname, exc_tb.tb_lineno)
@@ -357,6 +358,7 @@ def getFilesToProcess_RRL(RootFolder, POSource, OrderDate, ClientCode, base_path
 
     except Exception as e:
         print('Error while processing '+str(e))
+        logger.error('Error while processing '+str(e))
         exc_type, exc_obj, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
         print(exc_type, fname, exc_tb.tb_lineno)
