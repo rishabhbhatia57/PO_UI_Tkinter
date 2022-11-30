@@ -99,7 +99,7 @@ def pdfToTable_RRL(RootFolder, POSource, OrderDate, ClientCode, f, base_path):
 
         # Excract EAN Data from Page 2 to len(Pages of PDF)
         if order_type == "SELLER PURCHASE ORDER -PREVIEW":
-            print("\nRunning PDF PLUMBER code\n") 
+            # print("\nRunning PDF PLUMBER code\n") 
             with pdfplumber.open(base_path+'/99-Working/10-Download-Files/'+str(f)) as pdf:
                 pages = pdf.pages
                 # print(pages)
@@ -207,7 +207,7 @@ def pdfToTable_RRL(RootFolder, POSource, OrderDate, ClientCode, f, base_path):
                     logger.info("Converted '" + file_name + "' to '"+po_number +".xlsx' in " + "{:.2f}".format(time.time() - startedProcessing, 2) + " seconds.")
 
         if order_type == "SELLER PURCHASE ORDER":
-            print("\nRunning TABULA code\n")
+            # print("\nRunning TABULA code\n")
             intermediateCSV = base_path+'/99-Working/30-Extract-CSV/'+str(f).replace('pdf', 'csv')
             intermediateExcel = base_path+'/99-Working/20-Intermediate-Files/'+str(f).replace('pdf', 'xlsx')
 
